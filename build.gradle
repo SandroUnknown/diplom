@@ -6,7 +6,7 @@ group = 'gmail.sandrounknown1991'
 version = '1.0-SNAPSHOT'
 
 def junitVersion = "5.11.1",
-    selenideVersion = "7.5.1"
+    restAssuredVersion = "5.5.0"
 
 
 repositories {
@@ -16,7 +16,7 @@ repositories {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion"
     )
 }
 
