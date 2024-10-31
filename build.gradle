@@ -1,0 +1,33 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'gmail.sandrounknown1991'
+version = '1.0-SNAPSHOT'
+
+def junitVersion = "5.11.1",
+    selenideVersion = "7.5.1"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "com.codeborne:selenide:$selenideVersion",
+    )
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
