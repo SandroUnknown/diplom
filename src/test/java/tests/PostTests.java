@@ -4,11 +4,10 @@ import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.assertj.core.api.Assertions.assertThat;
+import static specs.UserSpec.*;
 
 @DisplayName("POST-запросы")
 public class PostTests extends TestBase {
@@ -23,20 +22,14 @@ public class PostTests extends TestBase {
 
         CreateUserSuccessfulResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(postUserRequestSpec)
                     .body(request)
-                    .contentType(JSON)
 
             .when()
                     .post("/users")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(201)
+                    .spec(successfulCreateUserResponseSpec)
                     .extract().as(CreateUserSuccessfulResponseModel.class)
         );
 
@@ -58,20 +51,14 @@ public class PostTests extends TestBase {
 
         RegistrationSuccessfulResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(postUserRequestSpec)
                     .body(request)
-                    .contentType(JSON)
 
             .when()
                     .post("/register")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(200)
+                    .spec(successfulRegistrationUserResponseSpec)
                     .extract().as(RegistrationSuccessfulResponseModel.class)
         );
 
@@ -90,12 +77,8 @@ public class PostTests extends TestBase {
 
         RegistrationMissingEmailOrPasswordResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(postUserRequestSpec)
                     .body(request)
-                    .contentType(JSON)
 
             .when()
                     .post("/register")
@@ -103,7 +86,7 @@ public class PostTests extends TestBase {
             .then()
                     .log().status()
                     .log().body()
-                    .statusCode(400)
+                    .spec(errorRegistrationResponseSpec)
                     .extract().as(RegistrationMissingEmailOrPasswordResponseModel.class)
         );
 
@@ -121,20 +104,14 @@ public class PostTests extends TestBase {
 
         RegistrationMissingEmailOrPasswordResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(postUserRequestSpec)
                     .body(request)
-                    .contentType(JSON)
 
             .when()
                     .post("/register")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(400)
+                    .spec(errorRegistrationResponseSpec)
                     .extract().as(RegistrationMissingEmailOrPasswordResponseModel.class)
         );
 

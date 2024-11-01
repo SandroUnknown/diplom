@@ -6,10 +6,10 @@ import models.UserListSuccessfulResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static specs.UserSpec.*;
 
 @DisplayName("GET-запросы")
 public class GetTests extends TestBase {
@@ -20,17 +20,13 @@ public class GetTests extends TestBase {
 
         SingleUserSuccessfulResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(getUserRequestSpec)
+
             .when()
                     .get("/users/2")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(200)
+                    .spec(successfulUserResponseSpec)
                     .extract().as(SingleUserSuccessfulResponseModel.class)
         );
 
@@ -52,17 +48,13 @@ public class GetTests extends TestBase {
 
         SingleUserNotFoundResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(getUserRequestSpec)
+
             .when()
                     .get("/users/23")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(404)
+                    .spec(notFoundUserResponseSpec)
                     .extract().as(SingleUserNotFoundResponseModel.class)
         );
 
@@ -77,17 +69,13 @@ public class GetTests extends TestBase {
 
         UserListSuccessfulResponseModel response = step("Сделать запрос", ()->
             given()
-                    .filter(withCustomTemplates())
-                    .log().uri()
-                    .log().body()
-                    .log().headers()
+                    .spec(getUserRequestSpec)
+
             .when()
                     .get("/users?page=2")
 
             .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(200)
+                    .spec(successfulUserResponseSpec)
                     .extract().as(UserListSuccessfulResponseModel.class)
         );
 
