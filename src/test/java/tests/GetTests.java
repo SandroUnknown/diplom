@@ -37,8 +37,8 @@ public class GetTests extends TestBase {
             assertThat(response.getData().getLast_name()).isEqualTo("Weaver");
             assertThat(response.getData().getAvatar()).isEqualTo("https://reqres.in/img/faces/2-image.jpg");
 
-            assertThat(response.getSupport().getUrl()).isEqualTo("https://reqres.in/#support-heading");
-            assertThat(response.getSupport().getText()).isEqualTo("To keep ReqRes free, contributions towards server costs are appreciated!");
+            assertThat(response.getSupport().getUrl()).isEqualTo("https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral");
+            assertThat(response.getSupport().getText()).isEqualTo("Tired of writing endless social media content? Let Content Caddy generate it for you.");
         });
     }
 
@@ -70,9 +70,11 @@ public class GetTests extends TestBase {
         UserListSuccessfulResponseModel response = step("Сделать запрос", ()->
             given()
                     .spec(getUserRequestSpec)
+                    .queryParam("page", "2")
 
             .when()
-                    .get("/users?page=2")
+                    .get("/users")
+                    //.get("/users?page=2")
 
             .then()
                     .spec(successfulUserResponseSpec)
@@ -91,8 +93,8 @@ public class GetTests extends TestBase {
             assertThat(response.getData().get(3).getLast_name()).isEqualTo("Fields");
             assertThat(response.getData().get(3).getAvatar()).isEqualTo("https://reqres.in/img/faces/10-image.jpg");
 
-            assertThat(response.getSupport().getUrl()).isEqualTo("https://reqres.in/#support-heading");
-            assertThat(response.getSupport().getText()).isEqualTo("To keep ReqRes free, contributions towards server costs are appreciated!");
+            assertThat(response.getSupport().getUrl()).isEqualTo("https://contentcaddy.io?utm_source=reqres&utm_medium=json&utm_campaign=referral");
+            assertThat(response.getSupport().getText()).isEqualTo("Tired of writing endless social media content? Let Content Caddy generate it for you.");
         });
     }
 }
