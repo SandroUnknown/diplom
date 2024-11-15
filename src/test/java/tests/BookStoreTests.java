@@ -22,8 +22,7 @@ public class BookStoreTests extends TestBase {
                     booksApi.deleteAllBooks();
         });
 
-        String isbn = step("Получить случайный ISBN книги.", () ->
-                booksApi.getRandomIsbn());
+        String isbn = step("Получить случайный ISBN книги.", booksApi::getRandomIsbn);
 
         step("Добавить книгу в корзину (через API).", () -> {
                     booksApi.addBook(isbn);
