@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
 
-import static io.qameta.allure.Allure.step;
-
 @DisplayName("Тесты для Book Store")
 public class BookStoreTests extends TestBase {
 
@@ -17,24 +15,17 @@ public class BookStoreTests extends TestBase {
     void deleteBook() {
 
         BooksApi booksApi = new BooksApi();
+        booksApi.deleteAllBooks();
 
-        step("Очистить всю корзину (через API).", () -> {
-                    booksApi.deleteAllBooks();
-        });
+        String isbn = booksApi.getRandomIsbn();
+        booksApi.addBook(isbn);
 
-        String isbn = step("Получить случайный ISBN книги.", booksApi::getRandomIsbn);
+        ProfilePage profilePage = new ProfilePage();
+        profilePage
+                .openPage()
+                .deleteBook(isbn)
+                .checkResultOnUi(isbn);
+        booksApi.checkResultOnApi();
 
-        step("Добавить книгу в корзину (через API).", () -> {
-                    booksApi.addBook(isbn);
-        });
-
-        step("Удаляем книгу из корзины (через UI).", () -> {
-            ProfilePage profilePage = new ProfilePage();
-            profilePage
-                    .openPage()
-                    .deleteBook(isbn)
-                    .checkResultOnUi(isbn)
-                    .checkResultOnApi();
-        });
     }
 }

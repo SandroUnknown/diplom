@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class AddBooksCollectionRequestModel {
+
     private String userId;
     private List<BookModel> collectionOfIsbns;
 }

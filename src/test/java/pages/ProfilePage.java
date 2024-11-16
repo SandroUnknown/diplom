@@ -1,14 +1,10 @@
 package pages;
 
-import api.BooksApi;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import models.books.BookModel;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProfilePage {
 
@@ -40,14 +36,5 @@ public class ProfilePage {
         firstBookSelector.$("a[href='/profile?book=" + isbn + "']").shouldNot(exist);
 
         return this;
-    }
-
-    @Step("Проверить результат на API-слое.")
-    public void checkResultOnApi() {
-
-        BooksApi booksApi = new BooksApi();
-        List<BookModel> books = booksApi.getUserBooks();
-
-        assertTrue(books.isEmpty());
     }
 }

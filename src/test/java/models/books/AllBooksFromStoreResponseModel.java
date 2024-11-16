@@ -1,16 +1,22 @@
 package models.books;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 public class AllBooksFromStoreResponseModel {
-    List<BookFromStoreResponseModel> books;
+    private List<BookFromStoreResponseModel> books;
 
     @Data
     public static class BookFromStoreResponseModel {
-        String isbn, title, subTitle, author, publish_date, publisher, description, website;
-        Integer pages;
+
+        private String isbn, title, subTitle, author, publisher, description, website;
+
+        @JsonProperty("publish_date")
+        private String publishDate;
+
+        private Integer pages;
     }
 }

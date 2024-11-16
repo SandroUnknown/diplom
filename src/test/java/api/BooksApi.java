@@ -12,6 +12,7 @@ import java.util.Random;
 import static data.AuthData.USER_ID;
 import static data.AuthData.USER_TOKEN;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static specs.Specification.*;
 
 public class BooksApi {
@@ -86,5 +87,14 @@ public class BooksApi {
         int randomIndex = random.nextInt(booksFromStore.getBooks().size());
 
         return booksFromStore.getBooks().get(randomIndex).getIsbn();
+    }
+
+    @Step("Проверить, что в корзине пусто (API).")
+    public void checkResultOnApi() {
+
+        BooksApi booksApi = new BooksApi();
+        List<BookModel> books = booksApi.getUserBooks();
+
+        assertTrue(books.isEmpty());
     }
 }
