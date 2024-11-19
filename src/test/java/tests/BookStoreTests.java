@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
 
+import static data.AuthData.USER_NAME;
+
 @DisplayName("Тесты для Book Store")
 public class BookStoreTests extends TestBase {
 
@@ -23,6 +25,8 @@ public class BookStoreTests extends TestBase {
         ProfilePage profilePage = new ProfilePage();
         profilePage
                 .openPage()
+                .checkAuthData(USER_NAME)
+                .checkBookInProfile(isbn)
                 .deleteBook(isbn)
                 .checkResultOnUi(isbn);
         booksApi.checkResultOnApi();

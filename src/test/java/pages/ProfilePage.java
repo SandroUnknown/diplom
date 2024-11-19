@@ -20,10 +20,25 @@ public class ProfilePage {
         return this;
     }
 
+    @Step("Проверить, что авторизовались под правильным пользователем.")
+    public ProfilePage checkAuthData(String userName) {
+
+        $("#userName-value").shouldHave(text(userName));
+
+        return this;
+    }
+
+    @Step("Проверить, что книга есть в профиле.")
+    public ProfilePage checkBookInProfile(String isbn) {
+
+        firstBookSelector.$("a[href='/profile?book=" + isbn + "']").shouldBe(exist);
+
+        return this;
+    }
+
     @Step("Удалить книгу.")
     public ProfilePage deleteBook(String isbn) {
 
-        firstBookSelector.$("a[href='/profile?book=" + isbn + "']").shouldBe(exist);
         firstBookSelector.$("#delete-record-undefined").click();
         deleteConfirmSelector.click();
 

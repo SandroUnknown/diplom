@@ -6,8 +6,6 @@ import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
@@ -26,6 +24,8 @@ public class LoginExtension implements BeforeEachCallback {
 
         USER_NAME = System.getProperty("storeUserName", "login");
         USER_PASSWORD = System.getProperty("storeUserPassword", "password");
+        //USER_NAME = "alex";
+        //USER_PASSWORD = "Alex123!";
 
         LoginResponseModel authResponse = AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
 
@@ -34,9 +34,6 @@ public class LoginExtension implements BeforeEachCallback {
         getWebDriver().manage().addCookie(new Cookie("token", authResponse.getToken()));
         getWebDriver().manage().addCookie(new Cookie("expires", authResponse.getExpires()));
         getWebDriver().manage().addCookie(new Cookie("userID", authResponse.getUserId()));
-
-        open("/profile");
-        $("#userName-value").shouldHave(text(USER_NAME));
 
         USER_ID = authResponse.getUserId();
         USER_TOKEN = authResponse.getToken();

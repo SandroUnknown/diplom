@@ -3,7 +3,7 @@ package api;
 import io.qameta.allure.Step;
 import models.books.AllBooksFromStoreResponseModel;
 import models.books.AddBooksCollectionRequestModel;
-import models.books.BookModel;
+import models.books.IsbnModel;
 import models.books.AllBooksFromProfileResponseModel;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class BooksApi {
     @Step("Добавить книгу в корзину.")
     public BooksApi addBook(String isbn) {
 
-        BookModel book = new BookModel();
+        IsbnModel book = new IsbnModel();
         book.setIsbn(isbn);
 
         AddBooksCollectionRequestModel booksCollection = new AddBooksCollectionRequestModel();
@@ -52,7 +52,7 @@ public class BooksApi {
     }
 
     @Step("Получить список всех книг пользователя.")
-    public List<BookModel> getUserBooks() {
+    public List<IsbnModel> getUserBooks() {
 
         AllBooksFromProfileResponseModel response =
                 given(requestSpec)
@@ -93,7 +93,7 @@ public class BooksApi {
     public void checkResultOnApi() {
 
         BooksApi booksApi = new BooksApi();
-        List<BookModel> books = booksApi.getUserBooks();
+        List<IsbnModel> books = booksApi.getUserBooks();
 
         assertTrue(books.isEmpty());
     }

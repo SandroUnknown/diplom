@@ -8,5 +8,5 @@ import java.util.List;
 public class AddBooksCollectionRequestModel {
 
     private String userId;
-    private List<BookModel> collectionOfIsbns;
+    private List<IsbnModel> collectionOfIsbns;
 }
