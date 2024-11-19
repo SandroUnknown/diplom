@@ -1,10 +1,7 @@
 package api;
 
 import io.qameta.allure.Step;
-import models.books.AllBooksFromStoreResponseModel;
-import models.books.AddBooksCollectionRequestModel;
-import models.books.IsbnModel;
-import models.books.AllBooksFromProfileResponseModel;
+import models.books.*;
 
 import java.util.List;
 import java.util.Random;
@@ -52,7 +49,7 @@ public class BooksApi {
     }
 
     @Step("Получить список всех книг пользователя.")
-    public List<IsbnModel> getUserBooks() {
+    public List<BookModel> getUserBooks() {
 
         AllBooksFromProfileResponseModel response =
                 given(requestSpec)
@@ -93,7 +90,7 @@ public class BooksApi {
     public void checkResultOnApi() {
 
         BooksApi booksApi = new BooksApi();
-        List<IsbnModel> books = booksApi.getUserBooks();
+        List<BookModel> books = booksApi.getUserBooks();
 
         assertTrue(books.isEmpty());
     }

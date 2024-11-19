@@ -22,10 +22,10 @@ public class LoginExtension implements BeforeEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) {
 
-        USER_NAME = System.getProperty("storeUserName", "login");
-        USER_PASSWORD = System.getProperty("storeUserPassword", "password");
-        //USER_NAME = "alex";
-        //USER_PASSWORD = "Alex123!";
+        //USER_NAME = System.getProperty("storeUserName", "login");
+        //USER_PASSWORD = System.getProperty("storeUserPassword", "password");
+        USER_NAME = "alex";
+        USER_PASSWORD = "Alex123!";
 
         LoginResponseModel authResponse = AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
 
