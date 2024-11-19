@@ -19,6 +19,7 @@ public class TestBase {
 
     @BeforeAll
     public static void setUp() {
+
         RestAssured.baseURI = "https://demoqa.com";
 
 
@@ -42,11 +43,13 @@ public class TestBase {
 
     @BeforeEach
     void preTest() {
+
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
     @AfterEach
     void addAttachments() {
+
         Attach.screenshotAs("Last screenshot");
         if (!Configuration.browser.equals("firefox")) {
             Attach.pageSource();

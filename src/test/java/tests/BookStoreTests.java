@@ -29,7 +29,7 @@ public class BookStoreTests extends TestBase {
                 .checkBookInProfile(isbn)
                 .deleteBook(isbn)
                 .checkResultOnUi(isbn);
-        booksApi.checkResultOnApi();
 
+        booksApi.checkResultOnApi();
     }
 }
