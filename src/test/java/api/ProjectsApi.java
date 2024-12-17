@@ -30,6 +30,15 @@ public class ProjectsApi {
                         .extract().as(ProjectResponseModel.class);
     }
 
+    // TODO : перегруженный метод
+    public ProjectResponseModel createNewProject(String name) {
+
+        ProjectRequestModel projectData = new ProjectRequestModel();
+        projectData.setName(name);
+
+        return createNewProject(projectData);
+    }
+
 
 
     // === ПОЛУЧИТЬ (один или все) =====================================================================================
