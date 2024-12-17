@@ -11,7 +11,7 @@ import static specs.Specification.*;
 
 public class ProjectsApi {
 
-    @Step("Создать новый проект (API) - POST")
+    @Step("Создать новый проект (API)")
     public ProjectResponseModel createNewProject(ProjectRequestModel projectData) {
         // TODO : Что такое parent id?
 
@@ -26,12 +26,26 @@ public class ProjectsApi {
                         .extract().as(ProjectResponseModel.class);
     }
 
-    public ProjectResponseModel createNewProject(String name) {
+    public ProjectResponseModel createNewProject(String projectName) {
 
         ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .name(name)
+                .name(projectName)
                 .build();
         return createNewProject(projectData);
+    }
+
+    @Step("Обновить проект по ID (API)")
+    public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
+
+        return
+                given()
+                        .spec(requestPostWithIdSpec)
+                        .body(newProjectData)
+                        .when()
+                        .post("/projects/" + projectId)
+                        .then()
+                        .spec(responseSpec200)
+                        .extract().as(ProjectResponseModel.class);
     }
 
     @Step("Получить проект по ID (API)")
@@ -60,20 +74,6 @@ public class ProjectsApi {
                         .extract()
                         .jsonPath()
                         .getList(".", ProjectResponseModel.class);
-    }
-
-    @Step("Обновить проект по ID (API)")
-    public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
-
-        return
-                given()
-                        .spec(requestPostWithIdSpec)
-                        .body(newProjectData)
-                        .when()
-                        .post("/projects/" + projectId)
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(ProjectResponseModel.class);
     }
 
     @Step("Удалить проект по ID (API)")

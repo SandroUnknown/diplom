@@ -9,7 +9,7 @@ import pages.ProfilePage;
 import static data.AuthData.USER_NAME;
 
 @DisplayName("Тесты для Book Store")
-public class BookStoreTests extends TestBaseForDemoqa {
+public class OLD_BookStoreTests extends OLD_TestBaseForDemoqa {
 
     @DisplayName("Удалить книгу (UI)")
     @Test

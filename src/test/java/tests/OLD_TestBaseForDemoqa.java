@@ -15,7 +15,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static java.lang.String.format;
 
-public class TestBaseForDemoqa {
+public class OLD_TestBaseForDemoqa {
 
     @BeforeAll
     public static void setUp() {

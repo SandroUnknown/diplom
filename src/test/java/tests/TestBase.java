@@ -1,21 +1,22 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
+import api.ProjectsApi;
+import api.SectionsApi;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static java.lang.String.format;
 
 public class TestBase {
+
+    // TODO : Точно ли протектед?
+    protected ProjectsApi projectsApi = new ProjectsApi();
+    protected SectionsApi sectionsApi = new SectionsApi();
 
     @BeforeAll
     public static void setUp() {
@@ -24,6 +25,9 @@ public class TestBase {
         // Asdf1234!
         // Qwer1234!
         // token = 62d652154d66834e51a6b776fd6f4fa79ab6e4a0
+
+
+
 
 
 
@@ -54,6 +58,8 @@ public class TestBase {
 
     @BeforeEach
     void preTest() {
+
+
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }

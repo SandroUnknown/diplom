@@ -25,6 +25,11 @@ public class Specification {
             .log().all()
             .header("Authorization", "Bearer " + token);
 
+    public static final RequestSpecification requestPostSpec = with()
+            .filter(withCustomTemplates())
+            .log().all()
+            .header("Authorization", "Bearer " + token)
+            .contentType(JSON);
 
     public static final RequestSpecification requestPostWithIdSpec = with()
             .filter(withCustomTemplates())
