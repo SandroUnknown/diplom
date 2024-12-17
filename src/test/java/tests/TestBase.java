@@ -29,6 +29,7 @@ public class TestBase {
 
 
         RestAssured.baseURI = "https://api.todoist.com/rest/v2";
+        //RestAssured.basePath =
 
 
         /*DesiredCapabilities capabilities = new DesiredCapabilities();

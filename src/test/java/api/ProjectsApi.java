@@ -1,8 +1,9 @@
 package api;
 
 import io.qameta.allure.Step;
-import models.projects.ProjectResponseModel;
 import models.projects.ProjectRequestModel;
+import models.projects.ProjectResponseModel;
+
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -10,14 +11,9 @@ import static specs.Specification.*;
 
 public class ProjectsApi {
 
-    // === СОЗДАТЬ (один) =====================================================================================
-
     @Step("Создать новый проект (API) - POST")
     public ProjectResponseModel createNewProject(ProjectRequestModel projectData) {
-
         // TODO : Что такое parent id?
-        // TODO : Сделать viewStyle через ENUM
-        // TODO : Сделать color через ENUM
 
         return
                 given()
@@ -30,20 +26,15 @@ public class ProjectsApi {
                         .extract().as(ProjectResponseModel.class);
     }
 
-    // TODO : перегруженный метод
     public ProjectResponseModel createNewProject(String name) {
 
-        ProjectRequestModel projectData = new ProjectRequestModel();
-        projectData.setName(name);
-
+        ProjectRequestModel projectData = ProjectRequestModel.builder()
+                .name(name)
+                .build();
         return createNewProject(projectData);
     }
 
-
-
-    // === ПОЛУЧИТЬ (один или все) =====================================================================================
-
-    @Step("Получить проект по ID (API) - GET")
+    @Step("Получить проект по ID (API)")
     public ProjectResponseModel getProject(String projectId) {
 
         return
@@ -56,7 +47,7 @@ public class ProjectsApi {
                         .extract().as(ProjectResponseModel.class);
     }
 
-    @Step("Получить все проекты (API) - GET")
+    @Step("Получить все проекты (API)")
     public List<ProjectResponseModel> getAllProjects() {
 
         return
@@ -71,15 +62,8 @@ public class ProjectsApi {
                         .getList(".", ProjectResponseModel.class);
     }
 
-
-
-    // === ОБНОВИТЬ (один) =====================================================================================
-
-    @Step("Обновить проект по ID (API) - POST")
+    @Step("Обновить проект по ID (API)")
     public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
-
-        // TODO : Сделать viewStyle через ENUM
-        // TODO : Сделать color через ENUM
 
         return
                 given()
@@ -92,14 +76,8 @@ public class ProjectsApi {
                         .extract().as(ProjectResponseModel.class);
     }
 
-
-
-    // === УДАЛИТЬ (один или все) =====================================================================================
-
-    @Step("Удалить проект по ID (API) - DELETE")
+    @Step("Удалить проект по ID (API)")
     public void deleteProject(String projectId) {
-
-        // TODO : использую общую спецификацию requestGetSpec для метода Delete? - исправить?
 
         given()
                 .spec(requestDeleteSpec)
@@ -119,5 +97,4 @@ public class ProjectsApi {
             deleteProject(projectId);
         }
     }
-
 }

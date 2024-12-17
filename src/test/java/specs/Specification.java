@@ -11,6 +11,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Specification {
 
+    // TODO : Убрать токен отсюда
     static String token = "62d652154d66834e51a6b776fd6f4fa79ab6e4a0";
 
 

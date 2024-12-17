@@ -1,22 +1,28 @@
 package tests;
 
 import api.ProjectsApi;
+import enums.Color;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
+import static enums.Color.*;
+import static enums.ViewStyle.*;
 
 public class TodoistTestApi extends TestBase {
 
+    // TODO : Передавать имя проекта (и др данные) из вне?
     @DisplayName("Создать новый проект (API)")
     @Test
     void createNewProjectTest() {
 
-        ProjectRequestModel projectData = new ProjectRequestModel();
-        projectData.setName("New Project Test 6");
-        projectData.setColor("yellow");
+        ProjectRequestModel projectData = ProjectRequestModel.builder()
+                .name("New Project Test 6")
+                .color(YELLOW)
+                .viewStyle(BOARD)
+                .build();
 
         ProjectsApi newApi = new ProjectsApi();
         newApi.createNewProject(projectData);
@@ -26,9 +32,10 @@ public class TodoistTestApi extends TestBase {
     @Test
     void deleteProjectTest() {
 
-        ProjectsApi newApi = new ProjectsApi();
         // создать новый проект и сразу получить его АйДи
+        ProjectsApi newApi = new ProjectsApi();
         String projectId = newApi.createNewProject("New Project Test 7").getId();
+
 
         // TODO : временный слип, чтобы увидеть, что проект создался, и потом удаляется...
         sleep(2000);
@@ -71,14 +78,33 @@ public class TodoistTestApi extends TestBase {
         sleep(2000);
 
         // Обновить проект (изменить имя на - New Project Test 15 UPDATED)
-        ProjectRequestModel newProjectData = new ProjectRequestModel();
-        newProjectData.setName("New Project Test 15 UPDATED");
-        //newProjectData.setColor("red");
-        newProjectData.setFavorite(true);
-        //newProjectData.setViewStyle(null);
+        ProjectRequestModel newProjectData = ProjectRequestModel.builder()
+                .name("New Project Test 15 UPDATED")
+                .color(RED)
+                .isFavorite(true)
+                .viewStyle(BOARD)
+                .build();
 
         newApi.updateProject(projectId, newProjectData);
+    }
+
+    // TODO : deleted
+    @Test
+    void enumTest() {
+
+        //Color color = new Color(RED);
+
+        //Color title = Color.getColorByTitle("red");
+        //Color title = Color.getColorById(35);
+        //Color title = Color.getColorByHex("#e05194");
+
+        //var a = RED.getColor();
+
+        //System.out.println("123");
 
     }
+
+
+
 
 }
