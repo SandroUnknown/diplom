@@ -1,4 +1,4 @@
-package tests;
+package tests.OLD_delete;
 
 import api.OLD_BooksApi;
 import helpers.extensions.WithLogin;

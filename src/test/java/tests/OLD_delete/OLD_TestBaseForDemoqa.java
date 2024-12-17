@@ -1,4 +1,4 @@
-package tests;
+package tests.OLD_delete;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;

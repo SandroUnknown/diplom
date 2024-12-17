@@ -1,4 +1,4 @@
-package tests;
+package tests.api;
 
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
