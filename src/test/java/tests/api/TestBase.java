@@ -21,10 +21,10 @@ public class TestBase {
     @BeforeAll
     public static void setUp() {
 
-        // testing.qaguru@gmail.com
-        // Asdf1234!
-        // Qwer1234!
-        // token = 62d652154d66834e51a6b776fd6f4fa79ab6e4a0
+        // email -      testing.qaguru@gmail.com
+        // email pass - Asdf1234!
+        // acc pass -   Qwer1234!
+        // token -      62d652154d66834e51a6b776fd6f4fa79ab6e4a0
 
 
 
