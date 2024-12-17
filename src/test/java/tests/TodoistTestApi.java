@@ -1,7 +1,6 @@
 package tests;
 
 import api.ProjectsApi;
-import enums.Color;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +13,8 @@ import static enums.ViewStyle.*;
 public class TodoistTestApi extends TestBase {
 
     // TODO : Передавать имя проекта (и др данные) из вне?
-    @DisplayName("Создать новый проект (API)")
     @Test
+    @DisplayName("Создать новый проект (API)")
     void createNewProjectTest() {
 
         ProjectRequestModel projectData = ProjectRequestModel.builder()
@@ -28,8 +27,8 @@ public class TodoistTestApi extends TestBase {
         newApi.createNewProject(projectData);
     }
 
-    @DisplayName("Удалить один проект по ID (API)")
     @Test
+    @DisplayName("Удалить один проект по ID (API)")
     void deleteProjectTest() {
 
         // создать новый проект и сразу получить его АйДи
@@ -47,8 +46,8 @@ public class TodoistTestApi extends TestBase {
         newApi.deleteProject(project.getId());
     }
 
-    @DisplayName("Удалить все проекты (API)")
     @Test
+    @DisplayName("Удалить все проекты (API)")
     void deleteAllProjectsTest() {
 
         ProjectsApi newApi = new ProjectsApi();
@@ -65,8 +64,8 @@ public class TodoistTestApi extends TestBase {
         newApi.deleteAllProjects();
     }
 
-    @DisplayName("Обновить проект по ID (API)")
     @Test
+    @DisplayName("Обновить проект по ID (API)")
     void updateProjectTest() {
 
         ProjectsApi newApi = new ProjectsApi();
