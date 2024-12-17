@@ -1,13 +1,13 @@
 package api;
 
 import io.qameta.allure.Step;
-import models.auth.LoginRequestModel;
-import models.auth.LoginResponseModel;
+import models.OLD_auth.LoginRequestModel;
+import models.OLD_auth.LoginResponseModel;
 
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-public class AuthorizationApi {
+public class OLD_AuthorizationApi {
 
     @Step("Получить авторизационные данные.")
     public static LoginResponseModel getAuthData(String userName, String userPassword) {
@@ -17,7 +17,7 @@ public class AuthorizationApi {
         request.setPassword(userPassword);
 
         return given()
-                .spec(requestSpec)
+                .spec(OLD_requestSpec)
                 .body(request)
 
                 .when()

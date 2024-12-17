@@ -1,6 +1,6 @@
 package tests;
 
-import api.BooksApi;
+import api.OLD_BooksApi;
 import helpers.extensions.WithLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,14 @@ import pages.ProfilePage;
 import static data.AuthData.USER_NAME;
 
 @DisplayName("Тесты для Book Store")
-public class BookStoreTests extends TestBase {
+public class BookStoreTests extends TestBaseForDemoqa {
 
     @DisplayName("Удалить книгу (UI)")
     @Test
     @WithLogin
     void deleteBook() {
 
-        BooksApi booksApi = new BooksApi();
+        OLD_BooksApi booksApi = new OLD_BooksApi();
         booksApi.deleteAllBooks();
 
         String isbn = booksApi.getRandomIsbn();

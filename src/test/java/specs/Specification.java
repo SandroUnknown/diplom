@@ -11,7 +11,37 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Specification {
 
-    public static final RequestSpecification requestSpec = with()
+    static String token = "62d652154d66834e51a6b776fd6f4fa79ab6e4a0";
+
+
+    public static final RequestSpecification requestGetSpec = with()
+            .filter(withCustomTemplates())
+            .log().all()
+            .header("Authorization", "Bearer " + token);
+
+    public static final RequestSpecification requestDeleteSpec = with()
+            .filter(withCustomTemplates())
+            .log().all()
+            .header("Authorization", "Bearer " + token);
+
+
+    public static final RequestSpecification requestPostWithIdSpec = with()
+            .filter(withCustomTemplates())
+            .log().all()
+            .header("Authorization", "Bearer " + token)
+            .header("X-Request-Id", "$(uuidgen)")
+            .contentType(JSON);
+
+
+
+
+
+
+
+
+
+
+    public static final RequestSpecification OLD_requestSpec = with()
             .filter(withCustomTemplates())
             .contentType(JSON)
             .log().all();

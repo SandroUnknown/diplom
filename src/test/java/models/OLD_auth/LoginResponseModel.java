@@ -1,4 +1,4 @@
-package models.auth;
+package models.OLD_auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

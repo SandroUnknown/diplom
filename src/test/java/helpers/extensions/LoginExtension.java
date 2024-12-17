@@ -1,7 +1,7 @@
 package helpers.extensions;
 
-import api.AuthorizationApi;
-import models.auth.LoginResponseModel;
+import api.OLD_AuthorizationApi;
+import models.OLD_auth.LoginResponseModel;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
@@ -25,7 +25,7 @@ public class LoginExtension implements BeforeEachCallback {
         USER_NAME = System.getProperty("storeUserName", "login");
         USER_PASSWORD = System.getProperty("storeUserPassword", "password");
 
-        LoginResponseModel authResponse = AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
+        LoginResponseModel authResponse = OLD_AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
 
         open("/favicon.ico");
 

@@ -1,7 +1,7 @@
 package api;
 
 import io.qameta.allure.Step;
-import models.books.*;
+import models.OLD_books.*;
 
 import java.util.List;
 import java.util.Random;
@@ -12,12 +12,12 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static specs.Specification.*;
 
-public class BooksApi {
+public class OLD_BooksApi {
 
     @Step("Удалить все книги из корзины.")
-    public BooksApi deleteAllBooks() {
+    public OLD_BooksApi deleteAllBooks() {
 
-        given(requestSpec)
+        given(OLD_requestSpec)
                 .header("Authorization", "Bearer " + USER_TOKEN)
                 .queryParam("UserId", USER_ID)
                 .when()
@@ -29,7 +29,7 @@ public class BooksApi {
     }
 
     @Step("Добавить книгу в корзину.")
-    public BooksApi addBook(String isbn) {
+    public OLD_BooksApi addBook(String isbn) {
 
         IsbnModel book = new IsbnModel();
         book.setIsbn(isbn);
@@ -38,7 +38,7 @@ public class BooksApi {
         booksCollection.setUserId(USER_ID);
         booksCollection.setCollectionOfIsbns(List.of(book));
 
-        given(requestSpec)
+        given(OLD_requestSpec)
                 .header("Authorization", "Bearer " + USER_TOKEN)
                 .body(booksCollection)
                 .when()
@@ -52,7 +52,7 @@ public class BooksApi {
     public List<BookModel> getUserBooks() {
 
         AllBooksFromProfileResponseModel response =
-                given(requestSpec)
+                given(OLD_requestSpec)
                         .when()
                         .header("Authorization", "Bearer " + USER_TOKEN)
                         .get("/Account/v1/User/" + USER_ID)
@@ -66,7 +66,7 @@ public class BooksApi {
     @Step("Получить список всех книг магазина.")
     public AllBooksFromStoreResponseModel getAllBooks() {
 
-        return given(requestSpec)
+        return given(OLD_requestSpec)
                 .when()
                 .header("Authorization", "Bearer " + USER_TOKEN)
                 .get("/BookStore/v1/Books")
@@ -89,7 +89,7 @@ public class BooksApi {
     @Step("Проверить, что в корзине пусто (API).")
     public void checkResultOnApi() {
 
-        BooksApi booksApi = new BooksApi();
+        OLD_BooksApi booksApi = new OLD_BooksApi();
         List<BookModel> books = booksApi.getUserBooks();
 
         assertTrue(books.isEmpty());
