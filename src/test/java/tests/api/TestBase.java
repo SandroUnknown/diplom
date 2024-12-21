@@ -2,6 +2,7 @@ package tests.api;
 
 import api.ProjectsApi;
 import api.SectionsApi;
+import api.TasksApi;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
@@ -17,6 +18,7 @@ public class TestBase {
     // TODO : Точно ли протектед?
     protected ProjectsApi projectsApi = new ProjectsApi();
     protected SectionsApi sectionsApi = new SectionsApi();
+    protected TasksApi tasksApi = new TasksApi();
 
     @BeforeAll
     public static void setUp() {
@@ -27,6 +29,10 @@ public class TestBase {
         // token -      62d652154d66834e51a6b776fd6f4fa79ab6e4a0
 
 
+        // 17.12 - 8.5 часов
+        // 21.12 - 5 часов
+        //-----------------------
+        // итого - 13.5 часов
 
 
 
