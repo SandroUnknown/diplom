@@ -15,8 +15,7 @@ public class CommentsApi {
 
     private static final String ENDPOINT = "/comments/";
 
-    /*
-    @Step("[API] Создать новую метку.")
+    @Step("[API] Создать новый комментарий.")
     public CommentResponseModel createNewComment(CommentRequestModel commentData) {
 
         return given()
@@ -29,18 +28,19 @@ public class CommentsApi {
                 .extract().as(CommentResponseModel.class);
     }
     
-    public CommentResponseModel createNewComment(String commentName) {
-
+    public CommentResponseModel createNewComment(String projectId, String taskId, String commentContent) {
+        // TODO : доделать: нужно принимать либо проджектАйди, либо таскАйди
         CommentRequestModel commentData = CommentRequestModel.builder()
-                .name(commentName)
+                .content(commentContent)
                 .build();
 
         return createNewComment(commentData);
     }
 
-    @Step("[API] Обновить метку.")
+    @Step("[API] Обновить комментарий.")
     public CommentResponseModel updateComment(String commentId, CommentRequestModel commentData) {
 
+    // TODO : под вопросом нужность этого метода? Проверить передать не только имя, но и новый айди проекта, например. Изменится ли место комментария? Если нет - то этот метод не нужен.
         return given()
                 .spec(requestPostWithIdSpec)
                 .body(commentData)
@@ -51,16 +51,16 @@ public class CommentsApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    public CommentResponseModel updateComment(String commentId, String commentName) {
+    public CommentResponseModel updateComment(String commentId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
-                .name(commentName)
+                .content(commentContent)
                 .build();
 
         return updateComment(commentId, commentData);
     }
 
-    @Step("[API] Получить метку.")
+    @Step("[API] Получить комментарий.")
     public CommentResponseModel getComment(String commentId) {
 
         return given()
@@ -72,7 +72,9 @@ public class CommentsApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    @Step("[API] Получить все метки пользователя.")
+    // TODO : ДОДЕЛАТЬ
+    /*
+    @Step("[API] Получить все комментарии.")
     public List<CommentResponseModel> getAllComments() {
 
         return given()
@@ -84,9 +86,9 @@ public class CommentsApi {
                 .extract()
                 .jsonPath()
                 .getList(".", CommentResponseModel.class);
-    }
+    }*/
 
-    @Step("[API] Удалить метку.")
+    @Step("[API] Удалить комментарий.")
     public void deleteComment(String commentId) {
 
         given()
@@ -95,5 +97,5 @@ public class CommentsApi {
                 .delete(ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec204);
-    }*/
+    }
 }
