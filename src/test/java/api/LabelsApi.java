@@ -37,9 +37,7 @@ public class LabelsApi {
         return createNewLabel(labelData);
     }
 
-    /*
-    // TODO : доделать
-    @Step("[API] Обновить задачу.")
+    @Step("[API] Обновить метку.")
     public LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
 
         return given()
@@ -52,16 +50,16 @@ public class LabelsApi {
                 .extract().as(LabelResponseModel.class);
     }
 
-    // TODO : доделать
-    public LabelResponseModel updateLabel(String labelId, String labelContent) {
+    public LabelResponseModel updateLabel(String labelId, String labelName) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
-                .content(labelContent)
+                .name(labelName)
                 .build();
 
         return updateLabel(labelId, labelData);
     }
 
+    /*
     // TODO : доделать
     @Step("[API] Получить задачу.")
     public LabelResponseModel getLabel(String labelId) {
