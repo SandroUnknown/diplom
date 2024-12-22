@@ -16,5 +16,5 @@ public class LabelRequestModel {
     @JsonProperty("new_name") private String newName;
     private Color color;
     private int order;
-    @JsonProperty("is_favoriteg") private boolean isFavorite;
+    @JsonProperty("is_favorite") private boolean isFavorite;
 }
