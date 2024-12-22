@@ -13,7 +13,6 @@ import java.util.List;
 public class LabelRequestModel {
 
     private String name;
-    @JsonProperty("new_name") private String newName;
     private Color color;
     private int order;
     @JsonProperty("is_favorite") private boolean isFavorite;
