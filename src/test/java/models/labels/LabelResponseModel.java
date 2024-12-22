@@ -12,8 +12,8 @@ public class LabelResponseModel {
 
     private String id;
     private String name;
-    @JsonProperty("new_name") private String newName;
+    //@JsonProperty("new_name") private String newName;
     private Color color;
     private int order;
-    @JsonProperty("is_favoriteg") private boolean isFavorite;
+    @JsonProperty("is_favorite") private boolean isFavorite;
 }
