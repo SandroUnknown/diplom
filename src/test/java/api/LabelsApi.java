@@ -15,7 +15,7 @@ public class LabelsApi {
 
     private static final String ENDPOINT = "/labels/";
 
-    /*@Step("[API] Создать новую задачу.")
+    @Step("[API] Создать новую метку.")
     public LabelResponseModel createNewLabel(LabelRequestModel labelData) {
 
         return given()
@@ -27,17 +27,18 @@ public class LabelsApi {
                 .spec(responseSpec200)
                 .extract().as(LabelResponseModel.class);
     }
-
-    public LabelResponseModel createNewLabel(String sectionId, String labelContent) {
+    
+    public LabelResponseModel createNewLabel(String labelName) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
-                .sectionId(sectionId)
-                .content(labelContent)
+                .name(labelName)
                 .build();
 
         return createNewLabel(labelData);
     }
 
+    /*
+    // TODO : доделать
     @Step("[API] Обновить задачу.")
     public LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
 
@@ -51,6 +52,7 @@ public class LabelsApi {
                 .extract().as(LabelResponseModel.class);
     }
 
+    // TODO : доделать
     public LabelResponseModel updateLabel(String labelId, String labelContent) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
@@ -60,6 +62,7 @@ public class LabelsApi {
         return updateLabel(labelId, labelData);
     }
 
+    // TODO : доделать
     @Step("[API] Получить задачу.")
     public LabelResponseModel getLabel(String labelId) {
 
@@ -72,6 +75,7 @@ public class LabelsApi {
                 .extract().as(LabelResponseModel.class);
     }
 
+    // TODO : доделать
     @Step("[API] Получить задачи (с фильтром).")
     public List<LabelResponseModel> getLabelsWithFilter(HashMap<String, String> params) {
 
@@ -103,6 +107,7 @@ public class LabelsApi {
                 .getList(".", LabelResponseModel.class);
     }
 
+    // TODO : доделать
     @Step("[API] Получить все задачи (во всех проектах).")
     public List<LabelResponseModel> getAllLabels() {
 
@@ -117,6 +122,7 @@ public class LabelsApi {
                 .getList(".", LabelResponseModel.class);
     }
 
+    // TODO : доделать
     @Step("[API] Закрыть задачу.")
     public void closeLabel(String labelId) {
 
@@ -128,6 +134,7 @@ public class LabelsApi {
                 .spec(responseSpec204);
     }
 
+    // TODO : доделать
     @Step("[API] Открыть ранее закрытую задачу.")
     public void reopenLabel(String labelId) {
 
@@ -139,6 +146,7 @@ public class LabelsApi {
                 .spec(responseSpec204);
     }
 
+    // TODO : доделать
     @Step("[API] Удалить задачу.")
     public void deleteLabel(String labelId) {
 
