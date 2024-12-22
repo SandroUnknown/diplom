@@ -11,7 +11,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-// TODO : заменить все метки на ЛИЧНЫЕ метки
+// TODO : заменить все метки на ЛИЧНЫЕ метки + узнать можно ли одну модель использовать и для реквест, и для респонс
 public class LabelsApi {
 
     private static final String ENDPOINT = "/labels/";
