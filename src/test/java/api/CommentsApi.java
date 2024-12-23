@@ -5,7 +5,6 @@ import io.restassured.specification.RequestSpecification;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -27,12 +26,23 @@ public class CommentsApi {
                 .spec(responseSpec200)
                 .extract().as(CommentResponseModel.class);
     }
-    
+
     public CommentResponseModel createNewComment(String projectId, String taskId, String commentContent) {
         // TODO : доделать: нужно принимать либо проджектАйди, либо таскАйди
-        CommentRequestModel commentData = CommentRequestModel.builder()
-                .content(commentContent)
-                .build();
+
+        CommentRequestModel commentData;
+
+        if (projectId != null) {
+            commentData = CommentRequestModel.builder()
+                    .content(commentContent)
+                    .projectId(projectId)
+                    .build();
+        } else {
+            commentData = CommentRequestModel.builder()
+                    .content(commentContent)
+                    .taskId(taskId)
+                    .build();
+        }
 
         return createNewComment(commentData);
     }
@@ -40,7 +50,7 @@ public class CommentsApi {
     @Step("[API] Обновить комментарий.")
     public CommentResponseModel updateComment(String commentId, CommentRequestModel commentData) {
 
-    // TODO : под вопросом нужность этого метода? Проверить передать не только имя, но и новый айди проекта, например. Изменится ли место комментария? Если нет - то этот метод не нужен.
+        // TODO : под вопросом нужность этого метода? Проверить передать не только имя, но и новый айди проекта, например. Изменится ли место комментария? Если нет - то этот метод не нужен.
         return given()
                 .spec(requestPostWithIdSpec)
                 .body(commentData)
@@ -72,12 +82,27 @@ public class CommentsApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    // TODO : ДОДЕЛАТЬ
-    /*
-    @Step("[API] Получить все комментарии.")
-    public List<CommentResponseModel> getAllComments() {
+    @Step("[API] Получить все комментарии в проекте.")
+    public List<CommentResponseModel> getAllCommentsInProject(String projectId) {
 
-        return given()
+        RequestSpecification request = given()
+                .queryParam("project_id", projectId);
+
+        return getAllComments(request);
+    }
+
+    @Step("[API] Получить все комментарии в задаче.")
+    public List<CommentResponseModel> getAllCommentsInTask(String taskId) {
+
+        RequestSpecification request = given()
+                .queryParam("task_id", taskId);
+
+        return getAllComments(request);
+    }
+
+    private List<CommentResponseModel> getAllComments(RequestSpecification request) {
+
+        return request
                 .spec(requestGetSpec)
                 .when()
                 .get(ENDPOINT)
@@ -86,7 +111,7 @@ public class CommentsApi {
                 .extract()
                 .jsonPath()
                 .getList(".", CommentResponseModel.class);
-    }*/
+    }
 
     @Step("[API] Удалить комментарий.")
     public void deleteComment(String commentId) {

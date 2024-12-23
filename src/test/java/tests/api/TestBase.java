@@ -1,9 +1,6 @@
 package tests.api;
 
-import api.LabelsApi;
-import api.ProjectsApi;
-import api.SectionsApi;
-import api.TasksApi;
+import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
@@ -20,7 +17,7 @@ public class TestBase {
     protected ProjectsApi projectsApi = new ProjectsApi();
     protected SectionsApi sectionsApi = new SectionsApi();
     protected TasksApi tasksApi = new TasksApi();
-
+    protected CommentsApi commentsApi = new CommentsApi();
     protected LabelsApi labelsApi = new LabelsApi();
 
     @BeforeAll
@@ -35,7 +32,7 @@ public class TestBase {
         // 17.12 - 8.5 часов
         // 21.12 - 5 часов
         // 22.12 - 1 час
-        // 23.12 - 13:00...
+        // 23.12 - 13:05...
         //-----------------------
         // итого -
 
