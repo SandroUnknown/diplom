@@ -2,6 +2,7 @@ package models.labels;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import enums.Color;
 import lombok.Builder;
 import lombok.Data;
 

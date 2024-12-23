@@ -1,5 +1,6 @@
 package tests.api;
 
+import api.LabelsApi;
 import api.ProjectsApi;
 import api.SectionsApi;
 import api.TasksApi;
@@ -20,6 +21,8 @@ public class TestBase {
     protected SectionsApi sectionsApi = new SectionsApi();
     protected TasksApi tasksApi = new TasksApi();
 
+    protected LabelsApi labelsApi = new LabelsApi();
+
     @BeforeAll
     public static void setUp() {
 
@@ -31,8 +34,10 @@ public class TestBase {
 
         // 17.12 - 8.5 часов
         // 21.12 - 5 часов
+        // 22.12 - 1 час
+        // 23.12 - 13:00...
         //-----------------------
-        // итого - 13.5 часов
+        // итого -
 
 
 

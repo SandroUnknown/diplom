@@ -2,6 +2,7 @@ package models.labels;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import enums.Color;
 import lombok.Data;
 
 import java.util.List;

@@ -1,11 +1,9 @@
 package api;
 
 import io.qameta.allure.Step;
-import io.restassured.specification.RequestSpecification;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -28,7 +26,9 @@ public class LabelsApi {
                 .spec(responseSpec200)
                 .extract().as(LabelResponseModel.class);
     }
-    
+
+    // TODO : ещё есть 400 код, когда уже есть с таким именем
+
     public LabelResponseModel createNewLabel(String labelName) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
