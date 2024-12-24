@@ -2,6 +2,7 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.datacreator.DataCreator;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +16,8 @@ public class TestBase {
 
     // TODO : Точно ли протектед?
     // TODO : Может тут передавать в конструктор ENDPOINT???
+    DataCreator data = new DataCreator();
+
     protected ProjectsApi projectsApi = new ProjectsApi();
     protected SectionsApi sectionsApi = new SectionsApi();
     protected TasksApi tasksApi = new TasksApi();
@@ -36,14 +39,18 @@ public class TestBase {
         // 22.12 - 1 час 00 минут
         // 23.12 - 3 часа 30 минут (13:00-14:30  //  19:00-20:10  //  20:40-21:30)
         //          ------- 18 часов 00 минут
-        // 24.12 - 10:25-10:35.....10:40-12:45.....13:12-14:35.....
-        //-----------------------
+        // 24.12 - 10:25-10:35.....10:40-12:45.....13:12-14:35.....14:55-16:32.....17:05-
+        //----------------------
 
         // =============================================================================
 
-        // Список дел:
-        // 1. Сделать json-файл с тестовыми данными
-        // 2. Создавать все объекты используя этот файл.
+        // АПИ-ТЕСТЫ (без проверки) (Примерное время / количество)
+        // КОММЕНТ:  28 сек / 7 тестов
+        // ЛЕЙБЛ:    17 сек / 6 тестов
+        // ПРОДЖЕКТ: 17 сек / 5 тестов
+        // СЕКШЕН:   40 сек / 6 тестов (разброс от 28 до 52 сек)
+        // ТАСК:     84 сек / 8 тестов (разброс от 71 до 97 сек)
+        // --итого:  186 сек / 32 теста
 
         // =============================================================================
 
@@ -83,6 +90,10 @@ public class TestBase {
 
     @AfterEach
     void addAttachments() {
+
+        projectsApi.deleteProjects();
+        labelsApi.deleteLabels();
+
 
         /*Attach.screenshotAs("Last screenshot");
         if (!Configuration.browser.equals("firefox")) {
