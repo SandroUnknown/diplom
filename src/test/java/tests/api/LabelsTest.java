@@ -1,7 +1,6 @@
 package tests.api;
 
 import enums.Color;
-import helpers.annotations.CleanupTestData;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
 import org.junit.jupiter.api.DisplayName;

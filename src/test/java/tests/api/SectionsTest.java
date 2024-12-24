@@ -1,6 +1,5 @@
 package tests.api;
 
-import helpers.annotations.CleanupTestData;
 import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
 import org.junit.jupiter.api.DisplayName;

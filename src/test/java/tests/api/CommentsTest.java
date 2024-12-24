@@ -1,6 +1,5 @@
 package tests.api;
 
-import helpers.annotations.CleanupTestData;
 import models.comments.CommentResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
