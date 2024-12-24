@@ -91,10 +91,6 @@ public class TestBase {
     @AfterEach
     void addAttachments() {
 
-        projectsApi.deleteProjects();
-        labelsApi.deleteLabels();
-
-
         /*Attach.screenshotAs("Last screenshot");
         if (!Configuration.browser.equals("firefox")) {
             Attach.pageSource();
@@ -102,5 +98,12 @@ public class TestBase {
         }
         Attach.addVideo();*/
         closeWebDriver();
+    }
+
+    @AfterEach
+    void cleanupTestData() {
+
+        projectsApi.deleteProjects();
+        labelsApi.deleteLabels();
     }
 }
