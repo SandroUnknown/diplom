@@ -3,31 +3,29 @@ package api;
 import io.qameta.allure.Step;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
+import models.projects.ProjectResponseModel;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-// TODO : заменить все метки на ЛИЧНЫЕ метки + узнать можно ли одну модель использовать и для реквест, и для респонс
-public class LabelsApi {
+// TODO : узнать можно ли одну модель использовать и для реквест, и для респонс
+// TODO : вероятно добавить методы для ОБЩИХ меток? (аразобраться как их использовать) [опционально]
+public class LabelsApi extends BaseApi {
 
-    private static final String ENDPOINT = "/labels/";
-
-    @Step("[API] Создать новую метку.")
+    @Step("[API] Создать новую персональную метку.")
     public LabelResponseModel createNewLabel(LabelRequestModel labelData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
                 .body(labelData)
                 .when()
-                .post(ENDPOINT)
+                .post(LABELS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(LabelResponseModel.class);
     }
-
-    // TODO : ещё есть 400 код, когда уже есть с таким именем
 
     public LabelResponseModel createNewLabel(String labelName) {
 
@@ -38,14 +36,14 @@ public class LabelsApi {
         return createNewLabel(labelData);
     }
 
-    @Step("[API] Обновить метку.")
+    @Step("[API] Обновить персональную метку.")
     public LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
                 .body(labelData)
                 .when()
-                .post(ENDPOINT + labelId)
+                .post(LABELS_ENDPOINT + labelId)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(LabelResponseModel.class);
@@ -60,25 +58,25 @@ public class LabelsApi {
         return updateLabel(labelId, labelData);
     }
 
-    @Step("[API] Получить метку.")
+    @Step("[API] Получить персональную метку.")
     public LabelResponseModel getLabel(String labelId) {
 
         return given()
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT + labelId)
+                .get(LABELS_ENDPOINT + labelId)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(LabelResponseModel.class);
     }
 
-    @Step("[API] Получить все метки пользователя.")
+    @Step("[API] Получить все персональные метки пользователя.")
     public List<LabelResponseModel> getAllLabels() {
 
         return given()
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT)
+                .get(LABELS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract()
@@ -86,14 +84,25 @@ public class LabelsApi {
                 .getList(".", LabelResponseModel.class);
     }
 
-    @Step("[API] Удалить метку.")
+    @Step("[API] Удалить персональную метку.")
     public void deleteLabel(String labelId) {
 
         given()
                 .spec(requestDeleteSpec)
                 .when()
-                .delete(ENDPOINT + labelId)
+                .delete(LABELS_ENDPOINT + labelId)
                 .then()
                 .spec(responseSpec204);
+    }
+
+    @Step("[API] Удалить все персональные метки.")
+    public void deleteLabels() {
+
+        List<LabelResponseModel> labels = getAllLabels();
+
+        for (LabelResponseModel label : labels) {
+            String labelId = label.getId();
+            deleteLabel(labelId);
+        }
     }
 }

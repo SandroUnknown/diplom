@@ -9,21 +9,29 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-public class ProjectsApi {
+public class ProjectsApi extends BaseApi {
 
-    @Step("Создать новый проект (API)")
+    @Step("[API] Создать новый проект.")
     public ProjectResponseModel createNewProject(ProjectRequestModel projectData) {
-        // TODO : Что такое parent id?
 
-        return
-                given()
-                        .spec(requestPostWithIdSpec)
-                        .body(projectData)
-                        .when()
-                        .post("/projects")
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(ProjectResponseModel.class);
+        return given()
+                .spec(requestPostWithIdSpec)
+                .body(projectData)
+                .when()
+                .post(PROJECTS_ENDPOINT)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(ProjectResponseModel.class);
+    }
+
+    public ProjectResponseModel createNewProject(String parentProjectId, String projectName) {
+
+        ProjectRequestModel projectData = ProjectRequestModel.builder()
+                .parentId(parentProjectId)
+                .name(projectName)
+                .build();
+
+        return createNewProject(projectData);
     }
 
     public ProjectResponseModel createNewProject(String projectName) {
@@ -31,64 +39,79 @@ public class ProjectsApi {
         ProjectRequestModel projectData = ProjectRequestModel.builder()
                 .name(projectName)
                 .build();
+
         return createNewProject(projectData);
     }
 
-    @Step("Обновить проект по ID (API)")
+    @Step("[API] Обновить проект.")
     public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
 
-        return
-                given()
-                        .spec(requestPostWithIdSpec)
-                        .body(newProjectData)
-                        .when()
-                        .post("/projects/" + projectId)
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(ProjectResponseModel.class);
+        return given()
+                .spec(requestPostWithIdSpec)
+                .body(newProjectData)
+                .when()
+                .post(PROJECTS_ENDPOINT + projectId)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(ProjectResponseModel.class);
     }
 
-    @Step("Получить проект по ID (API)")
+    public ProjectResponseModel updateProject(String projectId, String projectName) {
+
+        ProjectRequestModel projectData = ProjectRequestModel.builder()
+                .name(projectName)
+                .build();
+
+        return updateProject(projectId, projectData);
+    }
+
+    @Step("[API] Получить проект.")
     public ProjectResponseModel getProject(String projectId) {
 
-        return
-                given()
-                        .spec(requestGetSpec)
-                        .when()
-                        .get("/projects/" + projectId)
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(ProjectResponseModel.class);
+        return given()
+                .spec(requestGetSpec)
+                .when()
+                .get(PROJECTS_ENDPOINT + projectId)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(ProjectResponseModel.class);
     }
 
-    @Step("Получить все проекты (API)")
+    @Step("[API] Получить все проекты.")
     public List<ProjectResponseModel> getAllProjects() {
 
-        return
-                given()
-                        .spec(requestGetSpec)
-                        .when()
-                        .get("/projects")
-                        .then()
-                        .spec(responseSpec200)
-                        .extract()
-                        .jsonPath()
-                        .getList(".", ProjectResponseModel.class);
+        return given()
+                .spec(requestGetSpec)
+                .when()
+                .get(PROJECTS_ENDPOINT)
+                .then()
+                .spec(responseSpec200)
+                .extract()
+                .jsonPath()
+                .getList(".", ProjectResponseModel.class);
     }
 
-    @Step("Удалить проект по ID (API)")
+    @Step("[API] Удалить проект.")
     public void deleteProject(String projectId) {
 
         given()
                 .spec(requestDeleteSpec)
                 .when()
-                .delete("/projects/" + projectId)
+                .delete(PROJECTS_ENDPOINT + projectId)
                 .then()
                 .spec(responseSpec204);
     }
 
-    @Step("Удалить все проекты (API)")
-    public void deleteAllProjects() {
+    @Step("[API] Удалить список проектов.")
+    public void deleteProjects(List<String> projectsId) {
+
+        for (String projectId : projectsId) {
+            deleteProject(projectId);
+        }
+    }
+
+    @Step("[API] Удалить все проекты.")
+    public void deleteProjects() {
 
         List<ProjectResponseModel> projects = getAllProjects();
 

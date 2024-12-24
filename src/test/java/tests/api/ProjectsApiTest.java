@@ -1,5 +1,6 @@
 package tests.api;
 
+import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -11,13 +12,13 @@ import static enums.ViewStyle.*;
 
 public class ProjectsApiTest extends TestBase {
 
-    // TODO : Передавать имя проекта (и др данные) из вне?
     @Test
+    @CleanupTestData
     @DisplayName("Создать новый проект (API)")
     void createNewProjectTest() {
 
         ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .name("New Project Test 6")
+                .name("New Project Test 27")
                 .color(YELLOW)
                 .viewStyle(BOARD)
                 .build();
@@ -55,7 +56,7 @@ public class ProjectsApiTest extends TestBase {
         sleep(2000);
 
         // Удалить все проекты
-        projectsApi.deleteAllProjects();
+        projectsApi.deleteProjects();
     }
 
     @Test
@@ -78,4 +79,24 @@ public class ProjectsApiTest extends TestBase {
 
         projectsApi.updateProject(projectId, newProjectData);
     }
+
+    // ==========================
+
+    @Test
+    @DisplayName("Создать новый проект (API)")
+    void createNewProjectInProjectTest() {
+
+        ProjectRequestModel parentProjectData = ProjectRequestModel.builder()
+                .name("PARENT Project Test 20")
+                .color(YELLOW)
+                .viewStyle(BOARD)
+                .build();
+
+        // Создать родительский проект
+        String parentProjectId = projectsApi.createNewProject(parentProjectData).getId();
+
+        // Создать дочерний проект
+        projectsApi.createNewProject(parentProjectId,"CHILD Project Test 20");
+    }
+
 }

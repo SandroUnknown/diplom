@@ -10,9 +10,9 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-public class CommentsApi {
-
-    private static final String ENDPOINT = "/comments/";
+// TODO : Добавить аттачи в создание коммента?
+// TODO : Вероятно изменить перегрузки Создания и Получения (привести их к единому формату)
+public class CommentsApi extends BaseApi {
 
     @Step("[API] Создать новый комментарий.")
     public CommentResponseModel createNewComment(CommentRequestModel commentData) {
@@ -21,53 +21,47 @@ public class CommentsApi {
                 .spec(requestPostWithIdSpec)
                 .body(commentData)
                 .when()
-                .post(ENDPOINT)
+                .post(COMMENTS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(CommentResponseModel.class);
     }
 
-    public CommentResponseModel createNewComment(String projectId, String taskId, String commentContent) {
-        // TODO : доделать: нужно принимать либо проджектАйди, либо таскАйди
+    public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
 
-        CommentRequestModel commentData;
+        CommentRequestModel commentData = CommentRequestModel.builder()
+                .content(commentContent)
+                .projectId(projectId)
+                .build();
 
-        if (projectId != null) {
-            commentData = CommentRequestModel.builder()
-                    .content(commentContent)
-                    .projectId(projectId)
-                    .build();
-        } else {
-            commentData = CommentRequestModel.builder()
-                    .content(commentContent)
-                    .taskId(taskId)
-                    .build();
-        }
+        return createNewComment(commentData);
+    }
+
+    public CommentResponseModel createNewCommentInTask(String taskId, String commentContent) {
+
+        CommentRequestModel commentData = CommentRequestModel.builder()
+                .content(commentContent)
+                .taskId(taskId)
+                .build();
 
         return createNewComment(commentData);
     }
 
     @Step("[API] Обновить комментарий.")
-    public CommentResponseModel updateComment(String commentId, CommentRequestModel commentData) {
-
-        // TODO : под вопросом нужность этого метода? Проверить передать не только имя, но и новый айди проекта, например. Изменится ли место комментария? Если нет - то этот метод не нужен.
-        return given()
-                .spec(requestPostWithIdSpec)
-                .body(commentData)
-                .when()
-                .post(ENDPOINT + commentId)
-                .then()
-                .spec(responseSpec200)
-                .extract().as(CommentResponseModel.class);
-    }
-
     public CommentResponseModel updateComment(String commentId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
                 .build();
 
-        return updateComment(commentId, commentData);
+        return given()
+                .spec(requestPostWithIdSpec)
+                .body(commentData)
+                .when()
+                .post(COMMENTS_ENDPOINT + commentId)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(CommentResponseModel.class);
     }
 
     @Step("[API] Получить комментарий.")
@@ -76,7 +70,7 @@ public class CommentsApi {
         return given()
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT + commentId)
+                .get(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(CommentResponseModel.class);
@@ -105,7 +99,7 @@ public class CommentsApi {
         return request
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT)
+                .get(COMMENTS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract()
@@ -119,7 +113,7 @@ public class CommentsApi {
         given()
                 .spec(requestDeleteSpec)
                 .when()
-                .delete(ENDPOINT + commentId)
+                .delete(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec204);
     }

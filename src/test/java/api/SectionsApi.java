@@ -10,20 +10,19 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-public class SectionsApi {
+public class SectionsApi extends BaseApi {
 
-    @Step("Создать новый раздел (API)")
+    @Step("[API] Создать новый раздел.")
     public SectionResponseModel createNewSection(SectionRequestModel sectionData) {
 
-        return
-                given()
-                        .spec(requestPostSpec)
-                        .body(sectionData)
-                        .when()
-                        .post("/sections")
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(SectionResponseModel.class);
+        return given()
+                .spec(requestPostSpec)
+                .body(sectionData)
+                .when()
+                .post(SECTIONS_ENDPOINT)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(SectionResponseModel.class);
     }
 
     public SectionResponseModel createNewSection(String projectId, String sectionName) {
@@ -36,47 +35,54 @@ public class SectionsApi {
         return createNewSection(sectionData);
     }
 
-    @Step("Обновить раздел по ID (API)")
+    @Step("[API] Обновить раздел.")
+    public SectionResponseModel updateSection(String sectionId, SectionRequestModel sectionData) {
+
+        return given()
+                .spec(requestPostSpec)
+                .body(sectionData)
+                .when()
+                .post(SECTIONS_ENDPOINT + sectionId)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(SectionResponseModel.class);
+    }
+
     public SectionResponseModel updateSection(String sectionId, String newName) {
 
         SectionRequestModel sectionData = SectionRequestModel.builder()
                 .name(newName)
                 .build();
 
-        return
-                given()
-                        .spec(requestPostSpec)
-                        .body(sectionData)
-                        .when()
-                        .post("/sections/" + sectionId)
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(SectionResponseModel.class);
+        return updateSection(sectionId, sectionData);
     }
 
-    @Step("Получить один раздел по ID (API)")
+    @Step("[API] Получить раздел.")
     public SectionResponseModel getSection(String sectionId) {
 
-        return
-                given()
-                        .spec(requestGetSpec)
-                        .when()
-                        .get("/sections/" + sectionId)
-                        .then()
-                        .spec(responseSpec200)
-                        .extract().as(SectionResponseModel.class);
+        return given()
+                .spec(requestGetSpec)
+                .when()
+                .get(SECTIONS_ENDPOINT + sectionId)
+                .then()
+                .spec(responseSpec200)
+                .extract().as(SectionResponseModel.class);
     }
 
-    @Step("Получить все разделы (в рамках одного проекта) (API)")
-    public List<SectionResponseModel> getAllSectionsInProject(String projectId) {
+    @Step("[API] Получить все разделы в проекте.")
+    public List<SectionResponseModel> getAllSections(String projectId) {
+
         RequestSpecification request = given()
                 .queryParam("project_id", projectId);
+
         return getAllSections(request);
     }
 
-    @Step("Получить все разделы (во всех проектах) (API)")
+    @Step("[API] Получить все разделы во всех проектах.")
     public List<SectionResponseModel> getAllSections() {
+
         RequestSpecification request = given();
+
         return getAllSections(request);
     }
 
@@ -85,7 +91,7 @@ public class SectionsApi {
         return request
                 .spec(requestGetSpec)
                 .when()
-                .get("/sections")
+                .get(SECTIONS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract()
@@ -93,21 +99,21 @@ public class SectionsApi {
                 .getList(".", SectionResponseModel.class);
     }
 
-    @Step("Удалить один раздел по ID (API)")
+    @Step("[API] Удалить раздел.")
     public void deleteSection(String sectionId) {
 
         given()
                 .spec(requestGetSpec)
                 .when()
-                .delete("/sections/" + sectionId)
+                .delete(SECTIONS_ENDPOINT + sectionId)
                 .then()
                 .spec(responseSpec204);
     }
 
-    @Step("Удалить все разделы в проекте (API)")
+    @Step("[API] Удалить все разделы в проекте.")
     public void deleteAllSectionInProject(String projectId) {
 
-        List<SectionResponseModel> sections = getAllSectionsInProject(projectId);
+        List<SectionResponseModel> sections = getAllSections(projectId);
 
         for (SectionResponseModel section : sections) {
             deleteSection(section.getId());

@@ -78,7 +78,7 @@ public class TasksApiTest extends TestBase {
     void getTasksWithFilterTest() {
 
         String projectId = projectsApi.getAllProjects().get(1).getId();
-        String sectionId = sectionsApi.getAllSectionsInProject(projectId).get(1).getId();
+        String sectionId = sectionsApi.getAllSections(projectId).get(1).getId();
         String label = "xxx2";
         String filter = "@xxx3 & @NEW";
 

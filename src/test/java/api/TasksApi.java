@@ -11,9 +11,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static specs.Specification.*;
 
-public class TasksApi {
-
-    private static final String ENDPOINT = "/tasks/";
+public class TasksApi extends BaseApi {
 
     @Step("[API] Создать новую задачу.")
     public TaskResponseModel createNewTask(TaskRequestModel taskData) {
@@ -22,7 +20,7 @@ public class TasksApi {
                 .spec(requestPostWithIdSpec)
                 .body(taskData)
                 .when()
-                .post(ENDPOINT)
+                .post(TASKS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(TaskResponseModel.class);
@@ -45,7 +43,7 @@ public class TasksApi {
                 .spec(requestPostWithIdSpec)
                 .body(taskData)
                 .when()
-                .post(ENDPOINT + taskId)
+                .post(TASKS_ENDPOINT + taskId)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(TaskResponseModel.class);
@@ -66,7 +64,7 @@ public class TasksApi {
         return given()
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT + taskId)
+                .get(TASKS_ENDPOINT + taskId)
                 .then()
                 .spec(responseSpec200)
                 .extract().as(TaskResponseModel.class);
@@ -75,6 +73,7 @@ public class TasksApi {
     @Step("[API] Получить задачи (с фильтром).")
     public List<TaskResponseModel> getTasksWithFilter(HashMap<String, String> params) {
 
+        // TODO : заменить на enum?
         List<String> filters = List.of(
                 "filter",
                 "ids",
@@ -95,7 +94,7 @@ public class TasksApi {
         return request
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT)
+                .get(TASKS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract()
@@ -103,13 +102,13 @@ public class TasksApi {
                 .getList(".", TaskResponseModel.class);
     }
 
-    @Step("[API] Получить все задачи (во всех проектах).")
+    @Step("[API] Получить все задачи пользователя.")
     public List<TaskResponseModel> getAllTasks() {
 
         return given()
                 .spec(requestGetSpec)
                 .when()
-                .get(ENDPOINT)
+                .get(TASKS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
                 .extract()
@@ -123,7 +122,7 @@ public class TasksApi {
         given()
                 .spec(requestPostSpec)
                 .when()
-                .post(String.format("%s%s/close", ENDPOINT, taskId))
+                .post(String.format("%s%s/close", TASKS_ENDPOINT, taskId))
                 .then()
                 .spec(responseSpec204);
     }
@@ -134,7 +133,7 @@ public class TasksApi {
         given()
                 .spec(requestPostSpec)
                 .when()
-                .post(String.format("%s%s/reopen", ENDPOINT, taskId))
+                .post(String.format("%s%s/reopen", TASKS_ENDPOINT, taskId))
                 .then()
                 .spec(responseSpec204);
     }
@@ -145,7 +144,7 @@ public class TasksApi {
         given()
                 .spec(requestDeleteSpec)
                 .when()
-                .delete(ENDPOINT + taskId)
+                .delete(TASKS_ENDPOINT + taskId)
                 .then()
                 .spec(responseSpec204);
     }

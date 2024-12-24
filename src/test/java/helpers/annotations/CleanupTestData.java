@@ -1,4 +1,4 @@
-package helpers.extensions;
+package helpers.annotations;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -7,8 +7,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@ExtendWith(LoginExtension.class)
+@ExtendWith(CleanupTestDataExtension.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface WithLogin {
+public @interface CleanupTestData {
 }

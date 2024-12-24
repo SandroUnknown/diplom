@@ -1,9 +1,7 @@
 package tests.api;
 
-import enums.Color;
+import helpers.datacreator.DataCreator;
 import models.comments.CommentResponseModel;
-import models.labels.LabelRequestModel;
-import models.labels.LabelResponseModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +20,7 @@ public class CommentsApiTest extends TestBase {
         String projectId = projectsApi.createNewProject("PROJECT 1 for test COMMENT").getId();
 
         // Создаем комментарий
-        commentsApi.createNewComment(projectId, null, "New comment, bla-bla-bla...");
+        commentsApi.createNewCommentInProject(projectId, "New comment, bla-bla-bla...");
     }
 
     @Test
@@ -40,7 +38,7 @@ public class CommentsApiTest extends TestBase {
         String taskId = tasksApi.createNewTask(taskData).getId();
 
         // Создаем комментарий
-        commentsApi.createNewComment(null, taskId, "New comment, bla-bla-bla...");
+        commentsApi.createNewCommentInTask(taskId, "New comment, bla-bla-bla...");
     }
 
     @Test
@@ -58,7 +56,7 @@ public class CommentsApiTest extends TestBase {
         String taskId = tasksApi.createNewTask(taskData).getId();
 
         // Создаем комментарий
-        String commentId = commentsApi.createNewComment(null, taskId, "New comment 3, bla-bla-bla...").getId();
+        String commentId = commentsApi.createNewCommentInTask(taskId, "New comment 3, bla-bla-bla...").getId();
 
         // Получаем коммент по айди
         CommentResponseModel comment = commentsApi.getComment(commentId);
@@ -81,9 +79,9 @@ public class CommentsApiTest extends TestBase {
         String taskId = tasksApi.createNewTask(taskData).getId();
 
         // Создаем комментарий
-        commentsApi.createNewComment(null, taskId, "New comment 1, bla-bla-bla...");
-        commentsApi.createNewComment(null, taskId, "New comment 2, bla-bla-bla...");
-        commentsApi.createNewComment(null, taskId, "New comment 3, bla-bla-bla...");
+        commentsApi.createNewCommentInTask(taskId, "New comment 1, bla-bla-bla...");
+        commentsApi.createNewCommentInTask(taskId, "New comment 2, bla-bla-bla...");
+        commentsApi.createNewCommentInTask(taskId, "New comment 3, bla-bla-bla...");
 
         // Получаем все комменты в проекте
         List<CommentResponseModel> comments = commentsApi.getAllCommentsInTask(taskId);
@@ -99,9 +97,9 @@ public class CommentsApiTest extends TestBase {
         String projectId = projectsApi.createNewProject("PROJECT 11 for test COMMENT").getId();
 
         // Создаем комментарии
-        commentsApi.createNewComment(projectId, null, "New comment 1, bla-bla-bla...");
-        commentsApi.createNewComment(projectId, null, "New comment 2, bla-bla-bla...");
-        commentsApi.createNewComment(projectId, null, "New comment 3, bla-bla-bla...");
+        commentsApi.createNewCommentInProject(projectId, "New comment 1, bla-bla-bla...");
+        commentsApi.createNewCommentInProject(projectId, "New comment 2, bla-bla-bla...");
+        commentsApi.createNewCommentInProject(projectId, "New comment 3, bla-bla-bla...");
 
         // Получаем все комменты в проекте
         List<CommentResponseModel> comments = commentsApi.getAllCommentsInProject(projectId);
@@ -124,7 +122,7 @@ public class CommentsApiTest extends TestBase {
         String taskId = tasksApi.createNewTask(taskData).getId();
 
         // Создаем комментарий
-        String commentId = commentsApi.createNewComment(null, taskId, "New comment 3, bla-bla-bla...").getId();
+        String commentId = commentsApi.createNewCommentInTask(taskId, "New comment 3, bla-bla-bla...").getId();
 
         // TODO : удалить при релизе
         sleep(3000);
@@ -150,7 +148,7 @@ public class CommentsApiTest extends TestBase {
         String taskId = tasksApi.createNewTask(taskData).getId();
 
         // Создаем комментарий
-        String commentId = commentsApi.createNewComment(null, taskId, "New comment 5, bla-bla-bla...").getId();
+        String commentId = commentsApi.createNewCommentInTask(taskId, "New comment 5, bla-bla-bla...").getId();
 
         // TODO : удалить при релизе
         sleep(3000);
@@ -160,4 +158,32 @@ public class CommentsApiTest extends TestBase {
 
         System.out.println();
     }
+
+    // =========================
+
+    @Test
+    @DisplayName("TEST")
+    void testTest() {
+
+        DataCreator data = new DataCreator();
+
+        // Создаем проекты.
+        //String projectsId = data.createProjects();
+        List<String> projectsId = data.createProjects(2);
+
+        // Создаем разделы.
+        List<String> sectionsId = data.createSections(projectsId, 2, 4);
+
+        // Создаем задачи.
+        List<String> tasksId = data.createTasks(sectionsId, 2, 5);
+
+        // Создаем комментарии.
+        List<String> commentsId = data.createComments(tasksId, 0, 1);
+
+        // TODO : удалить при релизе
+        System.out.println();
+    }
+
+
+
 }

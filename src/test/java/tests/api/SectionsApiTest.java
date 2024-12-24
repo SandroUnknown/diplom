@@ -108,7 +108,7 @@ public class SectionsApiTest extends TestBase {
 
         // Получаем все разделы (getAllSections() - все-все, getAllSectionsInProject(projectId) - по конкретному проекту).
         //List<SectionResponseModel> sections = sectionsApi.getAllSections();
-        List<SectionResponseModel> sections = sectionsApi.getAllSectionsInProject(projectId);
+        List<SectionResponseModel> sections = sectionsApi.getAllSections(projectId);
 
         sectionsApi.deleteSection(sections.get(2).getId());
 

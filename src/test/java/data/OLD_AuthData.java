@@ -1,6 +1,6 @@
 package data;
 
-public class AuthData {
+public class OLD_AuthData {
     public static String USER_ID = "userID";
     public static String USER_NAME = "userName";
     public static String USER_PASSWORD = "userPassword";

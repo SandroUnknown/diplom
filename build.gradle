@@ -40,6 +40,7 @@ dependencies {
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "com.opencsv:opencsv:5.9",
             "org.assertj:assertj-core:$assertjVersion"
     )
 }

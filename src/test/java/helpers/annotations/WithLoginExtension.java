@@ -1,27 +1,15 @@
-package helpers.extensions;
+package helpers.annotations;
 
-import api.OLD_AuthorizationApi;
-import models.OLD_auth.LoginResponseModel;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-import static data.AuthData.USER_ID;
-import static data.AuthData.USER_NAME;
-import static data.AuthData.USER_PASSWORD;
-import static data.AuthData.USER_TOKEN;
-import static data.AuthData.EXPIRES;
-import static data.AuthData.CREATE_DATE;
-import static data.AuthData.IS_ACTIVE;
-
-public class LoginExtension implements BeforeEachCallback {
+public class WithLoginExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(ExtensionContext context) {
-
+/*
         USER_NAME = System.getProperty("storeUserName", "login");
         USER_PASSWORD = System.getProperty("storeUserPassword", "password");
 
@@ -37,6 +25,6 @@ public class LoginExtension implements BeforeEachCallback {
         USER_TOKEN = authResponse.getToken();
         EXPIRES = authResponse.getExpires();
         CREATE_DATE = authResponse.getCreatedDate();
-        IS_ACTIVE = authResponse.getIsActive();
+        IS_ACTIVE = authResponse.getIsActive();*/
     }
 }

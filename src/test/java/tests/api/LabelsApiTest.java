@@ -82,4 +82,6 @@ public class LabelsApiTest extends TestBase {
         // Удаляем метку по айди
         labelsApi.deleteLabel(labelId);
     }
+
+    // Создание метки с уже имеющимся именем? Код ответа 400
 }

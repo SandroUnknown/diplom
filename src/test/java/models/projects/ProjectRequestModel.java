@@ -14,9 +14,7 @@ public class ProjectRequestModel {
     private String name;
     @JsonProperty("parent_id") private String parentId;
     private Color color;
-    //private String color;
     @JsonProperty("is_favorite") private boolean isFavorite;
     @JsonProperty("view_style") private ViewStyle viewStyle;
-
 
 }
