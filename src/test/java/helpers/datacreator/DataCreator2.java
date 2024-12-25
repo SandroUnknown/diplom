@@ -23,7 +23,8 @@ public class DataCreator2 {
 
     ProjectsApi api = new ProjectsApi();
     List<ProjectRequestModel> requestModels = new ArrayList<>();
-    
+
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
     // Прочитать в переменную весь файл. 
     List<String[]> data = openFile("data/labelsList.csv");
     
@@ -74,11 +75,11 @@ public class DataCreator2 {
   }
   
   public List<ProjectRequestModel> getProjectsData(String filePath, int projectsCount) {
-        return getProjectData(filePath, projectsCount, projectsCount);
+        return getProjectsData(filePath, projectsCount, projectsCount);
   }
 
   public List<ProjectRequestModel> getProjectsData(String filePath) {
-        return getProjectData(filePath, null, null);
+        return getProjectsData(filePath, null, null);
   }
 
 
