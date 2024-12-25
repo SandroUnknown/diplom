@@ -20,8 +20,9 @@ import static enums.ViewStyle.BOARD;
 public class DataCreator2 {
 
   // === ЗАДАЧИ =================================================
-  
-  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int minTasksCount, int maxTasksCount, List<LabelResponseModel> labels) {
+
+  // min + max, с метками
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int minTasksCount, int maxTasksCount, List<LabelResponseModel> labels, int minLabelsCount, int maxLabelsCount) {
 
     // TODO : вероятно надо вынести data.size() в переменную, т.к. используется минимум трижды
     
@@ -34,6 +35,12 @@ public class DataCreator2 {
     // Прочитать в переменную весь файл. 
     List<String[]> data = openFile(filePath);
 
+    // Делаем из объектов-меток только список имен меток (остальные данные нам не нужны)
+    List<String> labelsName = new ArrayList<>();
+    for(List<LabelResponseModel> label : labels) {
+      labelsName.add(label.name);
+    }
+
     for(List<SectionResponseModel> section : sections) {
 
       // Определяем id раздела
@@ -41,7 +48,7 @@ public class DataCreator2 {
 
       List<String[]> dataCopy = new ArrayList<>(data);
       
-      // Определить количество секций
+      // Определить количество разделов
       int tasksCount;
       if (minTasksCount = null || maxTasksCount == null) {
           tasksCount = dataCopy.size();
@@ -65,27 +72,42 @@ public class DataCreator2 {
         Random randomPriority = new Random();
         int priority = randomPriority.nextInt(4) + 1;
 
-        // Метки
-        // Генерируем количество меток в задаче
+        // Метки ---------------------------------------------------------------------------
+        /*  // Генерируем количество меток в задаче
         Random randomLabelsCount = new Random();
-        int labelsCount = randomLabelsCount.nextInt(3);
-        labelsCount = Math.min(labelsCount, labels.size());
+        //int labelsCount = randomLabelsCount.nextInt(3);
+        int labelsCount = randomTasksCount.nextInt(
+                  maxLabelsCount - minLabelsCount + 1) + minLabelsCount;
+        labelsCount = Math.min(labelsCount, labelsName.size());*/
 
-        // TODO : проверить, вероятно может попасться одна и та же метка при генерации!!!!
-        // Создаем список из меток
-        List<String> labelsName = new ArrayList<>();
+        // Генерируем количество меток В ЗАДАЧЕ
+        int labelsCount;
+        if (minLabelsCount = null || maxLabelsCount == null) {
+          labelsCount = labelsName.size();
+        } else {
+          Random randomLabelsCount = new Random();
+          labelsCount = randomTasksCount.nextInt(
+                  maxLabelsCount - minLabelsCount + 1) + minLabelsCount;
+          labelsCount = Math.min(labelsCount, labelsName.size());
+        }
+
+        // Создаем список из меток, чтобы потом добавить В ЗАДАЧУ
+        List<String> labelsNameCopy = new ArrayList<>(labelsName);
+        List<String> labelsList = new ArrayList<>();
         for (int k = 1; k <= labelsCount; k++) {
           Random randomLabelsIndex = new Random();
-          int labelsIndex = randomLabelsIndex.nextInt(labels.size());
-          labelsName.add(labelsName.get(labelsIndex));
+          int labelIndex = randomLabelsIndex.nextInt(labelsNameCopy.size()); // TODO : проверить, вероятно будет генерировать даже при 0 размере!!!! 
+          labelsList.add(labelsNameCopy.get(labelIndex));
+          labelsNameCopy.remove(labelsIndex);
         }
+        // ----------------------------------------------------------------------------------
 
         // Создаем одну модель.
         TaskRequestModel request = TaskRequestModel.builder()
           .content(content)
           .sectionId(sectionId)
           .priority(priority)
-          .labels(labelsName)
+          .labels(labelsList)
           .build();
 
         // Добавляем запрос в список запросов
@@ -95,13 +117,33 @@ public class DataCreator2 {
 
     return requests;
   }
-  
-  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int sectionsCount) {
-        return getRandomSectionsData(filePath, sectionsCount, sectionsCount);
+
+  // min + max, но без меток
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int minTasksCount, int maxTasksCount) {
+        // TODO : подать в метках пустой список вместо NULL
+        return getRandomTasksData(sections, filePath, minTasksCount, maxTasksCount, null, 0, 0);
   }
 
-  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath) {
-        return getRandomSectionsData(filePath, null, null);
+  // конкретное число, c метками
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int tasksCount, List<LabelResponseModel> labels, int labelsCount) {
+        return getRandomTasksData(sections, filePath, tasksCount, tasksCount, labels, labelsCount, labelsCount);
+  }
+  
+  // конкретное число, но без меток
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int tasksCount) {
+        return getRandomTasksData(sections, filePath, tasksCount, tasksCount, null, 0, 0);
+  }
+
+  // все, со всеми метками
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, List<LabelResponseModel> labels) {
+        // TODO : подать в метках пустой список вместо NULL
+        return getRandomTasksData(sections, filePath, null, null, labels, null, null);
+  }
+  
+  // все, но без меток
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath) {
+        // TODO : подать в метках пустой список вместо NULL
+        return getRandomTasksData(sections, filePath, null, null, null, null, null);
   }
 
   // TODO : убрать в АПИ? (делает ровно тоже самое)
@@ -251,11 +293,11 @@ public class DataCreator2 {
   }
   
   public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int sectionsCount) {
-        return getRandomSectionsData(filePath, sectionsCount, sectionsCount);
+        return getRandomSectionsData(projects, filePath, sectionsCount, sectionsCount);
   }
 
   public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath) {
-        return getRandomSectionsData(filePath, null, null);
+        return getRandomSectionsData(projects, filePath, null, null);
   }
 
   // TODO : убрать в АПИ? (делает ровно тоже самое)
