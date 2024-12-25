@@ -19,6 +19,107 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator2 {
 
+  // === ЗАДАЧИ =================================================
+  
+  public List<TaskRequestModel> getRandomTasksData(List<SectionResponseModel> sections, String filePath, int minTasksCount, int maxTasksCount, List<LabelResponseModel> labels) {
+
+    // TODO : вероятно надо вынести data.size() в переменную, т.к. используется минимум трижды
+    
+    List<TaskRequestModel> requests = new ArrayList<>();
+    
+    // Сколько всего разделов?
+    int sectionsCount = sections.size();
+    
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
+    // Прочитать в переменную весь файл. 
+    List<String[]> data = openFile(filePath);
+
+    for(List<SectionResponseModel> section : sections) {
+
+      // Определяем id раздела
+      String sectionId = section.id;
+
+      List<String[]> dataCopy = new ArrayList<>(data);
+      
+      // Определить количество секций
+      int tasksCount;
+      if (minTasksCount = null || maxTasksCount == null) {
+          tasksCount = dataCopy.size();
+      } else {
+          Random randomTasksCount = new Random();
+          int tasksCount = randomTasksCount.nextInt(
+                  maxTasksCount - minTasksCount + 1) + minTasksCount;
+          tasksCount = Math.min(tasksCount, dataCopy.size());
+      }
+
+      // Собираем запрос в List<TaskRequestModel>
+      for (int i = 1; i <= tasksCount; i++) {
+
+        // Контент
+        Random randomContentsIndex = new Random();
+        int contentIndex = randomContentsIndex.nextInt(dataCopy.size());
+        String content = dataCopy.get(contentIndex)[0];
+        dataCopy.remove(contentIndex);
+
+        // Приорити
+        Random randomPriority = new Random();
+        int priority = randomPriority.nextInt(4) + 1;
+
+        // Метки
+        // Генерируем количество меток в задаче
+        Random randomLabelsCount = new Random();
+        int labelsCount = randomLabelsCount.nextInt(3);
+        labelsCount = Math.min(labelsCount, labels.size());
+
+        // TODO : проверить, вероятно может попасться одна и та же метка при генерации!!!!
+        // Создаем список из меток
+        List<String> labelsName = new ArrayList<>();
+        for (int k = 1; k <= labelsCount; k++) {
+          Random randomLabelsIndex = new Random();
+          int labelsIndex = randomLabelsIndex.nextInt(labels.size());
+          labelsName.add(labelsName.get(labelsIndex));
+        }
+
+        // Создаем одну модель.
+        TaskRequestModel request = TaskRequestModel.builder()
+          .content(content)
+          .sectionId(sectionId)
+          .priority(priority)
+          .labels(labelsName)
+          .build();
+
+        // Добавляем запрос в список запросов
+        requests.add(request);
+      }
+    }
+
+    return requests;
+  }
+  
+  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int sectionsCount) {
+        return getRandomSectionsData(filePath, sectionsCount, sectionsCount);
+  }
+
+  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath) {
+        return getRandomSectionsData(filePath, null, null);
+  }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<SectionResponseModel> createSections(List<SectionRequestModel> requests) {
+
+    SectionsApi api = new SectionsApi();
+    List<SectionResponseModel> responses = new ArrayList<>();
+
+    for (SectionRequestModel request : requests) {
+      responses.add(api.createNewSection(request));
+    }
+    
+    return responses;
+  }
+
+  // ====================================================
+
+  
 // === МЕТКИ =================================================
   
   public List<LabelRequestModel> getRandomLabelsData(String filePath, int minLabelsCount, int maxLabelsCount) {
@@ -118,7 +219,7 @@ public class DataCreator2 {
       // Определить количество секций
       int sectionsCount;
       if (minSectionsCount = null || maxSectionsCount == null) {
-          sectionsCount = data.size();
+          sectionsCount = dataCopy.size();
       } else {
           Random randomSectionsCount = new Random();
           int sectionsCount = randomSectionsCount.nextInt(
