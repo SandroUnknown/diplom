@@ -19,17 +19,16 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator2 {
 
-  public List<ProjectRequestModel> getProjectsData(String filePath, int minProjectsCount, int maxProjectsCount) {
-
-    ProjectsApi api = new ProjectsApi();
-    List<ProjectRequestModel> requestModels = new ArrayList<>();
-
+  // === РАЗДЕЛЫ =================================================
+  
+  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int minSectionsCount, int maxSectionsCount) {
+    
     // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
     // Прочитать в переменную весь файл. 
-    List<String[]> data = openFile("data/labelsList.csv");
+    List<String[]> data = openFile(filePath);
     
     // Определить количество проектов
-    int projectCount;
+    int sectionsCount;
     if (minProjectsCount = null || maxProjectsCount == null) {
         projectCount = data.size();
     } else {
@@ -39,7 +38,8 @@ public class DataCreator2 {
         projectsCount = Math.min(projectsCount, data.size());
     }
 
-    // Собираем ответ в List<ProjectRequestModel>
+    // Собираем запрос в List<ProjectRequestModel>
+    List<ProjectRequestModel> requests = new ArrayList<>();
     for (int i = 1; i <= projectsCount; i++) {
 
       // Имя
@@ -60,7 +60,7 @@ public class DataCreator2 {
       ViewStyle viewStyle = BOARD;
 
       // Создаем одну модель.
-      ProjectRequestModel requestModel = ProjectRequestModel.builder()
+      ProjectRequestModel request = ProjectRequestModel.builder()
         .name(name)
         .color(color)
         .isFavorite(isFavorite)
@@ -68,19 +68,187 @@ public class DataCreator2 {
         .build();
 
       // Добавляем модель в список моделей
-      requestModels.add(requestModel);
+      requests.add(request);
     }
 
     return requestModels;
   }
   
-  public List<ProjectRequestModel> getProjectsData(String filePath, int projectsCount) {
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath, int projectsCount) {
         return getProjectsData(filePath, projectsCount, projectsCount);
   }
 
-  public List<ProjectRequestModel> getProjectsData(String filePath) {
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath) {
         return getProjectsData(filePath, null, null);
   }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<ProjectResponseModel> createProjects(List<ProjectRequestModel> requests) {
+
+    ProjectsApi api = new ProjectsApi();
+    List<ProjectResponseModel> responses = new ArrayList<>();
+
+    for (ProjectRequestModel request : requests) {
+      responses.add(api.createNewProject(request));
+    }
+    
+    return responses;
+  }
+
+  // ====================================================
+  
+  
+  // === ПРОЕКТЫ =================================================
+  
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath, int minProjectsCount, int maxProjectsCount) {
+    
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
+    // Прочитать в переменную весь файл. 
+    List<String[]> data = openFile(filePath);
+    
+    // Определить количество проектов
+    int projectsCount;
+    if (minProjectsCount = null || maxProjectsCount == null) {
+        projectsCount = data.size();
+    } else {
+        Random randomProjectsCount = new Random();
+        int projectsCount = randomProjectsCount.nextInt(
+                maxProjectsCount - minProjectsCount + 1) + minProjectsCount;
+        projectsCount = Math.min(projectsCount, data.size());
+    }
+
+    // Собираем запрос в List<ProjectRequestModel>
+    List<ProjectRequestModel> requests = new ArrayList<>();
+    for (int i = 1; i <= projectsCount; i++) {
+
+      // Имя
+      Random randomNamesIndex = new Random();
+      int nameIndex = randomNamesIndex.nextInt(data.size());
+      String name = data.get(nameIndex)[0];
+      data.remove(nameIndex);
+
+      // Цвет
+      Color[] colors = Color.values();
+      Random randomColors = new Random();
+      Color color = colors[randomColors.nextInt(colors.length)];
+
+      // Любимое
+      bool isFavorite = false;
+
+      // Стиль
+      ViewStyle viewStyle = BOARD;
+
+      // Создаем одну модель.
+      ProjectRequestModel request = ProjectRequestModel.builder()
+        .name(name)
+        .color(color)
+        .isFavorite(isFavorite)
+        .viewStyle(viewStyle)
+        .build();
+
+      // Добавляем модель в список моделей
+      requests.add(request);
+    }
+
+    return requestModels;
+  }
+  
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath, int projectsCount) {
+        return getProjectsData(filePath, projectsCount, projectsCount);
+  }
+
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath) {
+        return getProjectsData(filePath, null, null);
+  }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<ProjectResponseModel> createProjects(List<ProjectRequestModel> requests) {
+
+    ProjectsApi api = new ProjectsApi();
+    List<ProjectResponseModel> responses = new ArrayList<>();
+
+    for (ProjectRequestModel request : requests) {
+      responses.add(api.createNewProject(request));
+    }
+    
+    return responses;
+  }
+    
+  // ====================================================
+    
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
+    // Прочитать в переменную весь файл. 
+    List<String[]> data = openFile("data/labelsList.csv");
+    
+    // Определить количество проектов
+    int projectCount;
+    if (minProjectsCount = null || maxProjectsCount == null) {
+        projectCount = data.size();
+    } else {
+        Random randomProjectsCount = new Random();
+        int projectsCount = randomProjectsCount.nextInt(
+                maxProjectsCount - minProjectsCount + 1) + minProjectsCount;
+        projectsCount = Math.min(projectsCount, data.size());
+    }
+
+    // Собираем запрос в List<ProjectRequestModel>
+    List<ProjectRequestModel> requests = new ArrayList<>();
+    for (int i = 1; i <= projectsCount; i++) {
+
+      // Имя
+      Random randomNamesIndex = new Random();
+      int nameIndex = randomNamesIndex.nextInt(data.size());
+      String name = data.get(nameIndex)[0];
+      data.remove(nameIndex);
+
+      // Цвет
+      Color[] colors = Color.values();
+      Random randomColors = new Random();
+      Color color = colors[randomColors.nextInt(colors.length)];
+
+      // Любимое
+      bool isFavorite = false;
+
+      // Стиль
+      ViewStyle viewStyle = BOARD;
+
+      // Создаем одну модель.
+      ProjectRequestModel request = ProjectRequestModel.builder()
+        .name(name)
+        .color(color)
+        .isFavorite(isFavorite)
+        .viewStyle(viewStyle)
+        .build();
+
+      // Добавляем модель в список моделей
+      requests.add(request);
+    }
+
+    return requestModels;
+  }
+  
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath, int projectsCount) {
+        return getProjectsData(filePath, projectsCount, projectsCount);
+  }
+
+  public List<ProjectRequestModel> getRandomProjectsData(String filePath) {
+        return getProjectsData(filePath, null, null);
+  }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<ProjectResponseModel> createProjects(List<ProjectRequestModel> requests) {
+
+    ProjectsApi api = new ProjectsApi();
+    List<ProjectResponseModel> responses = new ArrayList<>();
+
+    for (ProjectRequestModel request : requests) {
+      responses.add(api.createNewProject(request));
+    }
+    
+    return responses;
+  }
+
+  // ====================================================
 
 
   
