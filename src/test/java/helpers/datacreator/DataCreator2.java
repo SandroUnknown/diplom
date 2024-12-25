@@ -19,6 +19,84 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator2 {
 
+  // === КОММЕНТЫ =================================================
+  
+  public List<CommentRequestModel> getRandomCommentsData(List<TaskResponseModel> tasks, String filePath, int minCommentsCount, int maxCommentsCount) {
+
+    List<CommentRequestModel> requests = new ArrayList<>();
+    
+    // Сколько всего проектов?
+    int tasksCount = tasks.size();
+    
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
+    // Прочитать в переменную весь файл. 
+    List<String[]> data = openFile(filePath);
+
+    for(List<TaskResponseModel> task : tasks) {
+
+      // Определяем id проекта
+      String taskId = task.id;
+
+      List<String[]> dataCopy = new ArrayList<>(data);
+      
+      // Определить количество секций
+      int commentsCount;
+      if (minCommentsCount = null || maxCommentsCount == null) {
+          commentsCount = dataCopy.size();
+      } else {
+          Random randomCommentsCount = new Random();
+          int commentsCount = randomCommentsCount.nextInt(
+                  maxCommentsCount - minCommentsCount + 1) + minCommentsCount;
+          commentsCount = Math.min(commentsCount, dataCopy.size());
+      }
+
+      // Собираем запрос в List<CommentRequestModel>
+      for (int i = 1; i <= commentsCount; i++) {
+
+        // Имя
+        Random randomNamesIndex = new Random();
+        int nameIndex = randomNamesIndex.nextInt(dataCopy.size());
+        String name = dataCopy.get(nameIndex)[0];
+        dataCopy.remove(nameIndex);
+
+        // Создаем одну модель.
+        CommentRequestModel request = CommentRequestModel.builder()
+          .name(name)
+          .projectId(projectId)
+          .build();
+
+        // Добавляем запрос в список запросов
+        requests.add(request);
+      }
+    }
+
+    return requests;
+  }
+  
+  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int sectionsCount) {
+        return getRandomSectionsData(projects, filePath, sectionsCount, sectionsCount);
+  }
+
+  public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath) {
+        return getRandomSectionsData(projects, filePath, null, null);
+  }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<SectionResponseModel> createSections(List<SectionRequestModel> requests) {
+
+    SectionsApi api = new SectionsApi();
+    List<SectionResponseModel> responses = new ArrayList<>();
+
+    for (SectionRequestModel request : requests) {
+      responses.add(api.createNewSection(request));
+    }
+    
+    return responses;
+  }
+
+  // ====================================================
+
+  
   // === ЗАДАЧИ =================================================
 
   // min + max, с метками
