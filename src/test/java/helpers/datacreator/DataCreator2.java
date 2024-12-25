@@ -19,6 +19,82 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator2 {
 
+// === МЕТКИ =================================================
+  
+  public List<LabelRequestModel> getRandomLabelsData(String filePath, int minLabelsCount, int maxLabelsCount) {
+
+    List<LabelRequestModel> requests = new ArrayList<>();
+    
+    // TODO : заменить на txt-формат, чтобы data была просто List<String>, а не List<String[]>
+    // Прочитать в переменную весь файл. 
+    List<String[]> data = openFile(filePath);
+    
+    // Определить количество проектов
+    int labelsCount;
+    if (minLabelsCount = null || maxLabelsCount == null) {
+        labelsCount = data.size();
+    } else {
+        Random randomLabelsCount = new Random();
+        int labelsCount = randomLabelsCount.nextInt(
+                maxLabelsCount - minLabelsCount + 1) + minLabelsCount;
+        labelsCount = Math.min(labelsCount, data.size());
+    }
+
+    // Собираем запрос в List<LabelRequestModel>
+    for (int i = 1; i <= labelsCount; i++) {
+
+      // Имя
+      Random randomNamesIndex = new Random();
+      int nameIndex = randomNamesIndex.nextInt(data.size());
+      String name = data.get(nameIndex)[0];
+      data.remove(nameIndex);
+
+      // Цвет
+      Color[] colors = Color.values();
+      Random randomColors = new Random();
+      Color color = colors[randomColors.nextInt(colors.length)];
+
+      // Любимое
+      bool isFavorite = true;
+
+      // Создаем одну модель.
+      LabelRequestModel request = LabelRequestModel.builder()
+        .name(name)
+        .color(color)
+        .isFavorite(isFavorite)
+        .build();
+
+      // Добавляем модель в список моделей
+      requests.add(request);
+    }
+
+    return requests;
+  }
+  
+  public List<LabelRequestModel> getRandomLabelsData(String filePath, int labelsCount) {
+        return getLabelsData(filePath, labelsCount, labelsCount);
+  }
+
+  public List<LabelRequestModel> getRandomLabelsData(String filePath) {
+        return getLabelsData(filePath, null, null);
+  }
+
+  // TODO : убрать в АПИ? (делает ровно тоже самое)
+  public List<LabelResponseModel> createLabels(List<LabelRequestModel> requests) {
+
+    LabelsApi api = new LabelsApi();
+    List<LabelResponseModel> responses = new ArrayList<>();
+
+    for (LabelRequestModel request : requests) {
+      responses.add(api.createNewProject(request));
+    }
+    
+    return responses;
+  }
+    
+  // ====================================================
+
+  
   // === РАЗДЕЛЫ =================================================
   
   public List<SectionRequestModel> getRandomSectionsData(List<ProjectResponseModel> projects, String filePath, int minSectionsCount, int maxSectionsCount) {
