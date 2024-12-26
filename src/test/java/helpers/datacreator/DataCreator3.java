@@ -40,11 +40,16 @@ private void createLabels(List<AccountData> accountData, bool excludeLabels) {
     }
 }
 
-private void createProjects(List<AccountData> accountData) {
+private void createProjects(List<AccountData> accountData, ENUM setDeepLevel) {
 
-        ProjectsApi api = new ProjectsApi();
-        HashMap<String, String> newId = new HashMap();
+    HashMap<String, String> newId = new HashMap();
     
+    // Сравнивать уровень этого метода с уровнем, который я задал?
+    thisDeepLevel = ENUM.PROJECT;
+
+    if (setDeepLevel >= thisDeepLevel) {    // взять их id?
+    
+        ProjectsApi api = new ProjectsApi();     
         for (int i = 0; i < accountData.projects.size(); i++) {
             ProjectResponseModel project = accountData.projects.get(i);
             ProjectRequestModel request = ProjectRequestModel.builder()
@@ -57,6 +62,9 @@ private void createProjects(List<AccountData> accountData) {
             newId.add(i, project.id);
             accountData.projects.set(i, project);
         }
+    } else {
+        // очищаем все проекты
+    }
 
         // добавить новые ID в CommentInProject
         // добавить новые ID в Sections
