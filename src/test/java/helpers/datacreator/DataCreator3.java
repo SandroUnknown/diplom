@@ -59,16 +59,56 @@ private void createProjects(List<AccountData> accountData, ENUM setDeepLevel) {
                 .build();  
 
             project = api.createProject(request);
-            newId.add(i, project.id);
             accountData.projects.set(i, project);
+            newId.add(i, project.id);
         }
     } else {
-        // очищаем все проекты
+        accountData.projects.clear();
     }
 
+    if (setDeepLevel > thisDeepLevel) {    // взять их id?
         // добавить новые ID в CommentInProject
+        addNewProjectsIdForCommentsInProjects(newId);
         // добавить новые ID в Sections
+        addNewProjectsIdForSections(newId);
+    }
 }
+
+
+private void createCommentsInProjects(List<AccountData> accountData, ENUM setDeepLevel) {
+
+    //HashMap<String, String> newId = new HashMap();
+    
+    // Сравнивать уровень этого метода с уровнем, который я задал?
+    thisDeepLevel = ENUM.COMMENTS_IN_PROJECT;
+
+    if (setDeepLevel >= thisDeepLevel) {    // взять их id?
+    
+        CommentsApi api = new CommentsApi();     
+        for (int i = 0; i < accountData.commentsInProjects.size(); i++) {
+            CommentResponseModel comment = accountData.commentsInProjects.get(i);
+            CommentRequestModel request = CommentRequestModel.builder()
+                .name(comment.name)        // TODO : заменить на поля комментов
+                .color(comment.color)
+                .viewStyle(comment.viewStyle)
+                .build();  
+
+            comment = api.createCommentInProject(request);
+            accountData.projects.set(i, comment);
+            //newId.add(i, project.id);
+        }
+    } else {
+        accountData.projects.clear();
+    }
+
+    if (setDeepLevel > thisDeepLevel) {    // взять их id?
+        // добавить новые ID в.... некуда добавлять
+
+    }
+}
+
+
+    
 
 
     
