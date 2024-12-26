@@ -19,6 +19,57 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator3 {
 
+
+private void createLabels(List<AccountData> accountData, bool excludeLabels) {
+
+    if (!excludeLabels) {
+        LabelsApi api = new LabelsApi();
+        for (int i = 0; i < accountData.labels.size(); i++) {
+            LabelResponseModel label = accountData.labels.get(i);
+            LabelRequestModel request = LabelRequestModel.builder()
+                .name(label.name)
+                .color(label.color)
+                .isFavorite(label.isFavorite)
+                .build();   
+
+            label = api.createLabel(request);
+            accountData.labels.set(i, label);
+        }
+    } else {
+        accountData.labels.clear();
+    }
+}
+
+private void createProjects(List<AccountData> accountData) {
+
+        ProjectsApi api = new ProjectsApi();
+        HashMap<String, String> newId = new HashMap();
+    
+        for (int i = 0; i < accountData.projects.size(); i++) {
+            ProjectResponseModel project = accountData.projects.get(i);
+            ProjectRequestModel request = ProjectRequestModel.builder()
+                .name(project.name)
+                .color(project.color)
+                .viewStyle(project.viewStyle)
+                .build();  
+
+            project = api.createProject(request);
+            newId.add(i, project.id);
+            accountData.projects.set(i, project);
+        }
+
+        // добавить новые ID в CommentInProject
+        // добавить новые ID в Sections
+}
+
+
+    
+// =============================================================================================================================================
+// =============================================================================================================================================
+// =============================================================================================================================================
+
+
+    
 // === LABELS ===============================================================
 private void createLabels(List<AccData> accountData, excludeLabels) {
     
