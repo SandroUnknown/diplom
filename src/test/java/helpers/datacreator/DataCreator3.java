@@ -62,6 +62,31 @@ private void createProjects(List<AccData> accountData) {
     }
 }
 // === end of PROJECT =======================================================
+
+// === COMMENTS in PROJECTS =================================================
+private void createCommentsInProjects(List<AccData> accountData, excludeComments) {
+    
+        CommentsApi api = new CommentsApi();
+
+        for(int j = 0; j < accountData.projects.size(); j++) {
+            if (!excludeComments) {
+                for (int i = 0; i < accountData.projects.get(j).comments.size(); i++) {
+                    CommentResponseModel comment = accountData.projects.get(j).comments.get(i);
+                    CommentRequestModel request = CommentRequestModel.builder()
+                        .content(comment.content)
+                        .projectId(accountData.projects.get(j).id)
+                        .build();
+                    
+                    comment = api.createCommentInProject(request);
+                    accountData.projects.get(j).comments.set(i, comment);
+                }
+            } else {
+                accountData.projects.get(j).comments.clear();
+            }   
+        }
+
+}
+// === end of COMMENTS in PROJECTS ==========================================
   
   
   public <???????> createAccountData(<??????> data, ENUM_deep, ENUM_exclude...) {
@@ -82,12 +107,16 @@ private void createProjects(List<AccData> accountData) {
         case 1:
           createProjects(accountData);
           if (EXCLUDE_COMMENTS_IN_PROJECT == false) {
-            createCommentsInProjects(accountData);
+              createCommentsInProjects(accountData, false);
+          } else {
+              createCommentsInProjects(accountData, true);
           }
           break;
         case 2:
           if (EXCLUDE_SECTIONS == false) {
-            createSections(accountData);
+              createSections(accountData, false);
+          } else {
+              createSections(accountData, true);
           }
           break;
         case 3:
