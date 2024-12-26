@@ -58,7 +58,7 @@ private HashMap<String, String> createProjects(List<AccountData> accountData, Li
 
             project = api.createProject(request);
             accountData.projects.add(project);
-            newId.add(i, project.id);
+            //newId.add(i, project.id);
         }
     }
     return newId;
@@ -76,7 +76,8 @@ private void createCommentsInProjects(List<AccountData> accountData, List<Accoun
         for (int i = 0; i < data.commentsInProjects.size(); i++) {
             CommentResponseModel comment = data.commentsInProjects.get(i);
             CommentRequestModel request = CommentRequestModel.builder()
-                .projectId(newProjectId.get(i))  // вероятно i к стрингу привести
+                .projectId(accountData.projects.get(comment.projectId).id)
+                //.projectId(newProjectId.get(i))  // вероятно i к стрингу привести
                 .content(comment.content)        // TODO : заменить на поля комментов
                 .build();  
 
@@ -99,18 +100,21 @@ private HashMap<String, String> createSections(List<AccountData> accountData, Li
         for (int i = 0; i < data.sections.size(); i++) {
             SectionResponseModel section = data.sections.get(i);
             SectionRequestModel request = SectionRequestModel.builder()
-                .projectId(newProjectId.get(i))  // вероятно i к стрингу привести
+                .projectId(accountData.projects.get(section.projectId).id)
+                //.projectId(accountData.projects.get(i).id)
+                //.projectId(newProjectId.get(i))  // вероятно i к стрингу привести
                 .name(section.name)
                 .build();  
 
             section = api.createSection(request);
             accountData.sections.add(section);
-            newId.add(i, section.id);
+            //newId.add(i, section.id);
         }
     }
     return newId;
 }
 
+    // TODO : бывает ещё таска в проекте.... 
 private HashMap<String, String> createTasks(List<AccountData> accountData, List<AccountData> data, ENUM setDeepLevel, HashMap<String, String> newSectionId) {
 
     HashMap<String, String> newId = new HashMap();
@@ -124,13 +128,17 @@ private HashMap<String, String> createTasks(List<AccountData> accountData, List<
         for (int i = 0; i < data.tasks.size(); i++) {
             TaskResponseModel task = data.tasks.get(i);
             TaskRequestModel request = TaskRequestModel.builder()
-                .projectId(newSectionId.get(i))  // вероятно i к стрингу привести
-                .name(task.name)
+                .sectionId(accountData.sections.get(task.sectionId).id)
+                //.projectId(newSectionId.get(i))  // вероятно i к стрингу привести
+                .content(task.content)
+                .order(task.order)
+                .priority(task.priority)
+                .labels(task.labels)
                 .build();  
 
             task = api.createTask(request);
             accountData.tasks.add(task);
-            newId.add(i, task.id);
+            //newId.add(i, task.id);
         }
     }
     return newId;
