@@ -19,35 +19,55 @@ import static enums.ViewStyle.BOARD;
 
 public class DataCreator3 {
 
+// === LABELS ===============================================================
+private void createLabels(List<AccData> accountData) {
+    LabelsApi api = new LabelsApi();
+
+    for (int i = 0; i < accountData.labels.size(); i++) {
+        LabelResponseModel label = accountData.labels.get(i);
+        LabelRequestModel request = LabelRequestModel.builder()
+            .name(label.name)
+            .color(label.color)
+            .isFavorite(label.isFavorite)
+            .build();
+        
+        // Получаем новый объект label из API и обновляем accountData
+        label = api.createLabel(request);
+        accountData.labels.set(i, label);
+    }
+}
+// === end of LABELS ========================================================
+  
+  
   public <???????> createAccountData(<??????> data, ENUM_deep, ENUM_exclude...) {
 
     int maxDeepLevel = ENUM_deep.id;
-    <????> accountData = new <????>;
+    <????> accountData = new <????>(data);
 
     for(int currentDeepLevel = 0; currentDeepLevel <= maxDeepLevel; currentDeepLevel++) {
 
       switch(currentDeepLevel) {
         case 0:
           if (EXCLUDE_LABELS == false) {
-            accountData.labels.add(createLabels());
+            createLabels(accountData);
           }
           break;
         case 1:
           createProjects();
           if (EXCLUDE_COMMENTS_IN_PROJECT == false) {
-            createCommentsInProjects();
+            createCommentsInProjects(accountData);
           }
           break;
         case 2:
           if (EXCLUDE_SECTIONS == false) {
-            createSections();
+            createSections(accountData);
           }
           break;
         case 3:
-          createTasks();
+          createTasks(accountData, EXCLUDE_LABELS);
           break;
         case 4:
-          createCommentsInTasks();
+          createCommentsInTasks(accountData);
           break;
         default:
           // bla-bla
