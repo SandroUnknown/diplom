@@ -20,23 +20,48 @@ import static enums.ViewStyle.BOARD;
 public class DataCreator3 {
 
 // === LABELS ===============================================================
-private void createLabels(List<AccData> accountData) {
-    LabelsApi api = new LabelsApi();
-
-    for (int i = 0; i < accountData.labels.size(); i++) {
-        LabelResponseModel label = accountData.labels.get(i);
-        LabelRequestModel request = LabelRequestModel.builder()
-            .name(label.name)
-            .color(label.color)
-            .isFavorite(label.isFavorite)
-            .build();
-        
-        // Получаем новый объект label из API и обновляем accountData
-        label = api.createLabel(request);
-        accountData.labels.set(i, label);
+private void createLabels(List<AccData> accountData, excludeLabels) {
+    
+    if (!excludeLabels) {
+        LabelsApi api = new LabelsApi();
+    
+        for (int i = 0; i < accountData.labels.size(); i++) {
+            LabelResponseModel label = accountData.labels.get(i);
+            LabelRequestModel request = LabelRequestModel.builder()
+                .name(label.name)
+                .color(label.color)
+                .isFavorite(label.isFavorite)
+                .build();
+            
+            // Получаем новый объект label из API и обновляем accountData
+            label = api.createLabel(request);
+            accountData.labels.set(i, label);
+        }
+    } else {
+        accountData.labels.clear();
     }
 }
 // === end of LABELS ========================================================
+
+    
+// === PROJECT ==============================================================
+private void createProjects(List<AccData> accountData) {
+    ProjectsApi api = new ProjectsApi();
+
+    for (int i = 0; i < accountData.projects.size(); i++) {
+        ProjectResponseModel project = accountData.projects.get(i);
+        ProjectRequestModel request = ProjectRequestModel.builder()
+            .name(project.name)
+            .color(project.color)
+            .viewStyle(project.viewStyle)
+            .build();
+        
+        // Получаем новый объект label из API и обновляем accountData
+        project = api.createProject(request);
+        accountData.projects.set(i, project);
+    }
+}
+// === end of PROJECT =======================================================
   
   
   public <???????> createAccountData(<??????> data, ENUM_deep, ENUM_exclude...) {
@@ -49,11 +74,13 @@ private void createLabels(List<AccData> accountData) {
       switch(currentDeepLevel) {
         case 0:
           if (EXCLUDE_LABELS == false) {
-            createLabels(accountData);
+              createLabels(accountData, false);
+          } else {
+              createLabels(accountData, true);
           }
           break;
         case 1:
-          createProjects();
+          createProjects(accountData);
           if (EXCLUDE_COMMENTS_IN_PROJECT == false) {
             createCommentsInProjects(accountData);
           }
