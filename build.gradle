@@ -41,7 +41,8 @@ dependencies {
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.opencsv:opencsv:5.9",
-            "org.assertj:assertj-core:$assertjVersion"
+            "org.assertj:assertj-core:$assertjVersion",
+            "com.fasterxml.jackson.core:jackson-databind:2.18.2"
     )
 }
 

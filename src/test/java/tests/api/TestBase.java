@@ -2,7 +2,7 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.datacreator.DataCreator;
+import helpers.data.DataCreator;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static java.lang.String.format;
 
 public class TestBase {
 
@@ -39,7 +38,11 @@ public class TestBase {
         // 22.12 - 1 час 00 минут
         // 23.12 - 3 часа 30 минут (13:00-14:30  //  19:00-20:10  //  20:40-21:30)
         // 24.12 - 7 часов 15 минут (10:25-10:35  //  10:40-12:45  //  13:12-14:35  //  14:55-16:32  //  17:05-19:05)
-        //     ------- 25 часов 15 минут
+        // 25.12 - около 3 часов
+        // 26.12 - около 3 часов
+        // 27.12 - 2 часа 45 минут (11:55-12:10  //  14:30-16:40  //  17:00-17:20)
+        //     ------- 34 часа 00 минут
+        // 28.12 - 5.20 (10:30-12:55  //  13:10-14:55  //  16:25-17:35  //
         //----------------------
 
         // =============================================================================
@@ -82,8 +85,6 @@ public class TestBase {
 
     @BeforeEach
     void preTest() {
-
-
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }

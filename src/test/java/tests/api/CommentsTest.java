@@ -1,6 +1,8 @@
 package tests.api;
 
 import models.comments.CommentResponseModel;
+import models.data.TestData;
+import models.data.TestDataConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,36 +18,67 @@ public class CommentsTest extends TestBase {
     @DisplayName("[API] Создать новый комментарий в проекте.")
     void createNewCommentInProjectTest() {
 
-        String projectId = data.createProject();
+        // Что создаем? - проект
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .build();
 
-        commentsApi.createNewCommentInProject(projectId, "New comment, bla-bla-bla...");
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String projectId = testData.getProjects().get(0).getId();
+
+        // Создаем новый комментарий
+        commentsApi.createNewCommentInProject(projectId, "НОВЫЙ КОММЕНТАРИЙ");
 
         // TODO : сделать проверку
+        System.out.println();
     }
 
     @Test
     @DisplayName("[API] Создать новый комментарий в задаче.")
     void createNewCommentInTaskTest() {
 
-        String projectId = data.createProject();
-        String sectionId = data.createSection(projectId);
-        String taskId = data.createTask(sectionId);
+        // Что создаем? - проект
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .createTasksInSections(true)
+                .build();
 
-        commentsApi.createNewCommentInTask(taskId, "New comment, bla-bla-bla...");
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String taskId = testData.getTasksInSections().get(0).getId();
+
+        // Создаем новый комментарий
+        commentsApi.createNewCommentInTask(taskId, "НОВЫЙ КОММЕНТАРИЙ");
 
         // TODO : сделать проверку
+        System.out.println();
     }
 
     @Test
     @DisplayName("[API] Обновить комментарий по ID.")
     void updateCommentTest() {
 
-        String projectId = data.createProject();
-        String sectionId = data.createSection(projectId);
-        String taskId = data.createTask(sectionId);
-        String commentId = data.createCommentInTask(taskId);
+        // Что создаем? - проект
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .createTasksInSections(true)
+                .createCommentsInTasksInSections(true)
+                .build();
 
-        //sleep(5000); // TODO : убрать при релизе
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String commentId = testData.getCommentsInTasksInSections().get(0).getId();
+
+        // Обновляем комментарий
         commentsApi.updateComment(commentId, "ОБНОВЛЁННЫЙ КОММЕНТАРИЙ");
 
         // TODO : сделать проверку
@@ -56,11 +89,21 @@ public class CommentsTest extends TestBase {
     @DisplayName("[API] Получить комментарий по ID.")
     void getCommentTest() {
 
-        String projectId = data.createProject();
-        String sectionId = data.createSection(projectId);
-        String taskId = data.createTask(sectionId);
-        String commentId = data.createCommentInTask(taskId);
+        // Что создаем? - проект
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .createTasksInSections(true)
+                .createCommentsInTasksInSections(true)
+                .build();
 
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String commentId = testData.getCommentsInTasksInSections().get(0).getId();
+
+        // Получить комментарий
         CommentResponseModel comment = commentsApi.getComment(commentId);
 
         // TODO : сделать проверку
@@ -71,9 +114,19 @@ public class CommentsTest extends TestBase {
     @DisplayName("[API] Получить все комментарии в проекте.")
     void getAllCommentsInProjectTest() {
 
-        String projectId = data.createProject();
-        data.createCommentsInProject(projectId, 2);
+        // Что создаем? - проект
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createCommentsInProjects(true)
+                .build();
 
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String projectId = testData.getProjects().get(0).getId();
+
+        // Получить комментарий
         List<CommentResponseModel> comments = commentsApi.getAllCommentsInProject(projectId);
 
         // TODO : сделать проверку
@@ -84,11 +137,21 @@ public class CommentsTest extends TestBase {
     @DisplayName("[API] Получить все комментарии в задаче.")
     void getAllCommentsInTaskTest() {
 
-        String projectId = data.createProject();
-        String sectionId = data.createSection(projectId);
-        String taskId = data.createTask(sectionId);
-        data.createCommentsInTask(taskId, 2);
+        // Что создаем?
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .createTasksInSections(true)
+                .createCommentsInTasksInSections(true)
+                .build();
 
+        // Создаем!
+        TestData testData = data.create(1, whatIsCreate);
+
+        // Получаем ID проекта
+        String taskId = testData.getTasksInSections().get(0).getId();
+
+        // Получить комментарий
         List<CommentResponseModel> comments = commentsApi.getAllCommentsInTask(taskId);
 
         // TODO : сделать проверку
@@ -99,12 +162,21 @@ public class CommentsTest extends TestBase {
     @DisplayName("[API] Удалить комментарий по ID.")
     void deleteCommentTest() {
 
-        String projectId = data.createProject();
-        String sectionId = data.createSection(projectId);
-        String taskId = data.createTask(sectionId);
-        String commentId = data.createCommentInTask(taskId);
+        // Что создаем?
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .createTasksInSections(true)
+                .createCommentsInTasksInSections(true)
+                .build();
 
-        //sleep(5000); // TODO : убрать при релизе
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
+
+        // Получаем ID проекта
+        String commentId = testData.getCommentsInTasksInSections().get(0).getId();
+
+        // Удаляем комментарий
         commentsApi.deleteComment(commentId);
 
         // TODO : сделать проверку

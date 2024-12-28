@@ -1,6 +1,10 @@
 package tests.api;
 
+import models.data.TestData;
+import models.data.TestDataConfig;
 import models.projects.ProjectRequestModel;
+import models.projects.ProjectResponseModel;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,12 +33,13 @@ public class ProjectsTest extends TestBase {
     }
 
     @Test
+    @Disabled
     @DisplayName("[API] Создать новый вложенный проект.")
     void createNewProjectInProjectTest() {
 
-        String parentProjectId = data.createProject();
+        /*String parentProjectId = data.createProject();
 
-        projectsApi.createNewProject(parentProjectId,"ДОЧЕРНИЙ ПРОЕКТ");
+        projectsApi.createNewProject(parentProjectId,"ДОЧЕРНИЙ ПРОЕКТ");*/
 
         // TODO : выполнить проверку
     }
@@ -43,45 +48,103 @@ public class ProjectsTest extends TestBase {
     @DisplayName("[API] Обновить проект по ID.)")
     void updateProjectTest() {
 
-        String projectId = data.createProject();
+        // Что создаем?
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .build();
 
-        //sleep(3000); // TODO : убрать на релизе
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
 
+        // Получаем ID проекта
+        String projectId = testData.getProjects().get(0).getId();
+
+        // Создаем новые данные для проекта
         ProjectRequestModel newProjectData = ProjectRequestModel.builder()
                 .name("ОБНОВЛЁННЫЙ ПРОЕКТ")
                 .color(RED)
                 .isFavorite(true)
-                .viewStyle(BOARD)
+                .viewStyle(LIST)
                 .build();
 
-        projectsApi.updateProject(projectId, newProjectData);
+        // Обновляем проект!
+        ProjectResponseModel project = projectsApi.updateProject(projectId, newProjectData);
 
-        // TODO : выполнить проверку
+        // TODO : сделать проверку
+        System.out.println();
     }
 
     @Test
     @DisplayName("[API] Удалить проект по ID.")
     void deleteProjectTest() {
 
-        String projectId = data.createProject();
+        // Что создаем?
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .build();
 
-        //sleep(3000); // TODO : убрать на релизе
+        // Создаем!
+        TestData testData = data.create(0, whatIsCreate);
 
+        // Получаем ID проекта
+        String projectId = testData.getProjects().get(0).getId();
+
+        // Удаляем проект!
         projectsApi.deleteProject(projectId);
 
-        // TODO : выполнить проверку
+        // TODO : сделать проверку
+        System.out.println();
     }
 
     @Test
     @DisplayName("[API] Удалить все проекты пользователя.")
     void deleteAllProjectsTest() {
 
-        data.createProjects(2, 4);
+        // Что создаем?
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .build();
 
-        //sleep(3000); // TODO : убрать на релизе
+        // Создаем!
+        TestData testData = data.create(1, whatIsCreate);
 
+        // Удаляем проект!
         projectsApi.deleteProjects();
 
-        // TODO : выполнить проверку
+        // TODO : сделать проверку
+        System.out.println();
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

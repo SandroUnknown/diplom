@@ -27,12 +27,18 @@ public class CommentsApi extends BaseApi {
                 .extract().as(CommentResponseModel.class);
     }
 
+    // TODO : разобраться...
     public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
                 .projectId(projectId)
                 .build();
+
+        return createNewComment(commentData);
+    }
+
+    public CommentResponseModel createNewCommentInProject(CommentRequestModel commentData) {
 
         return createNewComment(commentData);
     }
