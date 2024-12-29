@@ -60,15 +60,91 @@ public class DataCreator {
         return testData;
     }
 
+    
     // === Создание ПРОЕКТА в корне ===
-    public void createProjects(myData, projectCount) {
+    public void createProjects(AccountData testData, int projectCount) {
+
+        // Получаем все проекты из нашего шаблона
+        List<ProjectResponseModel> projects = PROJECT_TEMPLATES.getProjects();
+
+        // Проверяем, что мы создаём корректное количество проектов (не больше, чем есть в шаблоне)
+        if (projectCount > projects.size()) {
+            // Выбросить исключение, что "Исходный шаблон содержит меньшее количество проектов, чем вы пытаетесь создать."
+        } 
         
+        // Создаем проекты
+        for(int i = 0; i < projects.size(); i++) {
+            ProjectResponseModel project = projects.get(i);
+            ProjectRequestModel request = ProjectRequestModel.builder()
+                .name(project.getName())
+                .color(project.getColor())
+                .viewStyle(project.getViewStyle())
+                .build();
+
+            project = api.createNewProject(request);
+            testData.getProjects().add(project);
+        }
     }
 
 
     // === Создание РАЗДЕЛА в проекте ===
-    public void createSections(myData, projectCount) {
+    public void createSections(AccountData testData, List<int> sectionCount) {
+
+        // Получаем количество проектов, которые мы уже создали.
+        int projectCount = accountData.getProjects().size();
+
+        // Проверяем, что мы уже создали столько же проектов, сколько сейчас передали "секций"
+        if (projectCount != sectionCount.size()) {
+            // Выбросить исключение, что "Ожидаемое количество созданных проектов не соответствует фактическому количеству созданных проектов."
+        }
+
+        // Считаем сколько всего хотим создать разделов.
+        int totalSectionCount = 0;
+        for(int k : sectionCount) {
+            totalSectionCount += k;
+        }
         
+        // Получаем ВСЕ разделы из нашего шаблона
+        List<SectionResponseModel> sections = PROJECT_TEMPLATES.getSections();
+
+        // Проверяем, что мы в нашем шаблоне есть нужное количество разделов
+        if (totalSectionCount > sections.size()) {
+            // Выбросить исключение, что "Количество разделов в шаблоне меньше, чем вы пытаетесь создать."
+        }
+
+        // Создаем разделы
+        int k = 0;
+        for(int i = 0; i < sectionCount.size(); i++) {
+            String projectId = testData.getProjects().get(i).getId();
+            for(int j = 0; j < sectionCount.get(i); j++) {
+                SectionResponseModel section = sections.get(k);
+                SectionRequestModel request = SectionRequestModel.builder()
+                    .projectId(projectId)
+                    .name(section.getName())    // TODO : набор данных для РАЗДЕЛА
+                    //.color(section.getColor())
+                    //.viewStyle(section.getViewStyle())
+                    .build();
+                section = api.createNewSection(request);
+                testData.getSections().add(section);
+                k++;     
+            }
+        }
+    }
+    
+    // === (перегрузка) Создание РАЗДЕЛА в проекте ===
+    public void createSections(AccountData testData, int sectionCount) {  
+
+        // Получаем количество проектов, которые мы уже создали.
+        int projectCount = accountData.getProjects().size();
+
+        // Создаем массив с количеством секций для каждого проекта
+        List<int> arraySectionCount = new ArrayList<>();
+        for(int i = 0; i < projectCount; i++) {
+            arraySectionCount.add(sectionCount);
+        }
+
+        // Вызываем основной метод.
+        createSections(testData, arraySectionCount);
     }
     
 
