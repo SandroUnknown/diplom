@@ -43,7 +43,10 @@ public class DataCreator {
 
         return null;
     }
+    // ==========================================================================================================================================================================
     
+
+    // ==========================================================================================================================================================================
     // === Создание ПРОЕКТА в корне ===
     public void createProjects(AccountData testData, int projectCount) {    // локальная переменная с моими данными, количество проектов (вероятно ещё добавить переменную шаблона?)
         
@@ -57,19 +60,23 @@ public class DataCreator {
         
         // Создаем проекты
         for(int i = 0; i < projectCount; i++) {
-            ProjectResponseModel project = projectTemplates.get(i);
+            /*ProjectResponseModel project = projectTemplates.get(i);
             ProjectRequestModel request = ProjectRequestModel.builder()
                 .name(project.getName())
                 .color(project.getColor())
                 .viewStyle(project.getViewStyle())
-                .build();
+                .build();*/
+            ProjectRequestModel request = projectTemplates.get(i);
 
-            project = api.createNewProject(request);
+            //project = api.createNewProject(request);
+            ProjectResponseModel project = api.createNewProject(request);
             testData.getProjects().add(project);
         }
     }
+    // ==========================================================================================================================================================================
 
-
+    
+    // ==========================================================================================================================================================================
     // === Создание РАЗДЕЛА в проекте ===
     public void createSections(AccountData testData, List<int> sectionCount) {
         
@@ -100,12 +107,16 @@ public class DataCreator {
         for(int i = 0; i < createdProjectCount; i++) {
             String projectId = testData.getProjects().get(i).getId();
             for(int j = 0; j < sectionCount.get(i); j++) {
-                SectionResponseModel section = sectionTemplates.get(sectionTemplateNumber);
+                /*SectionResponseModel section = sectionTemplates.get(sectionTemplateNumber);
                 SectionRequestModel request = SectionRequestModel.builder()
                     .projectId(projectId)
                     .name(section.getName())    // TODO : набор данных для РАЗДЕЛА
-                    .build();
-                section = api.createNewSection(request);
+                    .build();*/
+                SectionRequestModel request = sectionTemplates.get(sectionTemplateNumber);
+                request.setProjectId(projectId);
+                
+                //section = api.createNewSection(request);
+                SectionResponseModel section = api.createNewSection(request);
                 testData.getSections().add(section);
                 sectionTemplateNumber++;     
             }
@@ -127,17 +138,13 @@ public class DataCreator {
         // Вызываем основной метод.
         createSections(testData, arraySectionCount);
     }
+    // ==========================================================================================================================================================================
 
 
-
+    // ==========================================================================================================================================================================
     // === Создание ЗАДАЧИ в разделе ===
-    public void createTasksInSections(AccountData testData, List<int> taskCount) {
+    public void createTasksInSections(AccountData testData, List<int> taskCount, boolean addLabels) {
 
-        // sectionCount ==> createdSectionCount
-        // tasks ===> taskTemplates
-
-        
-        
         // Получаем количество разделов, которые мы уже создали.
         int createdSectionCount = testData.getSections().size();
 
@@ -165,22 +172,34 @@ public class DataCreator {
         for(int i = 0; i < createdSectionCount; i++) {
             String sectionId = testData.getSections().get(i).getId();
             for(int j = 0; j < taskCount.get(i); j++) {
-                TaskResponseModel task = taskTemplates.get(taskTemplateNumber);
+                /*TaskResponseModel task = taskTemplates.get(taskTemplateNumber);
                 TaskRequestModel request = TaskRequestModel.builder()
                     .sectionId(sectionId)
                     .content(task.getContent())    // TODO : набор данных для ЗАДАЧИ
                     .color(task.getColor())
                     //.labels(section.getViewStyle())    // TODO : LABELS
-                    .build();
-                task = api.createNewTask(request);
+                    .build();*/
+                TaskRequestModel request = taskTemplates.get(taskTemplateNumber);
+                request.setSectionId(sectionId);
+                if (!addLabels) { // если метки не нужны (false)
+                    request.setLabels(null); // TODO : LABELS  
+                }
+                
+                //task = api.createNewTask(request);
+                TaskResponseModel task = api.createNewTask(request);
                 testData.getTasks().add(task);
                 taskTemplateNumber++;     
             }
         }
     }
-
+    
     // === (перегрузка) Создание ЗАДАЧИ в разделе ===
-    public void createTasksInSections(AccountData testData, int taskCount) {  
+    public void createTasksInSections(AccountData testData, List<int> taskCount) {
+        createTasksInSections(testData, taskCount, false) {
+    }
+    
+    // === (перегрузка) Создание ЗАДАЧИ в разделе ===
+    public void createTasksInSections(AccountData testData, int taskCount, boolean addLabels) {  
 
         // Получаем количество разделов, которые мы уже создали.
         int createdSectionCount = testData.getSections().size();
@@ -192,8 +211,15 @@ public class DataCreator {
         }
 
         // Вызываем основной метод.
-        createTasksInSections(testData, arrayTaskCount);
+        createTasksInSections(testData, arrayTaskCount, addLabels);
     }
+
+    // === (перегрузка) Создание ЗАДАЧИ в разделе ===
+    public void createTasksInSections(AccountData testData, int taskCount) {
+        createTasksInSections(testData, taskCount, false)
+    }
+
+    // ==========================================================================================================================================================================
 
 
     
