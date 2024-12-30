@@ -16,13 +16,23 @@ import java.util.List;
 
 public class LabelsTest extends TestBase {
 
+    //private String labelName = "МЕТКА";
+    private LabelRequestModel testLabelData = LabelRequestModel.builder()
+            .name("МЕТКА")
+            .color(Color.BLUE)
+            .order(2)
+            .isFavorite(true)
+            .build();
+
     @Test
     @DisplayName("[API] Создать новую метку (с заполнением только имени).")
     void createNewLabelTest() {
 
-        labelsApi.createNewLabel("МЕТКА");
+        labelsApi.createNewLabel(labelName);
 
-        // TODO : сделать проверку
+        // TODO : проверка
+        LabelResponseModel label = labelsApi.getAllLabels().get(0);
+        assertThat(testLabelData.getName()).isEqualTo(label.getName());
     }
 
     // TODO : сделать параметризованным?
@@ -30,11 +40,22 @@ public class LabelsTest extends TestBase {
     @DisplayName("[API] Создать новую метку (с заполнением всех параметров).")
     void createNewLabelWithAllParamsTest() {
 
-        LabelRequestModel labelData = LabelRequestModel.builder().name("МЕТКА (с параметрами)").color(Color.BLUE).order(2).isFavorite(true).build();
+        LabelRequestModel request = LabelRequestModel.builder()
+            .name(labelName)
+            .color(Color.BLUE)
+            .order(2)
+            .isFavorite(true)
+            .build();
 
-        labelsApi.createNewLabel(labelData);
+        labelsApi.createNewLabel(request);
 
         // TODO : сделать проверку
+        LabelResponseModel label = labelsApi.getAllLabels().get(0);
+        assertThat(testLabelData.getName()).isEqualTo(label.getName());
+        assertThat(testLabelData.getColor()).isEqualTo(label.getColor());
+        assertThat(testLabelData.getOrder()).isEqualTo(label.getOrder());
+        assertThat(testLabelData.getFavorite()).isEqualTo(label.getFavorite());
+
     }
 
     @Test
