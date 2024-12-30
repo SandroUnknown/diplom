@@ -28,7 +28,7 @@ public class LabelsTest extends TestBase {
     @DisplayName("[API] Создать новую метку (с заполнением только имени).")
     void createNewLabelTest() {
 
-        labelsApi.createNewLabel(labelName);
+        labelsApi.createNewLabel(testLabelData.getName());
 
         // TODO : проверка
         LabelResponseModel myCreatedLabel = labelsApi.getAllLabels().get(0);
@@ -77,7 +77,7 @@ public class LabelsTest extends TestBase {
         labelsApi.updateLabel(labelId, newLabelName);
 
         // TODO : сделать проверку - точно ли ВСЁ нужно проверять? Всё ли я создаю?
-        LabelResponseModel templatesLabel = PROJECT_TEMPLATES .getLabels().get(0);
+        LabelResponseModel templatesLabel = PROJECT_TEMPLATES.getLabels().get(0);
         LabelResponseModel myCreatedLabel = labelsApi.getAllLabels().get(0);
         assertThat(templatesLabel.getName()).isEqualTo(myCreatedLabel.getName());
         assertThat(templatesLabel.getColor()).isEqualTo(myCreatedLabel.getColor());
@@ -106,7 +106,7 @@ public class LabelsTest extends TestBase {
         LabelResponseModel myCreatedLabel = labelsApi.getLabel(labelId);
 
         // TODO : сделать проверку - точно ли ВСЁ нужно проверять? Всё ли я создаю?
-        LabelResponseModel templatesLabel = PROJECT_TEMPLATES .getLabels().get(0);
+        LabelResponseModel templatesLabel = PROJECT_TEMPLATES.getLabels().get(0);
         assertThat(templatesLabel.getName()).isEqualTo(myCreatedLabel.getName());
         assertThat(templatesLabel.getColor()).isEqualTo(myCreatedLabel.getColor());
         assertThat(templatesLabel.getOrder()).isEqualTo(myCreatedLabel.getOrder());
@@ -134,7 +134,7 @@ public class LabelsTest extends TestBase {
         for(LabelResponseModel myCreatedLabel : myCreatedLabels) {
             myCreatedLabel.setId("");
         }
-        List<LabelResponseModel> templatesLabels = PROJECT_TEMPLATES .getLabels();
+        List<LabelResponseModel> templatesLabels = PROJECT_TEMPLATES.getLabels();
         assertThat(templatesLabels).containsExactlyInAnyOrderElementsOf(myCreatedLabels); // проверка двух листов без учета порядка
         /*for(int i = 0; i < templatesLabels.size(); i++) { // TODO : сильно под вопросом, что мои метки и шаблонные будут в одинаковом порядке
             assertThat(templatesLabels.get(i).getName()).isEqualTo(myCreatedLabels.get(i).getName());
