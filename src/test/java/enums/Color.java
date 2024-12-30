@@ -40,6 +40,13 @@ public enum Color {
         this.hex = hex;
     }
 
+    // TODO : работает метод??
+    public static Color getRandomColor() {
+        Color[] colors = values();
+        int randomIndex = new Random().nextInt(colors.length);
+        return colors[randomIndex];
+    }
+
     public static Color getColorByTitle(String title) {
         for (Color color : Color.values()) {
             if (color.getTitle().equalsIgnoreCase(title)) {
