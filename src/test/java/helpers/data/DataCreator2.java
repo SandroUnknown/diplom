@@ -142,6 +142,79 @@ public class DataCreator {
 
 
     // ==========================================================================================================================================================================
+    // === Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, List<int> taskCount, boolean addLabels) {
+
+        // Получаем количество проектов, которые мы уже создали.
+        int createdProjectCount = testData.getProjects().size();
+
+        // Проверяем, что мы уже создали столько же проектов, сколько элементов задач передали сейчас
+        if (createdProjectCount != taskCount.size()) {
+            // Выбросить исключение, что "Ожидаемое количество созданных проектов не соответствует фактическому количеству созданных проектов."
+        }
+        
+        // Считаем сколько всего хотим создать задач.
+        int totalTaskCount = 0;
+        for(int count : taskCount) {
+            totalTaskCount += count;
+        }   
+        
+        // Получаем ВСЕ задачи из нашего шаблона
+        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasksInProjects();
+
+        // Проверяем, что в нашем шаблоне есть нужное количество задач
+        if (totalTaskCount > taskTemplates.size()) {
+            // Выбросить исключение, что "Количество задач в шаблоне меньше, чем вы пытаетесь создать."
+        }
+
+        // Создаем задачи.
+        int taskTemplateNumber = 0;
+        for(int i = 0; i < createdProjectCount; i++) {
+            String projectId = testData.getProjects().get(i).getId();
+            for(int j = 0; j < taskCount.get(i); j++) {
+                TaskRequestModel request = taskTemplates.get(taskTemplateNumber);
+                request.setProjectId(projectId);
+                if (!addLabels) { // если метки не нужны (false)
+                    request.setLabels(null); // TODO : LABELS  
+                }
+                
+                TaskResponseModel task = api.createNewTask(request);
+                testData.getTasks().add(task);
+                taskTemplateNumber++;     
+            }
+        }
+    }
+    
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, List<int> taskCount) {
+        createTasksInProjects(testData, taskCount, false) {
+    }
+    
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, int taskCount, boolean addLabels) {  
+
+        // Получаем количество проектов, которые мы уже создали.
+        int createdProjectCount = testData.getProjects().size();
+
+        // Создаем массив с количеством задач для каждого раздела
+        List<int> arrayTaskCount = new ArrayList<>();
+        for(int i = 0; i < createdProjectCount; i++) {
+            arrayTaskCount.add(taskCount);
+        }
+
+        // Вызываем основной метод.
+        createTasksInProjects(testData, arrayTaskCount, addLabels);
+    }
+
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, int taskCount) {
+        createTasksInProjects(testData, taskCount, false)
+    }
+
+    // ==========================================================================================================================================================================
+    
+
+    // ==========================================================================================================================================================================
     // === Создание ЗАДАЧИ в разделе ===
     public void createTasksInSections(AccountData testData, List<int> taskCount, boolean addLabels) {
 
@@ -223,74 +296,45 @@ public class DataCreator {
 
         
     // ==========================================================================================================================================================================
-    // === Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, List<int> taskCount, boolean addLabels) {
+    // === Создание КОММЕНТОВ в проекте ===
+    public void createCommentsInProjects(AccountData testData, List<int> commentCount) {
 
         // Получаем количество проектов, которые мы уже создали.
         int createdProjectCount = testData.getProjects().size();
 
-        // Проверяем, что мы уже создали столько же проектов, сколько элементов задач передали сейчас
-        if (createdProjectCount != taskCount.size()) {
-            // Выбросить исключение, что "Ожидаемое количество созданных проектов не соответствует фактическому количеству созданных проектов."
-        }
-        
-        // Считаем сколько всего хотим создать задач.
-        int totalTaskCount = 0;
-        for(int count : taskCount) {
-            totalTaskCount += count;
-        }   
-        
-        // Получаем ВСЕ задачи из нашего шаблона
-        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasksInProjects();
-
-        // Проверяем, что в нашем шаблоне есть нужное количество задач
-        if (totalTaskCount > taskTemplates.size()) {
-            // Выбросить исключение, что "Количество задач в шаблоне меньше, чем вы пытаетесь создать."
-        }
-
-        // Создаем задачи.
-        int taskTemplateNumber = 0;
-        for(int i = 0; i < createdProjectCount; i++) {
-            String projectId = testData.getProjects().get(i).getId();
-            for(int j = 0; j < taskCount.get(i); j++) {
-                TaskRequestModel request = taskTemplates.get(taskTemplateNumber);
-                request.setProjectId(projectId);
-                if (!addLabels) { // если метки не нужны (false)
-                    request.setLabels(null); // TODO : LABELS  
-                }
+        // Создаем комменты.
+        int commentsNumber = 0;
+        for(int i = 0; i < createdProjectCount; i++) {     
+            String projectId = testData.getProjects().get(i).getId();    
+            for(int j = 0; j < commentCount.get(i); j++) {  
+                commentsNumber++; 
+                CommentRequestModel request = CommentRequestModel.builder()
+                    .projectId(projectId)
+                    .content("Комментарий для проекта №" + commentsNumber)    
+                    .build();
                 
-                TaskResponseModel task = api.createNewTask(request);
-                testData.getTasks().add(task);
-                taskTemplateNumber++;     
+                CommentResponseModel task = api.createNewComment(request);
+                testData.getComments().add(task);         
             }
         }
     }
     
-    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, List<int> taskCount) {
-        createTasksInProjects(testData, taskCount, false) {
-    }
-    
-    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, int taskCount, boolean addLabels) {  
+    // === (перегрузка) Создание КОММЕНТОВ в проекте ===
+    public void createCommentsInProjects(AccountData testData, int commentCount) {  
 
         // Получаем количество проектов, которые мы уже создали.
         int createdProjectCount = testData.getProjects().size();
 
         // Создаем массив с количеством задач для каждого раздела
-        List<int> arrayTaskCount = new ArrayList<>();
+        List<int> arrayCommentCount = new ArrayList<>();
         for(int i = 0; i < createdProjectCount; i++) {
-            arrayTaskCount.add(taskCount);
+            arrayCommentCount.add(commentCount);
         }
 
         // Вызываем основной метод.
-        createTasksInProjects(testData, arrayTaskCount, addLabels);
+        createCommentsInProjects(testData, arrayCommentCount);
     }
 
-    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, int taskCount) {
-        createTasksInProjects(testData, taskCount, false)
-    }
 
     // ==========================================================================================================================================================================
         
