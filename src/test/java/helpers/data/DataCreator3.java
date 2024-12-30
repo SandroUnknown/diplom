@@ -33,7 +33,7 @@ public class DataCreator3 {
             LabelRequestModel request = LabelRequestModel.builder()
                 .name(String.format("Метка №%s", i + 1))
                 .isFavorite(true)
-                .color(RED)    // TODO : сделать случайную генерацию
+                .color(Color.getRandom())    // TODO : сделать случайную генерацию
                 .build();
 
             LabelResponseModel label = labelApi.createNewProject(request);
@@ -51,7 +51,7 @@ public class DataCreator3 {
         for(int i = 0; i < projectCount; i++) {
             ProjectRequestModel request = ProjectRequestModel.builder()
                 .name(String.format("Проект №%s", i + 1))
-                .color(RED)    // TODO : сделать случайную генерацию
+                .color(Color.getRandom())    // TODO : сделать случайную генерацию
                 .viewStyle(BOARD)
                 .build();
 
