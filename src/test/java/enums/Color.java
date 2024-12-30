@@ -41,7 +41,7 @@ public enum Color {
     }
 
     // TODO : работает метод??
-    public static Color getRandomColor() {
+    public static Color getRandom() {
         Color[] colors = values();
         int randomIndex = new Random().nextInt(colors.length);
         return colors[randomIndex];
