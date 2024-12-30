@@ -24,6 +24,42 @@ import java.util.List;
 
 public class DataCreator3 {
 
+    // === Получаем названия всех созданных МЕТОК ===
+    private List<String> getLabelsName() {
+        
+        List<String> labelName = new ArrayList<>();
+
+        // Получаем количество созданных меток
+        int createdLabelCount = testData.getLabels().size();
+
+        for(int i = 1; i <= createdLabelCount) {
+            labelName.add(String.format("Метка №%s", i));
+        }
+        
+        return labelName;
+    }
+
+    // === Возвращает список случайных меток (количество, исходный список) ===
+    private List<String> getRandomLabels(labelCount, labelName) {
+
+        if (labelCount == 0 || labelName.size() == 0) {
+            return new ArraList<>();
+        }
+        
+        List<String> labelNameCopy = new ArrayList<>(labelName);
+        List<String> newLabelNameList = new ArraList<>();
+
+        for(int i = 0; i < labelCount; i++) {
+            int randomIndex = random.nextInt(labelNameCopy.size());
+            newLabelNameList.add(labelNameCopy.get(randomIndex));
+            labelNameCopy.remove(randomIndex);
+        }
+        
+        return newLabelNameList;
+    }
+
+
+    
     // ==========================================================================================================================================================================
     // === Создание МЕТОК ===
     public void createLabels(AccountData testData, int labelCount) {
@@ -104,11 +140,20 @@ public class DataCreator3 {
 
     // ==========================================================================================================================================================================
     // === Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, List<int> taskCount, boolean addLabels) {
+    public void createTasksInProjects(AccountData testData, List<int> taskCount, int labelCount) {
 
         // Получаем количество проектов, которые мы уже создали.
         int createdProjectCount = testData.getProjects().size();
 
+        // Получаем имена ранее созданных меток
+        List<String> labelName = new ArrayList<>();
+        if (labelCount > 0) {
+            labelName = getLabelsName();
+            if (labelCount > labelName.size()) {
+                // TODO : выбросить эксепшен, что я хочу добавить больше меток, чем я создал
+            }
+        }
+        
         // Создаем задачи.
         for(int i = 0; i < createdProjectCount; i++) {
             String projectId = testData.getProjects().get(i).getId();
@@ -118,6 +163,7 @@ public class DataCreator3 {
                     .projectId(projectId)
                     .content(String.format("Задача №%s для проекта №%s", j + 1, i + 1))
                     .priority(new Random().nextInt(4) + 1)
+                    .labels(getRandomLabels(labelCount, labelName))
                     .build();
 
                 if (!addLabels) { // если метки не нужны (false)
@@ -132,11 +178,11 @@ public class DataCreator3 {
     
     // === (перегрузка) Создание ЗАДАЧИ в проекте ===
     public void createTasksInProjects(AccountData testData, List<int> taskCount) {
-        createTasksInProjects(testData, taskCount, false) {
+        createTasksInProjects(testData, taskCount, 0) {
     }
     
     // === (перегрузка) Создание ЗАДАЧИ в проекте ===
-    public void createTasksInProjects(AccountData testData, int taskCount, boolean addLabels) {  
+    public void createTasksInProjects(AccountData testData, int taskCount, int labelCount) {  
 
         // Получаем количество проектов, которые мы уже создали.
         int createdProjectCount = testData.getProjects().size();
@@ -148,12 +194,12 @@ public class DataCreator3 {
         }
 
         // Вызываем основной метод.
-        createTasksInProjects(testData, arrayTaskCount, addLabels);
+        createTasksInProjects(testData, arrayTaskCount, labelCount);
     }
 
     // === (перегрузка) Создание ЗАДАЧИ в проекте ===
     public void createTasksInProjects(AccountData testData, int taskCount) {
-        createTasksInProjects(testData, taskCount, false)
+        createTasksInProjects(testData, taskCount, 0)
     }
 
     // ==========================================================================================================================================================================
@@ -161,10 +207,19 @@ public class DataCreator3 {
         
     // ==========================================================================================================================================================================
     // === Создание ЗАДАЧИ в разделе ===
-    public void createTasksInSections(AccountData testData, List<int> taskCount, boolean addLabels) {
+    public void createTasksInSections(AccountData testData, List<int> taskCount, int labelCount) {
 
         // Получаем количество разделов, которые мы уже создали.
         int createdSectionCount = testData.getSections().size();
+
+        // Получаем имена ранее созданных меток
+        List<String> labelName = new ArrayList<>();
+        if (labelCount > 0) {
+            labelName = getLabelsName();
+            if (labelCount > labelName.size()) {
+                // TODO : выбросить эксепшен, что я хочу добавить больше меток, чем я создал
+            }
+        }
 
         // Создаем задачи.
         for(int i = 0; i < createdSectionCount; i++) {
@@ -174,6 +229,7 @@ public class DataCreator3 {
                     .sectionId(sectionId)
                     .content(String.format("Задача №%s для раздела №%s", j + 1, i + 1))
                     .priority(new Random().nextInt(4) + 1)
+                    .labels(getRandomLabels(labelCount, labelName))
                     .build();
                 
                 if (!addLabels) { // если метки не нужны (false)
@@ -188,11 +244,11 @@ public class DataCreator3 {
     
     // === (перегрузка) Создание ЗАДАЧИ в разделе ===
     public void createTasksInSections(AccountData testData, List<int> taskCount) {
-        createTasksInSections(testData, taskCount, false) {
+        createTasksInSections(testData, taskCount, 0) {
     }
     
     // === (перегрузка) Создание ЗАДАЧИ в разделе ===
-    public void createTasksInSections(AccountData testData, int taskCount, boolean addLabels) {  
+    public void createTasksInSections(AccountData testData, int taskCount, int labelCount) {  
 
         // Получаем количество разделов, которые мы уже создали.
         int createdSectionCount = testData.getSections().size();
@@ -204,12 +260,12 @@ public class DataCreator3 {
         }
 
         // Вызываем основной метод.
-        createTasksInSections(testData, arrayTaskCount, addLabels);
+        createTasksInSections(testData, arrayTaskCount, labelCount);
     }
 
     // === (перегрузка) Создание ЗАДАЧИ в разделе ===
     public void createTasksInSections(AccountData testData, int taskCount) {
-        createTasksInSections(testData, taskCount, false)
+        createTasksInSections(testData, taskCount, 0)
     }
 
     // ==========================================================================================================================================================================
