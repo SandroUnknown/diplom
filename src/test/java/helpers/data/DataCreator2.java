@@ -153,14 +153,14 @@ public class DataCreator {
             // Выбросить исключение, что "Ожидаемое количество созданных разелов не соответствует фактическому количеству созданных разделов."
         }
 
-        // Считаем сколько всего хотим создать разделов.
+        // Считаем сколько всего хотим создать задач.
         int totalTaskCount = 0;
         for(int count : taskCount) {
             totalTaskCount += count;
         }
         
         // Получаем ВСЕ задачи из нашего шаблона
-        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasks();
+        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasksInSections();
 
         // Проверяем, что в нашем шаблоне есть нужное количество задач
         if (totalTaskCount > taskTemplates.size()) {
@@ -220,6 +220,80 @@ public class DataCreator {
     }
 
     // ==========================================================================================================================================================================
+
+        
+    // ==========================================================================================================================================================================
+    // === Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, List<int> taskCount, boolean addLabels) {
+
+        // Получаем количество проектов, которые мы уже создали.
+        int createdProjectCount = testData.getProjects().size();
+
+        // Проверяем, что мы уже создали столько же проектов, сколько элементов задач передали сейчас
+        if (createdProjectCount != taskCount.size()) {
+            // Выбросить исключение, что "Ожидаемое количество созданных проектов не соответствует фактическому количеству созданных проектов."
+        }
+        
+        // Считаем сколько всего хотим создать задач.
+        int totalTaskCount = 0;
+        for(int count : taskCount) {
+            totalTaskCount += count;
+        }   
+        
+        // Получаем ВСЕ задачи из нашего шаблона
+        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasksInProjects();
+
+        // Проверяем, что в нашем шаблоне есть нужное количество задач
+        if (totalTaskCount > taskTemplates.size()) {
+            // Выбросить исключение, что "Количество задач в шаблоне меньше, чем вы пытаетесь создать."
+        }
+
+        // Создаем задачи.
+        int taskTemplateNumber = 0;
+        for(int i = 0; i < createdProjectCount; i++) {
+            String projectId = testData.getProjects().get(i).getId();
+            for(int j = 0; j < taskCount.get(i); j++) {
+                TaskRequestModel request = taskTemplates.get(taskTemplateNumber);
+                request.setProjectId(projectId);
+                if (!addLabels) { // если метки не нужны (false)
+                    request.setLabels(null); // TODO : LABELS  
+                }
+                
+                TaskResponseModel task = api.createNewTask(request);
+                testData.getTasks().add(task);
+                taskTemplateNumber++;     
+            }
+        }
+    }
+    
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, List<int> taskCount) {
+        createTasksInProjects(testData, taskCount, false) {
+    }
+    
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, int taskCount, boolean addLabels) {  
+
+        // Получаем количество проектов, которые мы уже создали.
+        int createdProjectCount = testData.getProjects().size();
+
+        // Создаем массив с количеством задач для каждого раздела
+        List<int> arrayTaskCount = new ArrayList<>();
+        for(int i = 0; i < createdProjectCount; i++) {
+            arrayTaskCount.add(taskCount);
+        }
+
+        // Вызываем основной метод.
+        createTasksInProjects(testData, arrayTaskCount, addLabels);
+    }
+
+    // === (перегрузка) Создание ЗАДАЧИ в проекте ===
+    public void createTasksInProjects(AccountData testData, int taskCount) {
+        createTasksInProjects(testData, taskCount, false)
+    }
+
+    // ==========================================================================================================================================================================
+        
 
 
     
