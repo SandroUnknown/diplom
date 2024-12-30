@@ -16,20 +16,28 @@ import static enums.ViewStyle.*;
 // Примерное время тестов: 17 сек / 5 тестов
 
 public class ProjectsTest extends TestBase {
-
+        
+    private ProjectRequestModel testProjectData = ProjectRequestModel.builder()
+                .name("ПРОЕКТ")
+                .color(YELLOW)
+                .viewStyle(BOARD)
+                .build();
+    private ProjectRequestModel updatedTestProjectData = ProjectRequestModel.builder()
+                .name("ОБНОВЛЁННЫЙ ПРОЕКТ")
+                .color(RED)
+                .isFavorite(true)
+                .viewStyle(LIST)
+                .build();
+    
     @Test
     @DisplayName("[API] Создать новый проект.")
     void createNewProjectTest() {
 
-        ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .name("Тестовый проект")
-                .color(YELLOW)
-                .viewStyle(BOARD)
-                .build();
+        projectsApi.createNewProject(testProjectData);
 
-        projectsApi.createNewProject(projectData);
-
-        // TODO : выполнить проверку
+        // TODO : сделать проверку
+        ProjectResponseModel myCreatedProject = projectsApi.getAllProjects().get(0);
+        assertThat(testProjectData.getName()).isEqualTo(myCreatedProject.getName());
     }
 
     @Test
@@ -58,20 +66,24 @@ public class ProjectsTest extends TestBase {
 
         // Получаем ID проекта
         String projectId = testData.getProjects().get(0).getId();
-
-        // Создаем новые данные для проекта
-        ProjectRequestModel newProjectData = ProjectRequestModel.builder()
-                .name("ОБНОВЛЁННЫЙ ПРОЕКТ")
-                .color(RED)
-                .isFavorite(true)
-                .viewStyle(LIST)
-                .build();
+        
+        // TODO : проверить, что создался с нужными данными? Нужна ли эта проверка?
+        ProjectResponseModel templatesLabel = PROJECT_TEMPLATES.getProjects().get(0);
+        ProjectResponseModel myCreatedProject = projectsApi.getProject(projectId);
+        assertThat(templatesLabel.getName()).isEqualTo(myCreatedProject.getName());
+        assertThat(templatesLabel.getColor()).isEqualTo(myCreatedProject.getColor());
+        assertThat(templatesLabel.getViewStyle()).isEqualTo(myCreatedProject.getViewStyle());
+        assertThat(templatesLabel.getIsFavorite()).isEqualTo(myCreatedProject.getIsFavorite());
 
         // Обновляем проект!
-        ProjectResponseModel project = projectsApi.updateProject(projectId, newProjectData);
+        ProjectResponseModel project = projectsApi.updateProject(projectId, updatedTestProjectData);
 
         // TODO : сделать проверку
-        System.out.println();
+        ProjectResponseModel myCreatedProject = projectsApi.getProject(projectId);
+        assertThat(updatedTestProjectData.getName()).isEqualTo(myCreatedProject.getName());
+        assertThat(updatedTestProjectData.getColor()).isEqualTo(myCreatedProject.getColor());
+        assertThat(updatedTestProjectData.getViewStyle()).isEqualTo(myCreatedProject.getViewStyle());
+        assertThat(updatedTestProjectData.getIsFavorite()).isEqualTo(myCreatedProject.getIsFavorite());
     }
 
     @Test
@@ -89,11 +101,18 @@ public class ProjectsTest extends TestBase {
         // Получаем ID проекта
         String projectId = testData.getProjects().get(0).getId();
 
+        // TODO : проверить, что проект создался
+        //
+
         // Удаляем проект!
         projectsApi.deleteProject(projectId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        // TODO : сделать проверку - проверить, что по нужному айди более нет проекта
+        /*ProjectResponseModel myCreatedProject = projectsApi.getProject(projectId);
+        assertThat(updatedTestProjectData.getName()).isEqualTo(myCreatedProject.getName());
+        assertThat(updatedTestProjectData.getColor()).isEqualTo(myCreatedProject.getColor());
+        assertThat(updatedTestProjectData.getViewStyle()).isEqualTo(myCreatedProject.getViewStyle());
+        assertThat(updatedTestProjectData.getIsFavorite()).isEqualTo(myCreatedProject.getIsFavorite());*/
     }
 
     @Test
@@ -108,11 +127,18 @@ public class ProjectsTest extends TestBase {
         // Создаем!
         TestData testData = data.create(1, whatIsCreate);
 
+        // TODO : проверить, что проекты создались
+        //
+
         // Удаляем проект!
         projectsApi.deleteProjects();
 
-        // TODO : сделать проверку
-        System.out.println();
+        // TODO : сделать проверку - проверить, что нет ни одного проекта
+        /*ProjectResponseModel myCreatedProject = projectsApi.getProject(projectId);
+        assertThat(updatedTestProjectData.getName()).isEqualTo(myCreatedProject.getName());
+        assertThat(updatedTestProjectData.getColor()).isEqualTo(myCreatedProject.getColor());
+        assertThat(updatedTestProjectData.getViewStyle()).isEqualTo(myCreatedProject.getViewStyle());
+        assertThat(updatedTestProjectData.getIsFavorite()).isEqualTo(myCreatedProject.getIsFavorite());*/
 
     }
 
