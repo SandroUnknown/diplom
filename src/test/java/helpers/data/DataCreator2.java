@@ -25,8 +25,9 @@ import java.util.List;
 public class DataCreator {
 
     // TODO : передавать имя файла в конструкторе?
-    public static final List<TestData> PROJECT_TEMPLATES = getProjectTemplatesFromFile("data/ProjectTemplates.json");
+    public static final List<TestData> TEMPLATES = getProjectTemplatesFromFile("data/ProjectTemplates.json");
 
+    // Чтение из файла в переменную-шаблон
     private static List<TestData> getProjectTemplatesFromFile(String fileName) {
 
         ClassLoader cl = DataCreator.class.getClassLoader();
@@ -42,39 +43,21 @@ public class DataCreator {
 
         return null;
     }
-
-    public TestData create(int templateId, TestDataConfig whatIsCreate) {
-
-        TestData templateData = PROJECT_TEMPLATES.get(templateId);
-        TestData testData = new TestData();
-
-        createLabels(testData, templateData, whatIsCreate);
-        createProjects(testData, templateData, whatIsCreate);
-        createCommentsInProjects(testData, templateData, whatIsCreate);
-        createTasksInProjects(testData, templateData, whatIsCreate);
-        createCommentsInTasksInProjects(testData, templateData, whatIsCreate);
-        createSections(testData, templateData, whatIsCreate);
-        createTasksInSections(testData, templateData, whatIsCreate);
-        createCommentsInTasksInSections(testData, templateData, whatIsCreate);
-
-        return testData;
-    }
-
     
     // === Создание ПРОЕКТА в корне ===
-    public void createProjects(AccountData testData, int projectCount) {
-
+    public void createProjects(AccountData testData, int projectCount) {    // локальная переменная с моими данными, количество проектов (вероятно ещё добавить переменную шаблона?)
+        
         // Получаем все проекты из нашего шаблона
-        List<ProjectResponseModel> projects = PROJECT_TEMPLATES.getProjects();
+        List<ProjectResponseModel> projectTemplates = TEMPLATES.getProjects();
 
         // Проверяем, что мы создаём корректное количество проектов (не больше, чем есть в шаблоне)
-        if (projectCount > projects.size()) {
+        if (projectCount > projectTemplates.size()) {
             // Выбросить исключение, что "Исходный шаблон содержит меньшее количество проектов, чем вы пытаетесь создать."
         } 
         
         // Создаем проекты
-        for(int i = 0; i < projects.size(); i++) {
-            ProjectResponseModel project = projects.get(i);
+        for(int i = 0; i < projectCount; i++) {
+            ProjectResponseModel project = projectTemplates.get(i);
             ProjectRequestModel request = ProjectRequestModel.builder()
                 .name(project.getName())
                 .color(project.getColor())
@@ -89,44 +72,42 @@ public class DataCreator {
 
     // === Создание РАЗДЕЛА в проекте ===
     public void createSections(AccountData testData, List<int> sectionCount) {
-
+        
         // Получаем количество проектов, которые мы уже создали.
-        int projectCount = accountData.getProjects().size();
+        int createdProjectCount = testData.getProjects().size();
 
-        // Проверяем, что мы уже создали столько же проектов, сколько элементов разелов передали сейчас
-        if (projectCount != sectionCount.size()) {
+        // Проверяем, что мы уже создали столько же проектов, сколько элементов разделов передали сейчас
+        if (createdProjectCount != sectionCount.size()) {
             // Выбросить исключение, что "Ожидаемое количество созданных проектов не соответствует фактическому количеству созданных проектов."
         }
 
         // Считаем сколько всего хотим создать разделов.
         int totalSectionCount = 0;
-        for(int k : sectionCount) {
-            totalSectionCount += k;
+        for(int count : sectionCount) {
+            totalSectionCount += count;
         }
         
         // Получаем ВСЕ разделы из нашего шаблона
-        List<SectionResponseModel> sections = PROJECT_TEMPLATES.getSections();
+        List<SectionResponseModel> sectionTemplates = TEMPLATES.getSections();
 
         // Проверяем, что в нашем шаблоне есть нужное количество разделов
-        if (totalSectionCount > sections.size()) {
+        if (totalSectionCount > sectionTemplates.size()) {
             // Выбросить исключение, что "Количество разделов в шаблоне меньше, чем вы пытаетесь создать."
         }
 
         // Создаем разделы
-        int k = 0;
-        for(int i = 0; i < sectionCount.size(); i++) {
+        int sectionTemplateNumber = 0;
+        for(int i = 0; i < createdProjectCount; i++) {
             String projectId = testData.getProjects().get(i).getId();
             for(int j = 0; j < sectionCount.get(i); j++) {
-                SectionResponseModel section = sections.get(k);
+                SectionResponseModel section = sectionTemplates.get(sectionTemplateNumber);
                 SectionRequestModel request = SectionRequestModel.builder()
                     .projectId(projectId)
                     .name(section.getName())    // TODO : набор данных для РАЗДЕЛА
-                    //.color(section.getColor())
-                    //.viewStyle(section.getViewStyle())
                     .build();
                 section = api.createNewSection(request);
                 testData.getSections().add(section);
-                k++;     
+                sectionTemplateNumber++;     
             }
         }
     }
@@ -135,11 +116,11 @@ public class DataCreator {
     public void createSections(AccountData testData, int sectionCount) {  
 
         // Получаем количество проектов, которые мы уже создали.
-        int projectCount = accountData.getProjects().size();
+        int createdProjectCount = accountData.getProjects().size();
 
         // Создаем массив с количеством секций для каждого проекта
         List<int> arraySectionCount = new ArrayList<>();
-        for(int i = 0; i < projectCount; i++) {
+        for(int i = 0; i < createdProjectCount; i++) {
             arraySectionCount.add(sectionCount);
         }
 
@@ -152,34 +133,39 @@ public class DataCreator {
     // === Создание ЗАДАЧИ в разделе ===
     public void createTasksInSections(AccountData testData, List<int> taskCount) {
 
+        // sectionCount ==> createdSectionCount
+        // tasks ===> taskTemplates
+
+        
+        
         // Получаем количество разделов, которые мы уже создали.
-        int sectionCount = accountData.getSections().size();
+        int createdSectionCount = testData.getSections().size();
 
         // Проверяем, что мы уже создали столько же разделов, сколько элементов задач передали сейчас
-        if (sectionCount != taskCount.size()) {
+        if (createdSectionCount != taskCount.size()) {
             // Выбросить исключение, что "Ожидаемое количество созданных разелов не соответствует фактическому количеству созданных разделов."
         }
 
         // Считаем сколько всего хотим создать разделов.
         int totalTaskCount = 0;
-        for(int k : taskCount) {
-            totalTaskCount += k;
+        for(int count : taskCount) {
+            totalTaskCount += count;
         }
         
         // Получаем ВСЕ задачи из нашего шаблона
-        List<TaskResponseModel> tasks = PROJECT_TEMPLATES.getTasks();
+        List<TaskResponseModel> taskTemplates = TEMPLATES.getTasks();
 
         // Проверяем, что в нашем шаблоне есть нужное количество задач
-        if (totalTaskCount > tasks.size()) {
+        if (totalTaskCount > taskTemplates.size()) {
             // Выбросить исключение, что "Количество задач в шаблоне меньше, чем вы пытаетесь создать."
         }
 
         // Создаем задачи.
-        int k = 0;
-        for(int i = 0; i < taskCount.size(); i++) {
+        int taskTemplateNumber = 0;
+        for(int i = 0; i < createdSectionCount; i++) {
             String sectionId = testData.getSections().get(i).getId();
             for(int j = 0; j < taskCount.get(i); j++) {
-                TaskResponseModel task = tasks.get(k);
+                TaskResponseModel task = taskTemplates.get(taskTemplateNumber);
                 TaskRequestModel request = TaskRequestModel.builder()
                     .sectionId(sectionId)
                     .content(task.getContent())    // TODO : набор данных для ЗАДАЧИ
@@ -188,7 +174,7 @@ public class DataCreator {
                     .build();
                 task = api.createNewTask(request);
                 testData.getTasks().add(task);
-                k++;     
+                taskTemplateNumber++;     
             }
         }
     }
@@ -197,11 +183,11 @@ public class DataCreator {
     public void createTasksInSections(AccountData testData, int taskCount) {  
 
         // Получаем количество разделов, которые мы уже создали.
-        int sectionCount = accountData.getSections().size();
+        int createdSectionCount = testData.getSections().size();
 
         // Создаем массив с количеством задач для каждого раздела
         List<int> arrayTaskCount = new ArrayList<>();
-        for(int i = 0; i < sectionCount; i++) {
+        for(int i = 0; i < createdSectionCount; i++) {
             arrayTaskCount.add(taskCount);
         }
 
