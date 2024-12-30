@@ -23,6 +23,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DataCreator3 {
+
+    // ==========================================================================================================================================================================
+    // === Создание МЕТОК ===
+    public void createLabels(AccountData testData, int labelCount) {
+        
+        // Создаем метки
+        for(int i = 0; i < labelCount; i++) {
+            LabelRequestModel request = LabelRequestModel.builder()
+                .name(String.format("Метка №%s", i + 1))
+                .isFavorite(true)
+                .color(RED)    // TODO : сделать случайную генерацию
+                .build();
+
+            LabelResponseModel label = labelApi.createNewProject(request);
+            testData.getLabels().add(label);
+        }
+    }
+    // ==========================================================================================================================================================================
+
   
     // ==========================================================================================================================================================================
     // === Создание ПРОЕКТА в корне ===
@@ -98,7 +117,7 @@ public class DataCreator3 {
                 TaskRequestModel request = TaskRequestModel.builder()
                     .projectId(projectId)
                     .content(String.format("Задача №%s для проекта №%s", j + 1, i + 1))
-                    .priority(2) // TODO : сделать рандом
+                    .priority(new Random().nextInt(4) + 1)
                     .build();
 
                 if (!addLabels) { // если метки не нужны (false)
@@ -154,7 +173,7 @@ public class DataCreator3 {
                 TaskRequestModel request = TaskRequestModel.builder()
                     .sectionId(sectionId)
                     .content(String.format("Задача №%s для раздела №%s", j + 1, i + 1))
-                    .priority(2) // TODO : сделать рандом
+                    .priority(new Random().nextInt(4) + 1)
                     .build();
                 
                 if (!addLabels) { // если метки не нужны (false)
@@ -321,19 +340,4 @@ public class DataCreator3 {
 
     // ==========================================================================================================================================================================
 
-
-    
-    
-    
-
-
-    
-    
-
-    
-        
-   
-
-
-    
 }
