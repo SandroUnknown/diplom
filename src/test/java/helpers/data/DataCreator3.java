@@ -165,10 +165,6 @@ public class DataCreator3 {
                     .priority(new Random().nextInt(4) + 1)
                     .labels(getRandomLabels(labelCount, labelName))
                     .build();
-
-                if (!addLabels) { // если метки не нужны (false)
-                    request.setLabels(null); // TODO : LABELS  
-                }
                 
                 TaskResponseModel task = taskApi.createNewTask(request);
                 testData.getTasks().add(task);   
@@ -231,10 +227,6 @@ public class DataCreator3 {
                     .priority(new Random().nextInt(4) + 1)
                     .labels(getRandomLabels(labelCount, labelName))
                     .build();
-                
-                if (!addLabels) { // если метки не нужны (false)
-                    request.setLabels(null); // TODO : LABELS  
-                }
                 
                 TaskResponseModel task = taskApi.createNewTask(request);
                 testData.getTasks().add(task);
