@@ -2,14 +2,20 @@
     "labels": [
       {
         "name": "ВАЖНО",
-        "color": "GREY",
+        "color": "RED",
         "order": "0",
         "favorite": true
       },
       {
-        "name": "Акция",
-        "color": "RED",
+        "name": "Кэшбек",
+        "color": "GREEN",
         "order": "1",
+        "favorite": true
+      },
+      {
+        "name": "Акция",
+        "color": "BLUE",
+        "order": "2",
         "favorite": true
       }
     ],
@@ -17,42 +23,30 @@
       {
         "name": "Список покупок к Новому году",
         "parent_id": ""
-        "color": "YELLOW",
+        "color": "LAVENDER",
         "favorite": false,
         "view_style": "BOARD"
-      }
-    ],
-    "comments_in_projects": [
+      },
       {
-        "task_id": "",
-        "project_id": "",
-        "content": "Обязательно купить всем новогодние подарки!!!",
-        "attachment": {}
-      }
-    ],
-    "tasks_in_projects": [
+        "name": "Список покупок для дня рождения",
+        "parent_id": ""
+        "color": "SALMON",
+        "favorite": false,
+        "view_style": "BOARD"
+      },
       {
-        "content": "Сделать оливье",
-        "description": "",
-        "order": 0,
-        "priority": 1,
-        "labels": [
-          "ВАЖНО"
-        ],
-        "project_id": "0",
-        "section_id": "",
-        "parent_id": "",
-        "assignee_id": "",
-        "duration": {},
-        "due": {}
-      }
-    ],
-    "comments_in_tasks_in_projects": [
+        "name": "Список покупок к ужину",
+        "parent_id": ""
+        "color": "OLIVE_GREEN",
+        "favorite": false,
+        "view_style": "BOARD"
+      },
       {
-        "task_id": "0",
-        "project_id": "",
-        "content": "Сделать оливье, но не заправлять пока что майонезом!!!",
-        "attachment": {}
+        "name": "Список покупок для `шашлыков`",
+        "parent_id": ""
+        "color": "MINT_GREEN",
+        "favorite": false,
+        "view_style": "BOARD"
       }
     ],
     "sections": [
@@ -62,15 +56,520 @@
         "order": 0
       }
     ],
-    "tasks_in_sections": [
+    "tasks": [
       {
         "content": "Сделать оливье",
         "description": "",
         "order": 0,
         "priority": 1,
-        "labels": [
-          "ВАЖНО"
-        ],
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
         "project_id": "0",
         "section_id": "",
         "parent_id": "",
@@ -79,12 +578,42 @@
         "due": {}
       }
     ],
-    "comments_in_tasks_in_sections": [
+    "comments": [
       {
-        "task_id": "0",
+        "task_id": "",
         "project_id": "",
-        "content": "Мандарины только Марроканские!",
+        "content": "Комментарий №1",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Комментарий №2",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Комментарий №3",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Комментарий №4",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Комментарий №5",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Комментарий №6",
         "attachment": {}
       }
-    ]
+    ] 
   }
