@@ -1,0 +1,90 @@
+  {
+    "labels": [
+      {
+        "name": "ВАЖНО",
+        "color": "GREY",
+        "order": "0",
+        "favorite": true
+      },
+      {
+        "name": "Акция",
+        "color": "RED",
+        "order": "1",
+        "favorite": true
+      }
+    ],
+    "projects": [
+      {
+        "name": "Список покупок к Новому году",
+        "parent_id": ""
+        "color": "YELLOW",
+        "favorite": false,
+        "view_style": "BOARD"
+      }
+    ],
+    "comments_in_projects": [
+      {
+        "task_id": "",
+        "project_id": "",
+        "content": "Обязательно купить всем новогодние подарки!!!",
+        "attachment": {}
+      }
+    ],
+    "tasks_in_projects": [
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_projects": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "content": "Сделать оливье, но не заправлять пока что майонезом!!!",
+        "attachment": {}
+      }
+    ],
+    "sections": [
+      {
+        "name": "Купить в `Ашане`",
+        "project_id": "0",
+        "order": 0
+      }
+    ],
+    "tasks_in_sections": [
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_sections": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "content": "Мандарины только Марроканские!",
+        "attachment": {}
+      }
+    ]
+  }
