@@ -52,7 +52,62 @@
     "sections": [
       {
         "name": "Купить в `Ашане`",
-        "project_id": "0",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Пятёрочке`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Перекрестке`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `FixPrice`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Да!`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Metro`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Магните`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "Купить в `Дикси`",
+        "project_id": "",
+        "order": 0
+      },
+      {
+        "name": "",
+        "project_id": "Купить в `Карусели`",
+        "order": 0
+      },
+      {
+        "name": "",
+        "project_id": "Купить в `Самокате`",
+        "order": 0
+      },
+      {
+        "name": "",
+        "project_id": "Купить в `Купере`",
+        "order": 0
+      },
+      {
+        "name": "",
+        "project_id": "Купить в магазине за домом",
         "order": 0
       }
     ],
