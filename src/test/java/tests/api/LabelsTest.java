@@ -16,7 +16,7 @@ import java.util.List;
 
 public class LabelsTest extends TestBase {
 
-    //private String labelName = "МЕТКА";
+    private String newLabelName = "ОБНОВЛЁННАЯ МЕТКА";
     private LabelRequestModel testLabelData = LabelRequestModel.builder()
             .name("МЕТКА")
             .color(Color.BLUE)
@@ -31,8 +31,8 @@ public class LabelsTest extends TestBase {
         labelsApi.createNewLabel(labelName);
 
         // TODO : проверка
-        LabelResponseModel label = labelsApi.getAllLabels().get(0);
-        assertThat(testLabelData.getName()).isEqualTo(label.getName());
+        LabelResponseModel myCreatedLabel = labelsApi.getAllLabels().get(0);
+        assertThat(testLabelData.getName()).isEqualTo(myCreatedLabel.getName());
     }
 
     // TODO : сделать параметризованным?
@@ -50,16 +50,16 @@ public class LabelsTest extends TestBase {
         labelsApi.createNewLabel(request);
 
         // TODO : сделать проверку
-        LabelResponseModel label = labelsApi.getAllLabels().get(0);
-        assertThat(testLabelData.getName()).isEqualTo(label.getName());
-        assertThat(testLabelData.getColor()).isEqualTo(label.getColor());
-        assertThat(testLabelData.getOrder()).isEqualTo(label.getOrder());
-        assertThat(testLabelData.getFavorite()).isEqualTo(label.getFavorite());
+        LabelResponseModel myCreatedLabel = labelsApi.getAllLabels().get(0);
+        assertThat(testLabelData.getName()).isEqualTo(myCreatedLabel.getName());
+        assertThat(testLabelData.getColor()).isEqualTo(myCreatedLabel.getColor());
+        assertThat(testLabelData.getOrder()).isEqualTo(myCreatedLabel.getOrder());
+        assertThat(testLabelData.getFavorite()).isEqualTo(myCreatedLabel.getFavorite());
 
     }
 
     @Test
-    @DisplayName("[API] Обновить метку по ID.")
+    @DisplayName("[API] Обновить имя метки по ID.")
     void updateLabelTest() {
 
         // Что создаем?
@@ -74,9 +74,16 @@ public class LabelsTest extends TestBase {
         String labelId = testData.getLabels().get(0).getId();
 
         // Обновляем метку!
-        LabelResponseModel label = labelsApi.updateLabel(labelId, "ОБНОВЛЁННАЯ МЕТКА");
+        labelsApi.updateLabel(labelId, newLabelName);
 
-        // TODO : сделать проверку
+        // TODO : сделать проверку - точно ли ВСЁ нужно проверять? Всё ли я создаю?
+        LabelResponseModel templatesLabel = PROJECT_TEMPLATES .getLabels().get(0);
+        LabelResponseModel myCreatedLabel = labelsApi.getAllLabels().get(0);
+        assertThat(templatesLabel.getName()).isEqualTo(myCreatedLabel.getName());
+        assertThat(templatesLabel.getColor()).isEqualTo(myCreatedLabel.getColor());
+        assertThat(templatesLabel.getOrder()).isEqualTo(myCreatedLabel.getOrder());
+        assertThat(templatesLabel.getFavorite()).isEqualTo(myCreatedLabel.getFavorite());
+        
         System.out.println();
     }
 
@@ -95,11 +102,15 @@ public class LabelsTest extends TestBase {
         // Получаем ID метки
         String labelId = testData.getLabels().get(0).getId();
 
-        // Обновляем метку!
-        LabelResponseModel label = labelsApi.getLabel(labelId);
+        // Получаем метку по ID
+        LabelResponseModel myCreatedLabel = labelsApi.getLabel(labelId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        // TODO : сделать проверку - точно ли ВСЁ нужно проверять? Всё ли я создаю?
+        LabelResponseModel templatesLabel = PROJECT_TEMPLATES .getLabels().get(0);
+        assertThat(templatesLabel.getName()).isEqualTo(myCreatedLabel.getName());
+        assertThat(templatesLabel.getColor()).isEqualTo(myCreatedLabel.getColor());
+        assertThat(templatesLabel.getOrder()).isEqualTo(myCreatedLabel.getOrder());
+        assertThat(templatesLabel.getFavorite()).isEqualTo(myCreatedLabel.getFavorite());
     }
 
     @Test
@@ -114,11 +125,23 @@ public class LabelsTest extends TestBase {
         // Создаем!
         TestData testData = data.create(1, whatIsCreate);
 
-        // Получаем все метки
-        List<LabelResponseModel> labels = labelsApi.getAllLabels();
+        // Получаем все созданные метки
+        List<LabelResponseModel> myCreatedLabels = labelsApi.getAllLabels();
 
-        // TODO : сделать проверку
-        System.out.println();
+
+        // TODO : сделать проверку - точно ли ВСЁ нужно проверять? Всё ли я создаю?
+        // Убираем из массива наших меток id (для корректного сравнения в будущем, сам id нам не интересен)
+        for(LabelResponseModel myCreatedLabel : myCreatedLabels) {
+            myCreatedLabel.setId("");
+        }
+        List<LabelResponseModel> templatesLabels = PROJECT_TEMPLATES .getLabels();
+        assertThat(templatesLabels).containsExactlyInAnyOrderElementsOf(myCreatedLabels); // проверка двух листов без учета порядка
+        /*for(int i = 0; i < templatesLabels.size(); i++) { // TODO : сильно под вопросом, что мои метки и шаблонные будут в одинаковом порядке
+            assertThat(templatesLabels.get(i).getName()).isEqualTo(myCreatedLabels.get(i).getName());
+            assertThat(templatesLabels.get(i).getColor()).isEqualTo(myCreatedLabels.get(i).getColor());
+            assertThat(templatesLabels.get(i).getOrder()).isEqualTo(myCreatedLabels.get(i).getOrder());
+            assertThat(templatesLabels.get(i).getFavorite()).isEqualTo(myCreatedLabels.get(i).getFavorite());
+        }*/
     }
 
     @Test
@@ -135,12 +158,15 @@ public class LabelsTest extends TestBase {
 
         // Получаем ID метки
         String labelId = testData.getLabels().get(0).getId();
+        
+        // TODO : проверяем, что я могу получить такую метку?
+        //
 
         // Удаляем метку!
         labelsApi.deleteLabel(labelId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        // TODO : проверяем, что более по такому ID метка недоступна.
+        //
     }
 
     // TODO : Создание метки с уже имеющимся именем? Код ответа 400
