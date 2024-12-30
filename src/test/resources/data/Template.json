@@ -113,7 +113,7 @@
     ],
     "tasks": [
       {
-        "content": "Сделать оливье",
+        "content": "Хлеб (черный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -126,7 +126,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Помидоры",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -139,7 +139,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сахар",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -152,7 +152,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Конфеты (шоколадные)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -165,7 +165,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Вода (газированная)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -178,7 +178,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Курица",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -191,7 +191,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Масло (сливочное)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -204,7 +204,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Бекон",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -217,7 +217,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Хлеб (белый)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -230,7 +230,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Рыба (лосось)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -243,7 +243,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Коньяк",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -256,7 +256,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Гречка",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -269,7 +269,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Персики",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -282,7 +282,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сметана",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -295,7 +295,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Лук (репчатый)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -308,7 +308,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Соль",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -321,7 +321,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Рыба (окунь)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -334,7 +334,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Вареники (с картошкой)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -347,7 +347,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Авокадо",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -360,7 +360,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Соус (горчичный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -373,7 +373,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сок (яблочный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -386,7 +386,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Молоко",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -399,7 +399,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Джин",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -412,7 +412,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Вино (красное, сухое)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -425,7 +425,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Укроп",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -438,7 +438,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Перец (чили)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -451,7 +451,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Чай черный (пакетированный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -464,7 +464,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Рыба (тунец)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -477,7 +477,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Чай зеленый (пакетированный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -490,7 +490,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Вермут",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -503,7 +503,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Вода (без газа)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -516,7 +516,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Огурцы",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -529,7 +529,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сок (апельсиновый)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -542,7 +542,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Лук (зеленый)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -555,7 +555,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Мандарины",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -568,7 +568,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сок (мультифрукт)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -581,7 +581,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Торт",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -594,7 +594,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Сыр (творожный)",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -607,7 +607,7 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Пельмени",
         "description": "",
         "order": 0,
         "priority": 1,
@@ -620,7 +620,527 @@
         "due": {}
       },
       {
-        "content": "Сделать оливье",
+        "content": "Соус (сырный)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Мясо (говядина)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кефир",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Колбаса (докторская)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Перец (болгарский)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Виски",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Вареники (с творогом)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сельдерей",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Мясо (свинина)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Петрушка",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Масло (подсолнечное)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Шампанское",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кофе (в зернах)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Вино (белое, сухое)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Редис",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Соус (чесночный)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Яблоки",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Черная икра",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Апельсины",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кетчуп",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сыр (плавленный)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Морковь",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кексы",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Макароны",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Конфеты (карамель)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Ром",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Масло (оливковое)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Колбаса (салями)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сок (томатный)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сыр (твёрдый)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Бананы",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Красная икра",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Сода",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Виноград",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Печенье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кинза",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Картошка",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Кофе (растворимый)",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Ветчина",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Рис",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": ["ВАЖНО", "Кэшбек", "Акция"],
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Майонез",
         "description": "",
         "order": 0,
         "priority": 1,
