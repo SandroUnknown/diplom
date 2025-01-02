@@ -7,7 +7,10 @@ import models.sections.SectionResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
 // TODO : дописать теги, овнера и прочие данные
@@ -15,138 +18,138 @@ import java.util.List;
 
 public class SectionsTest extends TestBase {
 
+    private final SectionRequestModel testSectionData = SectionRequestModel.builder()
+            .name("НОВЫЙ РАЗДЕЛ")
+            .build();
+    private final String updatedSectionName = "ОБНОВЛЁННЫЙ РАЗДЕЛ";
+
     @Test
     @DisplayName("[API] Создать новый раздел.")
     void createNewSectionsTest() {
 
-        // Что создаем? - только проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
+        testSectionData.setProjectId(projectId);
 
-        // Подготавливаем данные для раздела
-        SectionRequestModel sectionData = SectionRequestModel.builder()
-                .projectId(projectId)
-                .name("НОВЫЙ РАЗДЕЛ")
-                .build();
+        SectionResponseModel myCreatedSection = sectionsApi.createNewSection(testSectionData);
 
-        sectionsApi.createNewSection(sectionData);
-
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myCreatedSection.getName()).isEqualTo(testSectionData.getName());
     }
 
     @Test
     @DisplayName("[API] Обновить раздел.")
     void updateSectionTest() {
 
-        // Что создаем? - проект и раздел в проекте
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String sectionId = testData.getSections().get(0).getId();
 
-        sectionsApi.updateSection(sectionId, "ОБНОВЛЁННЫЙ РАЗДЕЛ");
+        SectionResponseModel myUpdatedSection = sectionsApi.updateSection(sectionId, updatedSectionName);
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myUpdatedSection.getName()).isEqualTo(updatedSectionName);
     }
 
     @Test
     @DisplayName("[API] Получить все разделы внутри проекта.")
     void getAllSectionsInProjectTest() {
 
-        // Что создаем? - проект и раздел в проекте
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
-        List<SectionResponseModel> sections = sectionsApi.getAllSections(projectId);
+        List<SectionResponseModel> myCreatedSections = new ArrayList<>();
+        for(SectionResponseModel myCreatedSection : testData.getSections()) {
+            if (myCreatedSection.getProjectId().equals(projectId)) {
+                myCreatedSections.add(myCreatedSection);
+            }
+        }
 
-        // TODO : сделать проверку
-        System.out.println();
+        List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections(projectId);
+
+        assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
+        for(int i = 0; i < myCreatedSections.size(); i++) {
+            assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
+        }
     }
 
     @Test
     @DisplayName("[API] Получить все разделы пользователя.")
     void getAllSectionsTest() {
 
-        // Что создаем? - проект и раздел в проекте
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        List<SectionResponseModel> myCreatedSections = testData.getSections();
 
-        List<SectionResponseModel> sections = sectionsApi.getAllSections();
+        List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections();
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
+        for(int i = 0; i < myCreatedSections.size(); i++) {
+            assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
+        }
     }
 
     @Test
     @DisplayName("[API] Удалить раздел по ID.")
     void deleteSectionTest() {
 
-        // Что создаем? - проект и раздел в проекте
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID раздела
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        int createdSectionCount = testData.getSections().size();
         String sectionId = testData.getSections().get(0).getId();
 
         sectionsApi.deleteSection(sectionId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        int currentSectionCount = sectionsApi.getAllSections().size();
+        assertThat(currentSectionCount).isEqualTo(createdSectionCount - 1);
     }
 
     @Test
     @DisplayName("[API] Удалить все разделы в проекте.")
     void deleteAllSectionsInProjectTest() {
 
-        // Что создаем? - проект и раздел в проекте
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
-
-        // Получаем ID раздела
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
-        // удалить все разделы в проекте
         sectionsApi.deleteAllSectionInProject(projectId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        int currentSectionCount = sectionsApi.getAllSections(projectId).size();
+        assertThat(currentSectionCount).isEqualTo(0);
     }
 }

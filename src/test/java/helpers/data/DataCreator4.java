@@ -1,14 +1,10 @@
 package helpers.data;
 
-import api.*;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.qameta.allure.internal.shadowed.jackson.databind.PropertyNamingStrategy;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
 import models.data.TestData;
-import models.data.TestDataConfig;
-import models.labels.LabelRequestModel;
-import models.labels.LabelResponseModel;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import models.sections.SectionRequestModel;
@@ -22,15 +18,15 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataCreator {
-
+public class DataCreator4 {
+/*
     // TODO : передавать имя файла в конструкторе?
     public static final List<TestData> TEMPLATES = getProjectTemplatesFromFile("data/ProjectTemplates.json");
 
     // Чтение из файла в переменную-шаблон
     private static List<TestData> getProjectTemplatesFromFile(String fileName) {
 
-        ClassLoader cl = DataCreator.class.getClassLoader();
+        ClassLoader cl = DataCreator4.class.getClassLoader();
         ObjectMapper om = new ObjectMapper();
 
         om.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
@@ -60,12 +56,7 @@ public class DataCreator {
         
         // Создаем проекты
         for(int i = 0; i < projectCount; i++) {
-            /*ProjectResponseModel project = projectTemplates.get(i);
-            ProjectRequestModel request = ProjectRequestModel.builder()
-                .name(project.getName())
-                .color(project.getColor())
-                .viewStyle(project.getViewStyle())
-                .build();*/
+
             ProjectRequestModel request = projectTemplates.get(i);
 
             //project = api.createNewProject(request);
@@ -107,11 +98,7 @@ public class DataCreator {
         for(int i = 0; i < createdProjectCount; i++) {
             String projectId = testData.getProjects().get(i).getId();
             for(int j = 0; j < sectionCount.get(i); j++) {
-                /*SectionResponseModel section = sectionTemplates.get(sectionTemplateNumber);
-                SectionRequestModel request = SectionRequestModel.builder()
-                    .projectId(projectId)
-                    .name(section.getName())    // TODO : набор данных для РАЗДЕЛА
-                    .build();*/
+
                 SectionRequestModel request = sectionTemplates.get(sectionTemplateNumber);
                 request.setProjectId(projectId);
                 
@@ -245,13 +232,7 @@ public class DataCreator {
         for(int i = 0; i < createdSectionCount; i++) {
             String sectionId = testData.getSections().get(i).getId();
             for(int j = 0; j < taskCount.get(i); j++) {
-                /*TaskResponseModel task = taskTemplates.get(taskTemplateNumber);
-                TaskRequestModel request = TaskRequestModel.builder()
-                    .sectionId(sectionId)
-                    .content(task.getContent())    // TODO : набор данных для ЗАДАЧИ
-                    .color(task.getColor())
-                    //.labels(section.getViewStyle())    // TODO : LABELS
-                    .build();*/
+
                 TaskRequestModel request = taskTemplates.get(taskTemplateNumber);
                 request.setSectionId(sectionId);
                 if (!addLabels) { // если метки не нужны (false)
@@ -339,6 +320,6 @@ public class DataCreator {
     // ==========================================================================================================================================================================
         
 
-
+*/
     
 }

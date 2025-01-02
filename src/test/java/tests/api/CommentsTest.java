@@ -1,12 +1,16 @@
 package tests.api;
 
+import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
 import models.data.TestData;
 import models.data.TestDataConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
 // TODO : дописать теги, овнера и прочие данные
@@ -14,57 +18,60 @@ import java.util.List;
 
 public class CommentsTest extends TestBase {
 
+    private final CommentRequestModel testCommentData = CommentRequestModel.builder()
+            .content("НОВЫЙ КОММЕНТАРИЙ")
+            .build();
+
+    private final CommentRequestModel updatedTestCommentData = CommentRequestModel.builder()
+            .content("ОБНОВЛЁННЫЙ КОММЕНТАРИЙ")
+            .build();
+
     @Test
     @DisplayName("[API] Создать новый комментарий в проекте.")
     void createNewCommentInProjectTest() {
 
-        // Что создаем? - проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
-        // Создаем новый комментарий
-        commentsApi.createNewCommentInProject(projectId, "НОВЫЙ КОММЕНТАРИЙ");
+        CommentResponseModel myCreatedComment =
+                commentsApi.createNewCommentInProject(projectId, testCommentData.getContent());
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
     }
 
     @Test
     @DisplayName("[API] Создать новый комментарий в задаче.")
     void createNewCommentInTaskTest() {
 
-        // Что создаем? - проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        // Создаем новый комментарий
-        commentsApi.createNewCommentInTask(taskId, "НОВЫЙ КОММЕНТАРИЙ");
+        CommentResponseModel myCreatedComment =
+                commentsApi.createNewCommentInTask(taskId, testCommentData.getContent());
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
     }
 
     @Test
     @DisplayName("[API] Обновить комментарий по ID.")
     void updateCommentTest() {
 
-        // Что создаем? - проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
@@ -72,24 +79,21 @@ public class CommentsTest extends TestBase {
                 .createCommentsInTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
-        // Обновляем комментарий
-        commentsApi.updateComment(commentId, "ОБНОВЛЁННЫЙ КОММЕНТАРИЙ");
+        CommentResponseModel myUpdatedComment =
+                commentsApi.updateComment(commentId, updatedTestCommentData.getContent());
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myUpdatedComment.getContent()).isEqualTo(updatedTestCommentData.getContent());
     }
 
     @Test
     @DisplayName("[API] Получить комментарий по ID.")
     void getCommentTest() {
 
-        // Что создаем? - проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
@@ -97,47 +101,44 @@ public class CommentsTest extends TestBase {
                 .createCommentsInTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        CommentResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
-        // Получить комментарий
-        CommentResponseModel comment = commentsApi.getComment(commentId);
+        CommentResponseModel myReceivedComment = commentsApi.getComment(commentId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myReceivedComment.getContent()).isEqualTo(myCreatedComment.getContent());
     }
 
     @Test
     @DisplayName("[API] Получить все комментарии в проекте.")
     void getAllCommentsInProjectTest() {
 
-        // Что создаем? - проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createCommentsInProjects(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        List<CommentResponseModel> myCreatedComments = testData.getCommentsInProjects();
         String projectId = testData.getProjects().get(0).getId();
 
-        // Получить комментарий
-        List<CommentResponseModel> comments = commentsApi.getAllCommentsInProject(projectId);
+        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
+        for(int i = 0; i < myCreatedComments.size(); i++) {
+            assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
+        }
     }
 
     @Test
     @DisplayName("[API] Получить все комментарии в задаче.")
     void getAllCommentsInTaskTest() {
 
-        // Что создаем?
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
@@ -145,24 +146,30 @@ public class CommentsTest extends TestBase {
                 .createCommentsInTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        // Получить комментарий
-        List<CommentResponseModel> comments = commentsApi.getAllCommentsInTask(taskId);
+        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
+        for(CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+            if (myCreatedComment.getTaskId().equals(taskId)) {
+                myCreatedComments.add(myCreatedComment);
+            }
+        }
 
-        // TODO : сделать проверку
-        System.out.println();
+        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
+
+        assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
+        for(int i = 0; i < myCreatedComments.size(); i++) {
+            assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
+        }
     }
 
     @Test
     @DisplayName("[API] Удалить комментарий по ID.")
     void deleteCommentTest() {
 
-        // Что создаем?
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
@@ -170,16 +177,21 @@ public class CommentsTest extends TestBase {
                 .createCommentsInTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
+        String taskId = testData.getCommentsInTasksInSections().get(0).getTaskId();
 
-        // Удаляем комментарий
+        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
+        for(CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+            if (myCreatedComment.getTaskId().equals(taskId)) {
+                myCreatedComments.add(myCreatedComment);
+            }
+        }
+        int createdCommentCount = myCreatedComments.size();
+
         commentsApi.deleteComment(commentId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        int currentCommentCount = commentsApi.getAllCommentsInTask(taskId).size();
+        assertThat(currentCommentCount).isEqualTo(createdCommentCount - 1);
     }
 }

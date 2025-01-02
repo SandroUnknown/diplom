@@ -7,8 +7,11 @@ import models.tasks.TaskResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
 // TODO : дописать теги, овнера и прочие данные
@@ -16,119 +19,110 @@ import java.util.List;
 
 public class TasksTest extends TestBase {
 
+    private final TaskRequestModel testTaskData = TaskRequestModel.builder()
+            .content("НОВАЯ ЗАДАЧА")
+            .priority(4)
+            .build();
+
+    private final TaskRequestModel updatedTestTaskData = TaskRequestModel.builder()
+            .content("ОБНОВЛЕННАЯ ЗАДАЧА")
+            .priority(3)
+            .build();
+
     @Test
     @DisplayName("[API] Создать новую задачу.")
     void createNewTaskTest() {
 
-        // Что создаем? - только проект
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String sectionId = testData.getSections().get(0).getId();
+        testTaskData.setSectionId(sectionId);
 
-        // Подготавливаем данные для задачи
-        TaskRequestModel taskData = TaskRequestModel.builder()
-                .sectionId(sectionId)
-                .content("НОВАЯ ЗАДАЧА")
-                .priority(4)
-                .build();
+        TaskResponseModel myCreatedTask = tasksApi.createNewTask(testTaskData);
 
-        // Создаем новую задачу
-        tasksApi.createNewTask(taskData);
-
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myCreatedTask.getContent()).isEqualTo(testTaskData.getContent());
+        assertThat(myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
     }
 
     @Test
     @DisplayName("[API] Обновить задачу по ID.")
     void updateTaskTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        // Подготавливаем данные для задачи
-        TaskRequestModel updateTaskData = TaskRequestModel.builder()
-                .content("ОБНОВЛЕННАЯ ЗАДАЧА")
-                .priority(4)
-                .build();
+        TaskResponseModel myUpdatedTask = tasksApi.updateTask(taskId, updatedTestTaskData);
 
-        // Создаем новую задачу
-        tasksApi.updateTask(taskId, updateTaskData);
-
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myUpdatedTask.getContent()).isEqualTo(updatedTestTaskData.getContent());
+        assertThat(myUpdatedTask.getPriority()).isEqualTo(updatedTestTaskData.getPriority());
     }
 
     @Test
     @DisplayName("[API] Получить задачу по ID.")
     void getTaskTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        TaskResponseModel myCreatedTask = testData.getTasksInSections().get(0);
+        String taskId = myCreatedTask.getId();
 
-        // Получаем ID проекта
-        String taskId = testData.getTasksInSections().get(0).getId();
+        TaskResponseModel myReceivedTask = tasksApi.getTask(taskId);
 
-        // Получаем задачу по айди
-        TaskResponseModel task = tasksApi.getTask(taskId);
-
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myReceivedTask.getContent()).isEqualTo(myCreatedTask.getContent());
+        assertThat(myReceivedTask.getPriority()).isEqualTo(myCreatedTask.getPriority());
     }
 
     @Test
     @DisplayName("[API] Получить все активные задачи пользователя.")
     void getAllTasksTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        List<TaskResponseModel> myCreatedTasks = testData.getTasksInSections();
 
-        // Получаем ID проекта
-        String taskId = testData.getTasksInSections().get(0).getId();
+        List<TaskResponseModel> myReceivedTasks = tasksApi.getAllTasks();
 
-        // Получаем все задачи пользователя
-        List<TaskResponseModel> tasks = tasksApi.getAllTasks();
-
-        // TODO : сделать проверку
-        System.out.println();
+        assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
+        for(int i = 0; i < myCreatedTasks.size(); i++) {
+            assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
+            assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
+        }
     }
 
     @Test
     @DisplayName("[API] Получить все активные задачи (с применением фильтра `label`).")
     void getTasksWithFilterTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 1;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createLabels(true)
                 .createProjects(true)
@@ -137,96 +131,90 @@ public class TasksTest extends TestBase {
                 .addLabelsForTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(1, whatIsCreate);
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        String labelName = testData.getLabels().get(1).getName(); // заменить на 0?
 
-        // Получаем ID проекта
-        String labelName = testData.getLabels().get(1).getName();
+        List<TaskResponseModel> myCreatedTasks = new ArrayList<>();
+        for(TaskResponseModel myCreatedTask : testData.getTasksInSections()) {
+            if (myCreatedTask.getLabels().contains(labelName)) {
+                myCreatedTasks.add(myCreatedTask);
+            }
+        }
 
-        // Создаем фильтр
         HashMap<String, String> filters = new HashMap<>();
         filters.put("label", labelName);
 
-        // Получаем все задачи пользователя с фильтром
-        List<TaskResponseModel> tasks = tasksApi.getTasksWithFilter(filters);
+        List<TaskResponseModel> myReceivedTasks = tasksApi.getTasksWithFilter(filters);
 
-        // TODO : сделать проверку
-        System.out.println();
-
+        assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
+        for(int i = 0; i < myCreatedTasks.size(); i++) {
+            assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
+            assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
+        }
     }
 
     @Test
     @DisplayName("[API] Закрыть задачу по ID.")
     void closeTaskTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        // Закрываем задачу
         tasksApi.closeTask(taskId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
+        assertThat(myReceivedTasks.isCompleted()).isEqualTo(true);
     }
 
     @Test
     @DisplayName("[API] Снова открыть (закрытую) задачу по ID.")
     void reopenTaskTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
-
-        // Закрываем задачу
         tasksApi.closeTask(taskId);
 
-        // открываем
         tasksApi.reopenTask(taskId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
+        assertThat(myReceivedTasks.isCompleted()).isEqualTo(false);
     }
 
     @Test
     @DisplayName("[API] Удалить задачу по ID.")
     void deleteTaskTest() {
 
-        // Что создаем? - проект, раздел и задачу
+        int templateNumber = 0;
+
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .build();
 
-        // Создаем!
-        TestData testData = data.create(0, whatIsCreate);
-
-        // Получаем ID проекта
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        int createdTaskCount = testData.getTasksInSections().size();
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        // Удаляем задачу
         tasksApi.deleteTask(taskId);
 
-        // TODO : сделать проверку
-        System.out.println();
+        int currentTaskCount = tasksApi.getAllTasks().size();
+        assertThat(currentTaskCount).isEqualTo(createdTaskCount - 1);
     }
 }

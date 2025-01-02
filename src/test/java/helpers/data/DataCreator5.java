@@ -22,12 +22,12 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataCreator {
+public class DataCreator5 {
 
     // TODO : передавать имя файла в конструкторе?
-    public static final List<TestData> TEMPLATES = getTemplatesFromFile("data/ProjectTemplates2.json");
+    private static final List<TestData> PROJECT_TEMPLATES = getProjectTemplatesFromFile("data/ProjectTemplates.json");
 
-    private static List<TestData> getTemplatesFromFile(String fileName) {
+    private static List<TestData> getProjectTemplatesFromFile(String fileName) {
 
         ClassLoader cl = DataCreator4.class.getClassLoader();
         ObjectMapper om = new ObjectMapper();
@@ -45,7 +45,7 @@ public class DataCreator {
 
     public TestData create(int templateId, TestDataConfig whatIsCreate) {
 
-        TestData templateData = TEMPLATES.get(templateId);
+        TestData templateData = PROJECT_TEMPLATES.get(templateId);
         TestData testData = new TestData();
 
         createLabels(testData, templateData, whatIsCreate);
