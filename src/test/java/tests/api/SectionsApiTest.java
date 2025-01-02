@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // TODO : дописать теги, овнера и прочие данные
 // Примерное время тестов: 40 сек / 6 тестов (разброс от 28 до 52 сек)
 
-public class SectionsTest extends TestBase {
+public class SectionsApiTest extends ApiTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()
             .name("НОВЫЙ РАЗДЕЛ")

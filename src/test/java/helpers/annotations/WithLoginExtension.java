@@ -1,19 +1,45 @@
 package helpers.annotations;
 
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.openqa.selenium.Cookie;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class WithLoginExtension implements BeforeEachCallback {
 
+    // TODO : убрать отсюда эти переменные
+    public static String USER_NAME = "testing.qaguru@gmail.com";
+    public static String USER_PASSWORD = "Qwer1234!";
+    public static Set<Cookie> ALL_COOKIES = new HashSet<>();
+
+
     @Override
     public void beforeEach(ExtensionContext context) {
-/*
-        USER_NAME = System.getProperty("storeUserName", "login");
-        USER_PASSWORD = System.getProperty("storeUserPassword", "password");
 
-        LoginResponseModel authResponse = OLD_AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
+        SelenideElement emailElement = $("input[type='email']");
+        SelenideElement passwordElement = $("input[type='password']");
+
+        //open("/auth/login");
+        open("/app/today");
+
+        emailElement.setValue(USER_NAME);
+        passwordElement.setValue(USER_PASSWORD).pressEnter();
+
+        ALL_COOKIES = WebDriverRunner.getWebDriver().manage().getCookies();
+
+
+
+        //USER_NAME = System.getProperty("storeUserName", "login");
+        //USER_PASSWORD = System.getProperty("storeUserPassword", "password");
+
+        /*LoginResponseModel authResponse = OLD_AuthorizationApi.getAuthData(USER_NAME, USER_PASSWORD);
 
         open("/favicon.ico");
 
@@ -26,5 +52,13 @@ public class WithLoginExtension implements BeforeEachCallback {
         EXPIRES = authResponse.getExpires();
         CREATE_DATE = authResponse.getCreatedDate();
         IS_ACTIVE = authResponse.getIsActive();*/
+
+
+       //===============================================
+
+        /*
+        open("/app/today");
+        $("[type='email]").setValue(USER_NAME);
+        $("#element-3").setValue(USER_PASSWORD).pressEnter();*/
     }
 }

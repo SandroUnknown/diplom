@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // TODO : дописать теги, овнера и прочие данные
 // Примерное время тестов: 28 сек / 7 тестов
 
-public class CommentsTest extends TestBase {
+public class CommentsApiTest extends ApiTestBase {
 
     private final CommentRequestModel testCommentData = CommentRequestModel.builder()
             .content("НОВЫЙ КОММЕНТАРИЙ")

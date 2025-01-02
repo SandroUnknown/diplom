@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // TODO : дописать теги, овнера и прочие данные
 // Примерное время тестов: 17 сек / 6 тестов
 
-public class LabelsTest extends TestBase {
+public class LabelsApiTest extends ApiTestBase {
 
     private LabelRequestModel testLabelData = LabelRequestModel.builder()
             .name("МЕТКА")

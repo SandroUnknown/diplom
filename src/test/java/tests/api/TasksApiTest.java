@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // TODO : дописать теги, овнера и прочие данные
 // Примерное время тестов: 84 сек / 8 тестов (разброс от 71 до 97 сек)
 
-public class TasksTest extends TestBase {
+public class TasksApiTest extends ApiTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
             .content("НОВАЯ ЗАДАЧА")

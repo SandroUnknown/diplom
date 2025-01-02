@@ -15,7 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // TODO : дописать теги, овнера и прочие данные
 // Примерное время тестов: 17 сек / 5 тестов
 
-public class ProjectsTest extends TestBase {
+public class ProjectsApiTest extends ApiTestBase {
         
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
                 .name("НОВЫЙ ПРОЕКТ")
