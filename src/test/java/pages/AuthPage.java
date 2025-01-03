@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class AuthPage {
 
+    // TODO : вынесли пароли в Овнера
     public static String USER_NAME = "testing.qaguru@gmail.com";
     public static String USER_PASSWORD = "Qwer1234!";
 
@@ -16,10 +17,7 @@ public class AuthPage {
             passwordElement = $("input[type='password']");
 
 
-    public AuthPage login(String path) {
-
-        //open("/app/today");
-        open(path);
+    public AuthPage login() {
 
         emailElement.setValue(USER_NAME);
         passwordElement.setValue(USER_PASSWORD).pressEnter();

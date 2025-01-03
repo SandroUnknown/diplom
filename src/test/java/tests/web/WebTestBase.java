@@ -2,7 +2,9 @@ package tests.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.data.DataCreator;
 import io.qameta.allure.selenide.AllureSelenide;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,11 +18,15 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class WebTestBase {
 
+    DataCreator data = new DataCreator();
+
     ProjectPage projectPage = new ProjectPage();
     AuthPage authPage = new AuthPage();
 
     @BeforeAll
     public static void setUp() {
+
+        RestAssured.baseURI = "https://api.todoist.com/rest/v2/";
 
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -41,6 +47,8 @@ public class WebTestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "125.0");
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+
+        Configuration.timeout = 7000;
 
         //Configuration.holdBrowserOpen = true;
     }

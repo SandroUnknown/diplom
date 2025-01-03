@@ -8,10 +8,13 @@ import models.projects.ProjectRequestModel;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class ProjectPage {
+
+    // TODO : пас и прочие переменные
+    private final String path = "/app/projects/active";
 
     private SelenideElement getSelectProjectColorElement(Color projectColor) {
         return $(String.format("[data-value='%s']", projectColor.getTitle()));
@@ -21,9 +24,14 @@ public class ProjectPage {
         return $(String.format("#%s", viewStyle)).sibling(0);
     }
 
-    private SelenideElement getProjectColorCheckElement(Color projectColor) {
-        String projectColorElement = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssTitle());
-        return projectListElement.$(projectColorElement);
+    private SelenideElement getProjectColorForCheckElement(Color projectColor) {
+        String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssTitle());
+        return projectListForCheckElement.$(projectColorSelector);
+    }
+
+    private SelenideElement getProjectViewStyleForCheckElement(ViewStyle viewStyle) {
+        String projectViewStyleSelector = String.format("[data-testid='project-%s-view']", viewStyle.getTitle());
+        return $(projectViewStyleSelector);
     }
 
     private final SelenideElement
@@ -33,7 +41,21 @@ public class ProjectPage {
             projectColorDropdownElement = $("button[aria-labelledby='edit_project_modal_field_color_label']"),
             addToFavoriteElement = $("input[name='is_favorite']").parent().parent(),
             createProjectButtonElement = $("button[type='submit']"),
-            projectListElement = $("#projects_list");
+            projectListForCheckElement = $("ul#projects_list"),
+            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");
+
+
+    @Step("Открыть страницу.")
+    public ProjectPage openPage() {
+        open(path);
+        return this;
+    }
+
+    @Step("Ввести логин и пароль.")
+    public ProjectPage login() {
+        new AuthPage().login();
+        return this;
+    }
 
     @Step("Нажать '+'.")
     public ProjectPage clickPlusButton() {
@@ -80,21 +102,43 @@ public class ProjectPage {
         return this;
     }
 
-    @Step("Нажать кнопку 'Добавить'.")
-    public ProjectPage checkSuccessfulCreateProject(ProjectRequestModel testProjectData) {
+    @Step("Проверить, что проект успешно создан.")
+    public ProjectPage fullCheckProject(ProjectRequestModel testProjectData) {
 
-        // Проверка имени
-        projectListElement.shouldHave(text(testProjectData.getName()));
+        checkProjectName(testProjectData.getName());
 
-        // Проверка цвета
-        getProjectColorCheckElement(testProjectData.getColor()).shouldBe(exist);
+        checkProjectColor(testProjectData.getColor());
 
-        // TODO : проверка фаворит
+        if (testProjectData.isFavorite()) {
+            checkProjectFavorite(testProjectData.getName());
+        }
 
-        // TODO : проверка вьюСтайл
+        checkProjectViewStyle(testProjectData.getViewStyle());
 
+        return this;
+    }
 
+    @Step("Проверить имя созданного проекта.")
+    public ProjectPage checkProjectName(String projectName) {
+        projectListForCheckElement.shouldHave(text(projectName));
+        return this;
+    }
 
+    @Step("Проверить цвет созданного проекта.")
+    public ProjectPage checkProjectColor(Color projectColor) {
+        getProjectColorForCheckElement(projectColor).shouldBe(exist);
+        return this;
+    }
+
+    @Step("Проверить, что созданный проект добавлен в 'Избранное'.")
+    public ProjectPage checkProjectFavorite(String projectName) {
+        projectFavoriteForCheckElement.shouldHave(text(projectName));
+        return this;
+    }
+
+    @Step("Проверить вариант отображения (ViewStyle) созданного проекта.")
+    public ProjectPage checkProjectViewStyle(ViewStyle viewStyle) {
+        getProjectViewStyleForCheckElement(viewStyle).shouldBe(exist);
         return this;
     }
 }
