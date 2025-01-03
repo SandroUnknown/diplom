@@ -1,5 +1,6 @@
 package tests.web;
 
+import api.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.data.DataCreator;
@@ -19,6 +20,14 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 public class WebTestBase {
 
     DataCreator data = new DataCreator();
+
+    ProjectsApi projectsApi = new ProjectsApi();
+    SectionsApi sectionsApi = new SectionsApi();
+    TasksApi tasksApi = new TasksApi();
+    CommentsApi commentsApi = new CommentsApi();
+    LabelsApi labelsApi = new LabelsApi();
+
+
 
     ProjectPage projectPage = new ProjectPage();
     AuthPage authPage = new AuthPage();

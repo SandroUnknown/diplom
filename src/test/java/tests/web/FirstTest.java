@@ -2,13 +2,13 @@ package tests.web;
 
 import enums.Color;
 import enums.ViewStyle;
-import models.data.TestData;
 import models.data.TestDataConfig;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FirstTest extends WebTestBase {
 
@@ -60,42 +60,36 @@ public class FirstTest extends WebTestBase {
                 .fullCheckProject(testProjectData);
     }
 
-    // TODO : доделать!
     @Test
     @DisplayName("Удалить проект.")
     void deleteProjectTest() {
 
-        // Предварительно создать проект
         int templateNumber = 0;
 
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .build();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
-
-
-        //String parentProjectId = testData.getProjects().get(0).getId();
-        //testInnerProjectData.setParentId(parentProjectId);
-
+        data.create(templateNumber, whatIsCreate);
 
         projectPage
                 .openPage()
                 .login();
 
-        // TODO : параметры надо откуда-то брать?
-        /*projectPage
-                .clickPlusButton()
-                .clickAddProject()
-                .inputProjectName(testProjectData.getName())
-                .selectProjectColor(testProjectData.getColor())
-                .addToFavorite(testProjectData.isFavorite())
-                .selectViewStyle(testProjectData.getViewStyle())
-                .addProject();*/
+        projectPage
+                .mouseHoverOnCreatedProject()
+                .clickOtherActions()
+                .clickDeleteProjectButton()
+                .clickConfirmDeleteProjectButtonElement();
 
-        /*projectPage
-                .fullCheckProject(testProjectData);*/
 
-        sleep(5000);
+        projectPage
+                .checkDeleteProject();
+
+        // TODO : слишком быстро проходит АПИ проверка, не успевают обновиться данные на сервере...
+        sleep(1000);
+
+        int projectCount = projectsApi.getAllProjects().size();
+        assertThat(projectCount).isEqualTo(1);
     }
 }

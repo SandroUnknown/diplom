@@ -8,8 +8,7 @@ import models.projects.ProjectRequestModel;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ProjectPage {
 
@@ -44,6 +43,12 @@ public class ProjectPage {
             projectListForCheckElement = $("ul#projects_list"),
             projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");
 
+    private final SelenideElement
+            projectInListElement = $("#content ul[aria-label='Проекты'] li"),
+            otherActionsButtonElement = $("button.reactist_menubutton"),
+            deleteProjectButtonElement = $$("div.reactist_menulist div").last(),
+            confirmDeleteProjectButtonElement = $$("div[data-testid='modal-overlay'] footer button").last(),
+            fillProjectListElement = $("#content");
 
     @Step("Открыть страницу.")
     public ProjectPage openPage() {
@@ -102,6 +107,30 @@ public class ProjectPage {
         return this;
     }
 
+    @Step("Навести мышку на проект в списке.")
+    public ProjectPage mouseHoverOnCreatedProject() {
+        projectInListElement.hover();
+        return this;
+    }
+
+    @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия проекта).")
+    public ProjectPage clickOtherActions() {
+        otherActionsButtonElement.click();
+        return this;
+    }
+
+    @Step("Нажать на кнопку 'Удалить'.")
+    public ProjectPage clickDeleteProjectButton() {
+        deleteProjectButtonElement.click();
+        return this;
+    }
+
+    @Step("Подвердить удаление проекта.")
+    public ProjectPage clickConfirmDeleteProjectButtonElement() {
+        confirmDeleteProjectButtonElement.click();
+        return this;
+    }
+
     @Step("Проверить, что проект успешно создан.")
     public ProjectPage fullCheckProject(ProjectRequestModel testProjectData) {
 
@@ -139,6 +168,12 @@ public class ProjectPage {
     @Step("Проверить вариант отображения (ViewStyle) созданного проекта.")
     public ProjectPage checkProjectViewStyle(ViewStyle viewStyle) {
         getProjectViewStyleForCheckElement(viewStyle).shouldBe(exist);
+        return this;
+    }
+
+    @Step("Проверить, что проект успешно удалён (отсутствует в списке).")
+    public ProjectPage checkDeleteProject() {
+        fillProjectListElement.shouldHave(text("0 проектов"));
         return this;
     }
 }
