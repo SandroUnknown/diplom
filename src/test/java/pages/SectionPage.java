@@ -31,8 +31,6 @@ public class SectionPage {
             sectionCheckElement = $$("[data-testid='board-section']"),    // он не СелинидЭлемент !
             addProjectButtonElement = $("[aria-label='Добавить проект']"),
             projectNameInputElement = $("input[name='name']");
-    
-
 
     @Step("Открыть страницу.")
     public SectionPage openPage(String projectId) {
@@ -90,8 +88,6 @@ public class SectionPage {
         return this;
     }
 
-    // === ПРОВЕРКИ ================================
-
     @Step("Проверить, что раздел был успешно создан в указанном месте.")
     public SectionPage checkSuccsessfulCreatedSection(int sectionIndex, String sectionName) {
         sectionCheckElement.get(sectionIndex).shouldHave(text(sectionName));
@@ -103,72 +99,4 @@ public class SectionPage {
         sectionCheckElement.forEach(element -> element.shouldNotHave(text(sectionName)));
         return this;
     }
-
-
-    
-
-    /*
-    @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия проекта).")
-    public ProjectPage clickOtherActions() {
-        otherActionsButtonElement.click();
-        return this;
-    }
-
-    @Step("Нажать на кнопку 'Удалить'.")
-    public ProjectPage clickDeleteProjectButton() {
-        deleteProjectButtonElement.click();
-        return this;
-    }
-
-    @Step("Подвердить удаление проекта.")
-    public ProjectPage clickConfirmDeleteProjectButtonElement() {
-        confirmDeleteProjectButtonElement.click();
-        return this;
-    }
-
-    @Step("Проверить, что проект успешно создан.")
-    public ProjectPage fullCheckProject(ProjectRequestModel testProjectData) {
-
-        checkProjectName(testProjectData.getName());
-
-        checkProjectColor(testProjectData.getColor());
-
-        if (testProjectData.isFavorite()) {
-            checkProjectFavorite(testProjectData.getName());
-        }
-
-        checkProjectViewStyle(testProjectData.getViewStyle());
-
-        return this;
-    }
-
-    @Step("Проверить имя созданного проекта.")
-    public ProjectPage checkProjectName(String projectName) {
-        projectListForCheckElement.shouldHave(text(projectName));
-        return this;
-    }
-
-    @Step("Проверить цвет созданного проекта.")
-    public ProjectPage checkProjectColor(Color projectColor) {
-        getProjectColorForCheckElement(projectColor).shouldBe(exist);
-        return this;
-    }
-
-    @Step("Проверить, что созданный проект добавлен в 'Избранное'.")
-    public ProjectPage checkProjectFavorite(String projectName) {
-        projectFavoriteForCheckElement.shouldHave(text(projectName));
-        return this;
-    }
-
-    @Step("Проверить вариант отображения (ViewStyle) созданного проекта.")
-    public ProjectPage checkProjectViewStyle(ViewStyle viewStyle) {
-        getProjectViewStyleForCheckElement(viewStyle).shouldBe(exist);
-        return this;
-    }
-
-    @Step("Проверить, что проект успешно удалён (отсутствует в списке).")
-    public ProjectPage checkDeleteProject() {
-        fillProjectListElement.shouldHave(text("0 проектов"));
-        return this;
-    }*/
 }
