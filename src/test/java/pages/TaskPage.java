@@ -14,12 +14,24 @@ public class TaskPage {
 
     private final String basePath = "app/project/%s";
 
-  /*
-    private SelenideElement getOtherActionsElement(String sectionId) {
-        String str = String.format("header#section-%s div.board_section__menu_trigger button", sectionId);
+    private SelenideElement getAddTaskButtonElement(String sectionId) {
+        String str = String.format("footer[aria-labelledby='section-%s'] button.plus_add_button", sectionId);
         return $(str);
     }  
 
+    private SelenideElement getTaskPriorityDropdownElement(String priority) {
+        String str = String.format(".priority_picker_item data-value='$s'", priority);
+        return $(str);
+    }  
+
+    private final SelenideElement
+            taskContentInputElement = $("div.task_editor__content_field div.tiptap"),
+            taskPriorityButtonElement = $("div[data-priority]"),
+
+
+    div[data-priority]
+
+    /*
     private final SelenideElement
             addSectionButtonElement = $("button.board_add_section_button"),
             sectionNameInputElement = $("div.board_view__add_section input"),
@@ -32,25 +44,59 @@ public class TaskPage {
             sectionCheckElement = $$("[data-testid='board-section']"),    // он не СелинидЭлемент !
             addProjectButtonElement = $("[aria-label='Добавить проект']"),
             projectNameInputElement = $("input[name='name']");
+    */
 
     @Step("Открыть страницу.")
-    public SectionPage openPage(String projectId) {
+    public TaskPage openPage(String projectId) {
         String path = String.format(basePath, projectId);
         open(path);
         return this;
     }
 
     @Step("Ввести логин и пароль.")
-    public SectionPage login() {
+    public TaskPage login() {
         new AuthPage().login();
         return this;
     }
+    
+    @Step("Нажать на кнопку 'Добавить задачу'.")
+    public TaskPage clickOnAddTask(String sectionId) {
+        getAddTaskButtonElement(sectionId).click();
+        return this;
+    }
 
+    @Step("Ввести текст задачи.")
+    public TaskPage inputTaskContent(String taskContent) {
+        //taskContentInputElement.click(); // TODO : вероятно не нужно предварительно кликать, но это не точно
+        taskContentInputElement.setValue(taskContent);
+        return this;
+    }
+    
+    @Step("Выбрать приоритет задачи.")
+    public TaskPage selectTaskPriority(String taskPriority) {
+        taskPriorityButtonElement.click();
+        getTaskPriorityDropdownElement(taskPriority).click();
+        return this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    
+   /*
     @Step("Нажать на кнопку 'Добавить раздел'.")
-    public SectionPage clickOnAddSection() {
+    public TaskPage clickOnAddSection() {
         addSectionButtonElement.click();
         return this;
     }
+
 
     @Step("Навести мышку на разделительную линию между разделами и нажать на неё.")
     public SectionPage clickOnSeparatorBetweenSections(int separatorIndex) {
