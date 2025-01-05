@@ -16,7 +16,7 @@ public class WebSectionTest extends WebTestBase {
             .name("НОВЫЙ РАЗДЕЛ")
             .build();
 
-    // TODO : проверить варианты отображения
+    // TODO : добавить тестов для других вариантов отображения
     
     @Test
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
@@ -24,6 +24,8 @@ public class WebSectionTest extends WebTestBase {
 
         int templateNumber = 0;
 
+        // TODO : ВАЖНО_1: Сделать, чтобы шаблон передавался (устанавливался) сразу через переменную whatIsCreate, а не отдельно.
+        // TODO : ВАЖНО_2: В идеале и от переменной TestData testData = data.create() можно попробовать избавиться. Просто в build() для whatIsCreate прописать сразу создание всех сущностей.
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
                 .build();
@@ -32,7 +34,7 @@ public class WebSectionTest extends WebTestBase {
         String projectId = testData.getProjects().get(0).getId();
         
         sectionPage
-                .openPage() // TODO : Сюда передавать projectId ??
+                .openPage(projectId)
                 .login();
         
         sectionPage
@@ -66,7 +68,7 @@ public class WebSectionTest extends WebTestBase {
         }
         
         sectionPage
-                .openPage() // TODO : Сюда передавать projectId ??
+                .openPage(projectId)
                 .login();
         
         sectionPage
@@ -97,7 +99,7 @@ public class WebSectionTest extends WebTestBase {
         String projectId = testData.getProjects().get(0).getId();
         
         sectionPage
-                .openPage() // TODO : Сюда передавать projectId ??
+                .openPage(projectId)
                 .login();
         
         sectionPage
@@ -130,7 +132,7 @@ public class WebSectionTest extends WebTestBase {
         String sectionName = testData.getSections().get(sectionNumberInProject).getName();
 
         sectionPage
-                .openPage() // TODO : Сюда передавать projectId ??
+                .openPage(projectId)
                 .login();
         
         sectionPage
