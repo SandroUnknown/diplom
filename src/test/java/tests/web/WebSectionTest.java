@@ -20,7 +20,7 @@ public class WebSectionTest extends WebTestBase {
     
     @Test
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void createFirstSectionInProjectTest() {
+    void createSectionInEmptyProjectTest() {
 
         int templateNumber = 0;
 
