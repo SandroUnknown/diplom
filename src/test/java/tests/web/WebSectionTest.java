@@ -17,9 +17,10 @@ public class WebSectionTest extends WebTestBase {
             .build();
 
     // TODO : проверить варианты отображения
+    
     @Test
-    @DisplayName("Создать раздел (когда в проекте изначально нет других разделов).")
-    void createFirstSectionTest() {
+    @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void createFirstSectionInProjectTest() {
 
         int templateNumber = 0;
 
@@ -27,52 +28,26 @@ public class WebSectionTest extends WebTestBase {
                 .createProjects(true)
                 .build();
 
-        data.create(templateNumber, whatIsCreate);
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        String projectId = testData.getProjects().get(0).getId();
         
         sectionPage
-                .openPage()
+                .openPage() // TODO : Сюда передавать projectId ??
                 .login();
         
         sectionPage
                 .inputSectionName(testSectionData.getName())
                 .addSection()
 
-        // TODO : сделать провеку!!!
-        /*sectionPage
-                .fullCheckProject(testProjectData);*/
+        sectionPage
+                .checkSuccsessfulCreatedSection(0, testSectionData.getName());
+        
+        // TODO : добавить API-проверку
     }
 
     @Test
-    @DisplayName("Создать раздел (когда в проекте изначально нет других разделов).")
-    void createNotFirstSectionTest() {
-
-        int templateNumber = 0;
-
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
-                .createProjects(true)
-                .createSections(true)
-                .build();
-
-        data.create(templateNumber, whatIsCreate);
-        
-        sectionPage
-                .openPage()
-                .login();
-        
-        sectionPage
-                .clickOnAddSection()
-                .inputSectionName(testSectionData.getName())
-                .addSection()
-
-        
-        // TODO : сделать провеку!!!
-        /*sectionPage
-                .fullCheckProject(testProjectData);*/
-    }
-
-    @Test
-    @DisplayName("Удалить раздел.")
-    void deleteSectionTest() {
+    @DisplayName("Создать раздел в конце списка (когда в проекте уже имеется минимум 1 созданный раздел) [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void createNotFirstSectionInProjectAtEndOfListTest() {
 
         int templateNumber = 0;
 
@@ -82,10 +57,80 @@ public class WebSectionTest extends WebTestBase {
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
-        String sectionId = testData.getSections().get(0).getId();
+        String projectId = testData.getProjects().get(0).getId();
+        int sectionCountInProject;
+        for(ResponseSectionModel section : testData.getSections()) {
+            if (section.getProjectId().equals(projectId)) {
+                sectionCountInProject++;
+            }
+        }
+        
+        sectionPage
+                .openPage() // TODO : Сюда передавать projectId ??
+                .login();
+        
+        sectionPage
+                .clickOnAddSection()
+                .inputSectionName(testSectionData.getName())
+                .addSection()
 
         sectionPage
-                .openPage()
+                .checkSuccsessfulCreatedSection(sectionCountInProject, testSectionData.getName());
+        
+        // TODO : добавить API-проверку
+    }
+
+    // TODO : проверить работоспособность!
+    @Test
+    @DisplayName("Создать раздел между двумя ранее созданными разделами [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void createSectionBetweenTwoPreviouslyCreatedSectionsTest() {
+
+        int templateNumber = 1;
+        int separatorIndex = 0;
+
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .build();
+
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        String projectId = testData.getProjects().get(0).getId();
+        
+        sectionPage
+                .openPage() // TODO : Сюда передавать projectId ??
+                .login();
+        
+        sectionPage
+                .clickOnSeparatorBetweenSections(separatorIndex)
+                .inputSectionName(testSectionData.getName())
+                .addSection()
+
+        sectionPage
+                .checkSuccsessfulCreatedSection(separatorIndex + 1, testSectionData.getName());
+
+        // TODO : добавить API-проверку
+    }
+
+    @Test
+    @DisplayName("Удалить раздел [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void deleteSectionTest() {
+
+        int templateNumber = 0;
+        int sectionNumberInProject = 0;
+
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .build();
+
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        String projectId = testData.getProjects().get(0).getId();
+        
+        String sectionId = testData.getSections().get(sectionNumberInProject).getId();
+        String sectionName = testData.getSections().get(sectionNumberInProject).getName();
+
+        sectionPage
+                .openPage() // TODO : Сюда передавать projectId ??
                 .login();
         
         sectionPage
@@ -94,14 +139,16 @@ public class WebSectionTest extends WebTestBase {
                 .clickConfirmDeleteSectionButtonElement();
 
         
-        /*
         sectionPage
-                .checkDeleteProject();
+                .checkSuccsessfulDeleteSection(sectionName);
 
-        // TODO : слишком быстро проходит АПИ проверка, не успевают обновиться данные на сервере...
-        sleep(1000);
+        // TODO : добавить API-проверку
 
-        int projectCount = projectsApi.getAllProjects().size();
-        assertThat(projectCount).isEqualTo(1);*/
+    }
+
+    //TODO : сделать тест на драг энд дроп
+    @Test
+    @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void dragAndDropSectionTest() {
     }
 }
