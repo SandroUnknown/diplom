@@ -12,37 +12,47 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WebTaskTest extends WebTestBase {
 
-    /*private final SectionRequestModel testSectionData = SectionRequestModel.builder()
-            .name("НОВЫЙ РАЗДЕЛ")
+    private final TaskRequestModel testTaskData = TaskRequestModel.builder()
+            .content("НОВАЯ ЗАДАЧА")
+            .priority(4)
             .build();
 
-    // TODO : добавить тестов для других вариантов отображения
+    // TODO : добавить тестов для других вариантов отображения?
     
     @Test
-    @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void createFirstSectionInProjectTest() {
+    @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void createTaskInEmptySectionTest() {
 
         int templateNumber = 0;
 
-        // TODO : ВАЖНО_1: Сделать, чтобы шаблон передавался (устанавливался) сразу через переменную whatIsCreate, а не отдельно.
-        // TODO : ВАЖНО_2: В идеале и от переменной TestData testData = data.create() можно попробовать избавиться. Просто в build() для whatIsCreate прописать сразу создание всех сущностей.
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
+                .createSections(true)
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
+        String sectionId = testData.getSections().get(0).getId();
         
         sectionPage
                 .openPage(projectId)
                 .login();
         
         sectionPage
+                .clickOnAddTask(sectionId)
+                .inputTaskContent(testTaskData.getContent())
+                .selectTaskPriority(testTaskData.getPriority())
+                .addTask();
+        
+        
+        /*sectionPage
                 .inputSectionName(testSectionData.getName())
                 .addSection()
 
         sectionPage
-                .checkSuccsessfulCreatedSection(0, testSectionData.getName());
+                .checkSuccsessfulCreatedSection(0, testSectionData.getName());*/
+
+        // TODO : добавить UI-проверку
         
         // TODO : добавить API-проверку
     }
@@ -79,6 +89,8 @@ public class WebTaskTest extends WebTestBase {
         sectionPage
                 .checkSuccsessfulCreatedSection(sectionCountInProject, testSectionData.getName());
         
+        // TODO : добавить UI-проверку
+        
         // TODO : добавить API-проверку
     }
 
@@ -110,6 +122,8 @@ public class WebTaskTest extends WebTestBase {
         sectionPage
                 .checkSuccsessfulCreatedSection(separatorIndex + 1, testSectionData.getName());
 
+        // TODO : добавить UI-проверку
+        
         // TODO : добавить API-проверку
     }
 
@@ -144,6 +158,8 @@ public class WebTaskTest extends WebTestBase {
         sectionPage
                 .checkSuccsessfulDeleteSection(sectionName);
 
+        // TODO : добавить UI-проверку
+        
         // TODO : добавить API-проверку
 
     }
