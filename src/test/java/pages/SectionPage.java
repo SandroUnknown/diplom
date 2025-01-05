@@ -13,7 +13,8 @@ import static com.codeborne.selenide.Selenide.*;
 public class SectionPage {
 
     // TODO : пас и прочие переменные
-    private final String path = "/app/projects/active"; // TODO : заменить на правильный
+    //private final String path = "/app/projects/active"; // TODO : заменить на правильный
+    private final String basePath = "app/project/%s";
 
 
     
@@ -32,39 +33,23 @@ public class SectionPage {
 
     private final SelenideElement
             sectionCheckElement = $$("[data-testid='board-section']"),    // он не СелинидЭлемент !
-    
             addProjectButtonElement = $("[aria-label='Добавить проект']"),
-            projectNameInputElement = $("input[name='name']"),
+            projectNameInputElement = $("input[name='name']");
     
 
-    /*private final SelenideElement
-            plusButtonElement = $("#content button[aria-label='Мои проекты']"),
-            addProjectButtonElement = $("[aria-label='Добавить проект']"),
-            projectNameInputElement = $("input[name='name']"),
-            projectColorDropdownElement = $("button[aria-labelledby='edit_project_modal_field_color_label']"),
-            addToFavoriteElement = $("input[name='is_favorite']").parent().parent(),
-            createProjectButtonElement = $("button[type='submit']"),
-            projectListForCheckElement = $("ul#projects_list"),
-            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");*/
 
-    /*private final SelenideElement
-            projectInListElement = $("#content ul[aria-label='Проекты'] li"),
-            otherActionsButtonElement = $("button.reactist_menubutton"),
-            deleteProjectButtonElement = $$("div.reactist_menulist div").last(),
-            confirmDeleteProjectButtonElement = $$("div[data-testid='modal-overlay'] footer button").last(),
-            fillProjectListElement = $("#content");*/
-
-    /*@Step("Открыть страницу.")
-    public ProjectPage openPage() {
+    @Step("Открыть страницу.")
+    public SectionPage openPage(String projectId) {
+        String path = String.format(basePath, projectId);
         open(path);
         return this;
     }
 
     @Step("Ввести логин и пароль.")
-    public ProjectPage login() {
+    public SectionPage login() {
         new AuthPage().login();
         return this;
-    }*/
+    }
 
     @Step("Нажать на кнопку 'Добавить раздел'.")
     public SectionPage clickOnAddSection() {
