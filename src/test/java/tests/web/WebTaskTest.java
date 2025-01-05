@@ -45,10 +45,7 @@ public class WebTaskTest extends WebTestBase {
                 .addTask();
         
         
-        /*sectionPage
-                .inputSectionName(testSectionData.getName())
-                .addSection()
-
+        /*
         sectionPage
                 .checkSuccsessfulCreatedSection(0, testSectionData.getName());*/
 
@@ -58,78 +55,8 @@ public class WebTaskTest extends WebTestBase {
     }
 
     @Test
-    @DisplayName("Создать раздел в конце списка (когда в проекте уже имеется минимум 1 созданный раздел) [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void createNotFirstSectionInProjectAtEndOfListTest() {
-
-        int templateNumber = 0;
-
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
-                .createProjects(true)
-                .createSections(true)
-                .build();
-
-        TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
-        int sectionCountInProject;
-        for(ResponseSectionModel section : testData.getSections()) {
-            if (section.getProjectId().equals(projectId)) {
-                sectionCountInProject++;
-            }
-        }
-        
-        sectionPage
-                .openPage(projectId)
-                .login();
-        
-        sectionPage
-                .clickOnAddSection()
-                .inputSectionName(testSectionData.getName())
-                .addSection()
-
-        sectionPage
-                .checkSuccsessfulCreatedSection(sectionCountInProject, testSectionData.getName());
-        
-        // TODO : добавить UI-проверку
-        
-        // TODO : добавить API-проверку
-    }
-
-    // TODO : проверить работоспособность!
-    @Test
-    @DisplayName("Создать раздел между двумя ранее созданными разделами [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void createSectionBetweenTwoPreviouslyCreatedSectionsTest() {
-
-        int templateNumber = 1;
-        int separatorIndex = 0;
-
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
-                .createProjects(true)
-                .createSections(true)
-                .build();
-
-        TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
-        
-        sectionPage
-                .openPage(projectId)
-                .login();
-        
-        sectionPage
-                .clickOnSeparatorBetweenSections(separatorIndex)
-                .inputSectionName(testSectionData.getName())
-                .addSection()
-
-        sectionPage
-                .checkSuccsessfulCreatedSection(separatorIndex + 1, testSectionData.getName());
-
-        // TODO : добавить UI-проверку
-        
-        // TODO : добавить API-проверку
-    }
-
-    @Test
-    @DisplayName("Удалить раздел [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void deleteSectionTest() {
+    @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    void deleteTaskTest() {
 
         int templateNumber = 0;
         int sectionNumberInProject = 0;
