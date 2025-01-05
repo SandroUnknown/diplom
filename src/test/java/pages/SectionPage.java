@@ -13,27 +13,25 @@ import static com.codeborne.selenide.Selenide.*;
 public class SectionPage {
 
     // TODO : пас и прочие переменные
-    private final String path = "/app/projects/active";
+    private final String path = "/app/projects/active"; // TODO : заменить на правильный
 
-    private SelenideElement getSelectProjectColorElement(Color projectColor) {
-        return $(String.format("[data-value='%s']", projectColor.getTitle()));
-    }
 
-    private SelenideElement getSelectViewStyleElement(ViewStyle viewStyle) {
-        return $(String.format("#%s", viewStyle)).sibling(0);
-    }
-
-    private SelenideElement getProjectColorForCheckElement(Color projectColor) {
-        String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssTitle());
-        return projectListForCheckElement.$(projectColorSelector);
-    }
-
-    private SelenideElement getProjectViewStyleForCheckElement(ViewStyle viewStyle) {
-        String projectViewStyleSelector = String.format("[data-testid='project-%s-view']", viewStyle.getTitle());
-        return $(projectViewStyleSelector);
-    }
+    
+    private SelenideElement getOtherActionsElement(String sectionId) {
+        String str = String.format("header#section-%s div.board_section__menu_trigger button", sectionId);
+        return $(str);
+    }  
 
     private final SelenideElement
+            addSectionButtonElement = $("button.board_add_section_button"),
+            sectionNameInputElement = $("div.board_view__add_section input"),
+            createSectionButtonElement = $("div.board_view__add_section button[type='submit']"),
+            deleteSectionButtonElement = $$("div.reactist_menulist div").last(),
+            confirmDeleteSectionButtonElement = $$("div[data-testid='modal-overlay'] footer button").last();
+
+    
+
+    /*private final SelenideElement
             plusButtonElement = $("#content button[aria-label='Мои проекты']"),
             addProjectButtonElement = $("[aria-label='Добавить проект']"),
             projectNameInputElement = $("input[name='name']"),
@@ -41,16 +39,16 @@ public class SectionPage {
             addToFavoriteElement = $("input[name='is_favorite']").parent().parent(),
             createProjectButtonElement = $("button[type='submit']"),
             projectListForCheckElement = $("ul#projects_list"),
-            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");
+            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");*/
 
-    private final SelenideElement
+    /*private final SelenideElement
             projectInListElement = $("#content ul[aria-label='Проекты'] li"),
             otherActionsButtonElement = $("button.reactist_menubutton"),
             deleteProjectButtonElement = $$("div.reactist_menulist div").last(),
             confirmDeleteProjectButtonElement = $$("div[data-testid='modal-overlay'] footer button").last(),
-            fillProjectListElement = $("#content");
+            fillProjectListElement = $("#content");*/
 
-    @Step("Открыть страницу.")
+    /*@Step("Открыть страницу.")
     public ProjectPage openPage() {
         open(path);
         return this;
@@ -60,59 +58,48 @@ public class SectionPage {
     public ProjectPage login() {
         new AuthPage().login();
         return this;
-    }
+    }*/
 
-    @Step("Нажать '+'.")
-    public ProjectPage clickPlusButton() {
-        plusButtonElement.click();
+    @Step("Нажать на кнопку 'Добавить раздел'.")
+    public SectionPage clickOnAddSection() {
+        addSectionButtonElement.click();
+        return this;
+    }
+    
+    @Step("Ввести имя раздела.")
+    public SectionPage inputSectionName(String sectionName) {
+        sectionNameInputElement.setValue(sectionName);
         return this;
     }
 
-    @Step("Нажать 'Добавить проект'.")
-    public ProjectPage clickAddProject() {
-        addProjectButtonElement.click();
+    @Step("Нажать кнопку 'Добавить раздел'.")
+    public SectionPage addSection() {
+        createSectionButtonElement.click();
         return this;
     }
 
-    @Step("Ввести имя проекта.")
-    public ProjectPage inputProjectName(String projectName) {
-        projectNameInputElement.setValue(projectName);
+    @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия раздела).")
+    public SectionPage clickOtherActions(String sectionId) {
+        getOtherActionsElement(sectionId).click();
         return this;
     }
 
-    @Step("Выбрать цвет проекта.")
-    public ProjectPage selectProjectColor(Color projectColor) {
-        projectColorDropdownElement.click();
-        getSelectProjectColorElement(projectColor).click();
+    @Step("Нажать на кнопку 'Удалить'.")
+    public SectionPage clickDeleteSectionButton() {
+        deleteSectionButtonElement.click();
         return this;
     }
 
-    @Step("Добавить проект в 'Избранное'.")
-    public ProjectPage addToFavorite(boolean isFavorite) {
-        if (isFavorite) {
-            addToFavoriteElement.click();
-        }
+    @Step("Подвердить удаление раздела.")
+    public SectionPage clickConfirmDeleteSectionButtonElement() {
+        confirmDeleteSectionButtonElement.click();
         return this;
     }
 
-    @Step("Выбрать стиль отображения проекта.")
-    public ProjectPage selectViewStyle(ViewStyle viewStyle) {
-        getSelectViewStyleElement(viewStyle).click();
-        return this;
-    }
 
-    @Step("Нажать кнопку 'Добавить'.")
-    public ProjectPage addProject() {
-        createProjectButtonElement.click();
-        return this;
-    }
+    
 
-    @Step("Навести мышку на проект в списке.")
-    public ProjectPage mouseHoverOnCreatedProject() {
-        projectInListElement.hover();
-        return this;
-    }
-
+    /*
     @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия проекта).")
     public ProjectPage clickOtherActions() {
         otherActionsButtonElement.click();
@@ -175,5 +162,5 @@ public class SectionPage {
     public ProjectPage checkDeleteProject() {
         fillProjectListElement.shouldHave(text("0 проектов"));
         return this;
-    }
+    }*/
 }
