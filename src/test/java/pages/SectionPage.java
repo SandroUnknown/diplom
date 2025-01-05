@@ -12,11 +12,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class SectionPage {
 
-    // TODO : пас и прочие переменные
-    //private final String path = "/app/projects/active"; // TODO : заменить на правильный
     private final String basePath = "app/project/%s";
-
-
     
     private SelenideElement getOtherActionsElement(String sectionId) {
         String str = String.format("header#section-%s div.board_section__menu_trigger button", sectionId);
