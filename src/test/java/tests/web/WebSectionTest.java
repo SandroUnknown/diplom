@@ -12,57 +12,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WebSectionTest extends WebTestBase {
 
-    private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
-            .name("НОВЫЙ ПРОЕКТ")
-            .color(Color.BERRY_RED)
-            .isFavorite(true)
-            .viewStyle(ViewStyle.BOARD)
+    private final SectionRequestModel testSectionData = SectionRequestModel.builder()
+            .name("НОВЫЙ РАЗДЕЛ")
             .build();
 
+    // TODO : проверить варианты отображения
     @Test
-    @DisplayName("Создать проект (с заполнением только имени).")
-    void createProjectWithNameOnlyTest() {
-
-        projectPage
-                .openPage()
-                .login();
-
-        // TODO : параметры надо откуда-то брать?
-        projectPage
-                .clickPlusButton()
-                .clickAddProject()
-                .inputProjectName(testProjectData.getName())
-                .addProject();
-
-        projectPage
-                .checkProjectName(testProjectData.getName());
-    }
-
-    @Test
-    @DisplayName("Создать проект (с заполнением всех данных).")
-    void createProjectWithFullDataTest() {
-
-        projectPage
-                .openPage()
-                .login();
-
-        // TODO : параметры надо откуда-то брать?
-        projectPage
-                .clickPlusButton()
-                .clickAddProject()
-                .inputProjectName(testProjectData.getName())
-                .selectProjectColor(testProjectData.getColor())
-                .addToFavorite(testProjectData.isFavorite())
-                .selectViewStyle(testProjectData.getViewStyle())
-                .addProject();
-
-        projectPage
-                .fullCheckProject(testProjectData);
-    }
-
-    @Test
-    @DisplayName("Удалить проект.")
-    void deleteProjectTest() {
+    @DisplayName("Создать раздел (когда в проекте изначально нет других разделов).")
+    void createFirstSectionTest() {
 
         int templateNumber = 0;
 
@@ -71,25 +28,80 @@ public class WebSectionTest extends WebTestBase {
                 .build();
 
         data.create(templateNumber, whatIsCreate);
-
-        projectPage
+        
+        sectionPage
                 .openPage()
                 .login();
+        
+        sectionPage
+                .inputSectionName(testSectionData.getName())
+                .addSection()
 
-        projectPage
-                .mouseHoverOnCreatedProject()
-                .clickOtherActions()
-                .clickDeleteProjectButton()
-                .clickConfirmDeleteProjectButtonElement();
+        // TODO : сделать провеку!!!
+        /*sectionPage
+                .fullCheckProject(testProjectData);*/
+    }
 
+    @Test
+    @DisplayName("Создать раздел (когда в проекте изначально нет других разделов).")
+    void createNotFirstSectionTest() {
 
-        projectPage
+        int templateNumber = 0;
+
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .build();
+
+        data.create(templateNumber, whatIsCreate);
+        
+        sectionPage
+                .openPage()
+                .login();
+        
+        sectionPage
+                .clickOnAddSection()
+                .inputSectionName(testSectionData.getName())
+                .addSection()
+
+        
+        // TODO : сделать провеку!!!
+        /*sectionPage
+                .fullCheckProject(testProjectData);*/
+    }
+
+    @Test
+    @DisplayName("Удалить раздел.")
+    void deleteSectionTest() {
+
+        int templateNumber = 0;
+
+        TestDataConfig whatIsCreate = TestDataConfig.builder()
+                .createProjects(true)
+                .createSections(true)
+                .build();
+
+        TestData testData = data.create(templateNumber, whatIsCreate);
+        String sectionId = testData.getSections().get(0).getId();
+
+        sectionPage
+                .openPage()
+                .login();
+        
+        sectionPage
+                .clickOtherActions(sectionId);
+                .clickDeleteSectionButton()
+                .clickConfirmDeleteSectionButtonElement();
+
+        
+        /*
+        sectionPage
                 .checkDeleteProject();
 
         // TODO : слишком быстро проходит АПИ проверка, не успевают обновиться данные на сервере...
         sleep(1000);
 
         int projectCount = projectsApi.getAllProjects().size();
-        assertThat(projectCount).isEqualTo(1);
+        assertThat(projectCount).isEqualTo(1);*/
     }
 }
