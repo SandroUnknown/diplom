@@ -73,7 +73,7 @@
       {
         "id": "0",
         "project_id": "0",
-        "order": 0,
+        "order": 1,
         "name": "Купить в `Ашане`"
       }
     ],
@@ -320,25 +320,25 @@
       {
         "id": "0",
         "project_id": "0",
-        "order": 0,
+        "order": 1,
         "name": "Купить в `Ашане`"
       },
       {
         "id": "1",
         "project_id": "0",
-        "order": 0,
+        "order": 2,
         "name": "Купить в `Пятёрочке`"
       },
       {
         "id": "2",
         "project_id": "1",
-        "order": 0,
+        "order": 1,
         "name": "Купить в `Перекрестке`"
       },
       {
         "id": "3",
         "project_id": "1",
-        "order": 0,
+        "order": 2,
         "name": "Купить в `FixPrice`"
       }
     ],

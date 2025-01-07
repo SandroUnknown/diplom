@@ -1,6 +1,7 @@
-package helpers.data;
+package data;
 
 import api.*;
+import helpers.data.DataCreator4;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.qameta.allure.internal.shadowed.jackson.databind.PropertyNamingStrategy;
 import models.comments.CommentRequestModel;
@@ -186,6 +187,7 @@ public class DataCreator {
                 SectionRequestModel request = SectionRequestModel.builder()
                         .projectId(projectId)
                         .name(section.getName())
+                        .order(section.getOrder())
                         .build();
 
                 section = api.createNewSection(request);

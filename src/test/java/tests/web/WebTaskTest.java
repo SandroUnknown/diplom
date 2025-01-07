@@ -16,7 +16,7 @@ public class WebTaskTest extends WebTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
             .content("НОВАЯ ЗАДАЧА")
-            .priority(4)
+            .priority(2)
             .build();
 
     // TODO : добавить тестов для других вариантов отображения?
@@ -26,6 +26,7 @@ public class WebTaskTest extends WebTestBase {
     void createTaskInEmptySectionTest() {
 
         int templateNumber = 0;
+        int taskNumber = 0;
 
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
@@ -33,20 +34,22 @@ public class WebTaskTest extends WebTestBase {
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
-        String sectionId = testData.getSections().get(0).getId();
-        
+        //String projectId = testData.getProjects().get(0).getId();
+        String url = testData.getProjects().get(0).getUrl();
+
         taskPage
-                .openPage(projectId)
+                .openPage(url)
                 .login();
 
         taskPage
-                .clickOnAddTask(sectionId)
+                .clickOnAddTask(taskNumber)
                 .inputTaskContent(testTaskData.getContent())
                 .selectTaskPriority(String.valueOf(testTaskData.getPriority()))
                 .addTask();
-        
-        
+
+        sleep(3000);
+
+
         /*
         sectionPage
                 .checkSuccsessfulCreatedSection(0, testSectionData.getName());*/

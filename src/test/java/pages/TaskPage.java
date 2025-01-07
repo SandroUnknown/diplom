@@ -1,26 +1,17 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import enums.Color;
-import enums.ViewStyle;
 import io.qameta.allure.Step;
-import models.projects.ProjectRequestModel;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TaskPage {
 
     private final String basePath = "app/project/%s";
 
-    private SelenideElement getAddTaskButtonElement(String sectionId) {
-        String str = String.format("footer[aria-labelledby='section-%s'] button.plus_add_button", sectionId);
-        return $(str);
-    }  
-
     private SelenideElement getTaskPriorityDropdownElement(String priority) {
-        String str = String.format(".priority_picker_item data-value='$s'", priority);
+        String str = String.format("li[data-value='%s']", priority);
         return $(str);
     }  
 
@@ -28,6 +19,9 @@ public class TaskPage {
             taskContentInputElement = $("div.task_editor__content_field div.tiptap"),
             taskPriorityButtonElement = $("div[data-priority]"),
             createTaskButtonElement = $("div[data-testid='task-editor-action-buttons'] button[type='submit']");
+
+    private final ElementsCollection
+            getAddTaskButtonElement = $$("button.plus_add_button");
 
 
 
@@ -48,9 +42,8 @@ public class TaskPage {
     */
 
     @Step("Открыть страницу.")
-    public TaskPage openPage(String projectId) {
-        String path = String.format(basePath, projectId);
-        open(path);
+    public TaskPage openPage(String url) {
+        open(url);
         return this;
     }
 
@@ -61,14 +54,13 @@ public class TaskPage {
     }
     
     @Step("Нажать на кнопку 'Добавить задачу'.")
-    public TaskPage clickOnAddTask(String sectionId) {
-        getAddTaskButtonElement(sectionId).click();
+    public TaskPage clickOnAddTask(int taskNumber) {
+        getAddTaskButtonElement.get(taskNumber).click();
         return this;
     }
 
     @Step("Ввести текст задачи.")
     public TaskPage inputTaskContent(String taskContent) {
-        //taskContentInputElement.click(); // TODO : вероятно не нужно предварительно кликать, но это не точно
         taskContentInputElement.setValue(taskContent);
         return this;
     }
@@ -89,14 +81,6 @@ public class TaskPage {
 
 
 
-
-
-
-
-
-
-
-    
    /*
     @Step("Нажать на кнопку 'Добавить раздел'.")
     public TaskPage clickOnAddSection() {

@@ -1,14 +1,13 @@
 package tests.web;
 
-import enums.Color;
-import enums.ViewStyle;
+import models.data.TestData;
 import models.data.TestDataConfig;
-import models.projects.ProjectRequestModel;
+import models.sections.SectionRequestModel;
+import models.sections.SectionResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WebSectionTest extends WebTestBase {
 
@@ -31,19 +30,21 @@ public class WebSectionTest extends WebTestBase {
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
-        
+        String url = testData.getProjects().get(0).getUrl();
+
         sectionPage
-                .openPage(projectId)
+                .openPage(url)
                 .login();
         
         sectionPage
                 .inputSectionName(testSectionData.getName())
-                .addSection()
+                .addSection();
 
         sectionPage
                 .checkSuccsessfulCreatedSection(0, testSectionData.getName());
-        
+
+
+        sleep(3000);
         // TODO : добавить API-проверку
     }
 
@@ -60,25 +61,27 @@ public class WebSectionTest extends WebTestBase {
 
         TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
-        int sectionCountInProject;
-        for(ResponseSectionModel section : testData.getSections()) {
+        String url = testData.getProjects().get(0).getUrl();
+        int sectionCountInProject = 0;
+        for(SectionResponseModel section : testData.getSections()) {
             if (section.getProjectId().equals(projectId)) {
                 sectionCountInProject++;
             }
         }
         
         sectionPage
-                .openPage(projectId)
+                .openPage(url)
                 .login();
         
         sectionPage
                 .clickOnAddSection()
                 .inputSectionName(testSectionData.getName())
-                .addSection()
+                .addSection();
 
         sectionPage
                 .checkSuccsessfulCreatedSection(sectionCountInProject, testSectionData.getName());
-        
+
+        sleep(3000);
         // TODO : добавить API-проверку
     }
 
@@ -96,20 +99,23 @@ public class WebSectionTest extends WebTestBase {
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
+        String url = testData.getProjects().get(0).getUrl();
         
         sectionPage
-                .openPage(projectId)
+                .openPage(url)
                 .login();
         
         sectionPage
                 .clickOnSeparatorBetweenSections(separatorIndex)
                 .inputSectionName(testSectionData.getName())
-                .addSection()
+                .addSection();
+
+        sleep(3000); // TODO : удалить
 
         sectionPage
                 .checkSuccsessfulCreatedSection(separatorIndex + 1, testSectionData.getName());
 
+        sleep(3000);
         // TODO : добавить API-проверку
     }
 
@@ -118,7 +124,7 @@ public class WebSectionTest extends WebTestBase {
     void deleteSectionTest() {
 
         int templateNumber = 0;
-        int sectionNumberInProject = 0;
+        int sectionNumberToDelete = 0;
 
         TestDataConfig whatIsCreate = TestDataConfig.builder()
                 .createProjects(true)
@@ -126,17 +132,16 @@ public class WebSectionTest extends WebTestBase {
                 .build();
 
         TestData testData = data.create(templateNumber, whatIsCreate);
-        String projectId = testData.getProjects().get(0).getId();
+        String url = testData.getProjects().get(0).getUrl();
         
-        String sectionId = testData.getSections().get(sectionNumberInProject).getId();
-        String sectionName = testData.getSections().get(sectionNumberInProject).getName();
+        String sectionName = testData.getSections().get(sectionNumberToDelete).getName();
 
         sectionPage
-                .openPage(projectId)
+                .openPage(url)
                 .login();
         
         sectionPage
-                .clickOtherActions(sectionId);
+                .clickOtherActions(sectionNumberToDelete)
                 .clickDeleteSectionButton()
                 .clickConfirmDeleteSectionButtonElement();
 
@@ -144,6 +149,7 @@ public class WebSectionTest extends WebTestBase {
         sectionPage
                 .checkSuccsessfulDeleteSection(sectionName);
 
+        sleep(3000);
         // TODO : добавить API-проверку
 
     }

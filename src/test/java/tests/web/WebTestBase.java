@@ -3,7 +3,7 @@ package tests.web;
 import api.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.data.DataCreator;
+import data.DataCreator;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -85,8 +85,10 @@ public class WebTestBase {
         closeWebDriver();
     }
 
-    /*@AfterEach
+    @AfterEach
     void cleanupTestData() {
 
-    }*/
+        projectsApi.deleteProjects();
+        labelsApi.deleteLabels();
+    }
 }

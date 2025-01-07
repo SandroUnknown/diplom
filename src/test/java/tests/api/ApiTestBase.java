@@ -2,7 +2,7 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import helpers.data.DataCreator;
+import data.DataCreator;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -49,7 +49,7 @@ public class ApiTestBase {
         // 03.01 - 2 часа 25 минут (12:55-14:20  //  15:55-16:55)
         // 05.01 - 3 часа 40 минут (10:30-11:30  //  12:10-13:30  //  14:00-14:25  //  15:20-16:15)
         //     ------- 61 час 40 минут
-        // 07.01 -     12:45-
+        // 07.01 -     (12:45-14:15  //
         //----------------------
 
         // =============================================================================

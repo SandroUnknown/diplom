@@ -1,10 +1,13 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import enums.Color;
 import enums.ViewStyle;
 import io.qameta.allure.Step;
 import models.projects.ProjectRequestModel;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
@@ -14,28 +17,22 @@ public class SectionPage {
 
     private final String basePath = "app/project/%s";
     
-    private SelenideElement getOtherActionsElement(String sectionId) {
-        String str = String.format("header#section-%s div.board_section__menu_trigger button", sectionId);
-        return $(str);
-    }  
-
     private final SelenideElement
             addSectionButtonElement = $("button.board_add_section_button"),
-            sectionNameInputElement = $("div.board_view__add_section input"),
-            createSectionButtonElement = $("div.board_view__add_section button[type='submit']"),
+            sectionNameInputElement = $("input[aria-label='Название раздела']"),
+            createSectionButtonElement = $("button[type='submit']"),
             deleteSectionButtonElement = $$("div.reactist_menulist div").last(),
-            confirmDeleteSectionButtonElement = $$("div[data-testid='modal-overlay'] footer button").last(),
-            separatorBetweenSectionsElement = $$("div.board_add_section_trigger__container");   // он не СелинидЭлемент !
+            confirmDeleteSectionButtonElement = $$("div[data-testid='modal-overlay'] footer button").last();
 
-    private final SelenideElement
-            sectionCheckElement = $$("[data-testid='board-section']"),    // он не СелинидЭлемент !
-            addProjectButtonElement = $("[aria-label='Добавить проект']"),
-            projectNameInputElement = $("input[name='name']");
+
+    private final ElementsCollection
+            separatorBetweenSectionsElement = $$("button.board_add_section_trigger"),
+            sectionCheckElement = $$("[data-testid='board-section']"),
+            otherActionsElement = $$("div.board_section__menu_trigger button");
 
     @Step("Открыть страницу.")
-    public SectionPage openPage(String projectId) {
-        String path = String.format(basePath, projectId);
-        open(path);
+    public SectionPage openPage(String url) {
+        open(url);
         return this;
     }
 
@@ -53,7 +50,6 @@ public class SectionPage {
 
     @Step("Навести мышку на разделительную линию между разделами и нажать на неё.")
     public SectionPage clickOnSeparatorBetweenSections(int separatorIndex) {
-        //separatorBetweenSectionsElement.get(separatorIndex).hover(); // TODO : надо ли на него наводиться мышкой?
         separatorBetweenSectionsElement.get(separatorIndex).click();
         return this;
     }
@@ -71,8 +67,8 @@ public class SectionPage {
     }
 
     @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия раздела).")
-    public SectionPage clickOtherActions(String sectionId) {
-        getOtherActionsElement(sectionId).click();
+    public SectionPage clickOtherActions(int sectionNumberToDelete) {
+        otherActionsElement.get(sectionNumberToDelete).click();
         return this;
     }
 

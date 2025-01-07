@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class ProjectsTest extends WebTestBase {
+public class WebProjectsTest extends WebTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
             .name("НОВЫЙ ПРОЕКТ")
@@ -36,6 +36,8 @@ public class ProjectsTest extends WebTestBase {
 
         projectPage
                 .checkProjectName(testProjectData.getName());
+
+        // TODO : нужна АПИ-проверка
     }
 
     @Test
@@ -58,6 +60,8 @@ public class ProjectsTest extends WebTestBase {
 
         projectPage
                 .fullCheckProject(testProjectData);
+
+        // TODO : нужна АПИ-проверка
     }
 
     @Test
