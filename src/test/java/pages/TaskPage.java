@@ -27,7 +27,7 @@ public class TaskPage {
     private final SelenideElement
             taskContentInputElement = $("div.task_editor__content_field div.tiptap"),
             taskPriorityButtonElement = $("div[data-priority]"),
-            createTaskButtonElement = $("div[data-testid='task-editor-action-buttons'] button[type='submit']"),
+            createTaskButtonElement = $("div[data-testid='task-editor-action-buttons'] button[type='submit']");
 
 
 
@@ -81,7 +81,7 @@ public class TaskPage {
     }
 
     @Step("Нажать кнопку 'Добавить задачу'.")
-    public TaskPage addTask(String taskPriority) {
+    public TaskPage addTask() {
         createTaskButtonElement.click();
         return this;
     }

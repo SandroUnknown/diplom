@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class FirstTest extends WebTestBase {
+public class ProjectsTest extends WebTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
             .name("НОВЫЙ ПРОЕКТ")

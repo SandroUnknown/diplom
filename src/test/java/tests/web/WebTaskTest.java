@@ -2,8 +2,10 @@ package tests.web;
 
 import enums.Color;
 import enums.ViewStyle;
+import models.data.TestData;
 import models.data.TestDataConfig;
 import models.projects.ProjectRequestModel;
+import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,14 +36,14 @@ public class WebTaskTest extends WebTestBase {
         String projectId = testData.getProjects().get(0).getId();
         String sectionId = testData.getSections().get(0).getId();
         
-        sectionPage
+        taskPage
                 .openPage(projectId)
                 .login();
-        
-        sectionPage
+
+        taskPage
                 .clickOnAddTask(sectionId)
                 .inputTaskContent(testTaskData.getContent())
-                .selectTaskPriority(testTaskData.getPriority())
+                .selectTaskPriority(String.valueOf(testTaskData.getPriority()))
                 .addTask();
         
         
@@ -54,7 +56,7 @@ public class WebTaskTest extends WebTestBase {
         // TODO : добавить API-проверку
     }
 
-    @Test
+    /*@Test
     @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void deleteTaskTest() {
 
@@ -72,28 +74,28 @@ public class WebTaskTest extends WebTestBase {
         String sectionId = testData.getSections().get(sectionNumberInProject).getId();
         String sectionName = testData.getSections().get(sectionNumberInProject).getName();
 
-        sectionPage
+        taskPage
                 .openPage(projectId)
                 .login();
-        
-        sectionPage
+
+        taskPage
                 .clickOtherActions(sectionId);
                 .clickDeleteSectionButton()
                 .clickConfirmDeleteSectionButtonElement();
 
-        
-        sectionPage
+
+        taskPage
                 .checkSuccsessfulDeleteSection(sectionName);
 
         // TODO : добавить UI-проверку
         
         // TODO : добавить API-проверку
 
-    }
+    }*/
 
     //TODO : сделать тест на драг энд дроп
     @Test
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {
-    }*/
+    }
 }

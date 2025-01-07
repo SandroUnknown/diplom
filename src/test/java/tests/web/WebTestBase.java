@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.AuthPage;
 import pages.ProjectPage;
+import pages.SectionPage;
+import pages.TaskPage;
 
 import java.util.Map;
 
@@ -30,6 +32,9 @@ public class WebTestBase {
 
 
     ProjectPage projectPage = new ProjectPage();
+    SectionPage sectionPage = new SectionPage();
+    TaskPage taskPage = new TaskPage();
+
     AuthPage authPage = new AuthPage();
 
     @BeforeAll
