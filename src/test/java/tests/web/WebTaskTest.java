@@ -1,11 +1,9 @@
 package tests.web;
 
-import enums.Color;
-import enums.ViewStyle;
-import models.data.TestData;
-import models.data.TestDataConfig;
-import models.projects.ProjectRequestModel;
+import data.DataCreator;
+import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,12 +26,12 @@ public class WebTaskTest extends WebTestBase {
         int templateNumber = 0;
         int taskNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         //String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
 
@@ -66,12 +64,12 @@ public class WebTaskTest extends WebTestBase {
         int templateNumber = 0;
         int sectionNumberInProject = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
         
         String sectionId = testData.getSections().get(sectionNumberInProject).getId();
@@ -97,6 +95,7 @@ public class WebTaskTest extends WebTestBase {
     }*/
 
     //TODO : сделать тест на драг энд дроп
+    @Disabled
     @Test
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {

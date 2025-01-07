@@ -1,7 +1,7 @@
 package tests.api;
 
-import models.data.TestData;
-import models.data.TestDataConfig;
+import data.DataCreator;
+import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -29,11 +29,11 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
         testSectionData.setProjectId(projectId);
 
@@ -48,12 +48,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String sectionId = testData.getSections().get(0).getId();
 
         SectionResponseModel myUpdatedSection = sectionsApi.updateSection(sectionId, updatedSectionName);
@@ -67,12 +67,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
         List<SectionResponseModel> myCreatedSections = new ArrayList<>();
@@ -96,12 +96,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         List<SectionResponseModel> myCreatedSections = testData.getSections();
 
         List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections();
@@ -118,12 +118,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         int createdSectionCount = testData.getSections().size();
         String sectionId = testData.getSections().get(0).getId();
 
@@ -139,12 +139,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
         sectionsApi.deleteAllSectionInProject(projectId);

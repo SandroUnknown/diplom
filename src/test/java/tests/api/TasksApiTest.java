@@ -1,7 +1,7 @@
 package tests.api;
 
-import models.data.TestData;
-import models.data.TestDataConfig;
+import data.DataCreator;
+import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import models.tasks.TaskResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -35,12 +35,12 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String sectionId = testData.getSections().get(0).getId();
         testTaskData.setSectionId(sectionId);
 
@@ -56,13 +56,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
         TaskResponseModel myUpdatedTask = tasksApi.updateTask(taskId, updatedTestTaskData);
@@ -77,13 +77,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         TaskResponseModel myCreatedTask = testData.getTasksInSections().get(0);
         String taskId = myCreatedTask.getId();
 
@@ -99,13 +99,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         List<TaskResponseModel> myCreatedTasks = testData.getTasksInSections();
 
         List<TaskResponseModel> myReceivedTasks = tasksApi.getAllTasks();
@@ -123,15 +123,15 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .addLabelsForTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String labelName = testData.getLabels().get(1).getName(); // заменить на 0?
 
         List<TaskResponseModel> myCreatedTasks = new ArrayList<>();
@@ -159,13 +159,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
         tasksApi.closeTask(taskId);
@@ -180,13 +180,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
         tasksApi.closeTask(taskId);
 
@@ -202,13 +202,13 @@ public class TasksApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         int createdTaskCount = testData.getTasksInSections().size();
         String taskId = testData.getTasksInSections().get(0).getId();
 

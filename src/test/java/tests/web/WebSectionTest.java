@@ -1,9 +1,10 @@
 package tests.web;
 
-import models.data.TestData;
-import models.data.TestDataConfig;
+import data.DataCreator;
+import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,13 +24,11 @@ public class WebSectionTest extends WebTestBase {
 
         int templateNumber = 0;
 
-        // TODO : ВАЖНО_1: Сделать, чтобы шаблон передавался (устанавливался) сразу через переменную whatIsCreate, а не отдельно.
-        // TODO : ВАЖНО_2: В идеале и от переменной TestData testData = data.create() можно попробовать избавиться. Просто в build() для whatIsCreate прописать сразу создание всех сущностей.
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String url = testData.getProjects().get(0).getUrl();
 
         sectionPage
@@ -54,12 +53,12 @@ public class WebSectionTest extends WebTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
         int sectionCountInProject = 0;
@@ -93,12 +92,12 @@ public class WebSectionTest extends WebTestBase {
         int templateNumber = 1;
         int separatorIndex = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String url = testData.getProjects().get(0).getUrl();
         
         sectionPage
@@ -126,12 +125,12 @@ public class WebSectionTest extends WebTestBase {
         int templateNumber = 0;
         int sectionNumberToDelete = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String url = testData.getProjects().get(0).getUrl();
         
         String sectionName = testData.getSections().get(sectionNumberToDelete).getName();
@@ -155,6 +154,7 @@ public class WebSectionTest extends WebTestBase {
     }
 
     //TODO : сделать тест на драг энд дроп
+    @Disabled
     @Test
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {

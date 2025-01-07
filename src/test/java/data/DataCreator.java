@@ -1,13 +1,10 @@
 package data;
 
 import api.*;
-import helpers.data.DataCreator4;
-import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
-import io.qameta.allure.internal.shadowed.jackson.databind.PropertyNamingStrategy;
+import io.qameta.allure.Step;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
-import models.data.TestData;
-import models.data.TestDataConfig;
+import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
 import models.projects.ProjectRequestModel;
@@ -17,236 +14,304 @@ import models.sections.SectionResponseModel;
 import models.tasks.TaskRequestModel;
 import models.tasks.TaskResponseModel;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.Arrays;
-import java.util.List;
-
 public class DataCreator {
 
-    // TODO : передавать имя файла в конструкторе?
-    public static final List<TestData> TEMPLATES = getTemplatesFromFile("data/ProjectTemplates2.json");
+    public static class Setup {
 
-    private static List<TestData> getTemplatesFromFile(String fileName) {
+        private TestDataModel template;
+        private boolean createLabels;
+        private boolean createProjects;
+        private boolean createCommentsInProjects;
+        private boolean createTasksInProjects;
+        private boolean addLabelsForTasksInProjects;
+        private boolean createCommentsInTasksInProjects;
+        private boolean createSections;
+        private boolean createTasksInSections;
+        private boolean addLabelsForTasksInSections;
+        private boolean createCommentsInTasksInSections;
 
-        ClassLoader cl = DataCreator4.class.getClassLoader();
-        ObjectMapper om = new ObjectMapper();
-
-        om.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
-
-        try (Reader reader = new InputStreamReader(cl.getResourceAsStream(fileName))) {
-            return Arrays.asList(om.readValue(reader, TestData[].class));
-        } catch (IOException e) {
-            e.printStackTrace();
+        public Setup setTemplate(TestDataModel template) {
+            this.template = template;
+            return this;
         }
 
-        return null;
-    }
+        public Setup createLabels(boolean createLabels) {
+            this.createLabels = createLabels;
+            return this;
+        }
 
-    public TestData create(int templateId, TestDataConfig whatIsCreate) {
+        public Setup createProjects(boolean createProjects) {
+            this.createProjects = createProjects;
+            return this;
+        }
 
-        TestData templateData = TEMPLATES.get(templateId);
-        TestData testData = new TestData();
+        public Setup createCommentsInProjects(boolean createCommentsInProjects) {
+            this.createCommentsInProjects = createCommentsInProjects;
+            return this;
+        }
 
-        createLabels(testData, templateData, whatIsCreate);
-        createProjects(testData, templateData, whatIsCreate);
-        createCommentsInProjects(testData, templateData, whatIsCreate);
-        createTasksInProjects(testData, templateData, whatIsCreate);
-        createCommentsInTasksInProjects(testData, templateData, whatIsCreate);
-        createSections(testData, templateData, whatIsCreate);
-        createTasksInSections(testData, templateData, whatIsCreate);
-        createCommentsInTasksInSections(testData, templateData, whatIsCreate);
+        public Setup createTasksInProjects(boolean createTasksInProjects) {
+            this.createTasksInProjects = createTasksInProjects;
+            return this;
+        }
 
-        return testData;
-    }
+        public Setup addLabelsForTasksInProjects(boolean addLabelsForTasksInProjects) {
+            this.addLabelsForTasksInProjects = addLabelsForTasksInProjects;
+            return this;
+        }
 
+        public Setup createCommentsInTasksInProjects(boolean createCommentsInTasksInProjects) {
+            this.createCommentsInTasksInProjects = createCommentsInTasksInProjects;
+            return this;
+        }
 
-    // TODO : сократить все create-методы до одного?...
-    private void createLabels(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
+        public Setup createSections(boolean createSections) {
+            this.createSections = createSections;
+            return this;
+        }
 
-        if (whatIsCreate.isCreateLabels()) {
+        public Setup createTasksInSections(boolean createTasksInSections) {
+            this.createTasksInSections = createTasksInSections;
+            return this;
+        }
 
-            LabelsApi api = new LabelsApi();
-            for (int i = 0; i < templateData.getLabels().size(); i++) {
-                LabelResponseModel label = templateData.getLabels().get(i);
-                LabelRequestModel request = LabelRequestModel.builder()
-                        .name(label.getName())
-                        .color(label.getColor())
-                        .isFavorite(label.isFavorite())
-                        .build();
+        public Setup addLabelsForTasksInSections(boolean addLabelsForTasksInSections) {
+            this.addLabelsForTasksInSections = addLabelsForTasksInSections;
+            return this;
+        }
 
-                label = api.createNewLabel(request);
-                testData.getLabels().add(label);
+        public Setup createCommentsInTasksInSections(boolean createCommentsInTasksInSections) {
+            this.createCommentsInTasksInSections = createCommentsInTasksInSections;
+            return this;
+        }
+
+        @Step("[API] Подготовить данные для теста.")
+        public TestDataModel create() {
+
+            DataCreator mainClass = new DataCreator();
+
+            TestDataModel templateData = this.template;
+            boolean createLabels = this.createLabels;
+            boolean createProjects = this.createProjects;
+            boolean createCommentsInProjects = this.createCommentsInProjects;
+            boolean createTasksInProjects = this.createTasksInProjects;
+            boolean addLabelsForTasksInProjects = this.addLabelsForTasksInProjects;
+            boolean createCommentsInTasksInProjects = this.createCommentsInTasksInProjects;
+            boolean createSections = this.createSections;
+            boolean createTasksInSections = this.createTasksInSections;
+            boolean addLabelsForTasksInSections = this.addLabelsForTasksInSections;
+            boolean createCommentsInTasksInSections = this.createCommentsInTasksInSections;
+
+            TestDataModel testData = new TestDataModel();
+
+            if (createLabels) {
+                mainClass.createLabels(testData, templateData);
             }
-        }
-    }
 
-    private void createProjects(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()) {
-
-            ProjectsApi api = new ProjectsApi();
-            for (int i = 0; i < templateData.getProjects().size(); i++) {
-                ProjectResponseModel project = templateData.getProjects().get(i);
-                ProjectRequestModel request = ProjectRequestModel.builder()
-                        .name(project.getName())
-                        .color(project.getColor())
-                        .viewStyle(project.getViewStyle())
-                        .build();
-
-                project = api.createNewProject(request);
-                testData.getProjects().add(project);
+            if (createProjects) {
+                mainClass.createProjects(testData, templateData);
             }
-        }
-    }
 
-    private void createCommentsInProjects(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateCommentsInProjects()) {
-
-            CommentsApi api = new CommentsApi();
-            for (int i = 0; i < templateData.getCommentsInProjects().size(); i++) {
-                CommentResponseModel comment = templateData.getCommentsInProjects().get(i);
-                int projectNumber = Integer.parseInt(comment.getProjectId());
-                String projectId = testData.getProjects().get(projectNumber).getId();
-                CommentRequestModel request = CommentRequestModel.builder()
-                        .projectId(projectId)
-                        .content(comment.getContent())
-                        .build();
-
-                comment = api.createNewComment(request);
-                testData.getCommentsInProjects().add(comment);
-            }
-        }
-    }
-
-    private void createTasksInProjects(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateTasksInProjects()) {
-
-            TasksApi api = new TasksApi();
-            for (int i = 0; i < templateData.getTasksInProjects().size(); i++) {
-                TaskResponseModel task = templateData.getTasksInProjects().get(i);
-                int projectNumber = Integer.parseInt(task.getProjectId());
-                String projectId = testData.getProjects().get(projectNumber).getId();
-
-                TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
-                        .projectId(projectId)
-                        .content(task.getContent())
-                        //.order(task.getOrder()) // TODO : нужно?
-                        .priority(task.getPriority());
-
-                if (whatIsCreate.isCreateLabels()
-                        && whatIsCreate.isAddLabelsForTasksInProjects()) {
-                    builder.labels(task.getLabels());
+            if (createCommentsInProjects) {
+                if (!createProjects) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Проекте, но Проект не создан."
                 }
-
-                TaskRequestModel request = builder.build();
-
-                task = api.createNewTask(request);
-                testData.getTasksInProjects().add(task);
+                mainClass.createCommentsInProjects(testData, templateData);
             }
-        }
-    }
 
-    private void createCommentsInTasksInProjects(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateTasksInProjects()
-                && whatIsCreate.isCreateCommentsInTasksInProjects()) {
-
-            CommentsApi api = new CommentsApi();
-            for (int i = 0; i < templateData.getCommentsInTasksInProjects().size(); i++) {
-                CommentResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
-                int taskNumber = Integer.parseInt(comment.getTaskId());
-                String taskId = testData.getTasksInProjects().get(taskNumber).getId();
-                CommentRequestModel request = CommentRequestModel.builder()
-                        .taskId(taskId)
-                        .content(comment.getContent())        // TODO : заменить на поля комментов
-                        .build();
-
-                comment = api.createNewComment(request);
-                testData.getCommentsInTasksInProjects().add(comment);
-            }
-        }
-    }
-
-    private void createSections(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateSections()) {
-
-            SectionsApi api = new SectionsApi();
-            for (int i = 0; i < templateData.getSections().size(); i++) {
-                SectionResponseModel section = templateData.getSections().get(i);
-                int projectNumber = Integer.parseInt(section.getProjectId());
-                String projectId = testData.getProjects().get(projectNumber).getId();
-                SectionRequestModel request = SectionRequestModel.builder()
-                        .projectId(projectId)
-                        .name(section.getName())
-                        .order(section.getOrder())
-                        .build();
-
-                section = api.createNewSection(request);
-                testData.getSections().add(section);
-            }
-        }
-    }
-
-    private void createTasksInSections(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
-
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateSections()
-                && whatIsCreate.isCreateTasksInSections()) {
-
-            TasksApi api = new TasksApi();
-            for (int i = 0; i < templateData.getTasksInSections().size(); i++) {
-                TaskResponseModel task = templateData.getTasksInSections().get(i);
-                int sectionNumber = Integer.parseInt(task.getSectionId());
-                String sectionId = testData.getSections().get(sectionNumber).getId();
-
-                TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
-                        .sectionId(sectionId)
-                        .content(task.getContent())
-                        //.order(task.getOrder()) // TODO : нужно?
-                        .priority(task.getPriority());
-
-                if (whatIsCreate.isCreateLabels()
-                        && whatIsCreate.isAddLabelsForTasksInSections()) {
-                    builder.labels(task.getLabels());
+            if (createTasksInProjects) {
+                if (!createProjects) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Задачу в Проекте, но Проект не создан."
                 }
-
-                TaskRequestModel request = builder.build();
-
-                task = api.createNewTask(request);
-                testData.getTasksInSections().add(task);
+                if (addLabelsForTasksInProjects && !createLabels) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь добавить Метку к Задаче в Проекте, но Метка не создана."
+                }
+                mainClass.createTasksInProjects(testData, templateData, addLabelsForTasksInProjects);
             }
+
+            if (createCommentsInTasksInProjects) {
+                if (!createProjects || !createTasksInProjects) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Задаче в Проекте, но Задача не создана."
+                }
+                mainClass.createCommentsInTasksInProjects(testData, templateData);
+            }
+
+            if (createSections) {
+                if (!createProjects) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Раздел в Проекте, но Проект не создан."
+                }
+                mainClass.createSections(testData, templateData);
+            }
+
+            if (createTasksInSections) {
+                if (!createProjects || !createSections) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Задачу в Разделе в Проекте, но Раздел не создан."
+                }
+                if (addLabelsForTasksInSections && !createLabels) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь добавить Метку к Задаче в Разделе, но Метка не создана."
+                }
+                mainClass.createTasksInSections(testData, templateData, addLabelsForTasksInSections);
+            }
+
+            if (createCommentsInTasksInSections) {
+                if (!createProjects || !createSections || !createTasksInSections) {
+                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Задаче в Разделе, но Задача не создана."
+                }
+                mainClass.createCommentsInTasksInSections(testData, templateData);
+            }
+
+            return testData;
         }
     }
 
-    private void createCommentsInTasksInSections(TestData testData, TestData templateData, TestDataConfig whatIsCreate) {
+    private static void createLabels(TestDataModel testData, TestDataModel templateData) {
 
-        if (whatIsCreate.isCreateProjects()
-                && whatIsCreate.isCreateSections()
-                && whatIsCreate.isCreateTasksInSections()
-                && whatIsCreate.isCreateCommentsInTasksInSections()) {
+        LabelsApi api = new LabelsApi();
+        for (int i = 0; i < templateData.getLabels().size(); i++) {
+            LabelResponseModel label = templateData.getLabels().get(i);
+            LabelRequestModel request = LabelRequestModel.builder()
+                    .name(label.getName())
+                    .color(label.getColor())
+                    .isFavorite(label.isFavorite())
+                    .build();
 
-            CommentsApi api = new CommentsApi();
-            for (int i = 0; i < templateData.getCommentsInTasksInSections().size(); i++) {
-                CommentResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
-                int taskNumber = Integer.parseInt(comment.getTaskId());
-                String taskId = testData.getTasksInSections().get(taskNumber).getId();
-                CommentRequestModel request = CommentRequestModel.builder()
-                        .taskId(taskId)
-                        .content(comment.getContent())
-                        .build();
+            label = api.createNewLabel(request);
+            testData.getLabels().add(label);
+        }
+    }
 
-                comment = api.createNewComment(request);
-                testData.getCommentsInTasksInSections().add(comment);
+    private static void createProjects(TestDataModel testData, TestDataModel templateData) {
+
+        ProjectsApi api = new ProjectsApi();
+        for (int i = 0; i < templateData.getProjects().size(); i++) {
+            ProjectResponseModel project = templateData.getProjects().get(i);
+            ProjectRequestModel request = ProjectRequestModel.builder()
+                    .name(project.getName())
+                    .color(project.getColor())
+                    .viewStyle(project.getViewStyle())
+                    .build();
+
+            project = api.createNewProject(request);
+            testData.getProjects().add(project);
+        }
+    }
+
+    private static void createCommentsInProjects(TestDataModel testData, TestDataModel templateData) {
+
+        CommentsApi api = new CommentsApi();
+        for (int i = 0; i < templateData.getCommentsInProjects().size(); i++) {
+            CommentResponseModel comment = templateData.getCommentsInProjects().get(i);
+            int projectNumber = Integer.parseInt(comment.getProjectId());
+            String projectId = testData.getProjects().get(projectNumber).getId();
+            CommentRequestModel request = CommentRequestModel.builder()
+                    .projectId(projectId)
+                    .content(comment.getContent())
+                    .build();
+
+            comment = api.createNewComment(request);
+            testData.getCommentsInProjects().add(comment);
+        }
+    }
+
+    private static void createTasksInProjects(TestDataModel testData, TestDataModel templateData, boolean addLabels) {
+
+        TasksApi api = new TasksApi();
+        for (int i = 0; i < templateData.getTasksInProjects().size(); i++) {
+            TaskResponseModel task = templateData.getTasksInProjects().get(i);
+            int projectNumber = Integer.parseInt(task.getProjectId());
+            String projectId = testData.getProjects().get(projectNumber).getId();
+
+            TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
+                    .projectId(projectId)
+                    .content(task.getContent())
+                    //.order(task.getOrder()) // TODO : нужно?
+                    .priority(task.getPriority());
+
+            if (addLabels) {
+                builder.labels(task.getLabels());
             }
+
+            TaskRequestModel request = builder.build();
+
+            task = api.createNewTask(request);
+            testData.getTasksInProjects().add(task);
+        }
+    }
+
+    private static void createCommentsInTasksInProjects(TestDataModel testData, TestDataModel templateData) {
+
+        CommentsApi api = new CommentsApi();
+        for (int i = 0; i < templateData.getCommentsInTasksInProjects().size(); i++) {
+            CommentResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
+            int taskNumber = Integer.parseInt(comment.getTaskId());
+            String taskId = testData.getTasksInProjects().get(taskNumber).getId();
+            CommentRequestModel request = CommentRequestModel.builder()
+                    .taskId(taskId)
+                    .content(comment.getContent())        // TODO : заменить на поля комментов
+                    .build();
+
+            comment = api.createNewComment(request);
+            testData.getCommentsInTasksInProjects().add(comment);
+        }
+    }
+
+    private static void createSections(TestDataModel testData, TestDataModel templateData) {
+
+        SectionsApi api = new SectionsApi();
+        for (int i = 0; i < templateData.getSections().size(); i++) {
+            SectionResponseModel section = templateData.getSections().get(i);
+            int projectNumber = Integer.parseInt(section.getProjectId());
+            String projectId = testData.getProjects().get(projectNumber).getId();
+            SectionRequestModel request = SectionRequestModel.builder()
+                    .projectId(projectId)
+                    .name(section.getName())
+                    .order(section.getOrder())
+                    .build();
+
+            section = api.createNewSection(request);
+            testData.getSections().add(section);
+        }
+    }
+
+    private static void createTasksInSections(TestDataModel testData, TestDataModel templateData, boolean addLabels) {
+
+        TasksApi api = new TasksApi();
+        for (int i = 0; i < templateData.getTasksInSections().size(); i++) {
+            TaskResponseModel task = templateData.getTasksInSections().get(i);
+            int sectionNumber = Integer.parseInt(task.getSectionId());
+            String sectionId = testData.getSections().get(sectionNumber).getId();
+
+            TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
+                    .sectionId(sectionId)
+                    .content(task.getContent())
+                    //.order(task.getOrder()) // TODO : нужно?
+                    .priority(task.getPriority());
+
+            if (addLabels) {
+                builder.labels(task.getLabels());
+            }
+
+            TaskRequestModel request = builder.build();
+
+            task = api.createNewTask(request);
+            testData.getTasksInSections().add(task);
+        }
+    }
+
+    private static void createCommentsInTasksInSections(TestDataModel testData, TestDataModel templateData) {
+
+        CommentsApi api = new CommentsApi();
+        for (int i = 0; i < templateData.getCommentsInTasksInSections().size(); i++) {
+            CommentResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
+            int taskNumber = Integer.parseInt(comment.getTaskId());
+            String taskId = testData.getTasksInSections().get(taskNumber).getId();
+            CommentRequestModel request = CommentRequestModel.builder()
+                    .taskId(taskId)
+                    .content(comment.getContent())
+                    .build();
+
+            comment = api.createNewComment(request);
+            testData.getCommentsInTasksInSections().add(comment);
         }
     }
 }

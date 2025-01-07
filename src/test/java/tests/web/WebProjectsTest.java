@@ -1,8 +1,8 @@
 package tests.web;
 
+import data.DataCreator;
 import enums.Color;
 import enums.ViewStyle;
-import models.data.TestDataConfig;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,11 +70,10 @@ public class WebProjectsTest extends WebTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
-
-        data.create(templateNumber, whatIsCreate);
+                .create();
 
         projectPage
                 .openPage()

@@ -2,30 +2,35 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import data.DataCreator;
+import data.DataStorage;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
+import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class ApiTestBase {
 
-    // TODO : Точно ли протектед?
-    // TODO : Может тут передавать в конструктор ENDPOINT???
-    //DataCreator data = new DataCreator();
-    DataCreator data = new DataCreator();
+    static List<TestDataModel> TEMPLATES;
 
-    protected ProjectsApi projectsApi = new ProjectsApi();
-    protected SectionsApi sectionsApi = new SectionsApi();
-    protected TasksApi tasksApi = new TasksApi();
-    protected CommentsApi commentsApi = new CommentsApi();
-    protected LabelsApi labelsApi = new LabelsApi();
+    ProjectsApi projectsApi = new ProjectsApi();
+    SectionsApi sectionsApi = new SectionsApi();
+    TasksApi tasksApi = new TasksApi();
+    CommentsApi commentsApi = new CommentsApi();
+    LabelsApi labelsApi = new LabelsApi();
 
     @BeforeAll
     public static void setUp() {
+
+        // TODO : хардкодить адрес с данными? === "data/ProjectTemplates2.json"
+        TEMPLATES = new DataStorage("data/ProjectTemplates2.json").getTemplates();
+
+
 
         // email -      testing.qaguru@gmail.com
         // email pass - Asdf1234!
@@ -49,18 +54,17 @@ public class ApiTestBase {
         // 03.01 - 2 часа 25 минут (12:55-14:20  //  15:55-16:55)
         // 05.01 - 3 часа 40 минут (10:30-11:30  //  12:10-13:30  //  14:00-14:25  //  15:20-16:15)
         //     ------- 61 час 40 минут
-        // 07.01 -     (12:45-14:15  //
+        // 07.01 - 1.30 + 0.15 + 0.50 + 2.25      (12:45-14:15  //  14:30-14:45  //  15:00-15:50  //  16:05-18:30
         //----------------------
 
         // =============================================================================
 
-        // АПИ-ТЕСТЫ (без проверки) (Примерное время / количество)
-        // КОММЕНТ:  28 сек / 7 тестов
-        // ЛЕЙБЛ:    17 сек / 6 тестов
-        // ПРОДЖЕКТ: 17 сек / 5 тестов
-        // СЕКШЕН:   40 сек / 6 тестов (разброс от 28 до 52 сек)
-        // ТАСК:     84 сек / 8 тестов (разброс от 71 до 97 сек)
-        // --итого:  186 сек / 32 теста
+        // ЧТО СДЕЛАТЬ
+        // 1. Дописать все UI-тесты
+        // 2. Сделать рефакторинг всех тестов (и API, и UI)
+        // 3. Написать mobile-тесты
+        // 4. Сделать owner-проперти
+        // 5.
 
         // =============================================================================
 

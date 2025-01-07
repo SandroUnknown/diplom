@@ -11,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-//@JsonInclude(JsonInclude.Include.NON_NULL) // TODO : нужно ли тут?
-//@JsonIgnoreProperties(ignoreUnknown = true) // TODO : нужно ли тут?
-//@NoArgsConstructor
-//@AllArgsConstructor
-public class TestData {
+public class TestDataModel {
 
-    public TestData() {
+    public TestDataModel() {
         this.labels = new ArrayList<>();                        // +
         this.projects = new ArrayList<>();                      // +
         this.commentsInProjects = new ArrayList<>();            // +

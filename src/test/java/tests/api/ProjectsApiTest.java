@@ -1,7 +1,7 @@
 package tests.api;
 
-import models.data.TestData;
-import models.data.TestDataConfig;
+import data.DataCreator;
+import models.data.TestDataModel;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -53,11 +53,11 @@ public class ProjectsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String parentProjectId = testData.getProjects().get(0).getId();
         testInnerProjectData.setParentId(parentProjectId);
 
@@ -74,11 +74,11 @@ public class ProjectsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
         ProjectResponseModel myCreatedProject = projectsApi.updateProject(projectId, updatedTestProjectData);
@@ -95,11 +95,11 @@ public class ProjectsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
         projectsApi.deleteProject(projectId);
@@ -115,11 +115,10 @@ public class ProjectsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
-
-        data.create(templateNumber, whatIsCreate);
+                .create();
 
         projectsApi.deleteProjects();
 

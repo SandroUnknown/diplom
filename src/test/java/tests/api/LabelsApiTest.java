@@ -1,8 +1,8 @@
 package tests.api;
 
+import data.DataCreator;
 import enums.Color;
-import models.data.TestData;
-import models.data.TestDataConfig;
+import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
@@ -18,7 +19,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LabelsApiTest extends ApiTestBase {
 
-    private LabelRequestModel testLabelData = LabelRequestModel.builder()
+    private final Color defaultColor = Color.CHARCOAL;
+    private final boolean defaultFavorite = false;
+    private final LabelRequestModel testLabelData = LabelRequestModel.builder()
             .name("МЕТКА")
             .color(Color.BLUE)
             .order(2)
@@ -31,14 +34,13 @@ public class LabelsApiTest extends ApiTestBase {
     @DisplayName("[API] Создать новую метку (с заполнением только имени).")
     void createNewLabelTest() {
 
-        Color defaultColor = Color.CHARCOAL;
-        boolean defaultFavorite = false;
-
         LabelResponseModel myCreatedLabel = labelsApi.createNewLabel(testLabelData.getName());
 
-        assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
-        assertThat(myCreatedLabel.getColor()).isEqualTo(defaultColor);
-        assertThat(myCreatedLabel.isFavorite()).isEqualTo(defaultFavorite);
+        step("Проверить, что response-данные соответствуют заданным.", () -> {
+            assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
+            assertThat(myCreatedLabel.getColor()).isEqualTo(defaultColor);
+            assertThat(myCreatedLabel.isFavorite()).isEqualTo(defaultFavorite);
+        });
     }
 
     // TODO : сделать параметризованным?
@@ -48,10 +50,12 @@ public class LabelsApiTest extends ApiTestBase {
 
         LabelResponseModel myCreatedLabel = labelsApi.createNewLabel(testLabelData);
 
-        assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
-        assertThat(myCreatedLabel.getColor()).isEqualTo(testLabelData.getColor());
-        assertThat(myCreatedLabel.getOrder()).isEqualTo(testLabelData.getOrder());
-        assertThat(myCreatedLabel.isFavorite()).isEqualTo(testLabelData.isFavorite());
+        step("Проверить, что response-данные соответствуют заданным.", () -> {
+            assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
+            assertThat(myCreatedLabel.getColor()).isEqualTo(testLabelData.getColor());
+            assertThat(myCreatedLabel.getOrder()).isEqualTo(testLabelData.getOrder());
+            assertThat(myCreatedLabel.isFavorite()).isEqualTo(testLabelData.isFavorite());
+        });
     }
 
 
@@ -61,11 +65,11 @@ public class LabelsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String labelId = testData.getLabels().get(0).getId();
 
         LabelResponseModel myUpdatedLabel = labelsApi.updateLabel(labelId, newLabelName);
@@ -80,11 +84,11 @@ public class LabelsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         LabelResponseModel myCreatedLabel = testData.getLabels().get(0);
         String labelId = myCreatedLabel.getId();
 
@@ -103,17 +107,17 @@ public class LabelsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         List<LabelResponseModel> myCreatedLabels = testData.getLabels();
 
         List<LabelResponseModel> myReceivedLabels = labelsApi.getAllLabels();
 
         assertThat(myReceivedLabels.size()).isEqualTo(myCreatedLabels.size());
-        for(int i = 0; i < myCreatedLabels.size(); i++) {
+        for (int i = 0; i < myCreatedLabels.size(); i++) {
             assertThat(myReceivedLabels.get(i).getName()).isEqualTo(myCreatedLabels.get(i).getName());
             assertThat(myReceivedLabels.get(i).getColor()).isEqualTo(myCreatedLabels.get(i).getColor());
             assertThat(myReceivedLabels.get(i).getOrder()).isEqualTo(myCreatedLabels.get(i).getOrder());
@@ -128,11 +132,11 @@ public class LabelsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         int createdLabelCount = testData.getLabels().size();
         String labelId = testData.getLabels().get(0).getId();
 

@@ -1,9 +1,9 @@
 package tests.api;
 
+import data.DataCreator;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
-import models.data.TestData;
-import models.data.TestDataConfig;
+import models.data.TestDataModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +32,11 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String projectId = testData.getProjects().get(0).getId();
 
         CommentResponseModel myCreatedComment =
@@ -51,13 +51,13 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
         CommentResponseModel myCreatedComment =
@@ -72,14 +72,14 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
         CommentResponseModel myUpdatedComment =
@@ -94,14 +94,14 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         CommentResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
@@ -116,12 +116,12 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 0;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createCommentsInProjects(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         List<CommentResponseModel> myCreatedComments = testData.getCommentsInProjects();
         String projectId = testData.getProjects().get(0).getId();
 
@@ -139,14 +139,14 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String taskId = testData.getTasksInSections().get(0).getId();
 
         List<CommentResponseModel> myCreatedComments = new ArrayList<>();
@@ -170,14 +170,14 @@ public class CommentsApiTest extends ApiTestBase {
 
         int templateNumber = 1;
 
-        TestDataConfig whatIsCreate = TestDataConfig.builder()
+        TestDataModel testData = new DataCreator.Setup()
+                .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
-                .build();
+                .create();
 
-        TestData testData = data.create(templateNumber, whatIsCreate);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
         String taskId = testData.getCommentsInTasksInSections().get(0).getTaskId();
 
