@@ -11,7 +11,7 @@ import static enums.Color.*;
 import static enums.ViewStyle.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : добавить проверки во все тесты
+// TODO : может быть тест переменные передавать как параметры?
 // TODO : дописать теги, овнера и прочие данные
 
 @Owner("Petyukov Alexander")
