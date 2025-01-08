@@ -13,10 +13,13 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : добавить проверки во все тесты
-// TODO : дописать теги, овнера и прочие данные
-// Примерное время тестов: 84 сек / 8 тестов (разброс от 71 до 97 сек)
+// TODO : может быть тест переменные передавать как параметры?
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через API")
+@Feature("Проверка задач через API")
+@Tags({ @Tag("API"), @Tag("task") })
+@DisplayName("Проверка задач через API")
 public class TasksApiTest extends ApiTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
@@ -30,7 +33,9 @@ public class TasksApiTest extends ApiTestBase {
             .build();
 
     @Test
-    @DisplayName("[API] Создать новую задачу.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание новой задачи")
+    @DisplayName("Создать новую задачу")
     void createNewTaskTest() {
 
         int templateNumber = 0;
@@ -46,12 +51,16 @@ public class TasksApiTest extends ApiTestBase {
 
         TaskResponseModel myCreatedTask = tasksApi.createNewTask(testTaskData);
 
-        assertThat(myCreatedTask.getContent()).isEqualTo(testTaskData.getContent());
-        assertThat(myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
+        step("Проверить, что задача была корректно создана", () -> {
+            assertThat(myCreatedTask.getContent()).isEqualTo(testTaskData.getContent());
+            assertThat(myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
+        });
     }
 
     @Test
-    @DisplayName("[API] Обновить задачу по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Обновление задачи по ID")
+    @DisplayName("Обновить задачу по ID")
     void updateTaskTest() {
 
         int templateNumber = 0;
@@ -67,12 +76,16 @@ public class TasksApiTest extends ApiTestBase {
 
         TaskResponseModel myUpdatedTask = tasksApi.updateTask(taskId, updatedTestTaskData);
 
-        assertThat(myUpdatedTask.getContent()).isEqualTo(updatedTestTaskData.getContent());
-        assertThat(myUpdatedTask.getPriority()).isEqualTo(updatedTestTaskData.getPriority());
+        step("Проверить, что задача была корректно обновлена", () -> {
+            assertThat(myUpdatedTask.getContent()).isEqualTo(updatedTestTaskData.getContent());
+            assertThat(myUpdatedTask.getPriority()).isEqualTo(updatedTestTaskData.getPriority());
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить задачу по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение задачи по ID")
+    @DisplayName("Получить задачу по ID")
     void getTaskTest() {
 
         int templateNumber = 0;
@@ -89,12 +102,16 @@ public class TasksApiTest extends ApiTestBase {
 
         TaskResponseModel myReceivedTask = tasksApi.getTask(taskId);
 
-        assertThat(myReceivedTask.getContent()).isEqualTo(myCreatedTask.getContent());
-        assertThat(myReceivedTask.getPriority()).isEqualTo(myCreatedTask.getPriority());
+        step("Проверить, что задача была корректно получена", () -> {
+            assertThat(myReceivedTask.getContent()).isEqualTo(myCreatedTask.getContent());
+            assertThat(myReceivedTask.getPriority()).isEqualTo(myCreatedTask.getPriority());
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить все активные задачи пользователя.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех активных задач пользователя")
+    @DisplayName("Получить все активные задачи пользователя")
     void getAllTasksTest() {
 
         int templateNumber = 1;
@@ -110,15 +127,19 @@ public class TasksApiTest extends ApiTestBase {
 
         List<TaskResponseModel> myReceivedTasks = tasksApi.getAllTasks();
 
-        assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
-        for(int i = 0; i < myCreatedTasks.size(); i++) {
-            assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
-            assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
-        }
+        step("Проверить, что задачи были корректно получены", () -> {
+            assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
+            for(int i = 0; i < myCreatedTasks.size(); i++) {
+                assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
+                assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
+            }
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить все активные задачи (с применением фильтра `label`).")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех активных задач пользователя (с применением фильтра `label`)")
+    @DisplayName("Получить все активные задачи пользователя (с применением фильтра `label`)")
     void getTasksWithFilterTest() {
 
         int templateNumber = 1;
@@ -132,7 +153,7 @@ public class TasksApiTest extends ApiTestBase {
                 .addLabelsForTasksInSections(true)
                 .create();
 
-        String labelName = testData.getLabels().get(1).getName(); // заменить на 0?
+        String labelName = testData.getLabels().get(1).getName(); // TODO : заменить на 0?
 
         List<TaskResponseModel> myCreatedTasks = new ArrayList<>();
         for(TaskResponseModel myCreatedTask : testData.getTasksInSections()) {
@@ -146,15 +167,19 @@ public class TasksApiTest extends ApiTestBase {
 
         List<TaskResponseModel> myReceivedTasks = tasksApi.getTasksWithFilter(filters);
 
-        assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
-        for(int i = 0; i < myCreatedTasks.size(); i++) {
-            assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
-            assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
-        }
+        step("Проверить, что задачи были корректно получены", () -> {
+            assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
+            for(int i = 0; i < myCreatedTasks.size(); i++) {
+                assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
+                assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
+            }
+        });
     }
 
     @Test
-    @DisplayName("[API] Закрыть задачу по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Закрытие задачи по ID")
+    @DisplayName("Закрыть задачу по ID")
     void closeTaskTest() {
 
         int templateNumber = 0;
@@ -170,12 +195,16 @@ public class TasksApiTest extends ApiTestBase {
 
         tasksApi.closeTask(taskId);
 
-        TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
-        assertThat(myReceivedTasks.isCompleted()).isEqualTo(true);
+        step("Проверить, что задача действительно была закрыта", () -> {
+            TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
+            assertThat(myReceivedTasks.isCompleted()).isEqualTo(true);
+        });
     }
 
     @Test
-    @DisplayName("[API] Снова открыть (закрытую) задачу по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Открытие (ранее закрытой) задачи по ID")
+    @DisplayName("Открыть (ранее закрытую) задачу по ID")
     void reopenTaskTest() {
 
         int templateNumber = 0;
@@ -188,16 +217,20 @@ public class TasksApiTest extends ApiTestBase {
                 .create();
 
         String taskId = testData.getTasksInSections().get(0).getId();
-        tasksApi.closeTask(taskId);
+        tasksApi.closeTask(taskId); // TODO : может создать уже готовый проект с закрытой задачей?
 
         tasksApi.reopenTask(taskId);
 
-        TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
-        assertThat(myReceivedTasks.isCompleted()).isEqualTo(false);
+        step("Проверить, что задача действительно была открыта", () -> {
+            TaskResponseModel myReceivedTasks = tasksApi.getTask(taskId);
+            assertThat(myReceivedTasks.isCompleted()).isEqualTo(false);
+        });
     }
 
     @Test
-    @DisplayName("[API] Удалить задачу по ID.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление задачи по ID")
+    @DisplayName("Удалить задачу по ID")
     void deleteTaskTest() {
 
         int templateNumber = 0;
@@ -214,7 +247,9 @@ public class TasksApiTest extends ApiTestBase {
 
         tasksApi.deleteTask(taskId);
 
-        int currentTaskCount = tasksApi.getAllTasks().size();
-        assertThat(currentTaskCount).isEqualTo(createdTaskCount - 1);
+        step("Проверить, что задача действительно была удалена, () -> {
+            int currentTaskCount = tasksApi.getAllTasks().size();
+            assertThat(currentTaskCount).isEqualTo(createdTaskCount - 1);
+        });
     }
 }
