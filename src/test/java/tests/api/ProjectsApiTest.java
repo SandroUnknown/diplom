@@ -13,8 +13,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
 // TODO : дописать теги, овнера и прочие данные
-// Примерное время тестов: 17 сек / 5 тестов
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через API")
+@Feature("Проверка проектов через API")
+@Tags({ @Tag("API"), @Tag("project") })
+@DisplayName("Проверка проектов через API")
 public class ProjectsApiTest extends ApiTestBase {
         
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
@@ -37,18 +41,22 @@ public class ProjectsApiTest extends ApiTestBase {
                 .build();
     
     @Test
-    @DisplayName("[API] Создать новый проект.")
+    @Story("Создание нового проекта (с заполнением имени, цвета и варианта отображения)")
+    @DisplayName("Создать новый проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectTest() {
 
         ProjectResponseModel myCreatedProject = projectsApi.createNewProject(testProjectData);
 
-        assertThat(myCreatedProject.getName()).isEqualTo(testProjectData.getName());
-        assertThat(myCreatedProject.getColor()).isEqualTo(testProjectData.getColor());
-        assertThat(myCreatedProject.getViewStyle()).isEqualTo(testProjectData.getViewStyle());
+        step("Проверить, что проект был корректно создан", () -> {
+                assertThat(myCreatedProject.getName()).isEqualTo(testProjectData.getName());
+                assertThat(myCreatedProject.getColor()).isEqualTo(testProjectData.getColor());
+                assertThat(myCreatedProject.getViewStyle()).isEqualTo(testProjectData.getViewStyle());
+        });
     }
 
     @Test
-    @DisplayName("[API] Создать новый вложенный проект.")
+    @Story("Создание нового вложенного проекта (с заполнением имени, цвета и варианта отображения)")
+    @DisplayName("Создать новый вложенный проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectInProjectTest() {
 
         int templateNumber = 0;
@@ -63,13 +71,16 @@ public class ProjectsApiTest extends ApiTestBase {
 
         ProjectResponseModel myCreatedInnerProject = projectsApi.createNewProject(testInnerProjectData);
 
-        assertThat(myCreatedInnerProject.getName()).isEqualTo(testInnerProjectData.getName());
-        assertThat(myCreatedInnerProject.getColor()).isEqualTo(testInnerProjectData.getColor());
-        assertThat(myCreatedInnerProject.getViewStyle()).isEqualTo(testInnerProjectData.getViewStyle());
+        step("Проверить, что проект был корректно создан", () -> {
+                assertThat(myCreatedInnerProject.getName()).isEqualTo(testInnerProjectData.getName());
+                assertThat(myCreatedInnerProject.getColor()).isEqualTo(testInnerProjectData.getColor());
+                assertThat(myCreatedInnerProject.getViewStyle()).isEqualTo(testInnerProjectData.getViewStyle());
+        });
     }
 
     @Test
-    @DisplayName("[API] Обновить проект по ID.")
+    @Story("Обновление проекта по ID")
+    @DisplayName("Обновить проект по ID")
     void updateProjectTest() {
 
         int templateNumber = 0;
@@ -83,14 +94,17 @@ public class ProjectsApiTest extends ApiTestBase {
 
         ProjectResponseModel myCreatedProject = projectsApi.updateProject(projectId, updatedTestProjectData);
 
-        assertThat(myCreatedProject.getName()).isEqualTo(updatedTestProjectData.getName());
-        assertThat(myCreatedProject.getColor()).isEqualTo(updatedTestProjectData.getColor());
-        assertThat(myCreatedProject.getViewStyle()).isEqualTo(updatedTestProjectData.getViewStyle());
-        assertThat(myCreatedProject.isFavorite()).isEqualTo(updatedTestProjectData.isFavorite());
+        step("Проверить, что проект был корректно обновлен", () -> {
+                assertThat(myCreatedProject.getName()).isEqualTo(updatedTestProjectData.getName());
+                assertThat(myCreatedProject.getColor()).isEqualTo(updatedTestProjectData.getColor());
+                assertThat(myCreatedProject.getViewStyle()).isEqualTo(updatedTestProjectData.getViewStyle());
+                assertThat(myCreatedProject.isFavorite()).isEqualTo(updatedTestProjectData.isFavorite());
+        });
     }
 
     @Test
-    @DisplayName("[API] Удалить проект по ID.")
+    @Story("Удаление проекта по ID")
+    @DisplayName("Удалить проект по ID")
     void deleteProjectTest() {
 
         int templateNumber = 0;
@@ -105,12 +119,15 @@ public class ProjectsApiTest extends ApiTestBase {
         projectsApi.deleteProject(projectId);
         ProjectResponseModel myDeletedProject = projectsApi.getProject(projectId);
 
-        assertThat(myDeletedProject.getName()).isEqualTo("");
-        assertThat(myDeletedProject.getOrder()).isEqualTo("0");
+        step("Проверить, что проект действительно был удалён", () -> {
+                assertThat(myDeletedProject.getName()).isEqualTo("");
+                assertThat(myDeletedProject.getOrder()).isEqualTo("0");
+        });
     }
 
     @Test
-    @DisplayName("[API] Удалить все проекты пользователя.")
+    @Story("Удаление всех проектов пользователя")
+    @DisplayName("Удалить все проекты пользователя")
     void deleteAllProjectsTest() {
 
         int templateNumber = 1;
@@ -122,7 +139,9 @@ public class ProjectsApiTest extends ApiTestBase {
 
         projectsApi.deleteProjects();
 
-        int currentProjectCount = projectsApi.getAllProjects().size();
-        assertThat(currentProjectCount).isEqualTo(1);
+        step("Проверить, все проекты пользователя действительно были удалены", () -> {
+                int currentProjectCount = projectsApi.getAllProjects().size();
+                assertThat(currentProjectCount).isEqualTo(1);
+        });
     }
 }
