@@ -40,6 +40,7 @@ public class LabelsApiTest extends ApiTestBase {
     private final String newLabelName = "ОБНОВЛЁННАЯ МЕТКА";
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой метки (с заполнением только имени)")
     @DisplayName("Создать новую метку (с заполнением только имени)")
     void createNewLabelTest() {
@@ -55,6 +56,7 @@ public class LabelsApiTest extends ApiTestBase {
 
     // TODO : сделать параметризованным?
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой метки (с заполнением всех параметров)")
     @DisplayName("Создать новую метку (с заполнением всех параметров)")
     void createNewLabelWithAllParamsTest() {
@@ -70,6 +72,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление имени метки по ID")
     @DisplayName("Обновить имя метки по ID")
     void updateLabelTest() {
@@ -91,6 +94,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Story("Получение метки по ID")
     @DisplayName("Получить метку по ID")
     void getLabelTest() {
@@ -116,6 +120,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех меток")
     @DisplayName("Получить все метки пользователя")
     void getAllLabelsTest() {
@@ -143,6 +148,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Story("Удаление метки по ID")
     @DisplayName("Удалить метку по ID")
     void deleteLabelTest() {
