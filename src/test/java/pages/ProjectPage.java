@@ -134,26 +134,51 @@ public class ProjectPage {
 //================================================================
     
     @Step("Проверить, что проект был корректно создан")
-    public ProjectPage uiCheckProject(ProjectRequestModel testProjectData, String... checkFields) {
+    public ProjectPage uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 
-        List<String> fieldsList = Arrays.asList(checkFields);
+        List<ProjectField> fieldsList = Arrays.asList(checkFields);
 
-        if (fieldsList.contains("name")) {
+        if (fieldsList.contains(NAME)) {
             checkProjectName(testProjectData.getName());
         }
 
-        if (fieldsList.contains("color")) {
+        if (fieldsList.contains(COLOR)) {
             checkProjectColor(testProjectData.getColor());
         }
 
-        if (fieldsList.contains("favorite")) {
+        if (fieldsList.contains(FAVORITE)) {
             if (testProjectData.isFavorite()) {
                 checkProjectFavorite(testProjectData.getName());
             }
         }
 
-        if (fieldsList.contains("view_style")) {
+        if (fieldsList.contains(VIEW_STYLE)) {
             checkProjectViewStyle(testProjectData.getViewStyle());
+        }
+
+        return this;
+    }
+
+    @Step("Проверить, что проект был корректно создан")
+    public ProjectPage apiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
+
+        List<ProjectField> fieldsList = Arrays.asList(checkFields);
+        ProjectResponseModel response = projectsApi.getAllProjects().get(0);
+        
+        if (fieldsList.contains(NAME)) {
+            assertThat(testProjectData.getName()).isEqualTo(response.getName());
+        }
+
+        if (fieldsList.contains(COLOR)) {
+            assertThat(testProjectData.getColor()).isEqualTo(response.getColor());
+        }
+
+        if (fieldsList.contains(FAVORITE)) {
+            assertThat(testProjectData.isFavorite()).isEqualTo(response.isFavorite());
+        }
+
+        if (fieldsList.contains(VIEW_STYLE)) {
+            assertThat(testProjectData.getViewStyle()).isEqualTo(response.getViewStyle());
         }
 
         return this;
