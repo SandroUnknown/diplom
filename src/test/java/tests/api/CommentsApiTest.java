@@ -12,9 +12,13 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : добавить проверки во все тесты
-// TODO : дописать теги, овнера и прочие данные
+// TODO : может быть тест переменные передавать как параметры?
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через API")
+@Feature("Проверка комментариев через API")
+@Tags({ @Tag("API"), @Tag("comment") })
+@DisplayName("Проверка комментариев через API")
 public class CommentsApiTest extends ApiTestBase {
 
     private final CommentRequestModel testCommentData = CommentRequestModel.builder()
@@ -26,7 +30,9 @@ public class CommentsApiTest extends ApiTestBase {
             .build();
 
     @Test
-    @DisplayName("[API] Создать новый комментарий в проекте.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового комментария в проекте")
+    @DisplayName("Создать новый комментарий в проекте")
     void createNewCommentInProjectTest() {
 
         int templateNumber = 0;
@@ -41,11 +47,15 @@ public class CommentsApiTest extends ApiTestBase {
         CommentResponseModel myCreatedComment =
                 commentsApi.createNewCommentInProject(projectId, testCommentData.getContent());
 
-        assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
+        step("Проверить, что комментарий был корректно создан", () -> {
+            assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
+        });
     }
 
     @Test
-    @DisplayName("[API] Создать новый комментарий в задаче.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового комментария в задаче")
+    @DisplayName("Создать новый комментарий в задаче")
     void createNewCommentInTaskTest() {
 
         int templateNumber = 0;
@@ -61,12 +71,16 @@ public class CommentsApiTest extends ApiTestBase {
 
         CommentResponseModel myCreatedComment =
                 commentsApi.createNewCommentInTask(taskId, testCommentData.getContent());
-
-        assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
+            
+        step("Проверить, что комментарий был корректно создан", () -> {
+            assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
+        });
     }
 
     @Test
-    @DisplayName("[API] Обновить комментарий по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Обновление комментария по ID")
+    @DisplayName("Обновить комментарий по ID")
     void updateCommentTest() {
 
         int templateNumber = 0;
@@ -84,11 +98,15 @@ public class CommentsApiTest extends ApiTestBase {
         CommentResponseModel myUpdatedComment =
                 commentsApi.updateComment(commentId, updatedTestCommentData.getContent());
 
-        assertThat(myUpdatedComment.getContent()).isEqualTo(updatedTestCommentData.getContent());
+        step("Проверить, что комментарий был корректно обновлён", () -> {
+            assertThat(myUpdatedComment.getContent()).isEqualTo(updatedTestCommentData.getContent());
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить комментарий по ID.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение комментария по ID")
+    @DisplayName("Получить комментарий по ID")
     void getCommentTest() {
 
         int templateNumber = 0;
@@ -106,11 +124,15 @@ public class CommentsApiTest extends ApiTestBase {
 
         CommentResponseModel myReceivedComment = commentsApi.getComment(commentId);
 
-        assertThat(myReceivedComment.getContent()).isEqualTo(myCreatedComment.getContent());
+        step("Проверить, что комментарий был корректно получен", () -> {
+            assertThat(myReceivedComment.getContent()).isEqualTo(myCreatedComment.getContent());
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить все комментарии в проекте.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех комментариев в проекте")
+    @DisplayName("Получить все комментарии в проекте")
     void getAllCommentsInProjectTest() {
 
         int templateNumber = 0;
@@ -126,14 +148,18 @@ public class CommentsApiTest extends ApiTestBase {
 
         List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
 
-        assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
-        for(int i = 0; i < myCreatedComments.size(); i++) {
-            assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
-        }
+        step("Проверить, что комментарии были корректно получены", () -> {
+            assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
+            for(int i = 0; i < myCreatedComments.size(); i++) {
+                assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
+            }
+        });
     }
 
     @Test
-    @DisplayName("[API] Получить все комментарии в задаче.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех комментариев в задаче")
+    @DisplayName("Получить все комментарии в задаче")
     void getAllCommentsInTaskTest() {
 
         int templateNumber = 1;
@@ -157,14 +183,18 @@ public class CommentsApiTest extends ApiTestBase {
 
         List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
 
-        assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
-        for(int i = 0; i < myCreatedComments.size(); i++) {
-            assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
-        }
+        step("Проверить, что комментарии были корректно получены", () -> {
+            assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
+            for(int i = 0; i < myCreatedComments.size(); i++) {
+                assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
+            }
+        });
     }
 
     @Test
-    @DisplayName("[API] Удалить комментарий по ID.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление комментария по ID")
+    @DisplayName("Удалить комментарий по ID")
     void deleteCommentTest() {
 
         int templateNumber = 1;
@@ -190,7 +220,9 @@ public class CommentsApiTest extends ApiTestBase {
 
         commentsApi.deleteComment(commentId);
 
-        int currentCommentCount = commentsApi.getAllCommentsInTask(taskId).size();
-        assertThat(currentCommentCount).isEqualTo(createdCommentCount - 1);
+        step("Проверить, что комментарий действительно был удалён", () -> {
+            int currentCommentCount = commentsApi.getAllCommentsInTask(taskId).size();
+            assertThat(currentCommentCount).isEqualTo(createdCommentCount - 1);
+        });
     }
 }
