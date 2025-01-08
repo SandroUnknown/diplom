@@ -46,7 +46,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         LabelResponseModel myCreatedLabel = labelsApi.createNewLabel(testLabelData.getName());
 
-        step("Проверить, что response-данные соответствуют данным, заданным при создании метки", () -> {
+        step("Проверить, метка была корректно создана", () -> {
             assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
             assertThat(myCreatedLabel.getColor()).isEqualTo(defaultColor);
             assertThat(myCreatedLabel.isFavorite()).isEqualTo(defaultFavorite);
@@ -61,7 +61,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         LabelResponseModel myCreatedLabel = labelsApi.createNewLabel(testLabelData);
 
-        step("Проверить, что response-данные соответствуют данным, заданным при создании метки", () -> {
+        step("Проверить, метка была корректно создана", () -> {
             assertThat(myCreatedLabel.getName()).isEqualTo(testLabelData.getName());
             assertThat(myCreatedLabel.getColor()).isEqualTo(testLabelData.getColor());
             assertThat(myCreatedLabel.getOrder()).isEqualTo(testLabelData.getOrder());
@@ -85,7 +85,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         LabelResponseModel myUpdatedLabel = labelsApi.updateLabel(labelId, newLabelName);
 
-        step("Проверить, что response-данные соответствуют данным, заданным при обновлении метки", () -> {
+        step("Проверить, метка была корректно обновлена", () -> {
             assertThat(myUpdatedLabel.getName()).isEqualTo(newLabelName);
         });
     }
@@ -107,7 +107,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         LabelResponseModel myReceivedLabel = labelsApi.getLabel(labelId);
 
-        step("Проверить, что response-данные соответствуют данным, заданным при создании метки", () -> {
+        step("Проверить, метка была корректно получена", () -> {
             assertThat(myReceivedLabel.getName()).isEqualTo(myCreatedLabel.getName());
             assertThat(myReceivedLabel.getColor()).isEqualTo(myCreatedLabel.getColor());
             assertThat(myReceivedLabel.getOrder()).isEqualTo(myCreatedLabel.getOrder());
@@ -131,7 +131,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         List<LabelResponseModel> myReceivedLabels = labelsApi.getAllLabels();
 
-        step("Проверить, что response-данные соответствуют данным, заданным при создании меток", () -> {
+        step("Проверить, метки были корректно получены", () -> {
             assertThat(myReceivedLabels.size()).isEqualTo(myCreatedLabels.size());
             for (int i = 0; i < myCreatedLabels.size(); i++) {
                 assertThat(myReceivedLabels.get(i).getName()).isEqualTo(myCreatedLabels.get(i).getName());
@@ -159,7 +159,7 @@ public class LabelsApiTest extends ApiTestBase {
 
         labelsApi.deleteLabel(labelId);
 
-        step("Проверить, что количество меток стало на 1, чем было изначально создано", () -> {
+        step("Проверить, что метка действительно была удалена", () -> {
             int currentLabelCount = labelsApi.getAllLabels().size();
             assertThat(currentLabelCount).isEqualTo(createdLabelCount - 1);
         });
