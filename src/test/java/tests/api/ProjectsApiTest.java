@@ -41,6 +41,7 @@ public class ProjectsApiTest extends ApiTestBase {
                 .build();
     
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового проекта (с заполнением имени, цвета и варианта отображения)")
     @DisplayName("Создать новый проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectTest() {
@@ -55,6 +56,7 @@ public class ProjectsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового вложенного проекта (с заполнением имени, цвета и варианта отображения)")
     @DisplayName("Создать новый вложенный проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectInProjectTest() {
@@ -79,6 +81,7 @@ public class ProjectsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление проекта по ID")
     @DisplayName("Обновить проект по ID")
     void updateProjectTest() {
@@ -103,6 +106,7 @@ public class ProjectsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Story("Удаление проекта по ID")
     @DisplayName("Удалить проект по ID")
     void deleteProjectTest() {
@@ -126,6 +130,7 @@ public class ProjectsApiTest extends ApiTestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.NORMAL)
     @Story("Удаление всех проектов пользователя")
     @DisplayName("Удалить все проекты пользователя")
     void deleteAllProjectsTest() {
