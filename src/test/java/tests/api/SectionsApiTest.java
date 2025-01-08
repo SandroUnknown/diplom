@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : добавить проверки во все тесты
+// TODO : может быть тест переменные передавать как параметры?
 // TODO : дописать теги, овнера и прочие данные
 
 @Owner("Petyukov Alexander")
@@ -45,7 +45,9 @@ public class SectionsApiTest extends ApiTestBase {
 
         SectionResponseModel myCreatedSection = sectionsApi.createNewSection(testSectionData);
 
-        assertThat(myCreatedSection.getName()).isEqualTo(testSectionData.getName());
+        step("Проверить, что раздел был корректно создан", () -> {
+            assertThat(myCreatedSection.getName()).isEqualTo(testSectionData.getName());
+        });
     }
 
     @Test
@@ -66,7 +68,9 @@ public class SectionsApiTest extends ApiTestBase {
 
         SectionResponseModel myUpdatedSection = sectionsApi.updateSection(sectionId, updatedSectionName);
 
-        assertThat(myUpdatedSection.getName()).isEqualTo(updatedSectionName);
+        step("Проверить, что раздел был корректно обновлён", () -> {
+            assertThat(myUpdatedSection.getName()).isEqualTo(updatedSectionName);
+        });
     }
 
     @Test
@@ -94,10 +98,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections(projectId);
 
-        assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
-        for(int i = 0; i < myCreatedSections.size(); i++) {
-            assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
-        }
+        step("Проверить, что разделы были корректно получены", () -> {
+            assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
+            for(int i = 0; i < myCreatedSections.size(); i++) {
+                assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
+            }
+        });
     }
 
     @Test
@@ -118,10 +124,12 @@ public class SectionsApiTest extends ApiTestBase {
 
         List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections();
 
-        assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
-        for(int i = 0; i < myCreatedSections.size(); i++) {
-            assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
-        }
+        step("Проверить, что разделы были корректно получены", () -> {
+            assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
+            for(int i = 0; i < myCreatedSections.size(); i++) {
+                assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
+            }
+        });
     }
 
     @Test
@@ -143,8 +151,10 @@ public class SectionsApiTest extends ApiTestBase {
 
         sectionsApi.deleteSection(sectionId);
 
-        int currentSectionCount = sectionsApi.getAllSections().size();
-        assertThat(currentSectionCount).isEqualTo(createdSectionCount - 1);
+        step("Проверить, что раздел действительно был удалён", () -> {
+            int currentSectionCount = sectionsApi.getAllSections().size();
+            assertThat(currentSectionCount).isEqualTo(createdSectionCount - 1);
+        });
     }
 
     @Test
@@ -165,7 +175,9 @@ public class SectionsApiTest extends ApiTestBase {
 
         sectionsApi.deleteAllSectionInProject(projectId);
 
-        int currentSectionCount = sectionsApi.getAllSections(projectId).size();
-        assertThat(currentSectionCount).isEqualTo(0);
+        step("Проверить, что разделы действительно были удалены", () -> {
+            int currentSectionCount = sectionsApi.getAllSections(projectId).size();
+            assertThat(currentSectionCount).isEqualTo(0);
+        });
     }
 }
