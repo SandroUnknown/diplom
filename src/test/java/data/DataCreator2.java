@@ -19,7 +19,10 @@ public class DataCreator2 {
     public static class Setup {
 
         private TestDataModel template;
-        private boolean createLabels;
+        
+        private List<int> labelsId;
+        private ENUM labelsEnum;
+        
         private boolean createProjects;
         private boolean createCommentsInProjects;
         private boolean createTasksInProjects;
@@ -35,10 +38,25 @@ public class DataCreator2 {
             return this;
         }
 
-        public Setup createLabels(boolean createLabels) {
-            this.createLabels = createLabels;
+        // TODO : дописать
+        public Setup setTemplate(TestDataModel numberOfDefaultTemplate) {
+            this.template = TEMPLATES.get(numberOfDefaultTemplate); // Проверку сделать на индекс
             return this;
         }
+
+        // =========================================================================================================
+        
+        public Setup createLabels(List<int> labelsId) {
+            this.labelsId = labelsId;
+            return this;
+        }
+
+        public Setup createLabels(ENUM labelsEnum) {
+            this.labelsEnum = labelsEnum;
+            return this;
+        }
+
+        // =========================================================================================================
 
         public Setup createProjects(boolean createProjects) {
             this.createProjects = createProjects;
@@ -91,7 +109,12 @@ public class DataCreator2 {
             DataCreator mainClass = new DataCreator();
 
             TestDataModel templateData = this.template;
-            boolean createLabels = this.createLabels;
+            TestDataModel testData = new TestDataModel();
+
+            // labels
+            List<String> createLabels = convertLabelsToValidFormat(this.labelsId, this.labelsEnum, testData, templateData);
+
+            
             boolean createProjects = this.createProjects;
             boolean createCommentsInProjects = this.createCommentsInProjects;
             boolean createTasksInProjects = this.createTasksInProjects;
@@ -102,7 +125,7 @@ public class DataCreator2 {
             boolean addLabelsForTasksInSections = this.addLabelsForTasksInSections;
             boolean createCommentsInTasksInSections = this.createCommentsInTasksInSections;
 
-            TestDataModel testData = new TestDataModel();
+            
 
             if (createLabels) {
                 mainClass.createLabels(testData, templateData);
@@ -161,6 +184,67 @@ public class DataCreator2 {
             }
 
             return testData;
+        }
+
+        private List<String> convertLabelsToValidFormat(List<int> labelsId, ENUM labelsEnum, TestDataModel testData, TestDataModel templateData) {
+
+            List<String> convertedLabelsId = new ArrayList<>();
+            
+            // Проверить пустой ли массив с числами, если да - то проверить ENUM
+            if (labelsId.size() == 0) {
+                if (labelsEnum != null) {
+                    // вызвать метод, который запишет в labelsId преобразованные из ENUM в числа
+                    labelsId = convertEnumLabelsToArray(templateData, labelsEnum);
+                } else {
+                    // вернуть пустой СТРИНГ список id
+                    return convertedLabelsId;
+                }
+            }
+
+            // вызвать метод, который уберет дубликаты (из Инт labelsId) и отсортирует массив
+            labelsId = removeDublicate(labelsId);
+            
+            // вызвать метод, преобразует в Стринг (принимает Инт labelsId, возвращает Стринг)
+            convertedLabelsId = convertToString(labelsId);
+
+            // проверить, что наш массив валидный
+            //checkValidLabelsArray(convertedLabelsId, templateData, testData);
+
+            // вернуть заполненный массив
+            return convertedLabelsId        
+        }
+
+        private List<int> convertEnumLabelsToArray(TestDataModel templateData, ENUM labelsEnum) {
+            List<int> labelsId = new ArrayList<>();
+            swith(labelsEnum) {
+                case ALL:
+                case ALL_POSSIBLE:
+                    for(LabelResponseModel label : templateData.getLabels()) {
+                        labelsId.add(label.getId());
+                    }
+                    break;
+                case ONLY_FIRST:
+                    labelsId.add(templateData.getLabels().get(0).getId());
+                    break;
+                case ONLY_LAST:
+                    int lastId = templateData.getLabels().size() - 1;
+                    labelsId.add(templateData.getLabels().get(lastId).getId());
+                    break;
+            }          
+            return labelsId;
+        }
+
+        private List<int> removeDublicate(List<int> labelsId) {
+            List<Integer> sortedUniqueLabelsId = new ArrayList<>(new HashSet<>(labelsId));
+            return Collections.sort(sortedUniqueLabelsId);
+        }
+
+        private List<String> convertToString(List<int> labelsId) {
+            List<String> stringList = new ArrayList<>();
+            for (Integer id : labelsId) {
+                stringList.add(String.valueOf(id));
+            }
+            return stringList;
         }
     }
 
