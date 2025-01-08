@@ -38,6 +38,14 @@ public class WebProjectsTest extends WebTestBase {
                 .checkProjectName(testProjectData.getName());
 
         // TODO : нужна АПИ-проверка
+        /*step("Проверить имя созданного проекта (API)", () -> {
+            String responseName = projectsApi.getAllProjects().get(0).getName();
+            assertThat(projectName).isEqualTo(responseName);
+        });*/
+
+        projectPage
+                .uiCheckProject(testProjectData, NAME)
+                .apiCheckProject(testProjectData, NAME);
     }
 
     @Test
@@ -61,7 +69,18 @@ public class WebProjectsTest extends WebTestBase {
         projectPage
                 .fullCheckProject(testProjectData);
 
-        // TODO : нужна АПИ-проверка
+        // TODO : нужна АПИ-проверка 
+        /*step("Проверить, что проект был корректно создан (API)", () -> {
+            ProjectResponseModel project = projectsApi.getAllProjects().get(0);
+            assertThat(testProjectData.getName()).isEqualTo(project.getName());
+            assertThat(testProjectData.getColor()).isEqualTo(project.getColor());
+            assertThat(testProjectData.isFavorite()).isEqualTo(project.isFavorite());
+            assertThat(testProjectData.getViewStyle()).isEqualTo(project.getViewStyle());
+        });*/
+
+        projectPage
+                .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE)
+                .apiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
     }
 
     @Test
