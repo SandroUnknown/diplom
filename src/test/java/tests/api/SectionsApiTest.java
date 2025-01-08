@@ -14,8 +14,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : добавить проверки во все тесты
 // TODO : дописать теги, овнера и прочие данные
-// Примерное время тестов: 40 сек / 6 тестов (разброс от 28 до 52 сек)
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через API")
+@Feature("Проверка разделов через API")
+@Tags({ @Tag("API"), @Tag("section") })
+@DisplayName("Проверка разделов через API")
 public class SectionsApiTest extends ApiTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()
@@ -24,7 +28,9 @@ public class SectionsApiTest extends ApiTestBase {
     private final String updatedSectionName = "ОБНОВЛЁННЫЙ РАЗДЕЛ";
 
     @Test
-    @DisplayName("[API] Создать новый раздел.")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового раздела")
+    @DisplayName("Создать новый раздел")
     void createNewSectionsTest() {
 
         int templateNumber = 0;
@@ -43,7 +49,9 @@ public class SectionsApiTest extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("[API] Обновить раздел.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Обновление раздела")
+    @DisplayName("Обновить раздел")
     void updateSectionTest() {
 
         int templateNumber = 0;
@@ -62,7 +70,9 @@ public class SectionsApiTest extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("[API] Получить все разделы внутри проекта.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех разделов внутри проекта")
+    @DisplayName("Получить все разделы внутри проекта")
     void getAllSectionsInProjectTest() {
 
         int templateNumber = 1;
@@ -91,7 +101,9 @@ public class SectionsApiTest extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("[API] Получить все разделы пользователя.")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Получение всех разделов пользователя")
+    @DisplayName("Получить все разделы пользователя")
     void getAllSectionsTest() {
 
         int templateNumber = 1;
@@ -113,7 +125,9 @@ public class SectionsApiTest extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("[API] Удалить раздел по ID.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление раздела по ID")
+    @DisplayName("Удалить раздел по ID")
     void deleteSectionTest() {
 
         int templateNumber = 0;
@@ -134,7 +148,9 @@ public class SectionsApiTest extends ApiTestBase {
     }
 
     @Test
-    @DisplayName("[API] Удалить все разделы в проекте.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление всех разделов в проекте")
+    @DisplayName("Удалить все разделы в проекте")
     void deleteAllSectionsInProjectTest() {
 
         int templateNumber = 1;
