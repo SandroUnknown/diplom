@@ -19,8 +19,7 @@ import java.util.List;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : добавить проверки во все тесты
-// TODO : дописать теги, овнера и прочие данные
+// TODO : может быть тест переменные передавать как параметры?
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
