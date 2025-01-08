@@ -13,7 +13,6 @@ import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : может быть тест переменные передавать как параметры?
-// TODO : дописать теги, овнера и прочие данные
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
