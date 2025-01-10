@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
+import static enums.ProjectField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WebProjectsTest extends WebTestBase {
@@ -37,11 +38,7 @@ public class WebProjectsTest extends WebTestBase {
         projectPage
                 .checkProjectName(testProjectData.getName());
 
-        // TODO : нужна АПИ-проверка
-        /*step("Проверить имя созданного проекта (API)", () -> {
-            String responseName = projectsApi.getAllProjects().get(0).getName();
-            assertThat(projectName).isEqualTo(responseName);
-        });*/
+        sleep(1000); // TODO : нужный слип
 
         projectPage
                 .uiCheckProject(testProjectData, NAME)
@@ -63,20 +60,13 @@ public class WebProjectsTest extends WebTestBase {
                 .inputProjectName(testProjectData.getName())
                 .selectProjectColor(testProjectData.getColor())
                 .addToFavorite(testProjectData.isFavorite())
-                .selectViewStyle(testProjectData.getViewStyle())
+                .selectProjectViewStyle(testProjectData.getViewStyle())
                 .addProject();
 
         projectPage
                 .fullCheckProject(testProjectData);
 
-        // TODO : нужна АПИ-проверка 
-        /*step("Проверить, что проект был корректно создан (API)", () -> {
-            ProjectResponseModel project = projectsApi.getAllProjects().get(0);
-            assertThat(testProjectData.getName()).isEqualTo(project.getName());
-            assertThat(testProjectData.getColor()).isEqualTo(project.getColor());
-            assertThat(testProjectData.isFavorite()).isEqualTo(project.isFavorite());
-            assertThat(testProjectData.getViewStyle()).isEqualTo(project.getViewStyle());
-        });*/
+        sleep(1000); // TODO : нужный слип
 
         projectPage
                 .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE)

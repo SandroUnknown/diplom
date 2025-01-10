@@ -11,37 +11,35 @@ import java.util.Random;
 
 @Getter
 public enum Color {
-    BERRY_RED("berry_red", "berry-red", 30, "#b8256f"),
-    RED("red","red", 31, "#db4035"),
-    ORANGE("orange","orange", 32, "#ff9933"),
-    YELLOW("yellow", "yellow",33, "#fad000"),
-    OLIVE_GREEN("olive_green","olive-green", 34, "#afb83b"),
-    LIME_GREEN("lime_green","lime-green",35, "#7ecc49"),
-    GREEN("green", "green",36, "#299438"),
-    MINT_GREEN("mint_green","mint-green", 37, "#6accbc"),
-    TEAL("teal", "teal",38, "#158fad"),
-    SKY_BLUE("sky_blue","sky-blue", 39, "#14aaf5"),
-    LIGHT_BLUE("light_blue","light-blue", 40, "#96c3eb"),
-    BLUE("blue","blue", 41, "#4073ff"),
-    GRAPE("grape","grape", 42, "#884dff"),
-    VIOLET("violet","violet", 43, "#af38eb"),
-    LAVENDER("lavender","lavender", 44, "#eb96eb"),
-    MAGENTA("magenta","magenta", 45, "#e05194"),
-    SALMON("salmon","salmon", 46, "#ff8d85"),
-    CHARCOAL("charcoal","charcoal", 47, "#808080"),
-    GREY("grey","grey", 48, "#b8b8b8"),
-    TAUPE("taupe","taupe", 49, "#ccac93");
+    BERRY_RED("berry_red", "berry-red",  "Berry red"),
+    RED("red","red",  "Red"),
+    ORANGE("orange","orange",  "Orange"),
+    YELLOW("yellow", "yellow", "Yellow"),
+    OLIVE_GREEN("olive_green","olive-green",  "Olive green"),
+    LIME_GREEN("lime_green","lime-green", "Lime green"),
+    GREEN("green", "green", "Green"),
+    MINT_GREEN("mint_green","mint-green",  "Mint green"),
+    TEAL("teal", "teal", "Teal"),
+    SKY_BLUE("sky_blue","sky-blue",  "Sky blue"),
+    LIGHT_BLUE("light_blue","light-blue",  "Light blue"),
+    BLUE("blue","blue",  "Blue"),
+    GRAPE("grape","grape",  "Grape"),
+    VIOLET("violet","violet",  "Violet"),
+    LAVENDER("lavender","lavender",  "Lavender"),
+    MAGENTA("magenta","magenta",  "Magenta"),
+    SALMON("salmon","salmon",  "Salmon"),
+    CHARCOAL("charcoal","charcoal",  "Charcoal"),
+    GREY("grey","grey",  "Grey"),
+    TAUPE("taupe","taupe",  "Taupe");
 
     private final String title;
-    private final String cssTitle;
-    private final int id;
-    private final String hex;
+    private final String cssUiTitle;
+    private final String cssAndroidTitle;
 
-    Color(String title, String cssTitle, int id, String hex) {
+    Color(String title, String cssUiTitle, String cssAndroidTitle) {
         this.title = title;
-        this.cssTitle = cssTitle;
-        this.id = id;
-        this.hex = hex;
+        this.cssUiTitle = cssUiTitle;
+        this.cssAndroidTitle = cssAndroidTitle;
     }
 
     // TODO : работает метод??
@@ -54,24 +52,6 @@ public enum Color {
     public static Color getColorByTitle(String title) {
         for (Color color : Color.values()) {
             if (color.getTitle().equalsIgnoreCase(title)) {
-                return color;
-            }
-        }
-        return null;
-    }
-
-    public static Color getColorById(int id) {
-        for (Color color : Color.values()) {
-            if (color.getId() == id) {
-                return color;
-            }
-        }
-        return null;
-    }
-
-    public static Color getColorByHex(String hex) {
-        for (Color color : Color.values()) {
-            if (color.getHex().equalsIgnoreCase(hex)) {
                 return color;
             }
         }

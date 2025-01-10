@@ -3,6 +3,7 @@ package tests.api;
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
+import drivers.ApiConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import models.data.TestDataModel;
@@ -30,11 +31,7 @@ public class ApiTestBase {
         // TODO : хардкодить адрес с данными? === "data/ProjectTemplates2.json"
         TEMPLATES = new DataStorage("data/ProjectTemplates2.json").getTemplates();
 
-
-        // email -      testing.qaguru@gmail.com
-        // email pass - Asdf1234!
-        // acc pass -   Qwer1234!
-        // token -      62d652154d66834e51a6b776fd6f4fa79ab6e4a0
+        new ApiConfigDriver();
 
         // =============================================================================
 
@@ -53,8 +50,9 @@ public class ApiTestBase {
         // 03.01 - 2 часа 25 минут (12:55-14:20  //  15:55-16:55)*/
         // 05.01 - 3 часа 40 минут (10:30-11:30  //  12:10-13:30  //  14:00-14:25  //  15:20-16:15)
         // 07.01 - 5 часов 50 минут (12:45-14:15  //  14:30-14:45  //  15:00-15:50  //  16:05-18:30  //  19:40-20:30)
-        // 07.01 - 3 часа 00 минут (10:00-10:25  //  11:05-11:50  //  14:00-14:35  //  15:05-15:30  //  15:40-16:30)
-        //     ------- 70 часов 30 минут
+        // 09.01 - 8 часов 30 минут (13:20-15:50  //  17:35-19:25  //  19:45-23:55)
+        //----------------------
+        //     ------- 76 час 00 минут
 
         // =============================================================================
 
@@ -67,30 +65,6 @@ public class ApiTestBase {
 
         // =============================================================================
 
-
-
-        RestAssured.baseURI = "https://api.todoist.com/rest/v2/";
-        //RestAssured.basePath =
-
-
-        /*DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.browserCapabilities = capabilities;*/
-
-        /*String login = System.getProperty("login");
-        String rwhost = System.getProperty("rwhost");
-        if (login != null && rwhost != null) Configuration.remote = format("https://%s@%s/wd/hub", login, rwhost);*/
-
-       /* Configuration.baseUrl = "https://api.todoist.com/rest/v2";
-
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion", "125.0");
-        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");*/
     }
 
     @BeforeEach

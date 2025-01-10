@@ -1,15 +1,19 @@
 package tests.api;
 
 import data.DataCreator;
+import io.qameta.allure.*;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : может быть тест переменные передавать как параметры?

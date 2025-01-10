@@ -9,13 +9,15 @@ import lombok.Getter;
 
 @Getter
 public enum ViewStyle {
-    LIST("list"),
-    BOARD("board");
+    LIST("list", 1),
+    BOARD("board", 2);
 
     private final String title;
+    private final int number;
 
-    ViewStyle(String title) {
+    ViewStyle(String title, int number) {
         this.title = title;
+        this.number = number;
     }
 
     public static ViewStyle getViewStyleByTitle(String title) {

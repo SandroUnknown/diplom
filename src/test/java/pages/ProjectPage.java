@@ -1,14 +1,22 @@
 package pages;
 
+import api.ProjectsApi;
 import com.codeborne.selenide.SelenideElement;
 import enums.Color;
+import enums.ProjectField;
 import enums.ViewStyle;
 import io.qameta.allure.Step;
 import models.projects.ProjectRequestModel;
+import models.projects.ProjectResponseModel;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static enums.ProjectField.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectPage {
 
@@ -24,7 +32,7 @@ public class ProjectPage {
     }
 
     private SelenideElement getProjectColorForCheckElement(Color projectColor) {
-        String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssTitle());
+        String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssUiTitle());
         return projectListForCheckElement.$(projectColorSelector);
     }
 
@@ -96,7 +104,7 @@ public class ProjectPage {
     }
 
     @Step("Выбрать стиль отображения проекта.")
-    public ProjectPage selectViewStyle(ViewStyle viewStyle) {
+    public ProjectPage selectProjectViewStyle(ViewStyle viewStyle) {
         getSelectViewStyleElement(viewStyle).click();
         return this;
     }
@@ -163,7 +171,8 @@ public class ProjectPage {
     public ProjectPage apiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 
         List<ProjectField> fieldsList = Arrays.asList(checkFields);
-        ProjectResponseModel response = projectsApi.getAllProjects().get(0);
+        ProjectsApi projectsApi = new ProjectsApi();
+        ProjectResponseModel response = projectsApi.getAllProjects().get(1);
         
         if (fieldsList.contains(NAME)) {
             assertThat(testProjectData.getName()).isEqualTo(response.getName());

@@ -4,12 +4,17 @@ import api.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
+import drivers.ApiConfigDriver;
+import drivers.BrowserstackDriver;
+import drivers.WebConfigDriver;
+import helpers.attachments.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.AuthPage;
 import pages.ProjectPage;
@@ -44,31 +49,8 @@ public class WebTestBase {
         // TODO : хардкодить адрес с данными? === "data/ProjectTemplates2.json"
         TEMPLATES = new DataStorage("data/ProjectTemplates2.json").getTemplates();
 
-        RestAssured.baseURI = "https://api.todoist.com/rest/v2/";
-
-
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-
-        Configuration.pageLoadStrategy = "eager";
-        Configuration.browserCapabilities = capabilities;
-
-        /*String login = System.getProperty("login");
-        String rwhost = System.getProperty("rwhost");
-        if (login != null && rwhost != null) Configuration.remote = format("https://%s@%s/wd/hub", login, rwhost);*/
-
-        Configuration.baseUrl = "https://app.todoist.com";
-
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion", "125.0");
-        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-
-        Configuration.timeout = 7000;
-
-        //Configuration.holdBrowserOpen = true;
+        new ApiConfigDriver();
+        new WebConfigDriver();
     }
 
     @BeforeEach

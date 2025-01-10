@@ -16,7 +16,7 @@ import models.tasks.TaskResponseModel;
 
 public class DataCreator2 {
 
-    public static class Setup {
+    /*public static class Setup {
 
         private TestDataModel template;
         
@@ -211,7 +211,7 @@ public class DataCreator2 {
             //checkValidLabelsArray(convertedLabelsId, templateData, testData);
 
             // вернуть заполненный массив
-            return convertedLabelsId        
+            return convertedLabelsId;
         }
 
         private List<int> convertEnumLabelsToArray(TestDataModel templateData, ENUM labelsEnum) {
@@ -397,5 +397,5 @@ public class DataCreator2 {
             comment = api.createNewComment(request);
             testData.getCommentsInTasksInSections().add(comment);
         }
-    }
+    }*/
 }

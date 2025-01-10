@@ -2,10 +2,7 @@ package tests.api;
 
 import data.DataCreator;
 import enums.Color;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;

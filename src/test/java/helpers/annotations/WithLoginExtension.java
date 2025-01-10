@@ -2,9 +2,12 @@ package helpers.annotations;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
+import pages.AuthPage;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +26,13 @@ public class WithLoginExtension implements BeforeEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) {
 
-        SelenideElement emailElement = $("input[type='email']");
+        /*SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+        open();
+        AuthPage authPage = new AuthPage();
+        authPage.login();*/
+
+
+        /*SelenideElement emailElement = $("input[type='email']");
         SelenideElement passwordElement = $("input[type='password']");
 
         //open("/auth/login");
@@ -32,7 +41,7 @@ public class WithLoginExtension implements BeforeEachCallback {
         emailElement.setValue(USER_NAME);
         passwordElement.setValue(USER_PASSWORD).pressEnter();
 
-        ALL_COOKIES = WebDriverRunner.getWebDriver().manage().getCookies();
+        ALL_COOKIES = WebDriverRunner.getWebDriver().manage().getCookies();*/
 
 
 

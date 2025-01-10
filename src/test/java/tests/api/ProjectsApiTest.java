@@ -1,14 +1,18 @@
 package tests.api;
 
 import data.DataCreator;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static enums.Color.*;
 import static enums.ViewStyle.*;
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : может быть тест переменные передавать как параметры?

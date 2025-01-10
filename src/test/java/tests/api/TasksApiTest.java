@@ -1,16 +1,20 @@
 package tests.api;
 
 import data.DataCreator;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import models.tasks.TaskResponseModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 // TODO : может быть тест переменные передавать как параметры?
@@ -247,7 +251,7 @@ public class TasksApiTest extends ApiTestBase {
 
         tasksApi.deleteTask(taskId);
 
-        step("Проверить, что задача действительно была удалена, () -> {
+        step("Проверить, что задача действительно была удалена", () -> {
             int currentTaskCount = tasksApi.getAllTasks().size();
             assertThat(currentTaskCount).isEqualTo(createdTaskCount - 1);
         });
