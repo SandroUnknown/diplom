@@ -20,14 +20,14 @@ public interface WebConfig extends Config {
     @DefaultValue("1920x1080")
     String getBrowserSize();
 
-    @Key("web_remote_url")
+    /*@Key("web_remote_url")
     String getRemoteUrl();
 
     @Key("web_remote_login")
     String getRemoteLogin();
 
     @Key("web_remote_password")
-    String getRemotePassword();
+    String getRemotePassword();*/
 
     @Key("web_page_load_strategy")
     @DefaultValue("eager")

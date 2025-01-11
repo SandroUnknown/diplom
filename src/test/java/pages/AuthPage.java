@@ -14,8 +14,8 @@ public class AuthPage {
             passwordElement = $("input[type='password']");
 
     public AuthPage login() {
-        emailElement.setValue(credentials.getEmail());
-        passwordElement.setValue(credentials.getPassword()).pressEnter();
+        emailElement.setValue(credentials.getTodoistEmail());
+        passwordElement.setValue(credentials.getTodoistPassword()).pressEnter();
         return this;
     }
 }

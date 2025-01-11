@@ -15,4 +15,13 @@ public interface CredentialsConfig extends Config {
 
     @Key("todoist_token")
     String getTodoistToken();
+
+    @Key("web_remote_url")
+    String getRemoteHost();
+
+    @Key("web_remote_login")
+    String getRemoteHostLogin();
+
+    @Key("web_remote_password")
+    String getRemoteHostPassword();
 }

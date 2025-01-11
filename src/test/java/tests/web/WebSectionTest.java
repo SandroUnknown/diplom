@@ -20,10 +20,10 @@ public class WebSectionTest extends WebTestBase {
 
     // TODO : добавить тестов для других вариантов отображения
 
-    // TODO : убрать тег
+    // TODO : убрать тег + добавить везде КлианАп
     @Tag("WEB_FOR_TEST")
-    @CleanupTestData
     @Test
+    @CleanupTestData
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createSectionInEmptyProjectTest() {
 
