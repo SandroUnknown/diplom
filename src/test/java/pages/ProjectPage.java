@@ -82,7 +82,7 @@ public class ProjectPage {
         return this;
     }
 
-    @Step("Ввести имя проекта.")
+    @Step("Ввести имя проекта")
     public ProjectPage inputProjectName(String projectName) {
         projectNameInputElement.setValue(projectName);
         return this;

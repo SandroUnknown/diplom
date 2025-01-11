@@ -6,6 +6,8 @@ import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static enums.ProjectField.*;
+
 public class MobileProjectTests extends MobileTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
@@ -30,6 +32,9 @@ public class MobileProjectTests extends MobileTestBase {
         editProjectScreen.clickApplyButtonElement();
 
         // TODO : выполнить проверку UI
+        browseScreen.clickEditProject();
+        editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+
         // TODO : выполнить проверку API
     }
 }
