@@ -33,7 +33,7 @@ allure {
 }
 
 configurations {
-    withoutAppiumTests
+    //withoutAppiumTests
     appiumTests
 }
 
@@ -52,7 +52,7 @@ dependencies {
             "org.aeonbits.owner:owner:1.0.12"
     )
 
-    withoutAppiumTests(
+    /*withoutAppiumTests(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
@@ -64,7 +64,7 @@ dependencies {
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
             "org.aeonbits.owner:owner:1.0.12"
-    )
+    )*/
 
     appiumTests(
             //"org.junit.jupiter:junit-jupiter:$junitVersion",
