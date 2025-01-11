@@ -55,8 +55,20 @@ dependencies {
     )
 
     appiumTests(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            //"com.codeborne:selenide:$selenideVersion",
+            "com.codeborne:selenide:6.13.0",
+            //"com.codeborne:selenide:6.13.0",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "com.opencsv:opencsv:5.9",
+            "org.assertj:assertj-core:$assertjVersion",
+            "commons-io:commons-io:2.14.0",
+            "com.fasterxml.jackson.core:jackson-databind:2.18.2",
             "io.appium:java-client:8.3.0",
-            "com.codeborne:selenide:6.13.0"
+            "org.aeonbits.owner:owner:1.0.12",
     )
 }
 
