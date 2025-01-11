@@ -1,4 +1,4 @@
-package drivers;
+/*package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.mobile.LocalAndroidConfig;
@@ -70,4 +70,4 @@ public class EmulationDriver implements WebDriverProvider {
         }
         return app.getAbsolutePath();
     }
-}
+}*/

@@ -95,7 +95,6 @@ task mobile_android(type: Test) {
         includeTags("MOBILE_FOR_TEST")
     }
 
-    //useJUnitPlatform()
     testClassesDirs = sourceSets.test.output
     classpath = configurations.appiumTests + sourceSets.test.output
 }
