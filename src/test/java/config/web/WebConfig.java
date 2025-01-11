@@ -8,35 +8,35 @@ import org.aeonbits.owner.Config;
 })
 public interface WebConfig extends Config {
 
-    @Key("web.browser.name")
+    @Key("web_browser_name")
     @DefaultValue("chrome")
     String getBrowserName();
 
-    @Key("web.browser.version")
+    @Key("web_browser_version")
     @DefaultValue("125.0")
     String getBrowserVersion();
 
-    @Key("web.browser.size")
+    @Key("web_browser_size")
     @DefaultValue("1920x1080")
     String getBrowserSize();
 
-    @Key("web.remote_url")
+    @Key("web_remote_url")
     String getRemoteUrl();
 
-    @Key("web.remote_login")
+    @Key("web_remote_login")
     String getRemoteLogin();
 
-    @Key("web.remote_password")
+    @Key("web_remote_password")
     String getRemotePassword();
 
-    @Key("web.page_load_strategy")
+    @Key("web_page_load_strategy")
     @DefaultValue("eager")
     String getPageLoadStrategy();
 
-    @Key("web.timeout")
+    @Key("web_timeout")
     @DefaultValue("5000")
     long getTimeout();
 
-    @Key("web.base_url")
+    @Key("web_base_url")
     String getBaseUrl();
 }
