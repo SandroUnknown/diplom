@@ -8,6 +8,6 @@ import org.aeonbits.owner.Config;
 })
 public interface ApiConfig extends Config {
 
-    @Key("api.base_uri")
+    @Key("api_base_uri")
     String getBaseUri();
 }
