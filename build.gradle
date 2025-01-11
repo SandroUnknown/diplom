@@ -32,6 +32,11 @@ allure {
     }
 }
 
+configurations {
+    testImplementation
+    selenideTests
+}
+
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
@@ -47,8 +52,12 @@ dependencies {
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
             //"io.appium:java-client:8.3.0",
-            "io.appium:java-client:9.3.0",
             "org.aeonbits.owner:owner:1.0.12"
+    )
+
+    appiumTests(
+            "io.appium:java-client:8.3.0",
+            "com.codeborne:selenide:6.13.0"
     )
 }
 
@@ -80,4 +89,8 @@ task mobile_android(type: Test) {
     useJUnitPlatform {
         includeTags("MOBILE_FOR_TEST")
     }
+
+    //useJUnitPlatform()
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.appiumTests + sourceSets.test.output
 }
