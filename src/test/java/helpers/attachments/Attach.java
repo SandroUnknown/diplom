@@ -61,6 +61,8 @@ public class Attach {
 
         //String videoUrl = format("https://%s/video/%s.mp4", System.getProperty("rwhost"), sessionId());
         String videoUrl = format("https://%s:%s@%s/video/%s.mp4", login, pass, url, sessionId());
+        System.out.println("VIDEO : " + videoUrl);
+
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
