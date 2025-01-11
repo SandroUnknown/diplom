@@ -17,11 +17,20 @@ public interface CredentialsConfig extends Config {
     String getTodoistToken();
 
     @Key("web_remote_url")
-    String getRemoteHost();
+    String getRemoteWebHost();
 
     @Key("web_remote_login")
     String getRemoteHostLogin();
 
     @Key("web_remote_password")
     String getRemoteHostPassword();
+
+    @Key("browserstack_url")
+    String getBrowserstackHost();
+
+    @Key("browserstack_user")
+    String getBrowserstackUser();
+
+    @Key("browserstack_key")
+    String getBrowserstackKey();
 }

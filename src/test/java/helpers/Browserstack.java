@@ -1,5 +1,6 @@
 package helpers;
 
+import config.credentials.CredentialsConfig;
 import config.mobile.RemoveAndroidConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
@@ -14,14 +15,17 @@ import static io.restassured.RestAssured.given;
 
 public class Browserstack {
 
-    private static final RemoveAndroidConfig config =
-            ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+    /*private static final RemoveAndroidConfig config =
+            ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());*/
+
+    private static final CredentialsConfig credentialsConfig =
+            ConfigFactory.create(CredentialsConfig.class, System.getProperties());
 
     public static String videoUrl(String sessionId) {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
         return given()
-                .auth().basic(config.getBrowserstackUser(), config.getBrowserstackKey())
+                .auth().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
                 .get(url)
                 .then()
                 .log().status()
@@ -36,7 +40,7 @@ public class Browserstack {
         File file = new File(path);
 
         return given()
-                .auth().preemptive().basic(config.getBrowserstackUser(), config.getBrowserstackKey())
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
                 .contentType(ContentType.MULTIPART)
                 .multiPart("file", file)
                 .when()
@@ -54,7 +58,7 @@ public class Browserstack {
         //deleteApp("da02849da3fd88922ff6cde24571671034592527");
 
         String response = given()
-                .auth().preemptive().basic(config.getBrowserstackUser(), config.getBrowserstackKey())
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
                 .when()
                 .get("https://api-cloud.browserstack.com/app-automate/recent_apps")
                 .then()
@@ -80,7 +84,7 @@ public class Browserstack {
     private void deleteApp(String appId) {
 
         given()
-                .auth().preemptive().basic(config.getBrowserstackUser(), config.getBrowserstackKey())
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
                 .when()
                 .delete("https://api-cloud.browserstack.com/app-automate/app/delete/" + appId)
                 .then()

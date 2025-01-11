@@ -3,6 +3,7 @@ package tests.mobile;
 import enums.Color;
 import enums.ViewStyle;
 import models.projects.ProjectRequestModel;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class MobileProjectTests extends MobileTestBase {
@@ -14,6 +15,7 @@ public class MobileProjectTests extends MobileTestBase {
             .viewStyle(ViewStyle.BOARD)
             .build();
 
+    @Tag("MOBILE_FOR_TEST")
     @Test
     void createProjectTest() {
 

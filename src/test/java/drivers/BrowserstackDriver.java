@@ -1,6 +1,7 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.credentials.CredentialsConfig;
 import config.mobile.RemoveAndroidConfig;
 import helpers.Browserstack;
 import org.aeonbits.owner.ConfigFactory;
@@ -15,11 +16,13 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
 
-    private final RemoveAndroidConfig config;
+    private final RemoveAndroidConfig deviceConfig;
+    private final CredentialsConfig credentialsConfig;
 
     // TODO : переписать
     public BrowserstackDriver() {
-        this.config = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.deviceConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
 
     Browserstack browserstack = new Browserstack();
@@ -29,15 +32,18 @@ public class BrowserstackDriver implements WebDriverProvider {
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
         MutableCapabilities caps = new MutableCapabilities();
 
-        caps.setCapability("browserstack.user", config.getBrowserstackUser());
-        caps.setCapability("browserstack.key", config.getBrowserstackKey());
+        //caps.setCapability("browserstack.user", deviceConfig.getBrowserstackUser());
+        //caps.setCapability("browserstack.key", deviceConfig.getBrowserstackKey());
+        caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
+        caps.setCapability("browserstack.key", credentialsConfig.getBrowserstackKey());
         caps.setCapability("app", browserstack.checkUploadedAppsList());
-        caps.setCapability("device", config.getDevice());
-        caps.setCapability("os_version", config.getOsVersion());
+        caps.setCapability("device", deviceConfig.getDevice());
+        caps.setCapability("os_version", deviceConfig.getOsVersion());
 
         try {
             return new RemoteWebDriver(
-                    new URL(config.getRemoteUrl()), caps);
+                    //new URL(deviceConfig.getRemoteUrl()), caps);
+                    new URL(credentialsConfig.getBrowserstackHost()), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

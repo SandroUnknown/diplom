@@ -35,8 +35,8 @@ allure {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$selenideVersion",
-            //"com.codeborne:selenide:6.13.0",
+            //"com.codeborne:selenide:$selenideVersion",
+            "com.codeborne:selenide:6.13.0",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -71,5 +71,11 @@ task api(type: Test) {
 task web(type: Test) {
     useJUnitPlatform {
         includeTags("WEB_FOR_TEST")
+    }
+}
+
+task mobile_android(type: Test) {
+    useJUnitPlatform {
+        includeTags("MOBILE_FOR_TEST")
     }
 }
