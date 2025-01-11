@@ -35,6 +35,7 @@ public class LabelsApiTest extends ApiTestBase {
             .build();
     private final String newLabelName = "ОБНОВЛЁННАЯ МЕТКА";
 
+    @Tag("API_FOR_TEST")
     @Test
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой метки (с заполнением только имени)")
