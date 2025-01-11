@@ -33,8 +33,7 @@ allure {
 }
 
 configurations {
-    testImplementation
-    selenideTests
+    appiumTests
 }
 
 dependencies {
@@ -77,12 +76,18 @@ task api(type: Test) {
     useJUnitPlatform {
         includeTags("API_FOR_TEST")
     }
+
+    testClassesDirs = sourceSets.test.output  // Указываем, какие классы тестов использовать
+    classpath = configurations.testImplementation + sourceSets.test.output
 }
 
 task web(type: Test) {
     useJUnitPlatform {
         includeTags("WEB_FOR_TEST")
     }
+
+    testClassesDirs = sourceSets.test.output  // Указываем, какие классы тестов использовать
+    classpath = configurations.testImplementation + sourceSets.test.output
 }
 
 task mobile_android(type: Test) {
