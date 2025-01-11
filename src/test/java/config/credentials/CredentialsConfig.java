@@ -7,12 +7,12 @@ import org.aeonbits.owner.Config;
 })
 public interface CredentialsConfig extends Config {
 
-    @Key("todoist.email")
+    @Key("todoist_email")
     String getTodoistEmail();
 
-    @Key("todoist.password")
+    @Key("todoist_password")
     String getTodoistPassword();
 
-    @Key("todoist.token")
+    @Key("todoist_token")
     String getTodoistToken();
 }

@@ -33,7 +33,6 @@ public class Browserstack {
     public UploadAppResponseModel uploadAppToBrowserstack() {
 
         String path = "src/test/resources/apps/com.todoist-11342.apk";
-        //String path = "src/test/resources/apps/app-alpha-universal-release.apk";
         File file = new File(path);
 
         return given()
@@ -70,7 +69,6 @@ public class Browserstack {
 
             for (UploadedAppsListResponseModel app : jResponse) {
                 if (app.getAppName().equals("com.todoist-11342.apk")) {
-                //if (app.getAppName().equals("app-alpha-universal-release.apk")) {
                     return app.getAppUrl();
                 }
             }
