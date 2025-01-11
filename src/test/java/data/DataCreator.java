@@ -3,10 +3,9 @@ package data;
 import api.*;
 import io.qameta.allure.Step;
 import models.comments.CommentRequestModel;
-import models.comments.CommentResponseModel;
+import models.comments.LabelResponseModel;
 import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
-import models.labels.LabelResponseModel;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 import models.sections.SectionRequestModel;
@@ -168,7 +167,7 @@ public class DataCreator {
 
         LabelsApi api = new LabelsApi();
         for (int i = 0; i < templateData.getLabels().size(); i++) {
-            LabelResponseModel label = templateData.getLabels().get(i);
+            models.labels.LabelResponseModel label = templateData.getLabels().get(i);
             LabelRequestModel request = LabelRequestModel.builder()
                     .name(label.getName())
                     .color(label.getColor())
@@ -200,7 +199,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInProjects().size(); i++) {
-            CommentResponseModel comment = templateData.getCommentsInProjects().get(i);
+            LabelResponseModel comment = templateData.getCommentsInProjects().get(i);
             int projectNumber = Integer.parseInt(comment.getProjectId());
             String projectId = testData.getProjects().get(projectNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()
@@ -242,7 +241,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInTasksInProjects().size(); i++) {
-            CommentResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
+            LabelResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
             int taskNumber = Integer.parseInt(comment.getTaskId());
             String taskId = testData.getTasksInProjects().get(taskNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()
@@ -302,7 +301,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInTasksInSections().size(); i++) {
-            CommentResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
+            LabelResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
             int taskNumber = Integer.parseInt(comment.getTaskId());
             String taskId = testData.getTasksInSections().get(taskNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()

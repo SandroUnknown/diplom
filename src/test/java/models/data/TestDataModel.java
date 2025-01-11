@@ -1,8 +1,7 @@
 package models.data;
 
 import lombok.Data;
-import models.comments.CommentResponseModel;
-import models.labels.LabelResponseModel;
+import models.comments.LabelResponseModel;
 import models.projects.ProjectResponseModel;
 import models.sections.SectionResponseModel;
 import models.tasks.TaskResponseModel;
@@ -25,13 +24,13 @@ public class TestDataModel {
     }
 
 
-    private List<LabelResponseModel> labels;
+    private List<models.labels.LabelResponseModel> labels;
     private List<ProjectResponseModel> projects;
 
-        private List<CommentResponseModel> commentsInProjects;
+        private List<LabelResponseModel> commentsInProjects;
         private List<TaskResponseModel> tasksInProjects;
-            private List<CommentResponseModel> commentsInTasksInProjects;
+            private List<LabelResponseModel> commentsInTasksInProjects;
         private List<SectionResponseModel> sections;
             private List<TaskResponseModel> tasksInSections;
-                private List<CommentResponseModel> commentsInTasksInSections;
+                private List<LabelResponseModel> commentsInTasksInSections;
 }

@@ -1,21 +1,24 @@
 package api;
 
+import enums.CommentField;
 import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
 import models.comments.CommentRequestModel;
-import models.comments.CommentResponseModel;
+import models.comments.LabelResponseModel;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static enums.CommentField.*;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
 
-// TODO : Добавить аттачи в создание коммента?
 // TODO : Вероятно изменить перегрузки Создания и Получения (привести их к единому формату)
 public class CommentsApi extends BaseApi {
 
     @Step("Создать новый комментарий")
-    public CommentResponseModel createNewComment(CommentRequestModel commentData) {
+    public LabelResponseModel createNewComment(CommentRequestModel commentData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
@@ -24,10 +27,10 @@ public class CommentsApi extends BaseApi {
                 .post(COMMENTS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(CommentResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
-    public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
+    public LabelResponseModel createNewCommentInProject(String projectId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -37,12 +40,12 @@ public class CommentsApi extends BaseApi {
         return createNewComment(commentData);
     }
 
-    public CommentResponseModel createNewCommentInProject(CommentRequestModel commentData) {
+    public LabelResponseModel createNewCommentInProject(CommentRequestModel commentData) {
 
         return createNewComment(commentData);
     }
 
-    public CommentResponseModel createNewCommentInTask(String taskId, String commentContent) {
+    public LabelResponseModel createNewCommentInTask(String taskId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -53,7 +56,7 @@ public class CommentsApi extends BaseApi {
     }
 
     @Step("Обновить комментарий")
-    public CommentResponseModel updateComment(String commentId, String commentContent) {
+    public LabelResponseModel updateComment(String commentId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -66,11 +69,11 @@ public class CommentsApi extends BaseApi {
                 .post(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(CommentResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
     @Step("Получить комментарий")
-    public CommentResponseModel getComment(String commentId) {
+    public LabelResponseModel getComment(String commentId) {
 
         return given()
                 .spec(requestGetSpec)
@@ -78,11 +81,11 @@ public class CommentsApi extends BaseApi {
                 .get(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(CommentResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
     @Step("Получить все комментарии в проекте")
-    public List<CommentResponseModel> getAllCommentsInProject(String projectId) {
+    public List<LabelResponseModel> getAllCommentsInProject(String projectId) {
 
         RequestSpecification request = given()
                 .queryParam("project_id", projectId);
@@ -91,7 +94,7 @@ public class CommentsApi extends BaseApi {
     }
 
     @Step("Получить все комментарии в задаче")
-    public List<CommentResponseModel> getAllCommentsInTask(String taskId) {
+    public List<LabelResponseModel> getAllCommentsInTask(String taskId) {
 
         RequestSpecification request = given()
                 .queryParam("task_id", taskId);
@@ -99,7 +102,7 @@ public class CommentsApi extends BaseApi {
         return getAllComments(request);
     }
 
-    private List<CommentResponseModel> getAllComments(RequestSpecification request) {
+    private List<LabelResponseModel> getAllComments(RequestSpecification request) {
 
         return request
                 .spec(requestGetSpec)
@@ -109,7 +112,7 @@ public class CommentsApi extends BaseApi {
                 .spec(responseSpec200)
                 .extract()
                 .jsonPath()
-                .getList(".", CommentResponseModel.class);
+                .getList(".", LabelResponseModel.class);
     }
 
     @Step("Удалить комментарий")
@@ -121,5 +124,39 @@ public class CommentsApi extends BaseApi {
                 .delete(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec204);
+    }
+
+    @Step("Проверить комментарий")
+    public void checkComment(String commentId, CommentRequestModel expectedComment, CommentField... checkFields) {
+
+        List<CommentField> fieldsList = Arrays.asList(checkFields);
+        LabelResponseModel actualComment = getComment(commentId);
+
+        if (fieldsList.contains(CONTENT)) {
+            checkContent(actualComment.getContent(), expectedComment.getContent());
+        }
+
+        if (fieldsList.contains(PROJECT_ID)) {
+            checkProjectId(actualComment.getProjectId(), expectedComment.getProjectId());
+        }
+
+        if (fieldsList.contains(TASK_ID)) {
+            checkTaskId(actualComment.getTaskId(), expectedComment.getTaskId());
+        }
+    }
+
+    @Step("Проверить содержимое полученного комментария")
+    private void checkContent(String actualContent, String expectedContent) {
+        assertThat(actualContent).isEqualTo(expectedContent);
+    }
+
+    @Step("Проверить, что комментарий создан в правильном проекте")
+    private void checkProjectId(String actualContent, String expectedContent) {
+        assertThat(actualContent).isEqualTo(expectedContent);
+    }
+
+    @Step("Проверить, что комментарий создан в правильной задаче")
+    private void checkTaskId(String actualContent, String expectedContent) {
+        assertThat(actualContent).isEqualTo(expectedContent);
     }
 }

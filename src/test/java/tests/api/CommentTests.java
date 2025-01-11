@@ -4,7 +4,7 @@ import data.DataCreator;
 import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.comments.CommentRequestModel;
-import models.comments.CommentResponseModel;
+import models.comments.LabelResponseModel;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,20 +14,20 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static enums.CommentField.*;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка комментариев через API")
-@Tags({ @Tag("API"), @Tag("comment") })
+@Tags({@Tag("API"), @Tag("comment")})
 @DisplayName("Проверка комментариев через API")
 public class CommentTests extends ApiTestBase {
 
     private final CommentRequestModel testCommentData = CommentRequestModel.builder()
             .content("НОВЫЙ КОММЕНТАРИЙ")
             .build();
-
     private final CommentRequestModel updatedTestCommentData = CommentRequestModel.builder()
             .content("ОБНОВЛЁННЫЙ КОММЕНТАРИЙ")
             .build();
@@ -40,20 +40,15 @@ public class CommentTests extends ApiTestBase {
     void createNewCommentInProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
+        testCommentData.setProjectId(testData.getProjects().get(0).getId());
 
-        String projectId = testData.getProjects().get(0).getId();
+        String commentId = commentsApi.createNewCommentInProject(testCommentData).getId();
 
-        CommentResponseModel myCreatedComment =
-                commentsApi.createNewCommentInProject(projectId, testCommentData.getContent());
-
-        step("Проверить, что комментарий был корректно создан", () -> {
-            assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
-        });
+        commentsApi.checkComment(commentId, testCommentData, CONTENT, PROJECT_ID);
     }
 
     @Test
@@ -64,22 +59,17 @@ public class CommentTests extends ApiTestBase {
     void createNewCommentInTaskTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
+        testCommentData.setTaskId(testData.getTasksInSections().get(0).getId());
 
-        String taskId = testData.getTasksInSections().get(0).getId();
+        String commentId = commentsApi.createNewCommentInProject(testCommentData).getId();
 
-        CommentResponseModel myCreatedComment =
-                commentsApi.createNewCommentInTask(taskId, testCommentData.getContent());
-            
-        step("Проверить, что комментарий был корректно создан", () -> {
-            assertThat(myCreatedComment.getContent()).isEqualTo(testCommentData.getContent());
-        });
+        commentsApi.checkComment(commentId, testCommentData, CONTENT, TASK_ID);
     }
 
     @Test
@@ -90,7 +80,6 @@ public class CommentTests extends ApiTestBase {
     void updateCommentTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
@@ -98,15 +87,11 @@ public class CommentTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
                 .create();
-
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
-        CommentResponseModel myUpdatedComment =
-                commentsApi.updateComment(commentId, updatedTestCommentData.getContent());
+        commentsApi.updateComment(commentId, updatedTestCommentData.getContent());
 
-        step("Проверить, что комментарий был корректно обновлён", () -> {
-            assertThat(myUpdatedComment.getContent()).isEqualTo(updatedTestCommentData.getContent());
-        });
+        commentsApi.checkComment(commentId, updatedTestCommentData, CONTENT);
     }
 
     @Test
@@ -117,7 +102,6 @@ public class CommentTests extends ApiTestBase {
     void getCommentTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
@@ -125,11 +109,10 @@ public class CommentTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
                 .create();
-
-        CommentResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
+        LabelResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
-        CommentResponseModel myReceivedComment = commentsApi.getComment(commentId);
+        LabelResponseModel myReceivedComment = commentsApi.getComment(commentId);
 
         step("Проверить, что комментарий был корректно получен", () -> {
             assertThat(myReceivedComment.getContent()).isEqualTo(myCreatedComment.getContent());
@@ -144,21 +127,19 @@ public class CommentTests extends ApiTestBase {
     void getAllCommentsInProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createCommentsInProjects(true)
                 .create();
-
-        List<CommentResponseModel> myCreatedComments = testData.getCommentsInProjects();
+        List<LabelResponseModel> myCreatedComments = testData.getCommentsInProjects();
         String projectId = testData.getProjects().get(0).getId();
 
-        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
+        List<LabelResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
 
         step("Проверить, что комментарии были корректно получены", () -> {
             assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
-            for(int i = 0; i < myCreatedComments.size(); i++) {
+            for (int i = 0; i < myCreatedComments.size(); i++) {
                 assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
             }
         });
@@ -172,7 +153,6 @@ public class CommentTests extends ApiTestBase {
     void getAllCommentsInTaskTest() {
 
         int templateNumber = 1;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
@@ -180,21 +160,20 @@ public class CommentTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
                 .create();
-
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
-        for(CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+        List<LabelResponseModel> myCreatedComments = new ArrayList<>();
+        for (LabelResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
             if (myCreatedComment.getTaskId().equals(taskId)) {
                 myCreatedComments.add(myCreatedComment);
             }
         }
 
-        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
+        List<LabelResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
 
         step("Проверить, что комментарии были корректно получены", () -> {
             assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
-            for(int i = 0; i < myCreatedComments.size(); i++) {
+            for (int i = 0; i < myCreatedComments.size(); i++) {
                 assertThat(myReceivedComments.get(i).getContent()).isEqualTo(myCreatedComments.get(i).getContent());
             }
         });
@@ -208,7 +187,6 @@ public class CommentTests extends ApiTestBase {
     void deleteCommentTest() {
 
         int templateNumber = 1;
-
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
@@ -216,12 +194,11 @@ public class CommentTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
                 .create();
-
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
         String taskId = testData.getCommentsInTasksInSections().get(0).getTaskId();
 
-        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
-        for(CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+        List<LabelResponseModel> myCreatedComments = new ArrayList<>();
+        for (LabelResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
             if (myCreatedComment.getTaskId().equals(taskId)) {
                 myCreatedComments.add(myCreatedComment);
             }

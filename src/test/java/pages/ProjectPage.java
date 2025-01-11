@@ -167,6 +167,8 @@ public class ProjectPage {
         return this;
     }
 
+
+
     @Step("Проверить, что проект был корректно создан")
     public ProjectPage apiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 

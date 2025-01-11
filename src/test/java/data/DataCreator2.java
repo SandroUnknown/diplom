@@ -1,19 +1,5 @@
 package data;
 
-import api.*;
-import io.qameta.allure.Step;
-import models.comments.CommentRequestModel;
-import models.comments.CommentResponseModel;
-import models.data.TestDataModel;
-import models.labels.LabelRequestModel;
-import models.labels.LabelResponseModel;
-import models.projects.ProjectRequestModel;
-import models.projects.ProjectResponseModel;
-import models.sections.SectionRequestModel;
-import models.sections.SectionResponseModel;
-import models.tasks.TaskRequestModel;
-import models.tasks.TaskResponseModel;
-
 public class DataCreator2 {
 
     /*public static class Setup {

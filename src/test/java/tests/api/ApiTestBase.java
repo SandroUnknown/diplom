@@ -6,7 +6,6 @@ import data.DataStorage;
 import drivers.ApiConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class ApiTestBase {
 
-    static List<TestDataModel> TEMPLATES;
+    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
     ProjectsApi projectsApi = new ProjectsApi();
     SectionsApi sectionsApi = new SectionsApi();
@@ -24,23 +23,11 @@ public class ApiTestBase {
 
     @BeforeAll
     public static void setUp() {
-
-        // TODO : хардкодить адрес с данными? === "data/Templates.json"
-        TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
-
         new ApiConfigDriver();
     }
 
     @BeforeEach
     void preTest() {
-
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
-
-    /*@AfterEach
-    void cleanupTestData() {
-
-        projectsApi.deleteProjects();
-        labelsApi.deleteLabels();
-    }*/
 }
