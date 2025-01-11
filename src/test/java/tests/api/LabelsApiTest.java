@@ -35,6 +35,7 @@ public class LabelsApiTest extends ApiTestBase {
             .build();
     private final String newLabelName = "ОБНОВЛЁННАЯ МЕТКА";
 
+    // TODO : убрать тег
     @Tag("API_FOR_TEST")
     @Test
     @Severity(SeverityLevel.CRITICAL)

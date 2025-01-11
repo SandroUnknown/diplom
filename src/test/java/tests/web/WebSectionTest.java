@@ -6,6 +6,7 @@ import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
@@ -17,7 +18,9 @@ public class WebSectionTest extends WebTestBase {
             .build();
 
     // TODO : добавить тестов для других вариантов отображения
-    
+
+    // TODO : убрать тег
+    @Tag("WEB_FOR_TEST")
     @Test
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createSectionInEmptyProjectTest() {
