@@ -46,7 +46,8 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            "io.appium:java-client:8.3.0",
+            //"io.appium:java-client:8.3.0",
+            "io.appium:java-client:9.3.0",
             "org.aeonbits.owner:owner:1.0.12"
     )
 }
