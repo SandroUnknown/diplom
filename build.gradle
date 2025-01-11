@@ -8,7 +8,7 @@ group = 'gmail.sandrounknown1991'
 version = '1.0-SNAPSHOT'
 
 def junitVersion = "5.11.3",
-    selenideVersion = "7.5.1",
+    selenideVersion = "7.7.0",
     restAssuredVersion = "5.5.0",
     allureVersion = "2.29.0",
     assertjVersion = "3.24.2"
@@ -38,11 +38,9 @@ configurations {
 }
 
 dependencies {
-    testImplementation(
+    /*testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$selenideVersion",
-            "com.codeborne:selenide:7.7.0",
-            //"com.codeborne:selenide:6.13.0",
+            "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -51,15 +49,12 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            //"io.appium:java-client:8.3.0",
             "org.aeonbits.owner:owner:1.0.12"
-    )
+    )*/
 
     withoutAppiumTests(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$selenideVersion",
-            "com.codeborne:selenide:7.7.0",
-            //"com.codeborne:selenide:6.13.0",
+            "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -68,15 +63,12 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            //"io.appium:java-client:8.3.0",
             "org.aeonbits.owner:owner:1.0.12"
     )
 
     appiumTests(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$selenideVersion",
             "com.codeborne:selenide:6.13.0",
-            //"com.codeborne:selenide:6.13.0",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -107,7 +99,7 @@ task api(type: Test) {
         includeTags("API_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output  // Указываем, какие классы тестов использовать
+    testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
@@ -116,7 +108,7 @@ task web(type: Test) {
         includeTags("WEB_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output  // Указываем, какие классы тестов использовать
+    testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
