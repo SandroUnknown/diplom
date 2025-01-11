@@ -36,6 +36,9 @@ public class WebConfigDriver {
             String password = config.getRemotePassword();
             if (login != null && password != null) {
                 Configuration.remote = format("https://%s:%s@%s", login, password, url);
+
+                // TODO : удалить
+                System.out.println(Configuration.remote);
             }
 
             DesiredCapabilities capabilities = new DesiredCapabilities();

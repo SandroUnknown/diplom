@@ -62,12 +62,12 @@ public class WebTestBase {
     @AfterEach
     void addAttachments() {
 
-        /*Attach.screenshotAs("Last screenshot");
+        Attach.screenshotAs("Last screenshot");
         if (!Configuration.browser.equals("firefox")) {
             Attach.pageSource();
             Attach.browserConsoleLogs();
         }
-        Attach.addVideo();*/
+        Attach.addVideo();
         closeWebDriver();
     }
 
