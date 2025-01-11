@@ -74,7 +74,7 @@ public class WebTestBase {
     @AfterEach
     void cleanupTestData() {
 
-        projectsApi.deleteProjects();
-        labelsApi.deleteLabels();
+        /*projectsApi.deleteProjects();
+        labelsApi.deleteLabels();*/
     }
 }
