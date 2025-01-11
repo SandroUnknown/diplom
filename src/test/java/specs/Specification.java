@@ -1,5 +1,6 @@
 package specs;
 
+import drivers.CredentialsConfigDriver;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -11,9 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Specification {
 
-    // TODO : Убрать токен отсюда
-    static String token = "62d652154d66834e51a6b776fd6f4fa79ab6e4a0";
-
+    static String token = new CredentialsConfigDriver().getToken();
 
     public static final RequestSpecification requestGetSpec = with()
             .filter(withCustomTemplates())
@@ -38,20 +37,6 @@ public class Specification {
             .header("X-Request-Id", "$(uuidgen)")
             .contentType(JSON);
 
-
-
-
-
-
-
-
-
-
-    public static final RequestSpecification OLD_requestSpec = with()
-            .filter(withCustomTemplates())
-            .contentType(JSON)
-            .log().all();
-
     public static ResponseSpecification responseSpec(int statusCode){
         return new ResponseSpecBuilder()
                 .expectStatusCode(statusCode)
@@ -60,6 +45,5 @@ public class Specification {
     }
 
     public static final ResponseSpecification responseSpec200 = responseSpec(200);
-    public static final ResponseSpecification responseSpec201 = responseSpec(201);
     public static final ResponseSpecification responseSpec204 = responseSpec(204);
 }

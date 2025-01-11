@@ -2,6 +2,7 @@ package data;
 
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
 import io.qameta.allure.internal.shadowed.jackson.databind.PropertyNamingStrategy;
+import lombok.Getter;
 import models.data.TestDataModel;
 
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.List;
 
+@Getter
 public class DataStorage {
 
     private final List<TestDataModel> templates;
@@ -31,9 +33,5 @@ public class DataStorage {
         }
 
         return null;
-    }
-
-    public List<TestDataModel> getTemplates() {
-        return templates;
     }
 }
