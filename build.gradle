@@ -38,7 +38,7 @@ configurations {
 }
 
 dependencies {
-    /*testImplementation(
+    testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
@@ -50,7 +50,7 @@ dependencies {
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
             "org.aeonbits.owner:owner:1.0.12"
-    )*/
+    )
 
     withoutAppiumTests(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
@@ -67,18 +67,18 @@ dependencies {
     )
 
     appiumTests(
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            //"org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:6.13.0",
-            "io.rest-assured:rest-assured:$restAssuredVersion",
+            /*"io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "com.opencsv:opencsv:5.9",
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
-            "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            "io.appium:java-client:8.3.0",
-            "org.aeonbits.owner:owner:1.0.12",
+            "com.fasterxml.jackson.core:jackson-databind:2.18.2",*/
+            "io.appium:java-client:8.3.0"
+            //"org.aeonbits.owner:owner:1.0.12",
     )
 }
 
@@ -99,8 +99,8 @@ task api(type: Test) {
         includeTags("API_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    //testClassesDirs = sourceSets.test.output
+    //classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task web(type: Test) {
@@ -108,8 +108,8 @@ task web(type: Test) {
         includeTags("WEB_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    //testClassesDirs = sourceSets.test.output
+    //classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task mobile_android(type: Test) {
