@@ -25,8 +25,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @DisplayName("Проверка меток через API")
 public class LabelTests extends ApiTestBase {
 
-    private final Color defaultColor = Color.CHARCOAL;
-    private final boolean defaultFavorite = false;
     private final LabelRequestModel testLabelData = LabelRequestModel.builder()
             .name("МЕТКА")
             .color(Color.BLUE)
