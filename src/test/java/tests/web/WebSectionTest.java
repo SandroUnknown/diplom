@@ -1,7 +1,7 @@
 package tests.web;
 
 import data.DataCreator;
-import helpers.annotations.WithLogin;
+import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
@@ -22,7 +22,7 @@ public class WebSectionTest extends WebTestBase {
 
     // TODO : убрать тег
     @Tag("WEB_FOR_TEST")
-    @WithLogin
+    @CleanupTestData
     @Test
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createSectionInEmptyProjectTest() {
