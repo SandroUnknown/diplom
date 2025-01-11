@@ -85,7 +85,7 @@ public class DataCreator {
             return this;
         }
 
-        @Step("[API] Подготовить данные для теста.")
+        @Step("Подготовить данные для теста")
         public TestDataModel create() {
 
             DataCreator mainClass = new DataCreator();

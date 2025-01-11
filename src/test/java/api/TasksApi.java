@@ -13,7 +13,7 @@ import static specs.Specification.*;
 
 public class TasksApi extends BaseApi {
 
-    @Step("[API] Создать новую задачу.")
+    @Step("Создать новую задачу")
     public TaskResponseModel createNewTask(TaskRequestModel taskData) {
 
         return given()
@@ -36,7 +36,7 @@ public class TasksApi extends BaseApi {
         return createNewTask(taskData);
     }
 
-    @Step("[API] Обновить задачу.")
+    @Step("Обновить задачу")
     public TaskResponseModel updateTask(String taskId, TaskRequestModel taskData) {
 
         return given()
@@ -58,7 +58,7 @@ public class TasksApi extends BaseApi {
         return updateTask(taskId, taskData);
     }
 
-    @Step("[API] Получить задачу.")
+    @Step("Получить задачу")
     public TaskResponseModel getTask(String taskId) {
 
         return given()
@@ -70,7 +70,7 @@ public class TasksApi extends BaseApi {
                 .extract().as(TaskResponseModel.class);
     }
 
-    @Step("[API] Получить задачи (с фильтром).")
+    @Step("Получить задачи (с фильтром)")
     public List<TaskResponseModel> getTasksWithFilter(HashMap<String, String> params) {
 
         // TODO : заменить на enum?
@@ -102,7 +102,7 @@ public class TasksApi extends BaseApi {
                 .getList(".", TaskResponseModel.class);
     }
 
-    @Step("[API] Получить все задачи пользователя.")
+    @Step("Получить все задачи пользователя")
     public List<TaskResponseModel> getAllTasks() {
 
         return given()
@@ -116,7 +116,7 @@ public class TasksApi extends BaseApi {
                 .getList(".", TaskResponseModel.class);
     }
 
-    @Step("[API] Закрыть задачу.")
+    @Step("Закрыть задачу")
     public void closeTask(String taskId) {
 
         given()
@@ -127,7 +127,7 @@ public class TasksApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-    @Step("[API] Открыть ранее закрытую задачу.")
+    @Step("Открыть ранее закрытую задачу")
     public void reopenTask(String taskId) {
 
         given()
@@ -138,7 +138,7 @@ public class TasksApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-    @Step("[API] Удалить задачу.")
+    @Step("Удалить задачу")
     public void deleteTask(String taskId) {
 
         given()

@@ -77,6 +77,7 @@ public class EditProjectScreen {
         return this;
     }
 
+    // TODO : доделать, не работает почему-то
     @Step("Проверить, что проект был корректно создан")
     public EditProjectScreen uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 

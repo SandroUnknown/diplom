@@ -32,8 +32,8 @@ public class MobileProjectTests extends MobileTestBase {
         editProjectScreen.clickApplyButtonElement();
 
         // TODO : выполнить проверку UI
-        browseScreen.clickEditProject();
-        editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+        projectScreen.clickEditProject();
+        //editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API
     }

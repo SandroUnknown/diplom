@@ -24,7 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Feature("Проверка задач через API")
 @Tags({ @Tag("API"), @Tag("task") })
 @DisplayName("Проверка задач через API")
-public class TasksApiTest extends ApiTestBase {
+public class TaskTests extends ApiTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
             .content("НОВАЯ ЗАДАЧА")

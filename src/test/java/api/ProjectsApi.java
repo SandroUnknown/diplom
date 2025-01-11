@@ -11,7 +11,7 @@ import static specs.Specification.*;
 
 public class ProjectsApi extends BaseApi {
 
-    @Step("[API] Создать новый проект.")
+    @Step("Создать новый проект")
     public ProjectResponseModel createNewProject(ProjectRequestModel projectData) {
 
         return given()
@@ -43,7 +43,7 @@ public class ProjectsApi extends BaseApi {
         return createNewProject(projectData);
     }
 
-    @Step("[API] Обновить проект.")
+    @Step("Обновить проект")
     public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
 
         return given()
@@ -65,7 +65,7 @@ public class ProjectsApi extends BaseApi {
         return updateProject(projectId, projectData);
     }
 
-    @Step("[API] Получить проект.")
+    @Step("Получить проект")
     public ProjectResponseModel getProject(String projectId) {
 
         return given()
@@ -77,7 +77,7 @@ public class ProjectsApi extends BaseApi {
                 .extract().as(ProjectResponseModel.class);
     }
 
-    @Step("[API] Получить все проекты.")
+    @Step("Получить все проекты")
     public List<ProjectResponseModel> getAllProjects() {
 
         return given()
@@ -91,7 +91,7 @@ public class ProjectsApi extends BaseApi {
                 .getList(".", ProjectResponseModel.class);
     }
 
-    @Step("[API] Удалить проект.")
+    @Step("Удалить проект")
     public void deleteProject(String projectId) {
 
         given()
@@ -102,7 +102,7 @@ public class ProjectsApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-    @Step("[API] Удалить список проектов.")
+    @Step("Удалить список проектов")
     public void deleteProjects(List<String> projectsId) {
 
         for (String projectId : projectsId) {
@@ -110,7 +110,7 @@ public class ProjectsApi extends BaseApi {
         }
     }
 
-    @Step("[API] Удалить все проекты.")
+    @Step("Удалить все проекты")
     public void deleteProjects() {
 
         List<ProjectResponseModel> projects = getAllProjects();

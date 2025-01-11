@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import screens.AuthScreen;
 import screens.BrowseScreen;
 import screens.EditProjectScreen;
+import screens.ProjectScreen;
 import screens.components.BottomMenu;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
@@ -21,6 +22,7 @@ public class MobileTestBase {
     AuthScreen authScreen = new AuthScreen();
     BottomMenu bottomMenu = new BottomMenu();
     BrowseScreen browseScreen = new BrowseScreen();
+    ProjectScreen projectScreen = new ProjectScreen();
     EditProjectScreen editProjectScreen = new EditProjectScreen();
 
 

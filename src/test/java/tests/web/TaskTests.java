@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class WebTaskTest extends WebTestBase {
+public class TaskTests extends WebTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
             .content("НОВАЯ ЗАДАЧА")

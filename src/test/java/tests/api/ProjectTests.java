@@ -22,7 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Feature("Проверка проектов через API")
 @Tags({ @Tag("API"), @Tag("project") })
 @DisplayName("Проверка проектов через API")
-public class ProjectsApiTest extends ApiTestBase {
+public class ProjectTests extends ApiTestBase {
         
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
                 .name("НОВЫЙ ПРОЕКТ")

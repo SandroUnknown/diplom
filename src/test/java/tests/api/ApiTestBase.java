@@ -12,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.closeWebDriver;
-
 public class ApiTestBase {
 
     static List<TestDataModel> TEMPLATES;
@@ -27,8 +25,8 @@ public class ApiTestBase {
     @BeforeAll
     public static void setUp() {
 
-        // TODO : хардкодить адрес с данными? === "data/ProjectTemplates2.json"
-        TEMPLATES = new DataStorage("data/ProjectTemplates2.json").getTemplates();
+        // TODO : хардкодить адрес с данными? === "data/Templates.json"
+        TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
         new ApiConfigDriver();
     }
@@ -39,22 +37,10 @@ public class ApiTestBase {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
-    @AfterEach
-    void addAttachments() {
-
-        /*Attach.screenshotAs("Last screenshot");
-        if (!Configuration.browser.equals("firefox")) {
-            Attach.pageSource();
-            Attach.browserConsoleLogs();
-        }
-        Attach.addVideo();*/
-        closeWebDriver();
-    }
-
-    @AfterEach
+    /*@AfterEach
     void cleanupTestData() {
 
         projectsApi.deleteProjects();
         labelsApi.deleteLabels();
-    }
+    }*/
 }

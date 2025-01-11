@@ -12,7 +12,7 @@ import static specs.Specification.*;
 
 public class SectionsApi extends BaseApi {
 
-    @Step("[API] Создать новый раздел.")
+    @Step("Создать новый раздел")
     public SectionResponseModel createNewSection(SectionRequestModel sectionData) {
 
         return given()
@@ -35,7 +35,7 @@ public class SectionsApi extends BaseApi {
         return createNewSection(sectionData);
     }
 
-    @Step("[API] Обновить раздел.")
+    @Step("Обновить раздел")
     public SectionResponseModel updateSection(String sectionId, SectionRequestModel sectionData) {
 
         return given()
@@ -57,7 +57,7 @@ public class SectionsApi extends BaseApi {
         return updateSection(sectionId, sectionData);
     }
 
-    @Step("[API] Получить раздел.")
+    @Step("Получить раздел")
     public SectionResponseModel getSection(String sectionId) {
 
         return given()
@@ -69,7 +69,7 @@ public class SectionsApi extends BaseApi {
                 .extract().as(SectionResponseModel.class);
     }
 
-    @Step("[API] Получить все разделы в проекте.")
+    @Step("Получить все разделы в проекте")
     public List<SectionResponseModel> getAllSections(String projectId) {
 
         RequestSpecification request = given()
@@ -78,7 +78,7 @@ public class SectionsApi extends BaseApi {
         return getAllSections(request);
     }
 
-    @Step("[API] Получить все разделы во всех проектах.")
+    @Step("Получить все разделы во всех проектах")
     public List<SectionResponseModel> getAllSections() {
 
         RequestSpecification request = given();
@@ -99,7 +99,7 @@ public class SectionsApi extends BaseApi {
                 .getList(".", SectionResponseModel.class);
     }
 
-    @Step("[API] Удалить раздел.")
+    @Step("Удалить раздел")
     public void deleteSection(String sectionId) {
 
         given()
@@ -110,7 +110,7 @@ public class SectionsApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-    @Step("[API] Удалить все разделы в проекте.")
+    @Step("Удалить все разделы в проекте")
     public void deleteAllSectionInProject(String projectId) {
 
         List<SectionResponseModel> sections = getAllSections(projectId);
@@ -119,5 +119,4 @@ public class SectionsApi extends BaseApi {
             deleteSection(section.getId());
         }
     }
-
 }

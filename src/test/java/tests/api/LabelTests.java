@@ -2,6 +2,7 @@ package tests.api;
 
 import data.DataCreator;
 import enums.Color;
+import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
@@ -16,14 +17,12 @@ import java.util.List;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : может быть тест переменные передавать как параметры?
-
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка меток через API")
 @Tags({ @Tag("API"), @Tag("label") })
 @DisplayName("Проверка меток через API")
-public class LabelsApiTest extends ApiTestBase {
+public class LabelTests extends ApiTestBase {
 
     private final Color defaultColor = Color.CHARCOAL;
     private final boolean defaultFavorite = false;
@@ -38,6 +37,7 @@ public class LabelsApiTest extends ApiTestBase {
     // TODO : убрать тег
     @Tag("API_FOR_TEST")
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой метки (с заполнением только имени)")
     @DisplayName("Создать новую метку (с заполнением только имени)")
@@ -52,8 +52,8 @@ public class LabelsApiTest extends ApiTestBase {
         });
     }
 
-    // TODO : сделать параметризованным?
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой метки (с заполнением всех параметров)")
     @DisplayName("Создать новую метку (с заполнением всех параметров)")
@@ -70,6 +70,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление имени метки по ID")
     @DisplayName("Обновить имя метки по ID")
@@ -92,6 +93,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение метки по ID")
     @DisplayName("Получить метку по ID")
@@ -118,6 +120,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех меток")
     @DisplayName("Получить все метки пользователя")
@@ -146,6 +149,7 @@ public class LabelsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление метки по ID")
     @DisplayName("Удалить метку по ID")

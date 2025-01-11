@@ -1,6 +1,7 @@
 package tests.api;
 
 import data.DataCreator;
+import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.comments.CommentRequestModel;
 import models.comments.CommentResponseModel;
@@ -16,14 +17,12 @@ import java.util.List;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : может быть тест переменные передавать как параметры?
-
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка комментариев через API")
 @Tags({ @Tag("API"), @Tag("comment") })
 @DisplayName("Проверка комментариев через API")
-public class CommentsApiTest extends ApiTestBase {
+public class CommentTests extends ApiTestBase {
 
     private final CommentRequestModel testCommentData = CommentRequestModel.builder()
             .content("НОВЫЙ КОММЕНТАРИЙ")
@@ -34,6 +33,7 @@ public class CommentsApiTest extends ApiTestBase {
             .build();
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового комментария в проекте")
     @DisplayName("Создать новый комментарий в проекте")
@@ -57,6 +57,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового комментария в задаче")
     @DisplayName("Создать новый комментарий в задаче")
@@ -82,6 +83,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление комментария по ID")
     @DisplayName("Обновить комментарий по ID")
@@ -108,6 +110,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение комментария по ID")
     @DisplayName("Получить комментарий по ID")
@@ -134,6 +137,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех комментариев в проекте")
     @DisplayName("Получить все комментарии в проекте")
@@ -161,6 +165,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех комментариев в задаче")
     @DisplayName("Получить все комментарии в задаче")
@@ -196,6 +201,7 @@ public class CommentsApiTest extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление комментария по ID")
     @DisplayName("Удалить комментарий по ID")

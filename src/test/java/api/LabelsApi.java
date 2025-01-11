@@ -3,7 +3,6 @@ package api;
 import io.qameta.allure.Step;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
-import models.projects.ProjectResponseModel;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import static specs.Specification.*;
 // TODO : вероятно добавить методы для ОБЩИХ меток? (аразобраться как их использовать) [опционально]
 public class LabelsApi extends BaseApi {
 
-    @Step("[API] Создать новую персональную метку.")
+    @Step("Создать новую персональную метку")
     public LabelResponseModel createNewLabel(LabelRequestModel labelData) {
 
         return given()
@@ -36,7 +35,7 @@ public class LabelsApi extends BaseApi {
         return createNewLabel(labelData);
     }
 
-    @Step("[API] Обновить персональную метку.")
+    @Step("Обновить персональную метку")
     public LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
 
         return given()
@@ -58,7 +57,7 @@ public class LabelsApi extends BaseApi {
         return updateLabel(labelId, labelData);
     }
 
-    @Step("[API] Получить персональную метку.")
+    @Step("Получить персональную метку")
     public LabelResponseModel getLabel(String labelId) {
 
         return given()
@@ -70,7 +69,7 @@ public class LabelsApi extends BaseApi {
                 .extract().as(LabelResponseModel.class);
     }
 
-    @Step("[API] Получить все персональные метки пользователя.")
+    @Step("Получить все персональные метки пользователя")
     public List<LabelResponseModel> getAllLabels() {
 
         return given()
@@ -84,7 +83,7 @@ public class LabelsApi extends BaseApi {
                 .getList(".", LabelResponseModel.class);
     }
 
-    @Step("[API] Удалить персональную метку.")
+    @Step("Удалить персональную метку")
     public void deleteLabel(String labelId) {
 
         given()
@@ -95,7 +94,7 @@ public class LabelsApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-    @Step("[API] Удалить все персональные метки.")
+    @Step("Удалить все персональные метки")
     public void deleteLabels() {
 
         List<LabelResponseModel> labels = getAllLabels();

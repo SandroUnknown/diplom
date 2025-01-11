@@ -14,7 +14,7 @@ import static specs.Specification.*;
 // TODO : Вероятно изменить перегрузки Создания и Получения (привести их к единому формату)
 public class CommentsApi extends BaseApi {
 
-    @Step("[API] Создать новый комментарий.")
+    @Step("Создать новый комментарий")
     public CommentResponseModel createNewComment(CommentRequestModel commentData) {
 
         return given()
@@ -27,7 +27,6 @@ public class CommentsApi extends BaseApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    // TODO : разобраться...
     public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
@@ -53,7 +52,7 @@ public class CommentsApi extends BaseApi {
         return createNewComment(commentData);
     }
 
-    @Step("[API] Обновить комментарий.")
+    @Step("Обновить комментарий")
     public CommentResponseModel updateComment(String commentId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
@@ -70,7 +69,7 @@ public class CommentsApi extends BaseApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    @Step("[API] Получить комментарий.")
+    @Step("Получить комментарий")
     public CommentResponseModel getComment(String commentId) {
 
         return given()
@@ -82,7 +81,7 @@ public class CommentsApi extends BaseApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    @Step("[API] Получить все комментарии в проекте.")
+    @Step("Получить все комментарии в проекте")
     public List<CommentResponseModel> getAllCommentsInProject(String projectId) {
 
         RequestSpecification request = given()
@@ -91,7 +90,7 @@ public class CommentsApi extends BaseApi {
         return getAllComments(request);
     }
 
-    @Step("[API] Получить все комментарии в задаче.")
+    @Step("Получить все комментарии в задаче")
     public List<CommentResponseModel> getAllCommentsInTask(String taskId) {
 
         RequestSpecification request = given()
@@ -113,7 +112,7 @@ public class CommentsApi extends BaseApi {
                 .getList(".", CommentResponseModel.class);
     }
 
-    @Step("[API] Удалить комментарий.")
+    @Step("Удалить комментарий")
     public void deleteComment(String commentId) {
 
         given()

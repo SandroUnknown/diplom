@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
-public class WebSectionTest extends WebTestBase {
+public class SectionTests extends WebTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()
             .name("НОВЫЙ РАЗДЕЛ")

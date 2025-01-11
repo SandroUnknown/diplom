@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static enums.ProjectField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class WebProjectsTest extends WebTestBase {
+public class ProjectTests extends WebTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
             .name("НОВЫЙ ПРОЕКТ")

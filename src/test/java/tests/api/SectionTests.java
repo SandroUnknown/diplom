@@ -23,7 +23,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Feature("Проверка разделов через API")
 @Tags({ @Tag("API"), @Tag("section") })
 @DisplayName("Проверка разделов через API")
-public class SectionsApiTest extends ApiTestBase {
+public class SectionTests extends ApiTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()
             .name("НОВЫЙ РАЗДЕЛ")
