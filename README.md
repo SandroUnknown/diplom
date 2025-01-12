@@ -208,13 +208,13 @@
 > 2. Выбрать необходимые [параметры](#console_params)
 > 3. Нажать кнопку `▷ Build`
 >
-> | ![jenkins_status](/media/screenshots/jenkins_status.png) | ![jenkins_build](/media/screenshots/jenkins_build.png) |
+> | ![jenkins_status](/readme/media/screenshots/jenkins_status.png) | ![jenkins_build](/media/screenshots/jenkins_build.png) |
 > |-|-|
 >
 > После выполнения сборки в разделе `🔆 Build History` можно будет детально изучить прошедние тесты:
 > * Посмотреть лог
-> * Посмотреть &nbsp; [<img src="media/icons/Allure.svg" width="16" height="16" alt="Allure Report"/>   Allure Report](#allure-report)
-> * Посмотреть &nbsp; [<img src="media/icons/AllureTestOps.svg" width="16" height="16" alt="Allure TestOps"/>   Allure TestOps](#allure-testops)
+> * Посмотреть &nbsp; [<img src="readme/media/icons/Allure.svg" width="16" height="16" alt="Allure Report"/>   Allure Report](#allure-report)
+> * Посмотреть &nbsp; [<img src="readme/media/icons/AllureTestOps.svg" width="16" height="16" alt="Allure TestOps"/>   Allure TestOps](#allure-testops)
 
 </br>
 
@@ -229,20 +229,20 @@
 >
 > **Основная страница отчёта** `(Overview)`
 >
-> | ![allure report overview](/media/screenshots/allure_report_overview.png) |
+> | ![allure report overview](/readme/media/screenshots/allure_report_overview.png) |
 > |-|
 > </br>
 >
 > **Тест-кейсы** `(Suites)`</br>
 > _(с шагами и вложениями)_
 > 
-> | ![allure report suites](/media/screenshots/allure_report_suites.png) |
+> | ![allure report suites](/readme/media/screenshots/allure_report_suites.png) |
 > |-|
 > </br>
 >
 > **Графики** `(Graphs)`
 >
-> | ![allure report graphs](/media/screenshots/allure_report_graphs.png) |
+> | ![allure report graphs](/readme/media/screenshots/allure_report_graphs.png) |
 > |-|
 
 </br>
@@ -259,19 +259,19 @@
 > **Один из запусков** `(Launches)`</br>
 > _(с шагами пройденного теста)_
 > 
-> | ![allure testops launches](/media/screenshots/allure_testops_launches.png) |
+> | ![allure testops launches](/readme/media/screenshots/allure_testops_launches.png) |
 > |-|
 > </br>
 >
 > **Список авто тестов**
 > 
-> | ![allure testops auto tests](/media/screenshots/allure_testops_auto_tests.png) |
+> | ![allure testops auto tests](/readme/media/screenshots/allure_testops_auto_tests.png) |
 > |-|
 > </br>
 >
 > **Список ручных тестов**
 > 
-> | ![allure testops manual test](/media/screenshots/allure_testops_manual_test.png) |
+> | ![allure testops manual test](/readme/media/screenshots/allure_testops_manual_test.png) |
 > |-|
 
 </br>
@@ -287,7 +287,7 @@
 >
 > **Основная страница `Jira`**</br>
 > 
-> | ![jira](/media/screenshots/jira.png) |
+> | ![jira](/readme/media/screenshots/jira.png) |
 > |-|
 
 </br>
@@ -304,7 +304,7 @@
 > **После выполнения теста (при запуске на Jenkins) `Telegram-бот` пришлет оповещение в специальный Telegram-канал**</br>
 > _(с краткой статистикой пройденных тестов)_
 > 
-> | ![telegram](/media/screenshots/telegram_1.png) | ![telegram](/media/screenshots/telegram_2.png) |
+> | ![telegram](/readme/media/screenshots/telegram_1.png) | ![telegram](/readme/media/screenshots/telegram_2.png) |
 > |-|-|
 
 </br>
@@ -320,19 +320,19 @@
 >
 > **Проверка меню на главной странице**</br>
 > 
-> | ![menu test](/media/gif/menu_test.gif) |
+> | ![menu test](/readme/media/gif/menu_test.gif) |
 > |-|
 > </br>
 >
 > **Проверка партнеров из города Москва**
 > 
-> | ![check partner test](/media/gif/check_partner_test.gif) |
+> | ![check partner test](/readme/media/gif/check_partner_test.gif) |
 > |-|
 > </br>
 >
 > **Поиск партнера ЭМИТЭЛ**
 > 
-> | ![search test](/media/gif/search_test.gif) |
+> | ![search test](/readme/media/gif/search_test.gif) |
 > |-|
 
 </br>
@@ -343,4 +343,4 @@
 
 </br>
 
-<a><p align="right">[`Petyukov Alexander © 2024`](https://github.com/SandroUnknown)</p></a>
+<a><p align="right">[`Petyukov Alexander © 2025`](https://github.com/SandroUnknown)</p></a>
