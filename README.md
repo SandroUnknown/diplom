@@ -1,6 +1,6 @@
 <a name="start"></a>
-# <p align="center">Демонстрационный проект по автоматизации</br>тестирования для компании [`«ФЛАТ»`](https://flat-soft.ru/)</p>
-<a href="https://flat-soft.ru/"><img src="media/logos/face.png" width="100%" alt="FLAT-SOFT"/></a>  
+# <p align="center">Дипломный проект</br>по автоматизации тестировани</br>приложения [`«Todoist»`](https://todoist.com/ru)</p>
+<a href="https://todoist.com/ru"><img src="media/logos/face.png" width="100%" alt="Todoist"/></a>  
 
 > _<p align="justify"><sub><a href="https://flat-soft.ru/"><img src="media/logos/logo_flat.png" width="128" alt="FLAT-SOFT"/></a></sub></p>_
 > _<p align="justify"> &emsp;&emsp;&emsp;&emsp; — **российский разработчик** линейки программных продуктов для организации современных корпоративных коммуникаций и оперативного взаимодействия на территориально-распределенных объектах.</p>_
