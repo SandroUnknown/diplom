@@ -1,6 +1,6 @@
 <a name="start"></a>
 # <p align="center">Дипломный проект</br>по автоматизации тестировани</br>приложения [`«Todoist»`](https://todoist.com/ru)</p>
-<a href="https://todoist.com/ru"><img src="readme/media/1.png" width="80%" alt="Todoist"/></a>  
+<a href="https://todoist.com/ru"><img src="readme/media/1.png" width="100%" alt="Todoist"/></a>  
 
 > _<p align="justify"><sub><a href="https://todoist.com/ru"><img src="readme/media/logo1.png" width="128" alt="Todoist"/></a></sub></p>_
 > _<p align="justify"> &emsp;&emsp;&emsp;&emsp; — **веб-сервис и набор программного обеспечения** для управления задачами.</p>_
