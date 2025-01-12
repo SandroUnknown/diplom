@@ -160,7 +160,7 @@
 >
 > <a name="footnote-1"> [` 1 `](#item-1): бла бла </a><br>
 > <a name="footnote-2"> [` 2: `](#item-2) бла бла </a><br>
-> <a name="footnote-3"> [`_3_`](#item-3) бла бла </a><br>
+> <a name="footnote-3"> [`| 3 |`](#item-3) бла бла </a><br>
 
 
 <a><p align="right">[<sup>`Перейти к содержанию`</sup>](#table-of-contents)</p></a>
