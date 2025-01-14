@@ -7,8 +7,6 @@ import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.back;
-import static com.codeborne.selenide.Selenide.sleep;
 import static enums.ProjectField.*;
 
 public class MobileProjectTests extends MobileTestBase {
@@ -25,19 +23,23 @@ public class MobileProjectTests extends MobileTestBase {
     @CleanupTestData
     void createProjectTest() {
 
-        authScreen.login();
+        authScreen
+                .login();
+        bottomMenu
+                .clickBrowse();
+        browseScreen
+                .clickCreateProject();
+        editProjectScreen
+                .inputProjectName(testProjectData.getName())
+                .selectProjectColor(testProjectData.getColor())
+                .addToFavorite(testProjectData.isFavorite())
+                .selectProjectViewStyle(testProjectData.getViewStyle())
+                .clickApplyButtonElement();
 
-        bottomMenu.clickBrowse();
-        browseScreen.clickCreateProject();
-        editProjectScreen.inputProjectName(testProjectData.getName());
-        editProjectScreen.selectProjectColor(testProjectData.getColor());
-        editProjectScreen.addToFavorite(testProjectData.isFavorite());
-        editProjectScreen.selectProjectViewStyle(testProjectData.getViewStyle());
-        editProjectScreen.clickApplyButtonElement();
-
-        // TODO : выполнить проверку UI
-        projectScreen.clickEditProject();
-        editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+        projectScreen
+                .clickEditProject();
+        editProjectScreen
+                .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API
     }

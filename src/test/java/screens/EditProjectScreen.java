@@ -11,7 +11,6 @@ import org.openqa.selenium.By;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static enums.ProjectField.*;
 import static enums.ProjectField.VIEW_STYLE;
@@ -41,7 +40,6 @@ public class EditProjectScreen {
             "//android.widget.TextView[@resource-id='com.todoist:id/color']"));
 
     private final SelenideElement favoriteSelectElement = $(By.xpath(
-            //"//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_favorite']"));
             "//android.widget.Switch[@resource-id='com.todoist:id/favorite']"));
 
     @Step("Ввести имя проекта")
@@ -78,7 +76,6 @@ public class EditProjectScreen {
         return this;
     }
 
-    // TODO : доделать, не работает почему-то
     @Step("Проверить, что проект был корректно создан")
     public EditProjectScreen uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 
@@ -124,7 +121,6 @@ public class EditProjectScreen {
     @Step("Проверить вариант отображения (ViewStyle) созданного проекта")
     private void checkProjectViewStyle(ViewStyle viewStyle) {
         int numberViewStyle = viewStyle.getNumber();
-        numberViewStyle--;
         boolean actualViewStyle = Boolean.parseBoolean(
                 getViewStyleElement(numberViewStyle).getAttribute("checked"));
         assertThat(actualViewStyle).isEqualTo(true);
