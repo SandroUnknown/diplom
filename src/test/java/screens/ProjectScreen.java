@@ -9,20 +9,27 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectScreen {
 
-    private SelenideElement getSectionNameElement(String sectionName) {
+    private SelenideElement getSectionElement(String sectionName) {
         String str = "//android.widget.TextView[@resource-id='android:id/title' and @text='%s']";
         return $(By.xpath(String.format(str, sectionName)));
     }
 
-    private SelenideElement getAddTaskButtonElement(String sectionName) {
-
+    private SelenideElement getTaskGroupElement(String sectionName) {
         String str = "//android.widget.TextView[@resource-id='android:id/title' and @text='%s']/../../..";
-        SelenideElement parentElement = $(By.xpath(String.format(str, sectionName)));
+        return $(By.xpath(String.format(str, sectionName)));
+    }
 
+    private SelenideElement getAddTaskButtonElement(String sectionName) {
+        SelenideElement parentElement = getTaskGroupElement(sectionName);
         SelenideElement addTaskButtonElement = parentElement.$(By.xpath(
-                ".//android.widget.TextView[@resource-id='com.todoist:id/text']"));
-
+                ".//android.widget.TextView[@resource-id='com.todoist:id/text' and @text='Add task']"));
         return addTaskButtonElement;
+    }
+
+    private SelenideElement getTaskElement(String sectionName, String taskName) {
+        SelenideElement parentElement = getTaskGroupElement(sectionName);
+        String str = ".//android.widget.TextView[@resource-id='com.todoist:id/text' and @text='%s']";
+        return parentElement.$(By.xpath(String.format(str, taskName)));
     }
 
     private final SelenideElement moreOptionsButtonElement = $(By.xpath(
@@ -61,9 +68,16 @@ public class ProjectScreen {
         return this;
     }
 
+    // TODO : параметр в Степ
+    @Step("Нажать на задачу")
+    public ProjectScreen clickOnTask(String sectionName, String taskName) {
+        getTaskElement(sectionName, taskName).click();
+        return this;
+    }
+
     @Step("Проверить раздел")
     public void checkSection(String expectedSectionName) {
-        String actualSectionName = getSectionNameElement(expectedSectionName).getAttribute("text");
+        String actualSectionName = getSectionElement(expectedSectionName).getAttribute("text");
         assertThat(actualSectionName).isEqualTo(expectedSectionName);
     }
 }

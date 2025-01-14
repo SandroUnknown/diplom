@@ -34,7 +34,7 @@ public class MobileSectionTests extends MobileTestBase {
         projectScreen
                 .clickMoreOptions()
                 .clickAddSection();
-        sectionEditScreen
+        createSectionModalWindow
                 .inputSectionName(testSectionData.getName());
 
         projectScreen

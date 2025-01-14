@@ -38,12 +38,13 @@ public class MobileTaskTests extends MobileTestBase {
                 .openProject(projectName);
         projectScreen
                 .clickAddTask(sectionName);
-        taskCreateScreen
+        createTaskModalWindow
                 .inputTaskName(testTaskData.getContent())
                 .setTaskPriority(testTaskData.getPriority())
-                .clickSubmit();
+                .clickSubmit(true);
 
-
+        projectScreen
+                .clickOnTask(sectionName, testTaskData.getContent());
         /*sectionEditScreen
                 .inputSectionName(testSectionData.getName());
 

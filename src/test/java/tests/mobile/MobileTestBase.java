@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import screens.*;
 import screens.components.BottomMenu;
+import screens.components.CreateSectionModalWindow;
+import screens.components.CreateTaskModalWindow;
 
 import java.util.List;
 
@@ -28,8 +30,8 @@ public class MobileTestBase {
     BrowseScreen browseScreen = new BrowseScreen();
     ProjectScreen projectScreen = new ProjectScreen();
     ProjectEditScreen projectEditScreen = new ProjectEditScreen();
-    SectionEditScreen sectionEditScreen = new SectionEditScreen();
-    TaskCreateScreen taskCreateScreen = new TaskCreateScreen();
+    CreateSectionModalWindow createSectionModalWindow = new CreateSectionModalWindow();
+    CreateTaskModalWindow createTaskModalWindow = new CreateTaskModalWindow();
 
 
     @BeforeAll
