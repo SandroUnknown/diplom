@@ -67,11 +67,4 @@ public class MobileTestBase {
         //Attach.pageSource();
         closeWebDriver();
     }
-
-    /*@AfterEach
-    void cleanData() {
-        projectsApi.deleteProjects();
-        labelsApi.deleteLabels();
-
-    }*/
 }
