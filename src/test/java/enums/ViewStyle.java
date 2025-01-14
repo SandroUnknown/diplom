@@ -16,7 +16,6 @@ public enum ViewStyle {
         this.number = number;
     }
 
-    // TODO : нужен ли этот метод??
     @JsonValue
     public String getJsonValue() {
         return title;

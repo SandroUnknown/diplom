@@ -36,7 +36,6 @@ public enum Color {
         this.cssAndroidTitle = cssAndroidTitle;
     }
 
-    // TODO : нужен ли этот метод??
     @JsonValue
     public String getJsonValue() {
         return title;
