@@ -39,13 +39,8 @@ public class TaskEditScreen {
     // TODO : параметр в степ
     @Step("Проверить, что созданная задача имеет верное название")
     private void checkTaskContent(String expectedContent) {
-        /*String actualContent = taskContentElement.getAttribute("text").strip();
-        expectedContent = expectedContent.strip();*/
-        String actualContent = taskContentElement.getAttribute("text");
-        actualContent = actualContent.replaceAll("\\u200B", "");
-
-        //expectedContent = expectedContent.replaceAll("\\u200B", "");
-
+        String actualContent = taskContentElement.getAttribute("text")
+                .replaceAll("\\u200B", "");;
         assertThat(actualContent).isEqualTo(expectedContent);
     }
 

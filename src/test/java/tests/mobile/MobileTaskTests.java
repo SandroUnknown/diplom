@@ -18,7 +18,6 @@ public class MobileTaskTests extends MobileTestBase {
             .priority(2)
             .build();
 
-    @Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
     @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
@@ -50,7 +49,6 @@ public class MobileTaskTests extends MobileTestBase {
                 .clickOnTask(sectionName, testTaskData.getContent());
         taskEditScreen
                 .checkTask(testTaskData, CONTENT, PRIORITY);
-
 
         // TODO : выполнить проверку API
     }

@@ -4,6 +4,7 @@ import enums.Color;
 import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static enums.CheckField.*;
@@ -17,6 +18,8 @@ public class MobileProjectTests extends MobileTestBase {
             .viewStyle(ViewStyle.BOARD)
             .build();
 
+    // TODO : убрать тег
+    @Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
     void createProjectTest() {

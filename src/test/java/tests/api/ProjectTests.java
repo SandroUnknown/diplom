@@ -43,7 +43,9 @@ public class ProjectTests extends ApiTestBase {
                 .isFavorite(true)
                 .viewStyle(LIST)
                 .build();
-    
+
+    // TODO : убрать тег
+    @Tag("API_FOR_TEST")
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)

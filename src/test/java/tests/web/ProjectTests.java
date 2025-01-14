@@ -6,6 +6,7 @@ import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
@@ -21,6 +22,8 @@ public class ProjectTests extends WebTestBase {
             .viewStyle(ViewStyle.BOARD)
             .build();
 
+    // TODO : убрать тег
+    @Tag("WEB_FOR_TEST")
     @Test
     @CleanupTestData
     @DisplayName("Создать проект (с заполнением только имени).")

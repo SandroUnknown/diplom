@@ -33,8 +33,12 @@ allure {
 }
 
 configurations {
-    withoutAppiumTests
-    appiumTests
+    withoutAppiumTests {
+        extendsFrom testImplementation
+    }
+    appiumTests {
+        extendsFrom testImplementation
+    }
 }
 
 dependencies {
@@ -53,7 +57,7 @@ dependencies {
     )
 
     withoutAppiumTests(
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            /*"org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
@@ -62,13 +66,13 @@ dependencies {
             "com.opencsv:opencsv:5.9",
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
-            "com.fasterxml.jackson.core:jackson-databind:2.18.2",
+            "com.fasterxml.jackson.core:jackson-databind:2.18.2",*/
             "org.aeonbits.owner:owner:1.0.12"
     )
 
     appiumTests(
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:6.13.0",
+            /*"org.junit.jupiter:junit-jupiter:$junitVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -77,8 +81,8 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            "io.appium:java-client:8.3.0",
-            "org.aeonbits.owner:owner:1.0.12",
+            "org.aeonbits.owner:owner:1.0.12",*/
+            "io.appium:java-client:8.3.0"
     )
 }
 
@@ -96,7 +100,8 @@ tasks.withType(Test) {
 
 task api(type: Test) {
     useJUnitPlatform {
-        includeTags("API")
+        //includeTags("API")
+        includeTags("API_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output
@@ -105,7 +110,8 @@ task api(type: Test) {
 
 task web(type: Test) {
     useJUnitPlatform {
-        includeTags("WEB")
+        //includeTags("WEB")
+        includeTags("WEB_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output
