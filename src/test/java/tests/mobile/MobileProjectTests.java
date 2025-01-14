@@ -25,6 +25,8 @@ public class MobileProjectTests extends MobileTestBase {
 
         authScreen.login();
 
+        popupScreen.clickYesButton();
+
         bottomMenu.clickBrowse();
         browseScreen.clickCreateProject();
         editProjectScreen.inputProjectName(testProjectData.getName());
@@ -35,7 +37,7 @@ public class MobileProjectTests extends MobileTestBase {
 
         // TODO : выполнить проверку UI
         projectScreen.clickEditProject();
-        //editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+        editProjectScreen.uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API
     }

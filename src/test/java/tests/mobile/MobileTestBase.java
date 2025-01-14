@@ -13,6 +13,7 @@ import screens.BrowseScreen;
 import screens.EditProjectScreen;
 import screens.ProjectScreen;
 import screens.components.BottomMenu;
+import screens.components.PopupScreen;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
@@ -21,6 +22,7 @@ public class MobileTestBase {
 
     AuthScreen authScreen = new AuthScreen();
     BottomMenu bottomMenu = new BottomMenu();
+    PopupScreen popupScreen = new PopupScreen();
     BrowseScreen browseScreen = new BrowseScreen();
     ProjectScreen projectScreen = new ProjectScreen();
     EditProjectScreen editProjectScreen = new EditProjectScreen();
