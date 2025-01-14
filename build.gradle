@@ -38,9 +38,9 @@ allure {
 }
 
 configurations {
-    /*upperSelenideVersionConfiguration {
+    upperSelenideVersionConfiguration {
         extendsFrom testImplementation
-    }*/
+    }
     appiumTests {
         extendsFrom testImplementation
     }
@@ -49,8 +49,8 @@ configurations {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$selenideVersion",          // это добавил
-            //"com.codeborne:selenide:$lowerSelenideVersion",   // это убрал
+            //"com.codeborne:selenide:$selenideVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
             //"io.appium:java-client:$appiumVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
@@ -62,12 +62,12 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-    /*upperSelenideVersionConfiguration(
+    upperSelenideVersionConfiguration(  // раскоментил
             "com.codeborne:selenide:$selenideVersion"
-    )*/
+    )
 
     appiumTests(
-            "com.codeborne:selenide:$lowerSelenideVersion",
+            //"com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
     )
 }
@@ -95,6 +95,10 @@ task api(type: Test) {
         //includeTags("API")
         includeTags("API_FOR_TEST")
     }
+
+    // добавил
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
 }
 
 task web(type: Test) {
@@ -102,6 +106,10 @@ task web(type: Test) {
         //includeTags("WEB")
         includeTags("WEB_FOR_TEST")
     }
+
+    // добавил
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
 }
 
 task mobile_android(type: Test) {
