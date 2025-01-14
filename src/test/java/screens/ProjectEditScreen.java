@@ -77,7 +77,7 @@ public class ProjectEditScreen {
     }
 
     @Step("Проверить, что проект был корректно создан")
-    public void сheckProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
+    public void checkProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
 
         List<CheckField> fieldsList = Arrays.asList(checkFields);
 

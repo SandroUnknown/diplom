@@ -3,9 +3,7 @@ package tests.mobile;
 import enums.Color;
 import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -32,6 +30,9 @@ public class MobileProjectTests extends MobileTestBase {
     @Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
+    @DisplayName("Создать новый проект (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
     void createProjectTest() {
 
         authScreen
@@ -51,7 +52,7 @@ public class MobileProjectTests extends MobileTestBase {
                 .clickMoreOptions()
                 .clickEditProject();
         projectEditScreen
-                .сheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API
     }

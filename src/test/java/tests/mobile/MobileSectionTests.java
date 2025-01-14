@@ -2,9 +2,7 @@ package tests.mobile;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import org.junit.jupiter.api.DisplayName;
@@ -25,7 +23,9 @@ public class MobileSectionTests extends MobileTestBase {
 
     @Test
     @CleanupTestData
-    @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового раздела")
+    @DisplayName("Создать новый раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createSectionTest() {
 
         int templateNumber = 0;

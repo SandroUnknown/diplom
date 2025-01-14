@@ -2,6 +2,9 @@ package tests.web;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.*;
@@ -9,7 +12,11 @@ import org.junit.jupiter.api.*;
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через WEB")
+@Feature("Проверка задач через WEB")
 @Tags({ @Tag("WEB"), @Tag("task") })
+@DisplayName("Проверка задач через WEB")
 public class TaskTests extends WebTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()

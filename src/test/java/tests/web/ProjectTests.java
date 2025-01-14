@@ -4,6 +4,7 @@ import data.DataCreator;
 import enums.Color;
 import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
+import io.qameta.allure.*;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -14,7 +15,11 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static enums.CheckField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя через WEB")
+@Feature("Проверка проектов через WEB")
 @Tags({ @Tag("WEB"), @Tag("project") })
+@DisplayName("Проверка проектов через WEB")
 public class ProjectTests extends WebTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
@@ -28,7 +33,9 @@ public class ProjectTests extends WebTestBase {
     @Tag("WEB_FOR_TEST")
     @Test
     @CleanupTestData
-    @DisplayName("Создать проект (с заполнением только имени).")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового проекта (с заполнением только имени)")
+    @DisplayName("Создать новый проект (с заполнением только имени)")
     void createProjectWithNameOnlyTest() {
 
         projectPage
@@ -54,7 +61,9 @@ public class ProjectTests extends WebTestBase {
 
     @Test
     @CleanupTestData
-    @DisplayName("Создать проект (с заполнением всех данных).")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
+    @DisplayName("Создать новый проект (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
     void createProjectWithFullDataTest() {
 
         projectPage
@@ -83,7 +92,9 @@ public class ProjectTests extends WebTestBase {
 
     @Test
     @CleanupTestData
-    @DisplayName("Удалить проект.")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление проекта по ID")
+    @DisplayName("Удалить проект по ID")
     void deleteProjectTest() {
 
         int templateNumber = 0;
