@@ -27,10 +27,6 @@ public class MobileProjectTests extends MobileTestBase {
 
         authScreen.login();
 
-        sleep(3000);
-
-        popupScreen.clickYesButton();
-
         bottomMenu.clickBrowse();
         browseScreen.clickCreateProject();
         editProjectScreen.inputProjectName(testProjectData.getName());
