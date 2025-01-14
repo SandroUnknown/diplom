@@ -96,9 +96,9 @@ public class EditProjectScreen {
             checkProjectFavorite(testProjectData.isFavorite());
         }
 
-        /*if (fieldsList.contains(VIEW_STYLE)) {
+        if (fieldsList.contains(VIEW_STYLE)) {
             checkProjectViewStyle(testProjectData.getViewStyle());
-        }*/
+        }
 
         return this;
     }
@@ -116,9 +116,10 @@ public class EditProjectScreen {
     }
 
     @Step("Проверить, что созданный проект добавлен в 'Избранное'")
-    private void checkProjectFavorite(boolean isFavorite) {
+    private void checkProjectFavorite(boolean expectedFavorite) {
 
-        String actualFavorite = favoriteSelectElement.getAttribute("checked");
+        boolean actualFavorite = Boolean.parseBoolean(favoriteSelectElement.getAttribute("checked"));
+        assertThat(actualFavorite).isEqualTo(expectedFavorite);
 
         /*if (isFavorite) {
             favoriteSelectElement.shouldBe(checked);
@@ -130,6 +131,11 @@ public class EditProjectScreen {
     @Step("Проверить вариант отображения (ViewStyle) созданного проекта")
     private void checkProjectViewStyle(ViewStyle viewStyle) {
         int numberViewStyle = viewStyle.getNumber();
-        getViewStyleElement(numberViewStyle).shouldBe(checked);
+
+        boolean actualViewStyle = Boolean.parseBoolean(
+                getViewStyleElement(numberViewStyle).getAttribute("checked"));
+        assertThat(actualViewStyle).isEqualTo(true);
+
+        //getViewStyleElement(numberViewStyle).shouldBe(checked);
     }
 }
