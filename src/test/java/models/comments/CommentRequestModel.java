@@ -13,12 +13,12 @@ public class CommentRequestModel {
     @JsonProperty("task_id") private String taskId;
     @JsonProperty("project_id") private String projectId;
     private String content;
-    private Attachment attachment;
+    /*private Attachment attachment;
 
     private static class Attachment {
         @JsonProperty("resource_type") private String resourceType;
         @JsonProperty("file_url") private String fileUrl;
         @JsonProperty("file_type") private String fileType;
         @JsonProperty("file_name") private String fileName;
-    }
+    }*/
 }
