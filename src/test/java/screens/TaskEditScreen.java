@@ -35,8 +35,7 @@ public class TaskEditScreen {
         List<CheckField> fieldsList = Arrays.asList(checkFields);
 
         if (fieldsList.contains(CONTENT)) {
-            String a = taskContentElement.getAttribute("text");
-            checkTaskContent(testTaskData.getContent(), a);
+            checkTaskContent(testTaskData.getContent());
         }
 
         if (fieldsList.contains(PRIORITY)) {
@@ -46,14 +45,9 @@ public class TaskEditScreen {
 
     // TODO : параметр в степ
     @Step("Проверить, что созданная задача имеет верное название")
-    private void checkTaskContent(String expectedContent, String a) {
-        String actualContent = taskContentElement.getAttribute("text");
-
-        System.out.println("actual-" + actualContent + "-");
-        System.out.println("expected-" + expectedContent + "-");
-
+    private void checkTaskContent(String expectedContent) {
+        String actualContent = taskContentElement.getAttribute("text").strip();
         assertThat(actualContent).isEqualTo(expectedContent);
-        //assertThat(actualContent).isEqualTo(a);
     }
 
     // TODO : параметр в степ
