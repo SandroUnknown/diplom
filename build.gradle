@@ -44,7 +44,7 @@ configurations {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$selenideVersion",
+            "com.codeborne:selenide:$selenideVersion",
             //"com.codeborne:selenide:6.13.0",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
@@ -69,7 +69,8 @@ dependencies {
             "commons-io:commons-io:2.14.0",
             "com.fasterxml.jackson.core:jackson-databind:2.18.2",
             "org.aeonbits.owner:owner:1.0.12"*/
-            "com.codeborne:selenide:$selenideVersion"
+            //"com.codeborne:selenide:$selenideVersion"
+            "com.opencsv:opencsv:5.9"
     )
 
     appiumTests(
@@ -86,6 +87,12 @@ dependencies {
             "org.aeonbits.owner:owner:1.0.12",*/
             "io.appium:java-client:8.3.0"
     )
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.codeborne:selenide:6.13.0" // Заставляем использовать версию 6.13.0 для appiumTests
+    }
 }
 
 tasks.withType(Test) {
