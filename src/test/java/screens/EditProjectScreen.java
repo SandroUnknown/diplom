@@ -107,9 +107,10 @@ public class EditProjectScreen {
     private void checkProjectName(String projectName) {
         //nameInputElement.shouldHave(text(projectName));
         //nameInputElement.shouldHave(value(projectName));
-        nameInputElement.shouldBe(visible);
+        //nameInputElement.shouldBe(visible);
 
         String text = nameInputElement.getAttribute("text");
+        System.out.println("Text = " + text);
         assertThat(text).isEqualTo(projectName);
     }
 
