@@ -27,7 +27,7 @@ public class TaskResponseModel {
     @JsonProperty("is_completed") private boolean isCompleted;
     private String url;
 
-    private Duration duration;
+    /*private Duration duration;
     private Due due;
 
     // TODO : Public???
@@ -42,5 +42,5 @@ public class TaskResponseModel {
         @JsonProperty("is_recurring") private boolean isRecurring;
         private String datetime;
         private String timezone;
-    }
+    }*/
 }

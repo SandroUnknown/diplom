@@ -187,11 +187,14 @@ task mobile_android(type: Test) {
 //=============================
 
 
-configurations.all {
+
+
+// ЗАКОМЕНТИЛ ВОТ ЭТО!!!!!!!!!!!!!!!!!!!
+/*configurations.all {
     resolutionStrategy {
         force "com.codeborne:selenide:$lowerSelenideVersion"
     }
-}
+}*/
 
 task api(type: Test) {
     useJUnitPlatform {
