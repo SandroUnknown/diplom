@@ -6,8 +6,10 @@ import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
+@Tags({ @Tag("ANDROID"), @Tag("section") })
 public class MobileSectionTests extends MobileTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()

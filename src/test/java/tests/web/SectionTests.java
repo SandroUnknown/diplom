@@ -5,13 +5,11 @@ import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import models.sections.SectionResponseModel;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Selenide.sleep;
 
+@Tags({ @Tag("WEB"), @Tag("section") })
 public class SectionTests extends WebTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()
@@ -20,8 +18,6 @@ public class SectionTests extends WebTestBase {
 
     // TODO : добавить тестов для других вариантов отображения
 
-    // TODO : убрать тег + добавить везде КлианАп
-    @Tag("WEB_FOR_TEST")
     @Test
     @CleanupTestData
     @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")

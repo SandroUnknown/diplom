@@ -4,13 +4,12 @@ import data.DataCreator;
 import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Tags({ @Tag("WEB"), @Tag("task") })
 public class TaskTests extends WebTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()

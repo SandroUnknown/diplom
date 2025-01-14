@@ -6,6 +6,7 @@ import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static enums.CheckField.CONTENT;
@@ -20,8 +21,9 @@ public class MobileTaskTests extends MobileTestBase {
 
     @Test
     @CleanupTestData
+    @Tags({ @Tag("ANDROID"), @Tag("task") })
     @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void createSectionTest() {
+    void createTaskTest() {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()

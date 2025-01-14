@@ -5,10 +5,12 @@ import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static enums.CheckField.*;
 
+@Tags({ @Tag("ANDROID"), @Tag("project") })
 public class MobileProjectTests extends MobileTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()

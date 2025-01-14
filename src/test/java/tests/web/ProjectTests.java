@@ -7,12 +7,14 @@ import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static enums.CheckField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Tags({ @Tag("WEB"), @Tag("project") })
 public class ProjectTests extends WebTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
