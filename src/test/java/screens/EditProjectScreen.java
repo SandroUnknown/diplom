@@ -118,7 +118,6 @@ public class EditProjectScreen {
     @Step("Проверить, что созданный проект добавлен в 'Избранное'")
     private void checkProjectFavorite(boolean expectedFavorite) {
         boolean actualFavorite = Boolean.parseBoolean(favoriteSelectElement.getAttribute("checked"));
-        actualFavorite = false;
         assertThat(actualFavorite).isEqualTo(expectedFavorite);
     }
 
