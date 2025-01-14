@@ -29,6 +29,7 @@ public class MobileTestBase {
     ProjectScreen projectScreen = new ProjectScreen();
     ProjectEditScreen projectEditScreen = new ProjectEditScreen();
     SectionEditScreen sectionEditScreen = new SectionEditScreen();
+    TaskCreateScreen taskCreateScreen = new TaskCreateScreen();
 
 
     @BeforeAll
