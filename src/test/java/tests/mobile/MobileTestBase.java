@@ -29,23 +29,7 @@ public class MobileTestBase {
     @BeforeAll
     static void beforeAll() {
 
-        // удалить потом хардкод
         Configuration.browser = BrowserstackDriver.class.getName();
-
-        /*String env = System.getProperty("env", "local");
-        if (env.equals("remote")) {
-            Configuration.browser = BrowserstackDriver.class.getName();
-        } else {
-            Configuration.browser = EmulationDriver.class.getName();
-        }*/
-
-
-        // TODO : это вероятно не нужно))
-        /*if (System.getProperty("deviceHost").equals("emulation")) {
-            Configuration.browser = EmulationDriver.class.getName();
-        } else if (System.getProperty("deviceHost").equals("browserstack")) {
-            Configuration.browser = BrowserstackDriver.class.getName();
-        }*/
 
         Configuration.browserSize = null;
         Configuration.timeout = 30000;

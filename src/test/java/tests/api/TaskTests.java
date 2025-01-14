@@ -1,6 +1,7 @@
 package tests.api;
 
 import data.DataCreator;
+import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
@@ -37,6 +38,7 @@ public class TaskTests extends ApiTestBase {
             .build();
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание новой задачи")
     @DisplayName("Создать новую задачу")
@@ -62,6 +64,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление задачи по ID")
     @DisplayName("Обновить задачу по ID")
@@ -87,6 +90,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение задачи по ID")
     @DisplayName("Получить задачу по ID")
@@ -113,6 +117,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех активных задач пользователя")
     @DisplayName("Получить все активные задачи пользователя")
@@ -141,6 +146,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех активных задач пользователя (с применением фильтра `label`)")
     @DisplayName("Получить все активные задачи пользователя (с применением фильтра `label`)")
@@ -181,6 +187,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Закрытие задачи по ID")
     @DisplayName("Закрыть задачу по ID")
@@ -206,6 +213,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Открытие (ранее закрытой) задачи по ID")
     @DisplayName("Открыть (ранее закрытую) задачу по ID")
@@ -232,6 +240,7 @@ public class TaskTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление задачи по ID")
     @DisplayName("Удалить задачу по ID")

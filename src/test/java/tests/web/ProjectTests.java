@@ -3,6 +3,7 @@ package tests.web;
 import data.DataCreator;
 import enums.Color;
 import enums.ViewStyle;
+import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ public class ProjectTests extends WebTestBase {
             .build();
 
     @Test
+    @CleanupTestData
     @DisplayName("Создать проект (с заполнением только имени).")
     void createProjectWithNameOnlyTest() {
 
@@ -46,6 +48,7 @@ public class ProjectTests extends WebTestBase {
     }
 
     @Test
+    @CleanupTestData
     @DisplayName("Создать проект (с заполнением всех данных).")
     void createProjectWithFullDataTest() {
 
@@ -74,6 +77,7 @@ public class ProjectTests extends WebTestBase {
     }
 
     @Test
+    @CleanupTestData
     @DisplayName("Удалить проект.")
     void deleteProjectTest() {
 

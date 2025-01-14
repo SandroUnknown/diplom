@@ -1,6 +1,7 @@
 package tests.api;
 
 import data.DataCreator;
+import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.projects.ProjectRequestModel;
@@ -44,6 +45,7 @@ public class ProjectTests extends ApiTestBase {
                 .build();
     
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового проекта (с заполнением имени, цвета и варианта отображения)")
     @DisplayName("Создать новый проект (с заполнением имени, цвета и варианта отображения)")
@@ -59,6 +61,7 @@ public class ProjectTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового вложенного проекта (с заполнением имени, цвета и варианта отображения)")
     @DisplayName("Создать новый вложенный проект (с заполнением имени, цвета и варианта отображения)")
@@ -84,6 +87,7 @@ public class ProjectTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление проекта по ID")
     @DisplayName("Обновить проект по ID")
@@ -109,6 +113,7 @@ public class ProjectTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление проекта по ID")
     @DisplayName("Удалить проект по ID")
@@ -133,6 +138,7 @@ public class ProjectTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление всех проектов пользователя")
     @DisplayName("Удалить все проекты пользователя")

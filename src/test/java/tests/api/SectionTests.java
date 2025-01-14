@@ -1,6 +1,7 @@
 package tests.api;
 
 import data.DataCreator;
+import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
@@ -31,6 +32,7 @@ public class SectionTests extends ApiTestBase {
     private final String updatedSectionName = "ОБНОВЛЁННЫЙ РАЗДЕЛ";
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
     @Story("Создание нового раздела")
     @DisplayName("Создать новый раздел")
@@ -54,6 +56,7 @@ public class SectionTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Обновление раздела")
     @DisplayName("Обновить раздел")
@@ -77,6 +80,7 @@ public class SectionTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех разделов внутри проекта")
     @DisplayName("Получить все разделы внутри проекта")
@@ -110,6 +114,7 @@ public class SectionTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
     @Story("Получение всех разделов пользователя")
     @DisplayName("Получить все разделы пользователя")
@@ -136,6 +141,7 @@ public class SectionTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление раздела по ID")
     @DisplayName("Удалить раздел по ID")
@@ -161,6 +167,7 @@ public class SectionTests extends ApiTestBase {
     }
 
     @Test
+    @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление всех разделов в проекте")
     @DisplayName("Удалить все разделы в проекте")

@@ -1,6 +1,7 @@
 package tests.web;
 
 import data.DataCreator;
+import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.Disabled;
@@ -20,6 +21,7 @@ public class TaskTests extends WebTestBase {
     // TODO : добавить тестов для других вариантов отображения?
     
     @Test
+    @CleanupTestData
     @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createTaskInEmptySectionTest() {
 
@@ -58,6 +60,7 @@ public class TaskTests extends WebTestBase {
     }
 
     /*@Test
+    @CleanupTestData
     @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void deleteTaskTest() {
 
@@ -97,6 +100,7 @@ public class TaskTests extends WebTestBase {
     //TODO : сделать тест на драг энд дроп
     @Disabled
     @Test
+    @CleanupTestData
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {
     }

@@ -53,6 +53,7 @@ public class SectionTests extends WebTestBase {
     }
 
     @Test
+    @CleanupTestData
     @DisplayName("Создать раздел в конце списка (когда в проекте уже имеется минимум 1 созданный раздел) [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createNotFirstSectionInProjectAtEndOfListTest() {
 
@@ -91,6 +92,7 @@ public class SectionTests extends WebTestBase {
 
     // TODO : проверить работоспособность!
     @Test
+    @CleanupTestData
     @DisplayName("Создать раздел между двумя ранее созданными разделами [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createSectionBetweenTwoPreviouslyCreatedSectionsTest() {
 
@@ -124,6 +126,7 @@ public class SectionTests extends WebTestBase {
     }
 
     @Test
+    @CleanupTestData
     @DisplayName("Удалить раздел [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void deleteSectionTest() {
 
@@ -161,6 +164,7 @@ public class SectionTests extends WebTestBase {
     //TODO : сделать тест на драг энд дроп
     @Disabled
     @Test
+    @CleanupTestData
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {
     }
