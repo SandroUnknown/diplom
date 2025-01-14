@@ -5,7 +5,9 @@ import enums.Color;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectScreen {
 
@@ -42,8 +44,11 @@ public class ProjectScreen {
     }
 
     @Step("Проверить раздел")
-    public ProjectScreen checkSection(String sectionName) {
-        getSectionNameElement(sectionName).click();
+    public ProjectScreen checkSection(String expectedSectionName) {
+        getSectionNameElement(expectedSectionName).shouldBe(exist);
+
+        //String actualSectionName = getSectionNameElement(expectedSectionName).getAttribute("text");
+        //assertThat(actualSectionName).isEqualTo(expectedSectionName);
         return this;
     }
 

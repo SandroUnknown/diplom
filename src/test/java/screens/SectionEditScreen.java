@@ -17,8 +17,8 @@ public class SectionEditScreen {
     @Step("Ввести имя раздела")
     public SectionEditScreen inputSectionName(String sectionName) {
         sectionNameInputElement.sendKeys(sectionName);
-        sectionNameInputElement.pressEnter();
-        //submitButtonElement.click();
+        //sectionNameInputElement.pressEnter();
+        submitButtonElement.click();
         return this;
     }
 }
