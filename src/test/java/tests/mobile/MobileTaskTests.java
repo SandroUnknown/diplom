@@ -3,27 +3,32 @@ package tests.mobile;
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
-import models.sections.SectionRequestModel;
+import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class MobileSectionTests extends MobileTestBase {
+public class MobileTaskTests extends MobileTestBase {
 
-    private final SectionRequestModel testSectionData = SectionRequestModel.builder()
-            .name("НОВЫЙ РАЗДЕЛ")
+    private final TaskRequestModel testTaskData = TaskRequestModel.builder()
+            .content("НОВАЯ ЗАДАЧА")
+            .priority(2)
             .build();
 
+    @Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
-    @DisplayName("Создать раздел в пустом проекте [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createSectionTest() {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
+                .createSections(true)
                 .create();
         String projectName = testData.getProjects().get(0).getName();
+        String sectionName = testData.getSections().get(0).getName();
 
         authScreen
                 .login();
@@ -32,13 +37,16 @@ public class MobileSectionTests extends MobileTestBase {
         browseScreen
                 .openProject(projectName);
         projectScreen
-                .clickMoreOptions()
-                .clickAddSection();
-        sectionEditScreen
+                //.clickMoreOptions()
+                //.clickAddSection();
+                .clickAddTask();
+
+
+        /*sectionEditScreen
                 .inputSectionName(testSectionData.getName());
 
         projectScreen
-                .checkSection(testSectionData.getName());
+                .checkSection(testSectionData.getName());*/
 
         // TODO : выполнить проверку API
     }

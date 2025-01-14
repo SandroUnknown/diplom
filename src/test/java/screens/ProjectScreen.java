@@ -23,6 +23,9 @@ public class ProjectScreen {
     private final SelenideElement addSectionButtonElement = $(By.xpath(
             "//android.widget.TextView[@resource-id='com.todoist:id/title' and @text='Add section']"));
 
+    private final SelenideElement addTaskButtonElement = $(By.xpath(
+            "//android.widget.TextView[@resource-id='com.todoist:id/text']"));
+
     @Step("Нажать 'Больше опций'")
     public ProjectScreen clickMoreOptions() {
         moreOptionsButtonElement.click();
@@ -38,6 +41,12 @@ public class ProjectScreen {
     @Step("Нажать 'Добавить раздел'")
     public ProjectScreen clickAddSection() {
         addSectionButtonElement.click();
+        return this;
+    }
+
+    @Step("Нажать 'Добавить задачу'")
+    public ProjectScreen clickAddTask() {
+        addTaskButtonElement.click();
         return this;
     }
 
