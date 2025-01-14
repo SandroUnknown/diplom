@@ -11,10 +11,14 @@ public class SectionEditScreen {
     private final SelenideElement sectionNameInputElement = $(By.xpath(
             "//android.widget.EditText[@resource-id='android:id/message']"));
 
-    @Step("Нажать '+' (создать проект)")
+    private final SelenideElement submitButtonElement = $(By.xpath(
+            "//android.widget.ImageButton[@content-desc='Submit']"));
+
+    @Step("Ввести имя раздела")
     public SectionEditScreen inputSectionName(String sectionName) {
-        //sectionNameInputElement.sendKeys(sectionName);
-        sectionNameInputElement.setValue(sectionName).pressEnter();
+        sectionNameInputElement.sendKeys(sectionName);
+        sectionNameInputElement.pressEnter();
+        //submitButtonElement.click();
         return this;
     }
 }
