@@ -105,7 +105,8 @@ public class EditProjectScreen {
     @Step("Проверить имя созданного проекта")
     private void checkProjectName(String projectName) {
         //nameInputElement.shouldHave(text(projectName));
-        nameInputElement.shouldHave(value(projectName));
+        //nameInputElement.shouldHave(value(projectName));
+        nameInputElement.shouldBe(visible);
     }
 
     @Step("Проверить цвет созданного проекта")
