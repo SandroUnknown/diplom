@@ -8,10 +8,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class BrowseScreen {
 
-    private final SelenideElement createProjectButtonElement = $(By.xpath(
+    /*private final SelenideElement createProjectButtonElement = $(By.xpath(
             "//androidx.recyclerview.widget.RecyclerView[@resource-id='android:id/list']" +
                     "/androidx.compose.ui.platform.ComposeView[3]/android.view.View" +
-                    "/android.view.View/android.view.View[1]"));
+                    "/android.view.View/android.view.View[1]"));*/
+
+    private final SelenideElement createProjectButtonElement = $(By.xpath(
+            "//android.view.View[@content-desc='Add']"));
 
     @Step("Нажать '+' (создать проект)")
     public BrowseScreen clickCreateProject() {
