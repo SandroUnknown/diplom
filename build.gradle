@@ -38,10 +38,10 @@ allure {
 }
 
 configurations {
-    upperSelenideVersionConfiguration {
+    withoutAppiumTests {
         extendsFrom testImplementation
     }
-    appiumTests {
+    withAppiumTests {
         extendsFrom testImplementation
     }
 }
@@ -49,7 +49,7 @@ configurations {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$lowerSelenideVersion",   // закоментил
+            "com.codeborne:selenide:$lowerSelenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -60,17 +60,14 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-    upperSelenideVersionConfiguration(  // раскоментил
+    withoutAppiumTests(  // раскоментил
             "com.codeborne:selenide:$selenideVersion"
     )
 
-    appiumTests(
-            "com.codeborne:selenide:$lowerSelenideVersion",
+    withAppiumTests(
             "io.appium:java-client:$appiumVersion"
     )
 }
-
-
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -96,7 +93,7 @@ task api(type: Test) {
 
     // добавил
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task web(type: Test) {
@@ -107,7 +104,7 @@ task web(type: Test) {
 
     // добавил
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task mobile_android(type: Test) {
@@ -117,5 +114,5 @@ task mobile_android(type: Test) {
     }
 
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.appiumTests + sourceSets.test.output
+    classpath = configurations.withAppiumTests + sourceSets.test.output
 }
