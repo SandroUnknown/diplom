@@ -44,7 +44,7 @@ public class TaskEditScreen {
         String actualContent = taskContentElement.getAttribute("text");
         actualContent = actualContent.replaceAll("\\u200B", "");
 
-        expectedContent = expectedContent.replaceAll("\\u200B", "");
+        //expectedContent = expectedContent.replaceAll("\\u200B", "");
 
         assertThat(actualContent).isEqualTo(expectedContent);
     }
