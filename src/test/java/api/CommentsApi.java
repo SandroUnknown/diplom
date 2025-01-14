@@ -1,6 +1,6 @@
 package api;
 
-import enums.CommentField;
+import enums.CheckField;
 import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
 import models.comments.CommentRequestModel;
@@ -9,7 +9,7 @@ import models.comments.LabelResponseModel;
 import java.util.Arrays;
 import java.util.List;
 
-import static enums.CommentField.*;
+import static enums.CheckField.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
@@ -127,9 +127,9 @@ public class CommentsApi extends BaseApi {
     }
 
     @Step("Проверить комментарий")
-    public void checkComment(String commentId, CommentRequestModel expectedComment, CommentField... checkFields) {
+    public void checkComment(String commentId, CommentRequestModel expectedComment, CheckField... checkFields) {
 
-        List<CommentField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
         LabelResponseModel actualComment = getComment(commentId);
 
         if (fieldsList.contains(CONTENT)) {

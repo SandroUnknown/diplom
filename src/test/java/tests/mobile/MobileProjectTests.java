@@ -6,7 +6,7 @@ import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.Test;
 
-import static enums.ProjectField.*;
+import static enums.CheckField.*;
 
 public class MobileProjectTests extends MobileTestBase {
 
@@ -38,7 +38,7 @@ public class MobileProjectTests extends MobileTestBase {
                 .clickMoreOptions()
                 .clickEditProject();
         projectEditScreen
-                .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+                .сheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API
     }

@@ -1,7 +1,7 @@
 package api;
 
 import enums.Color;
-import enums.LabelField;
+import enums.CheckField;
 import io.qameta.allure.Step;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
@@ -9,7 +9,7 @@ import models.labels.LabelResponseModel;
 import java.util.Arrays;
 import java.util.List;
 
-import static enums.LabelField.*;
+import static enums.CheckField.*;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
@@ -109,7 +109,7 @@ public class LabelsApi extends BaseApi {
     }
 
     @Step("Проверить метку")
-    public void checkLabel(String labelId, LabelRequestModel expectedLabel, LabelField... checkFields) {
+    public void checkLabel(String labelId, LabelRequestModel expectedLabel, CheckField... checkFields) {
 
         LabelResponseModel actualLabel = getLabel(labelId);
 
@@ -117,9 +117,9 @@ public class LabelsApi extends BaseApi {
     }
 
     @Step("Проверить соответствие полученной метки")
-    public void checkEqualsLabel(LabelResponseModel actualLabel, LabelResponseModel expectedLabel, LabelField... checkFields) {
+    public void checkEqualsLabel(LabelResponseModel actualLabel, LabelResponseModel expectedLabel, CheckField... checkFields) {
 
-        List<LabelField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
 
         if (fieldsList.contains(NAME)) {
             checkName(actualLabel.getName(), expectedLabel.getName());
@@ -139,9 +139,9 @@ public class LabelsApi extends BaseApi {
     }
 
     @Step("Проверить соответствие полученной метки")
-    public void checkEqualsLabel(LabelResponseModel actualLabel, LabelRequestModel expectedLabel, LabelField... checkFields) {
+    public void checkEqualsLabel(LabelResponseModel actualLabel, LabelRequestModel expectedLabel, CheckField... checkFields) {
 
-        List<LabelField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
 
         if (fieldsList.contains(NAME)) {
             checkName(actualLabel.getName(), expectedLabel.getName());

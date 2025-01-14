@@ -3,7 +3,7 @@ package pages;
 import api.ProjectsApi;
 import com.codeborne.selenide.SelenideElement;
 import enums.Color;
-import enums.ProjectField;
+import enums.CheckField;
 import enums.ViewStyle;
 import io.qameta.allure.Step;
 import models.projects.ProjectRequestModel;
@@ -15,7 +15,7 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static enums.ProjectField.*;
+import static enums.CheckField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectPage {
@@ -142,9 +142,9 @@ public class ProjectPage {
 //================================================================
     
     @Step("Проверить, что проект был корректно создан")
-    public ProjectPage uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
+    public ProjectPage uiCheckProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
 
-        List<ProjectField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
 
         if (fieldsList.contains(NAME)) {
             checkProjectName(testProjectData.getName());
@@ -170,9 +170,9 @@ public class ProjectPage {
 
 
     @Step("Проверить, что проект был корректно создан")
-    public ProjectPage apiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
+    public ProjectPage apiCheckProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
 
-        List<ProjectField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
         ProjectsApi projectsApi = new ProjectsApi();
         ProjectResponseModel response = projectsApi.getAllProjects().get(1);
         

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static enums.ProjectField.*;
+import static enums.CheckField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectTests extends WebTestBase {

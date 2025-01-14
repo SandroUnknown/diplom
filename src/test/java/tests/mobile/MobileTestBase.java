@@ -32,6 +32,7 @@ public class MobileTestBase {
     ProjectEditScreen projectEditScreen = new ProjectEditScreen();
     CreateSectionModalWindow createSectionModalWindow = new CreateSectionModalWindow();
     CreateTaskModalWindow createTaskModalWindow = new CreateTaskModalWindow();
+    TaskEditScreen taskEditScreen = new TaskEditScreen();
 
 
     @BeforeAll

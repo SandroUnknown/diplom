@@ -1,12 +1,16 @@
 package tests.mobile;
 
 import data.DataCreator;
+import enums.CheckField;
 import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static enums.CheckField.CONTENT;
+import static enums.CheckField.PRIORITY;
 
 public class MobileTaskTests extends MobileTestBase {
 
@@ -45,6 +49,8 @@ public class MobileTaskTests extends MobileTestBase {
 
         projectScreen
                 .clickOnTask(sectionName, testTaskData.getContent());
+        taskEditScreen
+                .checkTask(testTaskData, CONTENT, PRIORITY);
 
 
         // TODO : выполнить проверку API

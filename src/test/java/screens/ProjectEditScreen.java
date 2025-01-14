@@ -2,7 +2,7 @@ package screens;
 
 import com.codeborne.selenide.SelenideElement;
 import enums.Color;
-import enums.ProjectField;
+import enums.CheckField;
 import enums.ViewStyle;
 import io.qameta.allure.Step;
 import models.projects.ProjectRequestModel;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
-import static enums.ProjectField.*;
-import static enums.ProjectField.VIEW_STYLE;
+import static enums.CheckField.*;
+import static enums.CheckField.VIEW_STYLE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectEditScreen {
@@ -77,9 +77,9 @@ public class ProjectEditScreen {
     }
 
     @Step("Проверить, что проект был корректно создан")
-    public ProjectEditScreen uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
+    public void сheckProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
 
-        List<ProjectField> fieldsList = Arrays.asList(checkFields);
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
 
         if (fieldsList.contains(NAME)) {
             checkProjectName(testProjectData.getName());
@@ -96,8 +96,6 @@ public class ProjectEditScreen {
         if (fieldsList.contains(VIEW_STYLE)) {
             checkProjectViewStyle(testProjectData.getViewStyle());
         }
-
-        return this;
     }
 
     @Step("Проверить имя созданного проекта")
