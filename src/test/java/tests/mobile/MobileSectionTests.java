@@ -37,7 +37,7 @@ public class MobileSectionTests extends MobileTestBase {
         bottomMenu
                 .clickBrowse();
         browseScreen
-                .clickShowProject()
+                //.clickShowProject()
                 .openProject(projectName);
 
         /*editProjectScreen
