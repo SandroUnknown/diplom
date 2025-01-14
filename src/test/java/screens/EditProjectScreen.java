@@ -15,6 +15,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static enums.ProjectField.*;
 import static enums.ProjectField.VIEW_STYLE;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class EditProjectScreen {
 
@@ -107,6 +108,9 @@ public class EditProjectScreen {
         //nameInputElement.shouldHave(text(projectName));
         //nameInputElement.shouldHave(value(projectName));
         nameInputElement.shouldBe(visible);
+
+        String text = nameInputElement.getAttribute("text");
+        assertThat(text).isEqualTo(projectName);
     }
 
     @Step("Проверить цвет созданного проекта")
