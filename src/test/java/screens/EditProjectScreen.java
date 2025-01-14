@@ -88,11 +88,11 @@ public class EditProjectScreen {
             checkProjectName(testProjectData.getName());
         }
 
-        /*if (fieldsList.contains(COLOR)) {
+        if (fieldsList.contains(COLOR)) {
             checkProjectColor(testProjectData.getColor());
         }
 
-        if (fieldsList.contains(FAVORITE)) {
+        /*if (fieldsList.contains(FAVORITE)) {
             checkProjectFavorite(testProjectData.isFavorite());
         }
 
@@ -104,19 +104,16 @@ public class EditProjectScreen {
     }
 
     @Step("Проверить имя созданного проекта")
-    private void checkProjectName(String projectName) {
-        //nameInputElement.shouldHave(text(projectName));
-        //nameInputElement.shouldHave(value(projectName));
-        //nameInputElement.shouldBe(visible);
-
-        String text = nameInputElement.getAttribute("text");
-        System.out.println("Text = " + text);
-        assertThat(text).isEqualTo(projectName);
+    private void checkProjectName(String expectedProjectName) {
+        String actualProjectName = nameInputElement.getAttribute("text");
+        assertThat(actualProjectName).isEqualTo(expectedProjectName);
     }
 
     @Step("Проверить цвет созданного проекта")
-    private void checkProjectColor(Color projectColor) {
-        colorSelectElement.shouldHave(text(projectColor.getCssAndroidTitle()));
+    private void checkProjectColor(Color expectedProjectColor) {
+        //colorSelectElement.shouldHave(text(projectColor.getCssAndroidTitle()));
+        String actualProjectColor = colorSelectElement.getAttribute("text");
+        assertThat(actualProjectColor).isEqualTo(expectedProjectColor.getCssAndroidTitle());
     }
 
     @Step("Проверить, что созданный проект добавлен в 'Избранное'")
