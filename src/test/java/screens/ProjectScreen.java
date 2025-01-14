@@ -14,6 +14,19 @@ public class ProjectScreen {
         return $(By.xpath(String.format(str, sectionName)));
     }
 
+    private SelenideElement getAddTaskButtonElement(String sectionName) {
+        String str = "//android.widget.TextView[@resource-id='android:id/title' and @text='%s']/../../..";
+        SelenideElement parentElement = $(By.xpath(String.format(str, sectionName)));
+
+        SelenideElement addTaskButtonElement = parentElement.$(By.xpath(
+                ".//android.widget.TextView[@resource-id='com.todoist:id/text']"));
+
+
+
+        //return $(By.xpath(String.format(str, sectionName)));
+        return addTaskButtonElement;
+    }
+
     private final SelenideElement moreOptionsButtonElement = $(By.xpath(
             "//android.widget.ImageView[@content-desc='More options']"));
 
@@ -45,8 +58,10 @@ public class ProjectScreen {
     }
 
     @Step("Нажать 'Добавить задачу'")
-    public ProjectScreen clickAddTask() {
-        addTaskButtonElement.click();
+    public ProjectScreen clickAddTask(String sectionName) {
+        //addTaskButtonElement.click();
+        getAddTaskButtonElement(sectionName).click();
+
         return this;
     }
 

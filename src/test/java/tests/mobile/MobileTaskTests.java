@@ -39,7 +39,7 @@ public class MobileTaskTests extends MobileTestBase {
         projectScreen
                 //.clickMoreOptions()
                 //.clickAddSection();
-                .clickAddTask();
+                .clickAddTask(sectionName);
 
 
         /*sectionEditScreen
