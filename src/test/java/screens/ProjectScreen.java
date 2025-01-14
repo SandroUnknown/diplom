@@ -46,10 +46,10 @@ public class ProjectScreen {
 
     @Step("Проверить раздел")
     public ProjectScreen checkSection(String expectedSectionName) {
-        getSectionNameElement(expectedSectionName).shouldBe(visible);
+        //getSectionNameElement(expectedSectionName).shouldBe(visible);
 
-        //String actualSectionName = getSectionNameElement(expectedSectionName).getAttribute("text");
-        //assertThat(actualSectionName).isEqualTo(expectedSectionName);
+        String actualSectionName = getSectionNameElement(expectedSectionName).getAttribute("text");
+        assertThat(actualSectionName).isEqualTo(expectedSectionName);
         return this;
     }
 
