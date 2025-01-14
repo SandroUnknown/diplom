@@ -37,10 +37,7 @@ public class MobileTaskTests extends MobileTestBase {
         browseScreen
                 .openProject(projectName);
         projectScreen
-                //.clickMoreOptions()
-                //.clickAddSection();
                 .clickAddTask(sectionName);
-
         taskCreateScreen
                 .inputTaskName(testTaskData.getContent())
                 .setTaskPriority(testTaskData.getPriority())

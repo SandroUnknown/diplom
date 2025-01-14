@@ -5,16 +5,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.back;
 
 public class TaskCreateScreen {
 
     private final SelenideElement taskNameInputElement = $(By.xpath(
             "//android.widget.EditText[@resource-id='android:id/message']"));
-
-    private final SelenideElement taskPriorityButtonElement = $(By.xpath(
-            "//android.widget.TextView[@content-desc='Priority']"));
-
-    //getTaskPriorityDropdownElement
 
     private final SelenideElement submitButtonElement = $(By.xpath(
             "//android.widget.ImageView[@resource-id='android:id/button1']"));
@@ -25,33 +21,18 @@ public class TaskCreateScreen {
         return this;
     }
 
+    // TODO : дописать параметр в Степ
     @Step("Установить приоритет задачи")
     public TaskCreateScreen setTaskPriority(int taskPriority) {
-        String text = taskNameInputElement.getAttribute("text");
-        text = text + " !!" + taskPriority;
+        String text = taskNameInputElement.getAttribute("text") + " !!" + taskPriority;;
         taskNameInputElement.sendKeys(text);
-
-
-        //clickTaskPriority();
-        //selectTaskPriority(taskPriority);
-        return this;
-    }
-
-    @Step("Нажать на 'Приоритет'")
-    private TaskCreateScreen clickTaskPriority() {
-        taskPriorityButtonElement.click();
-        return this;
-    }
-
-    // TODO : дописать в степ параметр
-    @Step("Выбрать значение")
-    private TaskCreateScreen selectTaskPriority(int taskPriority) {
         return this;
     }
 
     @Step("Нажать 'Применить'")
     public TaskCreateScreen clickSubmit() {
         submitButtonElement.click();
+        back();
         return this;
     }
 }
