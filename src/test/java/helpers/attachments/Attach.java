@@ -55,6 +55,7 @@ public class Attach {
 
     public static URL getVideoUrl() {
 
+        // TODO : ??? через credential?
         String login = System.getProperty("web_remote_login");
         String pass = System.getProperty("web_remote_password");
         String url = System.getProperty("web_remote_url");

@@ -3,10 +3,6 @@ package enums;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-
-// TODO : Нужен ли тут метод для получения по стилю?
-
-
 @Getter
 public enum ViewStyle {
     LIST("list", 1),
@@ -20,14 +16,14 @@ public enum ViewStyle {
         this.number = number;
     }
 
-    public static ViewStyle getViewStyleByTitle(String title) {
+    /*public static ViewStyle getViewStyleByTitle(String title) {
         for (ViewStyle viewStyle : ViewStyle.values()) {
             if (viewStyle.getTitle().equalsIgnoreCase(title)) {
                 return viewStyle;
             }
         }
         return null;
-    }
+    }*/
 
     @JsonValue
     public String getJsonValue() {

@@ -25,18 +25,11 @@ public class WebTestBase {
 
     static List<TestDataModel> TEMPLATES;
 
-    // АПИ
     ProjectsApi projectsApi = new ProjectsApi();
-    SectionsApi sectionsApi = new SectionsApi();
-    TasksApi tasksApi = new TasksApi();
-    CommentsApi commentsApi = new CommentsApi();
-    LabelsApi labelsApi = new LabelsApi();
 
-    // Пейдж
     ProjectPage projectPage = new ProjectPage();
     SectionPage sectionPage = new SectionPage();
     TaskPage taskPage = new TaskPage();
-    AuthPage authPage = new AuthPage();
 
     @BeforeAll
     public static void setUp() {

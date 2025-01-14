@@ -5,10 +5,6 @@ import lombok.Getter;
 
 import java.util.Random;
 
-
-// TODO : Нужны ли тут методы для получения по тайтлу, айди и хешу?
-
-
 @Getter
 public enum Color {
     BERRY_RED("berry_red", "berry-red",  "Berry red"),
@@ -43,20 +39,20 @@ public enum Color {
     }
 
     // TODO : работает метод??
-    public static Color getRandom() {
+    /*public static Color getRandom() {
         Color[] colors = values();
         int randomIndex = new Random().nextInt(colors.length);
         return colors[randomIndex];
-    }
+    }*/
 
-    public static Color getColorByTitle(String title) {
+    /*public static Color getColorByTitle(String title) {
         for (Color color : Color.values()) {
             if (color.getTitle().equalsIgnoreCase(title)) {
                 return color;
             }
         }
         return null;
-    }
+    }*/
 
     @JsonValue
     public String getJsonValue() {
