@@ -2,6 +2,7 @@ package tests.mobile;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import drivers.ApiConfigDriver;
 import drivers.BrowserstackDriver;
 //import drivers.EmulationDriver;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -29,6 +30,7 @@ public class MobileTestBase {
     @BeforeAll
     static void beforeAll() {
 
+        new ApiConfigDriver();
         Configuration.browser = BrowserstackDriver.class.getName();
 
         Configuration.browserSize = null;
@@ -54,4 +56,11 @@ public class MobileTestBase {
         //Attach.pageSource();
         closeWebDriver();
     }
+
+    /*@AfterEach
+    void cleanData() {
+        projectsApi.deleteProjects();
+        labelsApi.deleteLabels();
+
+    }*/
 }

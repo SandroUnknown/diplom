@@ -65,11 +65,4 @@ public class WebTestBase {
         Attach.addVideo();
         closeWebDriver();
     }
-
-    @AfterEach
-    void cleanData() {
-        projectsApi.deleteProjects();
-        labelsApi.deleteLabels();
-
-    }
 }
