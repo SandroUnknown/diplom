@@ -3,7 +3,6 @@ package screens;
 import com.codeborne.selenide.SelenideElement;
 import enums.CheckField;
 import io.qameta.allure.Step;
-import models.projects.ProjectRequestModel;
 import models.tasks.TaskRequestModel;
 import org.openqa.selenium.By;
 
@@ -15,12 +14,6 @@ import static enums.CheckField.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class TaskEditScreen {
-
-    private SelenideElement getViewStyleElement(int number) {
-        String str = "//android.view.ViewGroup[@resource-id='com.todoist:id/view_style']" +
-                "/android.view.View/android.view.View/android.view.View[%s]";
-        return $(By.xpath(String.format(str, number)));
-    }
 
     private final SelenideElement taskContentElement = $(By.xpath(
             "//android.widget.EditText[@resource-id='com.todoist:id/item_content']"));
@@ -58,5 +51,4 @@ public class TaskEditScreen {
                 actualStringPriority.replaceAll("[^0-9]", ""));
         assertThat(actualPriority).isEqualTo(expectedPriority);
     }
-
 }
