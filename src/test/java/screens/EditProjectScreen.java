@@ -38,10 +38,7 @@ public class EditProjectScreen {
             "//android.widget.EditText[@resource-id='com.todoist:id/name']"));
 
     private final SelenideElement colorSelectElement = $(By.xpath(
-            //"//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_color']"));
             "//android.widget.TextView[@resource-id='com.todoist:id/color']"));
-
-
 
     private final SelenideElement favoriteSelectElement = $(By.xpath(
             //"//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_favorite']"));
@@ -95,11 +92,11 @@ public class EditProjectScreen {
             checkProjectColor(testProjectData.getColor());
         }
 
-        /*if (fieldsList.contains(FAVORITE)) {
+        if (fieldsList.contains(FAVORITE)) {
             checkProjectFavorite(testProjectData.isFavorite());
         }
 
-        if (fieldsList.contains(VIEW_STYLE)) {
+        /*if (fieldsList.contains(VIEW_STYLE)) {
             checkProjectViewStyle(testProjectData.getViewStyle());
         }*/
 
@@ -114,7 +111,6 @@ public class EditProjectScreen {
 
     @Step("Проверить цвет созданного проекта")
     private void checkProjectColor(Color expectedProjectColor) {
-        //colorSelectElement.shouldHave(text(projectColor.getCssAndroidTitle()));
         String actualProjectColor = colorSelectElement.getAttribute("text");
         assertThat(actualProjectColor).isEqualTo(expectedProjectColor.getCssAndroidTitle());
     }
