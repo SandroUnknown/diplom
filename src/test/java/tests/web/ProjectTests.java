@@ -34,7 +34,7 @@ public class ProjectTests extends WebTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового проекта (с заполнением только имени)")
+    @Story("Создание нового проекта")
     @DisplayName("Создать новый проект (с заполнением только имени)")
     void createProjectWithNameOnlyTest() {
 
@@ -62,7 +62,7 @@ public class ProjectTests extends WebTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
+    @Story("Создание нового проекта")
     @DisplayName("Создать новый проект (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
     void createProjectWithFullDataTest() {
 
@@ -93,7 +93,7 @@ public class ProjectTests extends WebTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление проекта по ID")
+    @Story("Удаление проекта")
     @DisplayName("Удалить проект по ID")
     void deleteProjectTest() {
 

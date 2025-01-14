@@ -42,7 +42,7 @@ public class LabelTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание новой метки (с заполнением только имени)")
+    @Story("Создание новой метки")
     @DisplayName("Создать новую метку (с заполнением только имени)")
     void createNewLabelTest() {
 
@@ -54,7 +54,7 @@ public class LabelTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание новой метки (с заполнением всех параметров)")
+    @Story("Создание новой метки")
     @DisplayName("Создать новую метку (с заполнением всех параметров)")
     void createNewLabelWithAllParamsTest() {
 
@@ -66,7 +66,7 @@ public class LabelTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Обновление метки по ID")
+    @Story("Обновление метки")
     @DisplayName("Обновить метку по ID")
     void updateLabelTest() {
 
@@ -85,7 +85,7 @@ public class LabelTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Получение метки по ID")
+    @Story("Получение метки")
     @DisplayName("Получить метку по ID")
     void getLabelTest() {
 
@@ -131,7 +131,7 @@ public class LabelTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление метки по ID")
+    @Story("Удаление метки")
     @DisplayName("Удалить метку по ID")
     void deleteLabelTest() {
 

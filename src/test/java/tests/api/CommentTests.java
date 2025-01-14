@@ -35,7 +35,7 @@ public class CommentTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового комментария в проекте")
+    @Story("Создание нового комментария")
     @DisplayName("Создать новый комментарий в проекте")
     void createNewCommentInProjectTest() {
 
@@ -54,7 +54,7 @@ public class CommentTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового комментария в задаче")
+    @Story("Создание нового комментария")
     @DisplayName("Создать новый комментарий в задаче")
     void createNewCommentInTaskTest() {
 
@@ -75,7 +75,7 @@ public class CommentTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Обновление комментария по ID")
+    @Story("Обновление комментария")
     @DisplayName("Обновить комментарий по ID")
     void updateCommentTest() {
 
@@ -97,7 +97,7 @@ public class CommentTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Получение комментария по ID")
+    @Story("Получение комментария")
     @DisplayName("Получить комментарий по ID")
     void getCommentTest() {
 
@@ -182,7 +182,7 @@ public class CommentTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление комментария по ID")
+    @Story("Удаление комментария")
     @DisplayName("Удалить комментарий по ID")
     void deleteCommentTest() {
 

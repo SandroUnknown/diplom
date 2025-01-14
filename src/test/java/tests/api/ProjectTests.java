@@ -49,7 +49,7 @@ public class ProjectTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового проекта (с заполнением имени, цвета и варианта отображения)")
+    @Story("Создание нового проекта")
     @DisplayName("Создать новый проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectTest() {
 
@@ -65,7 +65,7 @@ public class ProjectTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового вложенного проекта (с заполнением имени, цвета и варианта отображения)")
+    @Story("Создание нового вложенного проекта")
     @DisplayName("Создать новый вложенный проект (с заполнением имени, цвета и варианта отображения)")
     void createNewProjectInProjectTest() {
 
@@ -91,7 +91,7 @@ public class ProjectTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Обновление проекта по ID")
+    @Story("Обновление проекта")
     @DisplayName("Обновить проект по ID")
     void updateProjectTest() {
 
@@ -117,7 +117,7 @@ public class ProjectTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление проекта по ID")
+    @Story("Удаление проекта")
     @DisplayName("Удалить проект по ID")
     void deleteProjectTest() {
 

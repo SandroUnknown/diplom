@@ -66,7 +66,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Обновление задачи по ID")
+    @Story("Обновление задачи")
     @DisplayName("Обновить задачу по ID")
     void updateTaskTest() {
 
@@ -92,7 +92,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Получение задачи по ID")
+    @Story("Получение задачи")
     @DisplayName("Получить задачу по ID")
     void getTaskTest() {
 
@@ -148,7 +148,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Получение всех активных задач пользователя (с применением фильтра `label`)")
+    @Story("Получение всех активных задач пользователя")
     @DisplayName("Получить все активные задачи пользователя (с применением фильтра `label`)")
     void getTasksWithFilterTest() {
 
@@ -189,7 +189,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Закрытие задачи по ID")
+    @Story("Закрытие задачи")
     @DisplayName("Закрыть задачу по ID")
     void closeTaskTest() {
 
@@ -215,7 +215,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.BLOCKER)
-    @Story("Открытие (ранее закрытой) задачи по ID")
+    @Story("Открытие (ранее закрытой) задачи")
     @DisplayName("Открыть (ранее закрытую) задачу по ID")
     void reopenTaskTest() {
 
@@ -242,7 +242,7 @@ public class TaskTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление задачи по ID")
+    @Story("Удаление задачи")
     @DisplayName("Удалить задачу по ID")
     void deleteTaskTest() {
 

@@ -143,7 +143,7 @@ public class SectionTests extends ApiTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление раздела по ID")
+    @Story("Удаление раздела")
     @DisplayName("Удалить раздел по ID")
     void deleteSectionTest() {
 

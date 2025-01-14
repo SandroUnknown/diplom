@@ -37,14 +37,14 @@ allure {
     }
 }
 
-configurations {
+/*configurations {
     withoutAppiumTests {
         extendsFrom testImplementation
     }
     appiumTests {
         extendsFrom testImplementation
     }
-}
+}*/
 
 dependencies {
     testImplementation(
@@ -62,14 +62,14 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-    withoutAppiumTests(
+   /* withoutAppiumTests(
             "com.opencsv:opencsv:5.9"
-    )
+    )*/
 
-    appiumTests(
+    /*appiumTests(
             //"com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
-    )
+    )*/
 }
 
 /*
@@ -128,11 +128,11 @@ task mobile_android(type: Test) {
 
 
 //configurations.appiumTests {
-/*configurations.all {
+configurations.all {
     resolutionStrategy {
-        force "com.codeborne:selenide:$lowerSelenideVersion"
+        force "com.codeborne:selenide:$selenideVersion"
     }
-}*/
+}
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

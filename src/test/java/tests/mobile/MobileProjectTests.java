@@ -31,7 +31,7 @@ public class MobileProjectTests extends MobileTestBase {
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
-    @Story("Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
+    @Story("Создание нового проекта")
     @DisplayName("Создать новый проект (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)")
     void createProjectTest() {
 
