@@ -2,6 +2,9 @@ package tests.mobile;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import models.data.TestDataModel;
 import models.sections.SectionRequestModel;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +12,11 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя на ANDROID")
+@Feature("Проверка разделов на ANDROID")
 @Tags({ @Tag("ANDROID"), @Tag("section") })
+@DisplayName("Проверка разделов на ANDROID")
 public class MobileSectionTests extends MobileTestBase {
 
     private final SectionRequestModel testSectionData = SectionRequestModel.builder()

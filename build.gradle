@@ -70,8 +70,8 @@ dependencies {
     )
 }
 
-configurations.appiumTests {
-//configurations.all {
+//configurations.appiumTests {
+configurations.all {
     resolutionStrategy {
         force "com.codeborne:selenide:$lowerSelenideVersion"
     }
@@ -99,8 +99,8 @@ task api(type: Test) {
         //includeTags("API_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    //testClassesDirs = sourceSets.test.output
+    //classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task web(type: Test) {
@@ -109,8 +109,8 @@ task web(type: Test) {
         //includeTags("WEB_FOR_TEST")
     }
 
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    //testClassesDirs = sourceSets.test.output
+    //classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task mobile_android(type: Test) {

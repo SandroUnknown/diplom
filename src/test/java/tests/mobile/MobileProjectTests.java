@@ -3,14 +3,22 @@ package tests.mobile;
 import enums.Color;
 import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import models.projects.ProjectRequestModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static enums.CheckField.*;
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя на ANDROID")
+@Feature("Проверка проектов на ANDROID")
 @Tags({ @Tag("ANDROID"), @Tag("project") })
+@DisplayName("Проверка проектов на ANDROID")
 public class MobileProjectTests extends MobileTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()

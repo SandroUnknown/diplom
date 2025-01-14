@@ -2,6 +2,9 @@ package tests.mobile;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +15,11 @@ import org.junit.jupiter.api.Test;
 import static enums.CheckField.CONTENT;
 import static enums.CheckField.PRIORITY;
 
+@Owner("Petyukov Alexander")
+@Epic("Проверка рабочего пространства пользователя на ANDROID")
+@Feature("Проверка задач на ANDROID")
+@Tags({ @Tag("ANDROID"), @Tag("task") })
+@DisplayName("Проверка задач на ANDROID")
 public class MobileTaskTests extends MobileTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
@@ -21,7 +29,6 @@ public class MobileTaskTests extends MobileTestBase {
 
     @Test
     @CleanupTestData
-    @Tags({ @Tag("ANDROID"), @Tag("task") })
     @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void createTaskTest() {
 
