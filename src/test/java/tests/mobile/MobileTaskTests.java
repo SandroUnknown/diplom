@@ -1,7 +1,6 @@
 package tests.mobile;
 
 import data.DataCreator;
-import enums.CheckField;
 import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
