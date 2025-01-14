@@ -223,7 +223,6 @@ public class DataCreator {
             TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
                     .projectId(projectId)
                     .content(task.getContent())
-                    //.order(task.getOrder()) // TODO : нужно?
                     .priority(task.getPriority());
 
             if (addLabels) {
@@ -283,7 +282,6 @@ public class DataCreator {
             TaskRequestModel.TaskRequestModelBuilder builder = TaskRequestModel.builder()
                     .sectionId(sectionId)
                     .content(task.getContent())
-                    //.order(task.getOrder()) // TODO : нужно?
                     .priority(task.getPriority());
 
             if (addLabels) {

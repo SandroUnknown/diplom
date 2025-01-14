@@ -37,8 +37,8 @@ public enum Color {
     }
 
     // TODO : нужен ли этот метод??
-    @JsonValue
+    /*@JsonValue
     public String getJsonValue() {
         return title;
-    }
+    }*/
 }

@@ -15,9 +15,6 @@ import static io.restassured.RestAssured.given;
 
 public class Browserstack {
 
-    /*private static final RemoveAndroidConfig config =
-            ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());*/
-
     private static final CredentialsConfig credentialsConfig =
             ConfigFactory.create(CredentialsConfig.class, System.getProperties());
 
@@ -67,7 +64,7 @@ public class Browserstack {
                 .extract()
                 .asString();
 
-        if (!response.contains("No results found")) {
+        if (!response.contains("No results found")) {   // TODO : перепроверить
             List<UploadedAppsListResponseModel> jResponse =
                     new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
 
