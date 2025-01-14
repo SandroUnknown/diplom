@@ -49,9 +49,7 @@ configurations {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$selenideVersion",
-            "com.codeborne:selenide:$lowerSelenideVersion",
-            //"io.appium:java-client:$appiumVersion",
+            //"com.codeborne:selenide:$lowerSelenideVersion",   // закоментил
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -67,7 +65,7 @@ dependencies {
     )
 
     appiumTests(
-            //"com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
     )
 }
