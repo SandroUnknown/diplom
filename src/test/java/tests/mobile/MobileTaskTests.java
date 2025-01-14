@@ -15,7 +15,7 @@ public class MobileTaskTests extends MobileTestBase {
             .priority(2)
             .build();
 
-    @Tag("MOBILE_FOR_TEST")
+    //@Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
     @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
