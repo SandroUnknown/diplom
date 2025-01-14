@@ -8,11 +8,12 @@ import static com.codeborne.selenide.Selenide.$;
 public class PopupScreen {
 
     private final SelenideElement popupYesButtonElement = $(By.xpath(
-            "//android.widget.Button[@resource-id='android:id/button1']"));
+            "//android.widget.Button[@resource-id='android:id/button3']"));
 
     public PopupScreen clickYesButton() {
         if (popupYesButtonElement.isDisplayed()) {
             popupYesButtonElement.click();
+            System.out.println("НАШЕЛСЯ!!!!");
         }
         return this;
     }
