@@ -7,6 +7,7 @@ import models.projects.ProjectRequestModel;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.back;
 import static enums.ProjectField.*;
 
 public class MobileProjectTests extends MobileTestBase {
@@ -26,6 +27,7 @@ public class MobileProjectTests extends MobileTestBase {
         authScreen.login();
 
         //popupScreen.clickYesButton();
+        back();
 
         bottomMenu.clickBrowse();
         browseScreen.clickCreateProject();
