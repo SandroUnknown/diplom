@@ -16,5 +16,4 @@ public class ProjectRequestModel {
     private Color color;
     @JsonProperty("is_favorite") private boolean isFavorite;
     @JsonProperty("view_style") private ViewStyle viewStyle;
-
 }

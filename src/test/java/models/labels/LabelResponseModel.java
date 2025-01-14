@@ -14,5 +14,4 @@ public class LabelResponseModel {
     private Color color;
     private int order;
     @JsonProperty("is_favorite") private boolean isFavorite;
-    //@JsonProperty("is_favorite") private boolean favorite;
 }

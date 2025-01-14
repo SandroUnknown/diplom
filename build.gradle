@@ -190,30 +190,30 @@ task mobile_android(type: Test) {
 
 
 // ЗАКОМЕНТИЛ ВОТ ЭТО!!!!!!!!!!!!!!!!!!!
-/*configurations.all {
+configurations.all {
     resolutionStrategy {
         force "com.codeborne:selenide:$lowerSelenideVersion"
     }
-}*/
+}
 
 task api(type: Test) {
     useJUnitPlatform {
-        includeTags("API")
-        //includeTags("API_FOR_TEST")
+        //includeTags("API")
+        includeTags("API_FOR_TEST")
     }
 }
 
 task web(type: Test) {
     useJUnitPlatform {
-        includeTags("WEB")
-        //includeTags("WEB_FOR_TEST")
+        //includeTags("WEB")
+        includeTags("WEB_FOR_TEST")
     }
 }
 
 task mobile_android(type: Test) {
     useJUnitPlatform {
-        includeTags("ANDROID")
-        //includeTags("MOBILE_FOR_TEST")
+        //includeTags("ANDROID")
+        includeTags("MOBILE_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output
