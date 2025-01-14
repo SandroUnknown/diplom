@@ -2,9 +2,7 @@ package tests.mobile;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +27,9 @@ public class MobileTaskTests extends MobileTestBase {
 
     @Test
     @CleanupTestData
-    @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание новой задачи")
+    @DisplayName("Создать новую задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createTaskTest() {
 
         int templateNumber = 0;

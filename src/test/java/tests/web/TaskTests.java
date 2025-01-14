@@ -2,9 +2,7 @@ package tests.web;
 
 import data.DataCreator;
 import helpers.annotations.CleanupTestData;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
+import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.*;
@@ -24,11 +22,11 @@ public class TaskTests extends WebTestBase {
             .priority(2)
             .build();
 
-    // TODO : добавить тестов для других вариантов отображения?
-    
     @Test
     @CleanupTestData
-    @DisplayName("Создать задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Создание новой задачи")
+    @DisplayName("Создать новую задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createTaskInEmptySectionTest() {
 
         int templateNumber = 0;
@@ -65,9 +63,12 @@ public class TaskTests extends WebTestBase {
         // TODO : добавить API-проверку
     }
 
-    /*@Test
+    /*
+    @Test
     @CleanupTestData
-    @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Удаление задачи")
+    @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void deleteTaskTest() {
 
         int templateNumber = 0;
@@ -107,6 +108,8 @@ public class TaskTests extends WebTestBase {
     @Disabled
     @Test
     @CleanupTestData
+    @Severity(SeverityLevel.MINOR)
+    @Story("Перемещение задачи")
     @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
     void dragAndDropSectionTest() {
     }
