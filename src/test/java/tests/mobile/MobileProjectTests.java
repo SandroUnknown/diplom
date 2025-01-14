@@ -36,6 +36,7 @@ public class MobileProjectTests extends MobileTestBase {
                 .clickApplyButtonElement();
 
         projectScreen
+                .clickMoreOptions()
                 .clickEditProject();
         editProjectScreen
                 .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);

@@ -40,6 +40,10 @@ public class MobileSectionTests extends MobileTestBase {
                 //.clickShowProject()
                 .openProject(projectName);
 
+        projectScreen
+                .clickMoreOptions()
+                .clickAddSection();
+
         /*editProjectScreen
                 .inputProjectName(testProjectData.getName())
                 .selectProjectColor(testProjectData.getColor())

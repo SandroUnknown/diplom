@@ -11,13 +11,27 @@ public class ProjectScreen {
     private final SelenideElement moreOptionsButtonElement = $(By.xpath(
             "//android.widget.ImageView[@content-desc='More options']"));
 
-    private final SelenideElement editButtonElement = $(By.xpath(
+    private final SelenideElement editProjectButtonElement = $(By.xpath(
             "//android.widget.TextView[@resource-id='com.todoist:id/title' and @text='Edit']"));
 
-    @Step("Нажать 'редактировать проект'")
-    public ProjectScreen clickEditProject() {
+    private final SelenideElement addSectionButtonElement = $(By.xpath(
+            "//android.widget.TextView[@resource-id='com.todoist:id/title' and @text='Add section']"));
+
+    @Step("Нажать 'Больше опций'")
+    public ProjectScreen clickMoreOptions() {
         moreOptionsButtonElement.click();
-        editButtonElement.click();
+        return this;
+    }
+
+    @Step("Нажать 'Редактировать проект'")
+    public ProjectScreen clickEditProject() {
+        editProjectButtonElement.click();
+        return this;
+    }
+
+    @Step("Нажать 'Добавить раздел'")
+    public ProjectScreen clickAddSection() {
+        addSectionButtonElement.click();
         return this;
     }
 }

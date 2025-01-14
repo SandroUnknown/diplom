@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class BrowseScreen {
 
     private SelenideElement getProjectElement(String projectName) {
-        String str = "(//android.widget.TextView[@text='%s'])[2]";
+        String str = "//android.widget.TextView[@text='%s']";
         return $(By.xpath(String.format(str, projectName)));
     }
 
