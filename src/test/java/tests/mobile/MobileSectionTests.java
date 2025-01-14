@@ -42,17 +42,14 @@ public class MobileSectionTests extends MobileTestBase {
         sectionEditScreen
                 .inputSectionName(testSectionData.getName());
 
-        /*editProjectScreen
-                .inputProjectName(testProjectData.getName())
-                .selectProjectColor(testProjectData.getColor())
-                .addToFavorite(testProjectData.isFavorite())
-                .selectProjectViewStyle(testProjectData.getViewStyle())
-                .clickApplyButtonElement();
-
-        projectScreen
+        /*projectScreen
                 .clickEditProject();
         editProjectScreen
                 .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);*/
+
+        projectScreen
+                .checkSection(testSectionData.getName());
+
 
         // TODO : выполнить проверку API
     }

@@ -1,12 +1,18 @@
 package screens;
 
 import com.codeborne.selenide.SelenideElement;
+import enums.Color;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class ProjectScreen {
+
+    private SelenideElement getSectionNameElement(String sectionName) {
+        String str = "//android.widget.TextView[@resource-id='android:id/title' and @text='%s']";
+        return $(By.xpath(String.format(str, sectionName)));
+    }
 
     private final SelenideElement moreOptionsButtonElement = $(By.xpath(
             "//android.widget.ImageView[@content-desc='More options']"));
@@ -34,4 +40,12 @@ public class ProjectScreen {
         addSectionButtonElement.click();
         return this;
     }
+
+    @Step("Проверить раздел")
+    public ProjectScreen checkSection(String sectionName) {
+        getSectionNameElement(sectionName).click();
+        return this;
+    }
+
+
 }

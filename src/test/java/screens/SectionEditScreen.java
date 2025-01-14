@@ -13,7 +13,8 @@ public class SectionEditScreen {
 
     @Step("Нажать '+' (создать проект)")
     public SectionEditScreen inputSectionName(String sectionName) {
-        sectionNameInputElement.sendKeys(sectionName);
+        //sectionNameInputElement.sendKeys(sectionName);
+        sectionNameInputElement.setValue(sectionName).pressEnter();
         return this;
     }
 }
