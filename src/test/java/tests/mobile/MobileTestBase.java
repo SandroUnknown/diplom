@@ -11,10 +11,7 @@ import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import screens.AuthScreen;
-import screens.BrowseScreen;
-import screens.EditProjectScreen;
-import screens.ProjectScreen;
+import screens.*;
 import screens.components.BottomMenu;
 
 import java.util.List;
@@ -30,7 +27,8 @@ public class MobileTestBase {
     BottomMenu bottomMenu = new BottomMenu();
     BrowseScreen browseScreen = new BrowseScreen();
     ProjectScreen projectScreen = new ProjectScreen();
-    EditProjectScreen editProjectScreen = new EditProjectScreen();
+    ProjectEditScreen projectEditScreen = new ProjectEditScreen();
+    SectionEditScreen sectionEditScreen = new SectionEditScreen();
 
 
     @BeforeAll

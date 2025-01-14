@@ -16,7 +16,7 @@ import static enums.ProjectField.*;
 import static enums.ProjectField.VIEW_STYLE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class EditProjectScreen {
+public class ProjectEditScreen {
 
     private SelenideElement getViewStyleElement(int number) {
         String str = "//android.view.ViewGroup[@resource-id='com.todoist:id/view_style']" +
@@ -43,20 +43,20 @@ public class EditProjectScreen {
             "//android.widget.Switch[@resource-id='com.todoist:id/favorite']"));
 
     @Step("Ввести имя проекта")
-    public EditProjectScreen inputProjectName(String name) {
+    public ProjectEditScreen inputProjectName(String name) {
         nameInputElement.sendKeys(name);
         return this;
     }
 
     @Step("Выбрать цвет проекта")
-    public EditProjectScreen selectProjectColor(Color color) {
+    public ProjectEditScreen selectProjectColor(Color color) {
         colorSelectElement.click();
         getSelectProjectColorElement(color).click();          // TODO : будет ли работать с VIOLET?
         return this;
     }
 
     @Step("Добавить проект в 'Избранное'")
-    public EditProjectScreen addToFavorite(boolean isFavorite) {
+    public ProjectEditScreen addToFavorite(boolean isFavorite) {
         if (isFavorite) {
             favoriteSelectElement.click();
         }
@@ -64,20 +64,20 @@ public class EditProjectScreen {
     }
 
     @Step("Выбрать стиль отображения проекта")
-    public EditProjectScreen selectProjectViewStyle(ViewStyle viewStyle) {
+    public ProjectEditScreen selectProjectViewStyle(ViewStyle viewStyle) {
         int numberViewStyle = viewStyle.getNumber();
         getViewStyleElement(numberViewStyle).click();
         return this;
     }
 
     @Step("Нажать кнопку 'Добавить' (галочка в правом верхнем углу)")
-    public EditProjectScreen clickApplyButtonElement() {
+    public ProjectEditScreen clickApplyButtonElement() {
         applyButtonElement.click();
         return this;
     }
 
     @Step("Проверить, что проект был корректно создан")
-    public EditProjectScreen uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
+    public ProjectEditScreen uiCheckProject(ProjectRequestModel testProjectData, ProjectField... checkFields) {
 
         List<ProjectField> fieldsList = Arrays.asList(checkFields);
 

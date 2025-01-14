@@ -4,7 +4,6 @@ import enums.Color;
 import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
 import models.projects.ProjectRequestModel;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static enums.ProjectField.*;
@@ -28,7 +27,7 @@ public class MobileProjectTests extends MobileTestBase {
                 .clickBrowse();
         browseScreen
                 .clickCreateProject();
-        editProjectScreen
+        projectEditScreen
                 .inputProjectName(testProjectData.getName())
                 .selectProjectColor(testProjectData.getColor())
                 .addToFavorite(testProjectData.isFavorite())
@@ -38,7 +37,7 @@ public class MobileProjectTests extends MobileTestBase {
         projectScreen
                 .clickMoreOptions()
                 .clickEditProject();
-        editProjectScreen
+        projectEditScreen
                 .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
 
         // TODO : выполнить проверку API

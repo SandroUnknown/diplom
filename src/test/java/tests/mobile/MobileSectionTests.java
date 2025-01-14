@@ -6,17 +6,15 @@ import enums.ViewStyle;
 import helpers.annotations.CleanupTestData;
 import models.data.TestDataModel;
 import models.projects.ProjectRequestModel;
+import models.sections.SectionRequestModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class MobileSectionTests extends MobileTestBase {
 
-    private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
-            .name("НОВЫЙ ПРОЕКТ")
-            .color(Color.RED)
-            .isFavorite(true)
-            .viewStyle(ViewStyle.BOARD)
+    private final SectionRequestModel testSectionData = SectionRequestModel.builder()
+            .name("НОВЫЙ РАЗДЕЛ")
             .build();
 
     @Tag("MOBILE_FOR_TEST")
@@ -37,12 +35,12 @@ public class MobileSectionTests extends MobileTestBase {
         bottomMenu
                 .clickBrowse();
         browseScreen
-                //.clickShowProject()
                 .openProject(projectName);
-
         projectScreen
                 .clickMoreOptions()
                 .clickAddSection();
+        sectionEditScreen
+                .inputSectionName(testSectionData.getName());
 
         /*editProjectScreen
                 .inputProjectName(testProjectData.getName())

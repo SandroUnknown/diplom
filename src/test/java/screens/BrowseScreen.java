@@ -16,18 +16,9 @@ public class BrowseScreen {
     private final SelenideElement createProjectButtonElement = $(By.xpath(
             "//android.view.View[@content-desc='Add']"));
 
-    private final SelenideElement showProjectButtonElement = $(By.xpath(
-            "(//android.view.View[@content-desc='Expand/collapse'])[2]"));
-
     @Step("Нажать '+' (создать проект)")
     public BrowseScreen clickCreateProject() {
         createProjectButtonElement.click();
-        return this;
-    }
-
-    @Step("Нажать 'v' (показать проекты)")
-    public BrowseScreen clickShowProject() {
-        showProjectButtonElement.click();
         return this;
     }
 
