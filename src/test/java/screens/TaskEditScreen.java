@@ -40,6 +40,7 @@ public class TaskEditScreen {
     @Step("Проверить, что созданная задача имеет верное название")
     private void checkTaskContent(String expectedContent) {
         String actualContent = taskContentElement.getAttribute("text").strip();
+        expectedContent = expectedContent.strip();
         assertThat(actualContent).isEqualTo(expectedContent);
     }
 
