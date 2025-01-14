@@ -8,8 +8,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class PopupScreen {
 
     private final SelenideElement popupYesButtonElement = $(By.xpath(
-            //"//android.widget.Button[@resource-id='android:id/button3']"));
-            "//android.widget.Button[@text='NEVER ASK']"));
+            "//android.widget.Button[@resource-id='android:id/button3']"));
+            //"//android.widget.Button[@text='NEVER ASK']"));
 
     //private final SelenideElement popupYesButtonElement = $("android:id/button3");
 

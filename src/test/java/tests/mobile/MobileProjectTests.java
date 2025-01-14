@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.back;
+import static com.codeborne.selenide.Selenide.sleep;
 import static enums.ProjectField.*;
 
 public class MobileProjectTests extends MobileTestBase {
@@ -25,6 +26,8 @@ public class MobileProjectTests extends MobileTestBase {
     void createProjectTest() {
 
         authScreen.login();
+
+        sleep(3000);
 
         popupScreen.clickYesButton();
 
