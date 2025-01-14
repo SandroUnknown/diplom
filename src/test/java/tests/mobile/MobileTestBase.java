@@ -2,10 +2,12 @@ package tests.mobile;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import data.DataStorage;
 import drivers.ApiConfigDriver;
 import drivers.BrowserstackDriver;
 //import drivers.EmulationDriver;
 import io.qameta.allure.selenide.AllureSelenide;
+import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +17,14 @@ import screens.EditProjectScreen;
 import screens.ProjectScreen;
 import screens.components.BottomMenu;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
+
+    static List<TestDataModel> TEMPLATES;
 
     AuthScreen authScreen = new AuthScreen();
     BottomMenu bottomMenu = new BottomMenu();
@@ -29,6 +35,9 @@ public class MobileTestBase {
 
     @BeforeAll
     static void beforeAll() {
+
+        // TODO : хардкодить адрес с данными? === "data/Templates.json"
+        TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
         new ApiConfigDriver();
         Configuration.browser = BrowserstackDriver.class.getName();
