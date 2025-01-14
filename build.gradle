@@ -67,7 +67,7 @@ dependencies {
     )*/
 
     appiumTests(
-            //"com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
     )
 }
