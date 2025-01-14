@@ -38,7 +38,10 @@ public class EditProjectScreen {
             "//android.widget.EditText[@resource-id='com.todoist:id/name']"));
 
     private final SelenideElement colorSelectElement = $(By.xpath(
-            "//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_color']"));
+            //"//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_color']"));
+            "//android.widget.TextView[@resource-id='com.todoist:id/color']"));
+
+
 
     private final SelenideElement favoriteSelectElement = $(By.xpath(
             //"//android.widget.RelativeLayout[@resource-id='com.todoist:id/form_favorite']"));
