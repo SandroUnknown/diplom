@@ -16,15 +16,7 @@ public enum ViewStyle {
         this.number = number;
     }
 
-    /*public static ViewStyle getViewStyleByTitle(String title) {
-        for (ViewStyle viewStyle : ViewStyle.values()) {
-            if (viewStyle.getTitle().equalsIgnoreCase(title)) {
-                return viewStyle;
-            }
-        }
-        return null;
-    }*/
-
+    // TODO : нужен ли этот метод??
     @JsonValue
     public String getJsonValue() {
         return title;

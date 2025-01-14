@@ -37,21 +37,21 @@ allure {
     }
 }
 
-/*configurations {
-    withoutAppiumTests {
+configurations {
+    /*upperSelenideVersionConfiguration {
         extendsFrom testImplementation
-    }
+    }*/
     appiumTests {
         extendsFrom testImplementation
     }
-}*/
+}
 
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             //"com.codeborne:selenide:$selenideVersion",
             "com.codeborne:selenide:$lowerSelenideVersion",
-            "io.appium:java-client:$appiumVersion",
+            //"io.appium:java-client:$appiumVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -62,14 +62,14 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-   /* withoutAppiumTests(
-            "com.opencsv:opencsv:5.9"
+    /*upperSelenideVersionConfiguration(
+            "com.codeborne:selenide:$selenideVersion"
     )*/
 
-    /*appiumTests(
+    appiumTests(
             //"com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
-    )*/
+    )
 }
 
 /*
@@ -128,11 +128,11 @@ task mobile_android(type: Test) {
 
 
 //configurations.appiumTests {
-configurations.all {
+/*configurations.all {
     resolutionStrategy {
         force "com.codeborne:selenide:$selenideVersion"
     }
-}
+}*/
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -147,6 +147,49 @@ tasks.withType(Test) {
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
+    }
+}
+
+//============================
+
+
+/*task api(type: Test) {
+    useJUnitPlatform {
+        includeTags("API")
+        //includeTags("API_FOR_TEST")
+    }
+
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
+}
+
+task web(type: Test) {
+    useJUnitPlatform {
+        includeTags("WEB")
+        //includeTags("WEB_FOR_TEST")
+    }
+
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.upperSelenideVersionConfiguration + sourceSets.test.output
+}
+
+task mobile_android(type: Test) {
+    useJUnitPlatform {
+        includeTags("ANDROID")
+        //includeTags("MOBILE_FOR_TEST")
+    }
+
+    //testClassesDirs = sourceSets.test.output
+    //classpath = configurations.appiumTests + sourceSets.test.output
+}*/
+
+
+//=============================
+
+
+configurations.all {
+    resolutionStrategy {
+        force "com.codeborne:selenide:$lowerSelenideVersion"
     }
 }
 
@@ -170,6 +213,6 @@ task mobile_android(type: Test) {
         //includeTags("MOBILE_FOR_TEST")
     }
 
-    //testClassesDirs = sourceSets.test.output
-    //classpath = configurations.appiumTests + sourceSets.test.output
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.appiumTests + sourceSets.test.output
 }

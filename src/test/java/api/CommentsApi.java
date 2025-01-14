@@ -14,7 +14,6 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
 
-// TODO : Вероятно изменить перегрузки Создания и Получения (привести их к единому формату)
 public class CommentsApi extends BaseApi {
 
     @Step("Создать новый комментарий")

@@ -3,8 +3,6 @@ package enums;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-import java.util.Random;
-
 @Getter
 public enum Color {
     BERRY_RED("berry_red", "berry-red",  "Berry red"),
@@ -38,22 +36,7 @@ public enum Color {
         this.cssAndroidTitle = cssAndroidTitle;
     }
 
-    // TODO : работает метод??
-    /*public static Color getRandom() {
-        Color[] colors = values();
-        int randomIndex = new Random().nextInt(colors.length);
-        return colors[randomIndex];
-    }*/
-
-    /*public static Color getColorByTitle(String title) {
-        for (Color color : Color.values()) {
-            if (color.getTitle().equalsIgnoreCase(title)) {
-                return color;
-            }
-        }
-        return null;
-    }*/
-
+    // TODO : нужен ли этот метод??
     @JsonValue
     public String getJsonValue() {
         return title;

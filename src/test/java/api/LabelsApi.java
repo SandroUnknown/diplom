@@ -17,7 +17,7 @@ import static specs.Specification.*;
 public class LabelsApi extends BaseApi {
 
     @Step("Создать новую персональную метку")
-    public models.labels.LabelResponseModel createNewLabel(LabelRequestModel labelData) {
+    public LabelResponseModel createNewLabel(LabelRequestModel labelData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
@@ -26,10 +26,10 @@ public class LabelsApi extends BaseApi {
                 .post(LABELS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(models.labels.LabelResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
-    public models.labels.LabelResponseModel createNewLabel(String labelName) {
+    public LabelResponseModel createNewLabel(String labelName) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
                 .name(labelName)
@@ -39,7 +39,7 @@ public class LabelsApi extends BaseApi {
     }
 
     @Step("Обновить персональную метку")
-    public models.labels.LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
+    public LabelResponseModel updateLabel(String labelId, LabelRequestModel labelData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
@@ -48,10 +48,10 @@ public class LabelsApi extends BaseApi {
                 .post(LABELS_ENDPOINT + labelId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(models.labels.LabelResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
-    public models.labels.LabelResponseModel updateLabel(String labelId, String labelName) {
+    public LabelResponseModel updateLabel(String labelId, String labelName) {
 
         LabelRequestModel labelData = LabelRequestModel.builder()
                 .name(labelName)
@@ -61,7 +61,7 @@ public class LabelsApi extends BaseApi {
     }
 
     @Step("Получить персональную метку")
-    public models.labels.LabelResponseModel getLabel(String labelId) {
+    public LabelResponseModel getLabel(String labelId) {
 
         return given()
                 .spec(requestGetSpec)
@@ -69,11 +69,11 @@ public class LabelsApi extends BaseApi {
                 .get(LABELS_ENDPOINT + labelId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(models.labels.LabelResponseModel.class);
+                .extract().as(LabelResponseModel.class);
     }
 
     @Step("Получить все персональные метки пользователя")
-    public List<models.labels.LabelResponseModel> getAllLabels() {
+    public List<LabelResponseModel> getAllLabels() {
 
         return given()
                 .spec(requestGetSpec)
@@ -83,7 +83,7 @@ public class LabelsApi extends BaseApi {
                 .spec(responseSpec200)
                 .extract()
                 .jsonPath()
-                .getList(".", models.labels.LabelResponseModel.class);
+                .getList(".", LabelResponseModel.class);
     }
 
     @Step("Удалить персональную метку")
@@ -100,9 +100,9 @@ public class LabelsApi extends BaseApi {
     @Step("Удалить все персональные метки")
     public void deleteLabels() {
 
-        List<models.labels.LabelResponseModel> labels = getAllLabels();
+        List<LabelResponseModel> labels = getAllLabels();
 
-        for (models.labels.LabelResponseModel label : labels) {
+        for (LabelResponseModel label : labels) {
             String labelId = label.getId();
             deleteLabel(labelId);
         }
