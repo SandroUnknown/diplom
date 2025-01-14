@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LabelResponseModel {
+public class CommentResponseModel {
 
     @JsonProperty("task_id") private String taskId;
     @JsonProperty("project_id") private String projectId;

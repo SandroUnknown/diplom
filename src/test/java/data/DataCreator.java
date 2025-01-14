@@ -3,7 +3,7 @@ package data;
 import api.*;
 import io.qameta.allure.Step;
 import models.comments.CommentRequestModel;
-import models.comments.LabelResponseModel;
+import models.comments.CommentResponseModel;
 import models.data.TestDataModel;
 import models.labels.LabelRequestModel;
 import models.projects.ProjectRequestModel;
@@ -199,7 +199,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInProjects().size(); i++) {
-            LabelResponseModel comment = templateData.getCommentsInProjects().get(i);
+            CommentResponseModel comment = templateData.getCommentsInProjects().get(i);
             int projectNumber = Integer.parseInt(comment.getProjectId());
             String projectId = testData.getProjects().get(projectNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()
@@ -241,7 +241,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInTasksInProjects().size(); i++) {
-            LabelResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
+            CommentResponseModel comment = templateData.getCommentsInTasksInProjects().get(i);
             int taskNumber = Integer.parseInt(comment.getTaskId());
             String taskId = testData.getTasksInProjects().get(taskNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()
@@ -301,7 +301,7 @@ public class DataCreator {
 
         CommentsApi api = new CommentsApi();
         for (int i = 0; i < templateData.getCommentsInTasksInSections().size(); i++) {
-            LabelResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
+            CommentResponseModel comment = templateData.getCommentsInTasksInSections().get(i);
             int taskNumber = Integer.parseInt(comment.getTaskId());
             String taskId = testData.getTasksInSections().get(taskNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()

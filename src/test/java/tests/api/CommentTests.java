@@ -4,7 +4,7 @@ import data.DataCreator;
 import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.comments.CommentRequestModel;
-import models.comments.LabelResponseModel;
+import models.comments.CommentResponseModel;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -109,10 +109,10 @@ public class CommentTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .createCommentsInTasksInSections(true)
                 .create();
-        LabelResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
+        CommentResponseModel myCreatedComment = testData.getCommentsInTasksInSections().get(0);
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
 
-        LabelResponseModel myReceivedComment = commentsApi.getComment(commentId);
+        CommentResponseModel myReceivedComment = commentsApi.getComment(commentId);
 
         step("Проверить, что комментарий был корректно получен", () -> {
             assertThat(myReceivedComment.getContent()).isEqualTo(myCreatedComment.getContent());
@@ -132,10 +132,10 @@ public class CommentTests extends ApiTestBase {
                 .createProjects(true)
                 .createCommentsInProjects(true)
                 .create();
-        List<LabelResponseModel> myCreatedComments = testData.getCommentsInProjects();
+        List<CommentResponseModel> myCreatedComments = testData.getCommentsInProjects();
         String projectId = testData.getProjects().get(0).getId();
 
-        List<LabelResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
+        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInProject(projectId);
 
         step("Проверить, что комментарии были корректно получены", () -> {
             assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
@@ -162,14 +162,14 @@ public class CommentTests extends ApiTestBase {
                 .create();
         String taskId = testData.getTasksInSections().get(0).getId();
 
-        List<LabelResponseModel> myCreatedComments = new ArrayList<>();
-        for (LabelResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
+        for (CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
             if (myCreatedComment.getTaskId().equals(taskId)) {
                 myCreatedComments.add(myCreatedComment);
             }
         }
 
-        List<LabelResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
+        List<CommentResponseModel> myReceivedComments = commentsApi.getAllCommentsInTask(taskId);
 
         step("Проверить, что комментарии были корректно получены", () -> {
             assertThat(myReceivedComments.size()).isEqualTo(myCreatedComments.size());
@@ -197,8 +197,8 @@ public class CommentTests extends ApiTestBase {
         String commentId = testData.getCommentsInTasksInSections().get(0).getId();
         String taskId = testData.getCommentsInTasksInSections().get(0).getTaskId();
 
-        List<LabelResponseModel> myCreatedComments = new ArrayList<>();
-        for (LabelResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
+        List<CommentResponseModel> myCreatedComments = new ArrayList<>();
+        for (CommentResponseModel myCreatedComment : testData.getCommentsInTasksInSections()) {
             if (myCreatedComment.getTaskId().equals(taskId)) {
                 myCreatedComments.add(myCreatedComment);
             }

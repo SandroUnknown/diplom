@@ -4,7 +4,7 @@ import enums.CheckField;
 import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
 import models.comments.CommentRequestModel;
-import models.comments.LabelResponseModel;
+import models.comments.CommentResponseModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ import static specs.Specification.*;
 public class CommentsApi extends BaseApi {
 
     @Step("Создать новый комментарий")
-    public LabelResponseModel createNewComment(CommentRequestModel commentData) {
+    public CommentResponseModel createNewComment(CommentRequestModel commentData) {
 
         return given()
                 .spec(requestPostWithIdSpec)
@@ -26,10 +26,10 @@ public class CommentsApi extends BaseApi {
                 .post(COMMENTS_ENDPOINT)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(LabelResponseModel.class);
+                .extract().as(CommentResponseModel.class);
     }
 
-    public LabelResponseModel createNewCommentInProject(String projectId, String commentContent) {
+    public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -39,12 +39,12 @@ public class CommentsApi extends BaseApi {
         return createNewComment(commentData);
     }
 
-    public LabelResponseModel createNewCommentInProject(CommentRequestModel commentData) {
+    public CommentResponseModel createNewCommentInProject(CommentRequestModel commentData) {
 
         return createNewComment(commentData);
     }
 
-    public LabelResponseModel createNewCommentInTask(String taskId, String commentContent) {
+    public CommentResponseModel createNewCommentInTask(String taskId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -55,7 +55,7 @@ public class CommentsApi extends BaseApi {
     }
 
     @Step("Обновить комментарий")
-    public LabelResponseModel updateComment(String commentId, String commentContent) {
+    public CommentResponseModel updateComment(String commentId, String commentContent) {
 
         CommentRequestModel commentData = CommentRequestModel.builder()
                 .content(commentContent)
@@ -68,11 +68,11 @@ public class CommentsApi extends BaseApi {
                 .post(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(LabelResponseModel.class);
+                .extract().as(CommentResponseModel.class);
     }
 
     @Step("Получить комментарий")
-    public LabelResponseModel getComment(String commentId) {
+    public CommentResponseModel getComment(String commentId) {
 
         return given()
                 .spec(requestGetSpec)
@@ -80,11 +80,11 @@ public class CommentsApi extends BaseApi {
                 .get(COMMENTS_ENDPOINT + commentId)
                 .then()
                 .spec(responseSpec200)
-                .extract().as(LabelResponseModel.class);
+                .extract().as(CommentResponseModel.class);
     }
 
     @Step("Получить все комментарии в проекте")
-    public List<LabelResponseModel> getAllCommentsInProject(String projectId) {
+    public List<CommentResponseModel> getAllCommentsInProject(String projectId) {
 
         RequestSpecification request = given()
                 .queryParam("project_id", projectId);
@@ -93,7 +93,7 @@ public class CommentsApi extends BaseApi {
     }
 
     @Step("Получить все комментарии в задаче")
-    public List<LabelResponseModel> getAllCommentsInTask(String taskId) {
+    public List<CommentResponseModel> getAllCommentsInTask(String taskId) {
 
         RequestSpecification request = given()
                 .queryParam("task_id", taskId);
@@ -101,7 +101,7 @@ public class CommentsApi extends BaseApi {
         return getAllComments(request);
     }
 
-    private List<LabelResponseModel> getAllComments(RequestSpecification request) {
+    private List<CommentResponseModel> getAllComments(RequestSpecification request) {
 
         return request
                 .spec(requestGetSpec)
@@ -111,7 +111,7 @@ public class CommentsApi extends BaseApi {
                 .spec(responseSpec200)
                 .extract()
                 .jsonPath()
-                .getList(".", LabelResponseModel.class);
+                .getList(".", CommentResponseModel.class);
     }
 
     @Step("Удалить комментарий")
@@ -129,7 +129,7 @@ public class CommentsApi extends BaseApi {
     public void checkComment(String commentId, CommentRequestModel expectedComment, CheckField... checkFields) {
 
         List<CheckField> fieldsList = Arrays.asList(checkFields);
-        LabelResponseModel actualComment = getComment(commentId);
+        CommentResponseModel actualComment = getComment(commentId);
 
         if (fieldsList.contains(CONTENT)) {
             checkContent(actualComment.getContent(), expectedComment.getContent());
