@@ -9,9 +9,14 @@ version = '1.0-SNAPSHOT'
 
 def junitVersion = "5.11.3",
     selenideVersion = "7.7.0",
+    lowerSelenideVersion = "6.13.0",
     restAssuredVersion = "5.5.0",
     allureVersion = "2.29.0",
-    assertjVersion = "3.24.2"
+    assertjVersion = "3.24.2",
+    commonsioVersion = "2.14.0",
+    jacksonVersion = "2.18.2",
+    ownerVersion = "1.0.12",
+    appiumVersion = "8.3.0"
 
 
 repositories {
@@ -45,16 +50,14 @@ dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$selenideVersion",
-            //"com.codeborne:selenide:6.13.0",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "com.opencsv:opencsv:5.9",
             "org.assertj:assertj-core:$assertjVersion",
-            "commons-io:commons-io:2.14.0",
-            "com.fasterxml.jackson.core:jackson-databind:2.18.2",
-            "org.aeonbits.owner:owner:1.0.12"
+            "commons-io:commons-io:$commonsioVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
     )
 
     withoutAppiumTests(
@@ -62,15 +65,20 @@ dependencies {
     )
 
     appiumTests(
-            "com.codeborne:selenide:6.13.0",
-            "io.appium:java-client:8.3.0"
+            "com.codeborne:selenide:$lowerSelenideVersion",
+            "io.appium:java-client:$appiumVersion"
     )
 }
 
-configurations.all {
+configurations.appiumTests {
+//configurations.all {
     resolutionStrategy {
-        force "com.codeborne:selenide:6.13.0"
+        force "com.codeborne:selenide:$lowerSelenideVersion"
     }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 tasks.withType(Test) {
@@ -114,6 +122,3 @@ task mobile_android(type: Test) {
     testClassesDirs = sourceSets.test.output
     classpath = configurations.appiumTests + sourceSets.test.output
 }
-
-
-
