@@ -39,8 +39,8 @@ public class SectionTests extends ApiTestBase {
     void createNewSectionsTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -63,8 +63,8 @@ public class SectionTests extends ApiTestBase {
     void updateSectionTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -86,9 +86,10 @@ public class SectionTests extends ApiTestBase {
     @DisplayName("Получить все разделы внутри проекта")
     void getAllSectionsInProjectTest() {
 
-        int templateNumber = 1;
-
+        //int templateNumber = 1;  // TODO : удалить
+        int templateNumber = 2;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -120,9 +121,10 @@ public class SectionTests extends ApiTestBase {
     @DisplayName("Получить все разделы пользователя")
     void getAllSectionsTest() {
 
-        int templateNumber = 1;
-
+        //int templateNumber = 1;  // TODO : удалить
+        int templateNumber = 3;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -148,8 +150,8 @@ public class SectionTests extends ApiTestBase {
     void deleteSectionTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -173,9 +175,10 @@ public class SectionTests extends ApiTestBase {
     @DisplayName("Удалить все разделы в проекте")
     void deleteAllSectionsInProjectTest() {
 
-        int templateNumber = 1;
-
+        //int templateNumber = 1;  // TODO : удалить
+        int templateNumber = 2;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)

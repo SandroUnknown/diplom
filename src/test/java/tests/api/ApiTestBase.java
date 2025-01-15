@@ -2,10 +2,8 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import config.CredentialsConfig;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
-import drivers.CredentialsConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +13,8 @@ import java.util.List;
 
 public class ApiTestBase {
 
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
+    static List<TestDataModel> TEMPLATES_2 = new DataStorage("data/Templates.json").getTemplates();
+    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates_TWO.json").getTemplates();
 
     ProjectsApi projectsApi = new ProjectsApi();
     SectionsApi sectionsApi = new SectionsApi();

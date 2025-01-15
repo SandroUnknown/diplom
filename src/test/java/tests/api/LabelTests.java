@@ -31,7 +31,6 @@ public class LabelTests extends ApiTestBase {
             .order(2)
             .isFavorite(true)
             .build();
-    private final String newLabelName = "ОБНОВЛЁННАЯ МЕТКА";
     private final LabelRequestModel updatedTestLabelData = LabelRequestModel.builder()
             .name("ОБНОВЛЁННАЯ МЕТКА")
             .color(Color.RED)
@@ -72,6 +71,7 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -91,6 +91,7 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -109,8 +110,10 @@ public class LabelTests extends ApiTestBase {
     @DisplayName("Получить все метки пользователя")
     void getAllLabelsTest() {
 
-        int templateNumber = 1;
+        //int templateNumber = 1;  // TODO : удалить
+        int templateNumber = 3;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -137,6 +140,7 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();

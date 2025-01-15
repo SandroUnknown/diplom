@@ -109,8 +109,8 @@ tasks.withType(Test) {
 
 task api(type: Test) {
     useJUnitPlatform {
-        //includeTags("API")
-        includeTags("API_FOR_TEST")
+        includeTags("API")
+        //includeTags("API_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output

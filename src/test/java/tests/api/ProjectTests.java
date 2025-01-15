@@ -70,8 +70,8 @@ public class ProjectTests extends ApiTestBase {
     void createNewProjectInProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -96,8 +96,8 @@ public class ProjectTests extends ApiTestBase {
     void updateProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -122,8 +122,8 @@ public class ProjectTests extends ApiTestBase {
     void deleteProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -146,9 +146,10 @@ public class ProjectTests extends ApiTestBase {
     @DisplayName("Удалить все проекты пользователя")
     void deleteAllProjectsTest() {
 
-        int templateNumber = 1;
-
+        //int templateNumber = 1; // TODO : удалить
+        int templateNumber = 3;
         new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
