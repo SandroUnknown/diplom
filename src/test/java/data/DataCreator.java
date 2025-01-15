@@ -113,49 +113,48 @@ public class DataCreator {
 
             if (createCommentsInProjects) {
                 if (!createProjects) {
-                    //throw new RuntimeException("Неверный URL для Appium сервера: " + e.getMessage(), e);
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Проекте, но Проект не создан."
+                    throw new RuntimeException("Вы пытаетесь создать Комментарий в Проекте, но Проект не создан");
                 }
                 mainClass.createCommentsInProjects(testData, templateData);
             }
 
             if (createTasksInProjects) {
                 if (!createProjects) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Задачу в Проекте, но Проект не создан."
+                    throw new RuntimeException("Вы пытаетесь создать Задачу в Проекте, но Проект не создан");
                 }
                 if (addLabelsForTasksInProjects && !createLabels) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь добавить Метку к Задаче в Проекте, но Метка не создана."
+                    throw new RuntimeException("Вы пытаетесь добавить Метку к Задаче в Проекте, но Метка не создана");
                 }
                 mainClass.createTasksInProjects(testData, templateData, addLabelsForTasksInProjects);
             }
 
             if (createCommentsInTasksInProjects) {
                 if (!createProjects || !createTasksInProjects) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Задаче в Проекте, но Задача не создана."
+                    throw new RuntimeException("Вы пытаетесь создать Комментарий в Задаче в Проекте, но Задача не создана");
                 }
                 mainClass.createCommentsInTasksInProjects(testData, templateData);
             }
 
             if (createSections) {
                 if (!createProjects) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Раздел в Проекте, но Проект не создан."
+                    throw new RuntimeException("Вы пытаетесь создать Раздел в Проекте, но Проект не создан");
                 }
                 mainClass.createSections(testData, templateData);
             }
 
             if (createTasksInSections) {
                 if (!createProjects || !createSections) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Задачу в Разделе в Проекте, но Раздел не создан."
+                    throw new RuntimeException("Вы пытаетесь создать Задачу в Разделе в Проекте, но Раздел не создан");
                 }
                 if (addLabelsForTasksInSections && !createLabels) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь добавить Метку к Задаче в Разделе, но Метка не создана."
+                    throw new RuntimeException("Вы пытаетесь добавить Метку к Задаче в Разделе, но Метка не создана");
                 }
                 mainClass.createTasksInSections(testData, templateData, addLabelsForTasksInSections);
             }
 
             if (createCommentsInTasksInSections) {
                 if (!createProjects || !createSections || !createTasksInSections) {
-                    // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Задаче в Разделе, но Задача не создана."
+                    throw new RuntimeException("Вы пытаетесь создать Комментарий в Задаче в Разделе, но Задача не создана");
                 }
                 mainClass.createCommentsInTasksInSections(testData, templateData);
             }
@@ -246,7 +245,7 @@ public class DataCreator {
             String taskId = testData.getTasksInProjects().get(taskNumber).getId();
             CommentRequestModel request = CommentRequestModel.builder()
                     .taskId(taskId)
-                    .content(comment.getContent())        // TODO : заменить на поля комментов
+                    .content(comment.getContent())
                     .build();
 
             comment = api.createNewComment(request);
