@@ -3,7 +3,7 @@ package drivers;
 import com.codeborne.selenide.WebDriverProvider;
 import config.credentials.CredentialsConfig;
 import config.mobile.RemoveAndroidConfig;
-import helpers.Browserstack;
+import helpers.browserstack.Browserstack;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;

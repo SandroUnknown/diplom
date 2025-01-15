@@ -1,7 +1,7 @@
 package helpers.attachments;
 
 import com.codeborne.selenide.Selenide;
-import helpers.Browserstack;
+import helpers.browserstack.Browserstack;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;

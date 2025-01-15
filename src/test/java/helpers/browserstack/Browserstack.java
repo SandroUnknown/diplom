@@ -1,10 +1,10 @@
-package helpers;
+package helpers.browserstack;
 
 import config.credentials.CredentialsConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import models.UploadAppResponseModel;
-import models.UploadedAppsListResponseModel;
+import models.apps.UploadAppResponseModel;
+import models.apps.UploadedAppsListResponseModel;
 import org.aeonbits.owner.ConfigFactory;
 
 import java.io.File;
@@ -33,8 +33,8 @@ public class Browserstack {
 
     public String getAppUrl(String appName) {
 
-        deleteApp("9f36839290dfdc9f4f8110c1a2b748e80d786887");
-
+        // TODO : удалить на релизе
+        //deleteApp("9f36839290dfdc9f4f8110c1a2b748e80d786887");
 
         String appUrl = checkUploadedApp(appName);
 
