@@ -8,19 +8,8 @@ import org.aeonbits.owner.Config;
 })
 public interface RemoveAndroidConfig extends Config {
 
-    /*@Key("app")
-    String getApp();
-
-    @Key("device")
-    String getDevice();
-
-    @Key("os_version")
-    String getOsVersion();*/
-
-    //============
-
-    @Key("android_app")
-    String getApp();
+    /*@Key("android_app")
+    String getApp();*/
 
     @Key("android_device")
     String getDevice();
