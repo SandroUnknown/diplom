@@ -5,6 +5,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
 import drivers.BrowserstackConfigDriver;
+import drivers.CredentialsConfigDriver;
 import drivers.EmulationConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;

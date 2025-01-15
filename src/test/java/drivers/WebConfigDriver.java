@@ -38,6 +38,7 @@ public class WebConfigDriver {
             String url = credentialConfig.getRemoteWebHost();
             String login = credentialConfig.getRemoteHostLogin();
             String password = credentialConfig.getRemoteHostPassword();
+
             if (login != null && password != null) {
                 Configuration.remote = format("https://%s:%s@%s/wd/hub", login, password, url);
             }

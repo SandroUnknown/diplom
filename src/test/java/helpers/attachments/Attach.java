@@ -1,6 +1,7 @@
 package helpers.attachments;
 
 import com.codeborne.selenide.Selenide;
+import drivers.CredentialsConfigDriver;
 import helpers.browserstack.Browserstack;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -55,10 +56,15 @@ public class Attach {
 
     public static URL getVideoUrl() {
 
+        CredentialsConfigDriver credentials = new CredentialsConfigDriver();
+
         // TODO : ??? через credential?
-        String login = System.getProperty("web_remote_login");
+        /*String login = System.getProperty("web_remote_login");
         String pass = System.getProperty("web_remote_password");
-        String url = System.getProperty("web_remote_url");
+        String url = System.getProperty("web_remote_url");*/
+        String login = credentials.getRemoteHostLogin();
+        String pass = credentials.getRemoteHostPassword();
+        String url = credentials.getRemoteWebHost();
 
         String videoUrl = format("https://%s:%s@%s/video/%s.mp4", login, pass, url, sessionId());
         try {

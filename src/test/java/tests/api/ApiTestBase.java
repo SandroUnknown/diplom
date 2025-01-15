@@ -2,8 +2,10 @@ package tests.api;
 
 import api.*;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import config.CredentialsConfig;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
+import drivers.CredentialsConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.BeforeAll;
