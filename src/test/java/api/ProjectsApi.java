@@ -24,25 +24,6 @@ public class ProjectsApi extends BaseApi {
                 .extract().as(ProjectResponseModel.class);
     }
 
-    public ProjectResponseModel createNewProject(String parentProjectId, String projectName) {
-
-        ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .parentId(parentProjectId)
-                .name(projectName)
-                .build();
-
-        return createNewProject(projectData);
-    }
-
-    public ProjectResponseModel createNewProject(String projectName) {
-
-        ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .name(projectName)
-                .build();
-
-        return createNewProject(projectData);
-    }
-
     @Step("Обновить проект")
     public ProjectResponseModel updateProject(String projectId, ProjectRequestModel newProjectData) {
 
@@ -54,15 +35,6 @@ public class ProjectsApi extends BaseApi {
                 .then()
                 .spec(responseSpec200)
                 .extract().as(ProjectResponseModel.class);
-    }
-
-    public ProjectResponseModel updateProject(String projectId, String projectName) {
-
-        ProjectRequestModel projectData = ProjectRequestModel.builder()
-                .name(projectName)
-                .build();
-
-        return updateProject(projectId, projectData);
     }
 
     @Step("Получить проект")
@@ -100,14 +72,6 @@ public class ProjectsApi extends BaseApi {
                 .delete(PROJECTS_ENDPOINT + projectId)
                 .then()
                 .spec(responseSpec204);
-    }
-
-    @Step("Удалить список проектов")
-    public void deleteProjects(List<String> projectsId) {
-
-        for (String projectId : projectsId) {
-            deleteProject(projectId);
-        }
     }
 
     @Step("Удалить все проекты")

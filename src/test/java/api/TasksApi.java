@@ -26,16 +26,6 @@ public class TasksApi extends BaseApi {
                 .extract().as(TaskResponseModel.class);
     }
 
-    public TaskResponseModel createNewTask(String sectionId, String taskContent) {
-
-        TaskRequestModel taskData = TaskRequestModel.builder()
-                .sectionId(sectionId)
-                .content(taskContent)
-                .build();
-
-        return createNewTask(taskData);
-    }
-
     @Step("Обновить задачу")
     public TaskResponseModel updateTask(String taskId, TaskRequestModel taskData) {
 
@@ -47,15 +37,6 @@ public class TasksApi extends BaseApi {
                 .then()
                 .spec(responseSpec200)
                 .extract().as(TaskResponseModel.class);
-    }
-
-    public TaskResponseModel updateTask(String taskId, String taskContent) {
-
-        TaskRequestModel taskData = TaskRequestModel.builder()
-                .content(taskContent)
-                .build();
-
-        return updateTask(taskId, taskData);
     }
 
     @Step("Получить задачу")
@@ -73,7 +54,6 @@ public class TasksApi extends BaseApi {
     @Step("Получить задачи (с фильтром)")
     public List<TaskResponseModel> getTasksWithFilter(HashMap<String, String> params) {
 
-        // TODO : заменить на enum?
         List<String> filters = List.of(
                 "filter",
                 "ids",

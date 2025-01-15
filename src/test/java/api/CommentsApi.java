@@ -29,27 +29,7 @@ public class CommentsApi extends BaseApi {
                 .extract().as(CommentResponseModel.class);
     }
 
-    public CommentResponseModel createNewCommentInProject(String projectId, String commentContent) {
-
-        CommentRequestModel commentData = CommentRequestModel.builder()
-                .content(commentContent)
-                .projectId(projectId)
-                .build();
-
-        return createNewComment(commentData);
-    }
-
     public CommentResponseModel createNewCommentInProject(CommentRequestModel commentData) {
-
-        return createNewComment(commentData);
-    }
-
-    public CommentResponseModel createNewCommentInTask(String taskId, String commentContent) {
-
-        CommentRequestModel commentData = CommentRequestModel.builder()
-                .content(commentContent)
-                .taskId(taskId)
-                .build();
 
         return createNewComment(commentData);
     }

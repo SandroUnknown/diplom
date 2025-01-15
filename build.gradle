@@ -37,12 +37,18 @@ allure {
 }
 
 configurations {
-    androidTestImplementation
+    withoutAppiumTests {
+        extendsFrom testImplementation
+    }
+    withAppiumTests {
+        extendsFrom testImplementation
+    }
 }
 
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -50,16 +56,16 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:$commonsIoVersion",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.aeonbits.owner:owner:$ownerVersion",
-            "io.appium:java-client:$appiumVersion"
+            "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-    // Зависимость по умолчанию для всех тестов
-    testImplementation "com.codeborne:selenide:$selenideVersion"
+    withoutAppiumTests(
+            "com.codeborne:selenide:$selenideVersion"
+    )
 
-    // Эта зависимость будет добавлена только если идет тест с тегом ANDROID.
-    androidTestImplementation "com.codeborne:selenide:$lowerSelenideVersion"
-
+    withAppiumTests(
+            "io.appium:java-client:$appiumVersion"
+    )
 }
 
 tasks.withType(JavaCompile) {
@@ -78,20 +84,32 @@ tasks.withType(Test) {
     }
 }
 
+task api(type: Test) {
+    useJUnitPlatform {
+        //includeTags("API")
+        includeTags("API_FOR_TEST")
+    }
+
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+}
+
 task web(type: Test) {
     useJUnitPlatform {
         //includeTags("WEB")
         includeTags("WEB_FOR_TEST")
     }
+
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task android(type: Test) {
-    // Добавляем зависимость для ANDROID тестов
-    classpath += configurations.androidTestImplementation
     useJUnitPlatform {
         //includeTags("ANDROID")
         includeTags("MOBILE_FOR_TEST")
     }
-}
 
-tasks.android.dependsOn(test)
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withAppiumTests + sourceSets.test.output
+}

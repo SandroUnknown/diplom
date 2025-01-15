@@ -25,16 +25,6 @@ public class SectionsApi extends BaseApi {
                 .extract().as(SectionResponseModel.class);
     }
 
-    public SectionResponseModel createNewSection(String projectId, String sectionName) {
-
-        SectionRequestModel sectionData = SectionRequestModel.builder()
-                .projectId(projectId)
-                .name(sectionName)
-                .build();
-
-        return createNewSection(sectionData);
-    }
-
     @Step("Обновить раздел")
     public SectionResponseModel updateSection(String sectionId, SectionRequestModel sectionData) {
 
@@ -55,18 +45,6 @@ public class SectionsApi extends BaseApi {
                 .build();
 
         return updateSection(sectionId, sectionData);
-    }
-
-    @Step("Получить раздел")
-    public SectionResponseModel getSection(String sectionId) {
-
-        return given()
-                .spec(requestGetSpec)
-                .when()
-                .get(SECTIONS_ENDPOINT + sectionId)
-                .then()
-                .spec(responseSpec200)
-                .extract().as(SectionResponseModel.class);
     }
 
     @Step("Получить все разделы в проекте")

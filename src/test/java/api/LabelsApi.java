@@ -51,15 +51,6 @@ public class LabelsApi extends BaseApi {
                 .extract().as(LabelResponseModel.class);
     }
 
-    public LabelResponseModel updateLabel(String labelId, String labelName) {
-
-        LabelRequestModel labelData = LabelRequestModel.builder()
-                .name(labelName)
-                .build();
-
-        return updateLabel(labelId, labelData);
-    }
-
     @Step("Получить персональную метку")
     public LabelResponseModel getLabel(String labelId) {
 
