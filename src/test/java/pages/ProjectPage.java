@@ -20,7 +20,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectPage {
 
-    // TODO : пас и прочие переменные
     private final String path = "/app/projects/active";
 
     private SelenideElement getSelectProjectColorElement(Color projectColor) {
