@@ -103,13 +103,13 @@ test {
 
 task newVersionTest(type: Test) {
     testClassesDirs = sourceSets.test.output
-    classpath = sourceSets.test.runtimeClasspath
+    classpath = sourceSets.newVersionTests.runtimeClasspath
     useJUnitPlatform()
 }
 
 task oldVersionTest(type: Test) {
     testClassesDirs = sourceSets.test.output
-    classpath = sourceSets.test.runtimeClasspath
+    classpath = sourceSets.oldVersionTests.runtimeClasspath
     useJUnitPlatform()
 }
 
