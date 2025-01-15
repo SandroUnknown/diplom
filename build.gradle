@@ -37,6 +37,15 @@ allure {
     }
 }
 
+configurations {
+    withoutAppiumTests {
+        extendsFrom testImplementation
+    }
+    withAppiumTests {
+        extendsFrom testImplementation
+    }
+}
+
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
@@ -49,6 +58,14 @@ dependencies {
             "commons-io:commons-io:$commonsioVersion",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
             "org.aeonbits.owner:owner:$ownerVersion",
+            "io.appium:java-client:$appiumVersion"
+    )
+
+    withoutAppiumTests(  // раскоментил
+            "com.codeborne:selenide:$selenideVersion"
+    )
+
+    withAppiumTests(
             "io.appium:java-client:$appiumVersion"
     )
 }
@@ -74,6 +91,10 @@ task api(type: Test) {
         //includeTags("API")
         includeTags("API_FOR_TEST")
     }
+
+    // добавил
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task web(type: Test) {
@@ -81,11 +102,18 @@ task web(type: Test) {
         //includeTags("WEB")
         includeTags("WEB_FOR_TEST")
     }
+
+    // добавил
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
-task mobile_android(type: Test) {
+task android(type: Test) {
     useJUnitPlatform {
         //includeTags("ANDROID")
         includeTags("MOBILE_FOR_TEST")
     }
+
+    testClassesDirs = sourceSets.test.output
+    classpath = configurations.withAppiumTests + sourceSets.test.output
 }
