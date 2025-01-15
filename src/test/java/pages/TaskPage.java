@@ -79,7 +79,7 @@ public class TaskPage {
     @Step("Проверить, что задача была корректно создана [UI]")
     public void checkTask(TaskRequestModel testTaskData, CheckField... checkFields) {
 
-        editTaskButtonElement.click();
+        clickOnTask();
 
         List<CheckField> fieldsList = Arrays.asList(checkFields);
 
@@ -92,9 +92,14 @@ public class TaskPage {
         }
     }
 
+    @Step("Открыть задачу")
+    private void clickOnTask() {
+        editTaskButtonElement.click();
+    }
+
     @Step("Проверить содержимое созданной задачи")
     private void checkTaskContent(String taskContent) {
-        getTaskContentCheckElement(taskContent).shouldBe(exist);;
+        getTaskContentCheckElement(taskContent).shouldBe(exist);
     }
 
     @Step("Проверить приоритет созданной задачи")
