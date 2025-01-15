@@ -30,7 +30,6 @@ public class TaskResponseModel {
     private Duration duration;
     private Due due;
 
-    // TODO : Public???
     private static class Duration {
         private int amount;
         private String unit;

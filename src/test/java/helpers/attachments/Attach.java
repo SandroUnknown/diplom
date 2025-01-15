@@ -58,10 +58,6 @@ public class Attach {
 
         CredentialsConfigDriver credentials = new CredentialsConfigDriver();
 
-        // TODO : ??? через credential?
-        /*String login = System.getProperty("web_remote_login");
-        String pass = System.getProperty("web_remote_password");
-        String url = System.getProperty("web_remote_url");*/
         String login = credentials.getRemoteHostLogin();
         String pass = credentials.getRemoteHostPassword();
         String url = credentials.getRemoteWebHost();

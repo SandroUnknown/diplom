@@ -33,9 +33,6 @@ public class Browserstack {
 
     public String getAppUrl(String appName) {
 
-        // TODO : удалить на релизе
-        //deleteApp("9f36839290dfdc9f4f8110c1a2b748e80d786887");
-
         String appUrl = checkUploadedApp(appName);
 
         if (appUrl.isEmpty()) {
@@ -58,6 +55,7 @@ public class Browserstack {
                 .asString();
 
         if (!response.contains("No results found")) {
+
             List<UploadedAppsListResponseModel> appList =
                     new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
 
@@ -87,19 +85,5 @@ public class Browserstack {
                 .log().all()
                 .extract().as(UploadAppResponseModel.class)
                 .getAppUrl();
-    }
-
-    // TODO : удалить на релизе
-    private void deleteApp(String appId) {
-
-        given()
-                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
-                .when()
-                .delete("https://api-cloud.browserstack.com/app-automate/app/delete/" + appId)
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract()
-                .asString();
     }
 }
