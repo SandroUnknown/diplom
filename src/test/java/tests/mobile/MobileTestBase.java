@@ -6,6 +6,7 @@ import data.DataStorage;
 import drivers.ApiConfigDriver;
 import drivers.BrowserstackDriver;
 //import drivers.EmulationDriver;
+import drivers.EmulationDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
@@ -42,7 +43,11 @@ public class MobileTestBase {
         TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
         new ApiConfigDriver();
-        Configuration.browser = BrowserstackDriver.class.getName();
+        if (System.getProperty("env").equals("remote")) {
+            Configuration.browser = BrowserstackDriver.class.getName();
+        } else {
+            Configuration.browser = EmulationDriver.class.getName();
+        }
 
         Configuration.browserSize = null;
         Configuration.timeout = 30000;
