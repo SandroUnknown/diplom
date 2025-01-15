@@ -36,6 +36,10 @@ allure {
     }
 }
 
+configurations {
+    androidTestImplementation
+}
+
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
@@ -81,6 +85,8 @@ task web(type: Test) {
 }
 
 task android(type: Test) {
+    // Добавляем зависимость для ANDROID тестов
+    classpath += configurations.androidTestImplementation
     useJUnitPlatform {
         //includeTags("ANDROID")
         includeTags("MOBILE_FOR_TEST")
