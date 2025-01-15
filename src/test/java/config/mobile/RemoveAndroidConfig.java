@@ -17,8 +17,8 @@ public interface RemoveAndroidConfig extends Config {
 
     //============
 
-    @Key("android_app_name")
-    String getAppName();
+    /*@Key("android_app_name")
+    String getAppName();*/
 
 
 }
