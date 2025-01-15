@@ -49,13 +49,10 @@ public class ProjectTests extends WebTestBase {
                 .inputProjectName(testProjectData.getName())
                 .addProject();
 
-        /*projectPage
-                .checkProjectName(testProjectData.getName());*/
-
         sleep(1000); // TODO : нужный слип
 
         projectPage
-                .uiCheckProject(testProjectData, NAME)
+                .checkProject(testProjectData, NAME)
                 .apiCheckProject(testProjectData, NAME);
     }
 
@@ -80,13 +77,10 @@ public class ProjectTests extends WebTestBase {
                 .selectProjectViewStyle(testProjectData.getViewStyle())
                 .addProject();
 
-        projectPage
-                .fullCheckProject(testProjectData);
-
         sleep(1000); // TODO : нужный слип
 
         projectPage
-                .uiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE)
+                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE)
                 .apiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
     }
 

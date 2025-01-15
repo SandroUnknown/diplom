@@ -147,7 +147,7 @@ public class ProjectPage {
 //================================================================
     
     @Step("Проверить, что проект был корректно создан")
-    public ProjectPage uiCheckProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
+    public ProjectPage checkProject(ProjectRequestModel testProjectData, CheckField... checkFields) {
 
         List<CheckField> fieldsList = Arrays.asList(checkFields);
 
@@ -201,25 +201,6 @@ public class ProjectPage {
     }
     
 //================================================================
-
-
-    
-
-    @Step("Проверить, что проект был корректно создан")
-    public ProjectPage fullCheckProject(ProjectRequestModel testProjectData) {
-
-        checkProjectName(testProjectData.getName());
-
-        checkProjectColor(testProjectData.getColor());
-
-        if (testProjectData.isFavorite()) {
-            checkProjectFavorite(testProjectData.getName());
-        }
-
-        checkProjectViewStyle(testProjectData.getViewStyle());
-
-        return this;
-    }
 
     @Step("Проверить имя созданного проекта")
     public ProjectPage checkProjectName(String projectName) {
