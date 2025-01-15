@@ -33,4 +33,8 @@ public interface CredentialsConfig extends Config {
 
     @Key("browserstack_key")
     String getBrowserstackKey();
+
+    @Key("emulator_local_url")
+    String getEmulatorUrl();
+
 }

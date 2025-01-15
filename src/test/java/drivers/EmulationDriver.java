@@ -1,7 +1,9 @@
-/*package drivers;
+package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.credentials.CredentialsConfig;
 import config.mobile.LocalAndroidConfig;
+import config.mobile.RemoveAndroidConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
@@ -21,31 +23,46 @@ import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 public class EmulationDriver implements WebDriverProvider {
 
-    private final LocalAndroidConfig config;
+    //private final LocalAndroidConfig config;
+    private final RemoveAndroidConfig mobileConfig;
+    private final CredentialsConfig credentialsConfig;
 
     public EmulationDriver() {
-        this.config = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
+        //this.config = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
+
+        this.mobileConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
 
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+
         UiAutomator2Options options = new UiAutomator2Options();
 
-        options.setAutomationName(ANDROID_UIAUTOMATOR2)
+        /*options.setAutomationName(ANDROID_UIAUTOMATOR2)
                 .setPlatformName(ANDROID)
                 .setPlatformVersion(config.getPlatformVersion())
                 .setDeviceName(config.getDeviceName())
                 .setApp(getAppPath())
                 .setAppPackage(config.getAppPackage())
-                .setAppActivity(config.getAppActivity());
+                .setAppActivity(config.getAppActivity());*/
+
+        options.setAutomationName(ANDROID_UIAUTOMATOR2)
+                .setPlatformName(ANDROID)
+                .setPlatformVersion(mobileConfig.getOsVersion())
+                .setDeviceName(mobileConfig.getDeviceName())
+                .setApp(getAppPath())
+                .setAppPackage(mobileConfig.getAppPackage())
+                .setAppActivity(mobileConfig.getAppActivity());
 
         return new AndroidDriver(getAppiumServerUrl(), options);
     }
 
     public URL getAppiumServerUrl() {
         try {
-            return new URL(config.getAppiumServerUrl());
+            //return new URL(config.getAppiumServerUrl());
+            return new URL(credentialsConfig.getEmulatorUrl());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -53,21 +70,13 @@ public class EmulationDriver implements WebDriverProvider {
 
     private String getAppPath() {
 
-        // TODO : заменить википедию на моё приложение
-
-        String appVersion = "app-alpha-universal-release.apk";
-        String appUrl = "https://github.com/wikimedia/apps-android-wikipedia" +
-                "/releases/download/latest/" + appVersion;
-        String appPath = "src/test/resources/apps/" + appVersion;
+        String appName = mobileConfig.getAppName();
+        String appPath = "src/test/resources/apps/" + appName;
 
         File app = new File(appPath);
         if (!app.exists()) {
-            try (InputStream in = new URL(appUrl).openStream()) {
-                copyInputStreamToFile(in, app);
-            } catch (IOException e) {
-                throw new AssertionError("Failed to download application", e);
-            }
+            // TODO : вызвать исключение, что приложение не обнаружено в папке ресурс/апп
         }
         return app.getAbsolutePath();
     }
-}*/
+}

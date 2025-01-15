@@ -56,7 +56,8 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "commons-io:commons-io:$commonsIoVersion",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.aeonbits.owner:owner:$ownerVersion"
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "io.appium:java-client:$appiumVersion"
     )
 
     withoutAppiumTests(
