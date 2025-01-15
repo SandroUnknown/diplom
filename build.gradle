@@ -36,9 +36,46 @@ allure {
     }
 }
 
+configurations {
+    withoutAppiumTests //{
+    //extendsFrom testImplementation
+    // }
+    withAppiumTests //{
+    //extendsFrom testImplementation
+    //}
+}
 
 dependencies {
     testImplementation(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            //"com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "commons-io:commons-io:$commonsIoVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
+            "io.appium:java-client:$appiumVersion"
+    )
+
+    withoutAppiumTests(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            //"com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "commons-io:commons-io:$commonsIoVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
+    )
+
+    withAppiumTests(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$lowerSelenideVersion",
             //"com.codeborne:selenide:$selenideVersion",
@@ -52,31 +89,6 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion",
             "io.appium:java-client:$appiumVersion"
     )
-}
-
-// Определение отдельных групп тестов с разными зависимостями
-sourceSets {
-    newVersionTests {
-        java {
-            setSrcDirs(['src/test/java/tests/web'])
-        }
-    }
-
-    oldVersionTests {
-        java {
-            setSrcDirs(['src/test/java/tests/mobile'])
-        }
-    }
-}
-
-configurations {
-    newVersionTest.extendsFrom testImplementation
-    oldVersionTest.extendsFrom testImplementation
-}
-
-dependencies {
-    newVersionTest 'com.codeborne:selenide:$selenideVersion'
-    oldVersionTest 'com.codeborne:selenide:$lowerSelenideVersion'
 }
 
 tasks.withType(JavaCompile) {
@@ -95,30 +107,6 @@ tasks.withType(Test) {
     }
 }
 
-test {
-    useJUnitPlatform()
-    // Указываем пути к тестам для новой и старой версии
-    include '**/web/**', '**/mobile/**'
-}
-
-task newVersionTest(type: Test) {
-    testClassesDirs = sourceSets.test.output
-    classpath = sourceSets.newVersionTests.runtimeClasspath
-    useJUnitPlatform()
-}
-
-task oldVersionTest(type: Test) {
-    testClassesDirs = sourceSets.test.output
-    classpath = sourceSets.oldVersionTests.runtimeClasspath
-    useJUnitPlatform()
-}
-
-
-
-
-
-
-/*
 task api(type: Test) {
     useJUnitPlatform {
         includeTags("API")
@@ -147,4 +135,4 @@ task android(type: Test) {
 
     testClassesDirs = sourceSets.test.output
     classpath = configurations.withAppiumTests + sourceSets.test.output
-}*/
+}
