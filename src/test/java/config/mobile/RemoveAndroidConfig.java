@@ -20,5 +20,12 @@ public interface RemoveAndroidConfig extends Config {
     @Key("android_app_name")
     String getAppName();
 
+    @Key("android_app_package")
+    String getAppPackage();
 
+    @Key("android_app_activity")
+    String getAppActivity();
+
+    @Key("android_app_version")
+    String getAppVersion();
 }
