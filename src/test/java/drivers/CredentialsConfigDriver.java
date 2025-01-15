@@ -1,6 +1,6 @@
 package drivers;
 
-import config.credentials.CredentialsConfig;
+import config.CredentialsConfig;
 import lombok.Getter;
 import org.aeonbits.owner.ConfigFactory;
 

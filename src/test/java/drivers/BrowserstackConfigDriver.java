@@ -1,8 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.credentials.CredentialsConfig;
-import config.mobile.MobileConfig;
+import config.CredentialsConfig;
+import config.MobileConfig;
 import helpers.browserstack.Browserstack;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
@@ -14,15 +14,14 @@ import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class BrowserstackDriver implements WebDriverProvider {
+public class BrowserstackConfigDriver implements WebDriverProvider {
 
     private final MobileConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
     Browserstack browserstack = new Browserstack();
 
-    // TODO : переписать
-    public BrowserstackDriver() {
+    public BrowserstackConfigDriver() {
         this.mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
@@ -43,7 +42,7 @@ public class BrowserstackDriver implements WebDriverProvider {
             return new RemoteWebDriver(
                     new URL(credentialsConfig.getBrowserstackHost()), caps);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Неверные данные для Browserstak: " + e.getMessage(), e);
         }
     }
 }

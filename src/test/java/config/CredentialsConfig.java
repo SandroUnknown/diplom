@@ -1,4 +1,4 @@
-package config.credentials;
+package config;
 
 import org.aeonbits.owner.Config;
 
@@ -36,5 +36,4 @@ public interface CredentialsConfig extends Config {
 
     @Key("emulator_local_url")
     String getEmulatorUrl();
-
 }

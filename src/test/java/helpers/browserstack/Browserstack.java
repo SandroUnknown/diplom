@@ -1,6 +1,6 @@
 package helpers.browserstack;
 
-import config.credentials.CredentialsConfig;
+import config.CredentialsConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import models.apps.UploadAppResponseModel;

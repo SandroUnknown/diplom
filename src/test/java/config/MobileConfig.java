@@ -1,4 +1,4 @@
-package config.mobile;
+package config;
 
 import org.aeonbits.owner.Config;
 
@@ -14,8 +14,6 @@ public interface MobileConfig extends Config {
     @Key("mobile_os_version")
     String getOsVersion();
 
-    //============
-
     @Key("android_app_name")
     String getAppName();
 
@@ -24,7 +22,4 @@ public interface MobileConfig extends Config {
 
     @Key("android_app_activity")
     String getAppActivity();
-
-    @Key("android_app_version")
-    String getAppVersion();
 }

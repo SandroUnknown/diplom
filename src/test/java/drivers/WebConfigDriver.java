@@ -1,8 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.Configuration;
-import config.credentials.CredentialsConfig;
-import config.web.WebConfig;
+import config.CredentialsConfig;
+import config.WebConfig;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.remote.DesiredCapabilities;
 

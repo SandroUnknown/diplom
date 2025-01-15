@@ -4,8 +4,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
-import drivers.BrowserstackDriver;
-import drivers.EmulationDriver;
+import drivers.BrowserstackConfigDriver;
+import drivers.EmulationConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
@@ -45,9 +45,9 @@ public class MobileTestBase {
 
         String env = System.getProperty("env", "local");
         if (env.equals("remote")) {
-            Configuration.browser = BrowserstackDriver.class.getName();
+            Configuration.browser = BrowserstackConfigDriver.class.getName();
         } else {
-            Configuration.browser = EmulationDriver.class.getName();
+            Configuration.browser = EmulationConfigDriver.class.getName();
         }
 
         Configuration.browserSize = null;

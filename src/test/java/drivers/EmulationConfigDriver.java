@@ -1,8 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.credentials.CredentialsConfig;
-import config.mobile.MobileConfig;
+import config.CredentialsConfig;
+import config.MobileConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
@@ -17,12 +17,12 @@ import java.net.URL;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
-public class EmulationDriver implements WebDriverProvider {
+public class EmulationConfigDriver implements WebDriverProvider {
 
     private final MobileConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
-    public EmulationDriver() {
+    public EmulationConfigDriver() {
 
         this.mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
@@ -49,7 +49,7 @@ public class EmulationDriver implements WebDriverProvider {
         try {
             return new URL(credentialsConfig.getEmulatorUrl());
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Неверный URL для Appium сервера: " + e.getMessage(), e);
         }
     }
 
@@ -60,7 +60,7 @@ public class EmulationDriver implements WebDriverProvider {
 
         File app = new File(appPath);
         if (!app.exists()) {
-            // TODO : вызвать исключение, что приложение не обнаружено в папке ресурс/апп
+            throw new RuntimeException("Приложение не найдено по пути: " + app.getAbsolutePath());
         }
         return app.getAbsolutePath();
     }

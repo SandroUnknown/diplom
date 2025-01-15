@@ -1,6 +1,6 @@
 package drivers;
 
-import config.api.ApiConfig;
+import config.ApiConfig;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
 
