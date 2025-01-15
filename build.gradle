@@ -4,7 +4,7 @@ plugins {
     id 'io.qameta.allure' version '2.12.0'
 }
 
-group = 'gmail.sandrounknown1991'
+group = 'sandrounknown'
 version = '1.0-SNAPSHOT'
 
 def junitVersion = "5.11.3",
@@ -13,11 +13,10 @@ def junitVersion = "5.11.3",
     restAssuredVersion = "5.5.0",
     allureVersion = "2.29.0",
     assertjVersion = "3.24.2",
-    commonsioVersion = "2.14.0",
+    commonsIoVersion = "2.14.0",
     jacksonVersion = "2.18.2",
     ownerVersion = "1.0.12",
     appiumVersion = "8.3.0"
-
 
 repositories {
     mavenCentral()
@@ -39,10 +38,10 @@ allure {
 
 configurations {
     withoutAppiumTests {
-        //extendsFrom testImplementation
+        extendsFrom testImplementation
     }
     withAppiumTests {
-        //extendsFrom testImplementation
+        extendsFrom testImplementation
     }
 }
 
@@ -55,13 +54,12 @@ dependencies {
             "io.qameta.allure:allure-selenide:$allureVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.assertj:assertj-core:$assertjVersion",
-            "commons-io:commons-io:$commonsioVersion",
+            "commons-io:commons-io:$commonsIoVersion",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.aeonbits.owner:owner:$ownerVersion",
-            "io.appium:java-client:$appiumVersion"
+            "org.aeonbits.owner:owner:$ownerVersion"
     )
 
-    withoutAppiumTests(  // раскоментил
+    withoutAppiumTests(
             "com.codeborne:selenide:$selenideVersion"
     )
 
@@ -92,7 +90,6 @@ task api(type: Test) {
         includeTags("API_FOR_TEST")
     }
 
-    // добавил
     testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
@@ -103,7 +100,6 @@ task web(type: Test) {
         includeTags("WEB_FOR_TEST")
     }
 
-    // добавил
     testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }

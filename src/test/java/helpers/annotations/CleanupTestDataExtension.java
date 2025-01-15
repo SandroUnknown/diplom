@@ -1,6 +1,7 @@
 package helpers.annotations;
 
-import api.*;
+import api.LabelsApi;
+import api.ProjectsApi;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
