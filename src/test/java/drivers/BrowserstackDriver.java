@@ -17,14 +17,14 @@ import java.net.URL;
 public class BrowserstackDriver implements WebDriverProvider {
 
     private final String appName = "com.todoist-11342.apk";
-    private final RemoveAndroidConfig deviceConfig;
+    private final RemoveAndroidConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
     Browserstack browserstack = new Browserstack();
 
     // TODO : переписать
     public BrowserstackDriver() {
-        this.deviceConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.mobileConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
 
@@ -36,9 +36,10 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
         caps.setCapability("browserstack.key", credentialsConfig.getBrowserstackKey());
-        caps.setCapability("app", browserstack.getAppUrl(appName));
-        caps.setCapability("device", deviceConfig.getDevice());
-        caps.setCapability("os_version", deviceConfig.getOsVersion());
+        //caps.setCapability("app", browserstack.getAppUrl(appName));
+        caps.setCapability("app", browserstack.getAppUrl(mobileConfig.getAppName()));
+        caps.setCapability("device", mobileConfig.getDevice());
+        caps.setCapability("os_version", mobileConfig.getOsVersion());
 
         try {
             return new RemoteWebDriver(
