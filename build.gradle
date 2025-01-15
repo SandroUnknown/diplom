@@ -36,20 +36,9 @@ allure {
     }
 }
 
-configurations {
-    withoutAppiumTests //{
-    //extendsFrom testImplementation
-    // }
-    withAppiumTests //{
-    //extendsFrom testImplementation
-    //}
-}
-
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$lowerSelenideVersion",
-            //"com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -61,34 +50,11 @@ dependencies {
             "io.appium:java-client:$appiumVersion"
     )
 
-    withoutAppiumTests(
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$lowerSelenideVersion",
-            "com.codeborne:selenide:$selenideVersion",
-            "io.rest-assured:rest-assured:$restAssuredVersion",
-            "io.rest-assured:json-schema-validator:$restAssuredVersion",
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "org.assertj:assertj-core:$assertjVersion",
-            "commons-io:commons-io:$commonsIoVersion",
-            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.aeonbits.owner:owner:$ownerVersion"
-    )
+    // Эта зависимость будет добавлена только если идет тест с тегом ANDROID.
+    androidTestImplementation "com.codeborne:selenide:$lowerSelenideVersion"
 
-    withAppiumTests(
-            "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$lowerSelenideVersion",
-            //"com.codeborne:selenide:$selenideVersion",
-            "io.rest-assured:rest-assured:$restAssuredVersion",
-            "io.rest-assured:json-schema-validator:$restAssuredVersion",
-            "io.qameta.allure:allure-selenide:$allureVersion",
-            "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "org.assertj:assertj-core:$assertjVersion",
-            "commons-io:commons-io:$commonsIoVersion",
-            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
-            "org.aeonbits.owner:owner:$ownerVersion",
-            "io.appium:java-client:$appiumVersion"
-    )
+    // Зависимость по умолчанию для всех тестов
+    testImplementation "com.codeborne:selenide:$selenideVersion"
 }
 
 tasks.withType(JavaCompile) {
@@ -107,32 +73,16 @@ tasks.withType(Test) {
     }
 }
 
-task api(type: Test) {
-    useJUnitPlatform {
-        includeTags("API")
-        //includeTags("API_FOR_TEST")
-    }
-
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
-}
-
 task web(type: Test) {
     useJUnitPlatform {
         includeTags("WEB")
-        //includeTags("WEB_FOR_TEST")
     }
-
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
 
 task android(type: Test) {
     useJUnitPlatform {
         includeTags("ANDROID")
-        //includeTags("MOBILE_FOR_TEST")
     }
-
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withAppiumTests + sourceSets.test.output
 }
+
+tasks.android.dependsOn(test)
