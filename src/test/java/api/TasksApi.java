@@ -1,14 +1,22 @@
 package api;
 
+import enums.CheckField;
+import enums.Color;
 import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
+import models.projects.ProjectRequestModel;
+import models.projects.ProjectResponseModel;
 import models.tasks.TaskRequestModel;
 import models.tasks.TaskResponseModel;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static enums.CheckField.*;
+import static enums.CheckField.VIEW_STYLE;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
 
 public class TasksApi extends BaseApi {
@@ -127,5 +135,35 @@ public class TasksApi extends BaseApi {
                 .delete(TASKS_ENDPOINT + taskId)
                 .then()
                 .spec(responseSpec204);
+    }
+
+
+
+
+    @Step("Проверить, что задача была корректно создана [API]")
+    public void checkTask(TaskRequestModel expectedTask, CheckField... checkFields) {
+
+        TaskResponseModel actualTask = getAllTasks().get(0);
+
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
+
+        if (fieldsList.contains(CONTENT)) {
+            checkTaskContent(actualTask.getContent(), expectedTask.getContent());
+        }
+
+        if (fieldsList.contains(PRIORITY)) {
+            checkTaskPriority(actualTask.getPriority(), expectedTask.getPriority());
+        }
+
+    }
+
+    @Step("Проверить содержимое созданной задачи")
+    private void checkTaskContent(String actualContent, String expectedContent) {
+        assertThat(actualContent).isEqualTo(expectedContent);
+    }
+
+    @Step("Проверить приоритет созданной задачи")
+    private void checkTaskPriority(int actualPriority, int expectedPriority) {
+        assertThat(actualPriority).isEqualTo(expectedPriority);
     }
 }

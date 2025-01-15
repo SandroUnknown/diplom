@@ -94,8 +94,7 @@ public class ProjectsApi extends BaseApi {
     @Step("Проверить, что проект был корректно создан [API]")
     public void checkProject(ProjectRequestModel expectedProject, CheckField... checkFields) {
 
-        ProjectsApi projectsApi = new ProjectsApi();
-        ProjectResponseModel actualProject = projectsApi.getAllProjects().get(1);
+        ProjectResponseModel actualProject = getAllProjects().get(1);
 
         List<CheckField> fieldsList = Arrays.asList(checkFields);
 

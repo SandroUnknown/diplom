@@ -33,23 +33,21 @@ public class SectionTests extends WebTestBase {
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
-
         String url = testData.getProjects().get(0).getUrl();
 
         sectionPage
                 .openPage(url)
                 .login();
-        
         sectionPage
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
+        sleep(500);  // TODO : нужный
+
         sectionPage
-                .checkSuccsessfulCreatedSection(0, testSectionData.getName());
-
-
-        sleep(3000);
-        // TODO : добавить API-проверку
+                .checkSection(0, testSectionData.getName());
+        sectionsApi
+                .checkSection(0, testSectionData.getName());
     }
 
     @Test
@@ -65,7 +63,6 @@ public class SectionTests extends WebTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
         int sectionCountInProject = 0;
@@ -78,17 +75,17 @@ public class SectionTests extends WebTestBase {
         sectionPage
                 .openPage(url)
                 .login();
-        
         sectionPage
                 .clickOnAddSection()
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
-        sectionPage
-                .checkSuccsessfulCreatedSection(sectionCountInProject, testSectionData.getName());
+        sleep(500);  // TODO : нужный
 
-        sleep(3000);
-        // TODO : добавить API-проверку
+        sectionPage
+                .checkSection(sectionCountInProject, testSectionData.getName());
+        sectionsApi
+                .checkSection(sectionCountInProject, testSectionData.getName());
     }
 
     @Test
@@ -110,19 +107,17 @@ public class SectionTests extends WebTestBase {
         sectionPage
                 .openPage(url)
                 .login();
-        
         sectionPage
                 .clickOnSeparatorBetweenSections(separatorIndex)
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
-        sleep(3000); // TODO : удалить
+        sleep(500);  // TODO : нужный
 
         sectionPage
-                .checkSuccsessfulCreatedSection(separatorIndex + 1, testSectionData.getName());
-
-        sleep(3000);
-        // TODO : добавить API-проверку
+                .checkSection(separatorIndex + 1, testSectionData.getName());
+        sectionsApi
+                .checkSection(separatorIndex + 1, testSectionData.getName());
     }
 
     @Test
@@ -145,18 +140,17 @@ public class SectionTests extends WebTestBase {
         sectionPage
                 .openPage(url)
                 .login();
-        
         sectionPage
                 .clickOtherActions(sectionNumberToDelete)
                 .clickDeleteSectionButton()
                 .clickConfirmDeleteSectionButtonElement();
 
-        
-        sectionPage
-                .checkSuccsessfulDeleteSection(sectionName);
+        sleep(500);  // TODO : нужный
 
-        sleep(3000);
-        // TODO : добавить API-проверку
+        sectionPage
+                .checkDeleteSection(sectionName);
+        sectionsApi
+                .checkDeleteSection(sectionName);
 
     }
 

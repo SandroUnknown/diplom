@@ -2,140 +2,103 @@ package pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import enums.CheckField;
 import io.qameta.allure.Step;
+import models.tasks.TaskRequestModel;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
+import static enums.CheckField.*;
 
 public class TaskPage {
-
-    private final String basePath = "app/project/%s";
 
     private SelenideElement getTaskPriorityDropdownElement(String priority) {
         String str = String.format("li[data-value='%s']", priority);
         return $(str);
-    }  
+    }
+
+    private SelenideElement getTaskContentCheckElement(String taskContent) {
+        String str = String.format("div[aria-label='%s'] div[aria-label='Название задачи']", taskContent);
+        return $(str);
+    }
+
+    private SelenideElement getTaskPriorityCheckElement(String taskContent, int priority) {
+        String str = String.format("div[aria-label='%s'] svg[data-priority='%s']", taskContent, 5 - priority);
+        return $(str);
+    }
 
     private final SelenideElement
             taskContentInputElement = $("div.task_editor__content_field div.tiptap"),
             taskPriorityButtonElement = $("div[data-priority]"),
-            createTaskButtonElement = $("div[data-testid='task-editor-action-buttons'] button[type='submit']");
+            createTaskButtonElement = $("div[data-testid='task-editor-action-buttons'] button[type='submit']"),
+            editTaskButtonElement = $("div.board_task__details");
 
     private final ElementsCollection
             getAddTaskButtonElement = $$("button.plus_add_button");
 
-
-
-
-    /*
-    private final SelenideElement
-            addSectionButtonElement = $("button.board_add_section_button"),
-            sectionNameInputElement = $("div.board_view__add_section input"),
-            createSectionButtonElement = $("div.board_view__add_section button[type='submit']"),
-            deleteSectionButtonElement = $$("div.reactist_menulist div").last(),
-            confirmDeleteSectionButtonElement = $$("div[data-testid='modal-overlay'] footer button").last(),
-            separatorBetweenSectionsElement = $$("div.board_add_section_trigger__container");   // он не СелинидЭлемент !
-
-    private final SelenideElement
-            sectionCheckElement = $$("[data-testid='board-section']"),    // он не СелинидЭлемент !
-            addProjectButtonElement = $("[aria-label='Добавить проект']"),
-            projectNameInputElement = $("input[name='name']");
-    */
-
-    @Step("Открыть страницу.")
+    @Step("Открыть страницу")
     public TaskPage openPage(String url) {
         open(url);
         return this;
     }
 
-    @Step("Ввести логин и пароль.")
+    @Step("Ввести логин и пароль")
     public TaskPage login() {
         new AuthPage().login();
         return this;
     }
     
-    @Step("Нажать на кнопку 'Добавить задачу'.")
+    @Step("Нажать на кнопку 'Добавить задачу'")
     public TaskPage clickOnAddTask(int taskNumber) {
         getAddTaskButtonElement.get(taskNumber).click();
         return this;
     }
 
-    @Step("Ввести текст задачи.")
+    @Step("Ввести текст задачи : <{taskContent}>")
     public TaskPage inputTaskContent(String taskContent) {
         taskContentInputElement.setValue(taskContent);
         return this;
     }
     
-    @Step("Выбрать приоритет задачи.")
+    @Step("Выбрать приоритет задачи : <Приоритет {taskPriority}>")
     public TaskPage selectTaskPriority(String taskPriority) {
         taskPriorityButtonElement.click();
         getTaskPriorityDropdownElement(taskPriority).click();
         return this;
     }
 
-    @Step("Нажать кнопку 'Добавить задачу'.")
+    @Step("Нажать кнопку 'Добавить задачу'")
     public TaskPage addTask() {
         createTaskButtonElement.click();
         return this;
     }
 
+    @Step("Проверить, что задача была корректно создана [UI]")
+    public void checkTask(TaskRequestModel testTaskData, CheckField... checkFields) {
 
+        editTaskButtonElement.click();
 
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
 
-   /*
-    @Step("Нажать на кнопку 'Добавить раздел'.")
-    public TaskPage clickOnAddSection() {
-        addSectionButtonElement.click();
-        return this;
+        if (fieldsList.contains(CONTENT)) {
+            checkTaskContent(testTaskData.getContent());
+        }
+
+        if (fieldsList.contains(PRIORITY)) {
+            checkTaskPriority(testTaskData.getContent(), testTaskData.getPriority());
+        }
     }
 
-
-    @Step("Навести мышку на разделительную линию между разделами и нажать на неё.")
-    public SectionPage clickOnSeparatorBetweenSections(int separatorIndex) {
-        //separatorBetweenSectionsElement.get(separatorIndex).hover(); // TODO : надо ли на него наводиться мышкой?
-        separatorBetweenSectionsElement.get(separatorIndex).click();
-        return this;
-    }
-    
-    @Step("Ввести имя раздела.")
-    public SectionPage inputSectionName(String sectionName) {
-        sectionNameInputElement.setValue(sectionName);
-        return this;
+    @Step("Проверить содержимое созданной задачи")
+    private void checkTaskContent(String taskContent) {
+        getTaskContentCheckElement(taskContent).shouldBe(exist);;
     }
 
-    @Step("Нажать кнопку 'Добавить раздел'.")
-    public SectionPage addSection() {
-        createSectionButtonElement.click();
-        return this;
+    @Step("Проверить приоритет созданной задачи")
+    private void checkTaskPriority(String taskContent, int taskPriority) {
+        getTaskPriorityCheckElement(taskContent, taskPriority).shouldBe(exist);
     }
-
-    @Step("Нажать на кнопку 'Другие действия' (три точки справа от названия раздела).")
-    public SectionPage clickOtherActions(String sectionId) {
-        getOtherActionsElement(sectionId).click();
-        return this;
-    }
-
-    @Step("Нажать на кнопку 'Удалить'.")
-    public SectionPage clickDeleteSectionButton() {
-        deleteSectionButtonElement.click();
-        return this;
-    }
-
-    @Step("Подвердить удаление раздела.")
-    public SectionPage clickConfirmDeleteSectionButtonElement() {
-        confirmDeleteSectionButtonElement.click();
-        return this;
-    }
-
-    @Step("Проверить, что раздел был успешно создан в указанном месте.")
-    public SectionPage checkSuccsessfulCreatedSection(int sectionIndex, String sectionName) {
-        sectionCheckElement.get(sectionIndex).shouldHave(text(sectionName));
-        return this;
-    }
-
-    @Step("Проверить, что раздел был успешно удалён (отсутствует в списке разделов).")
-    public SectionPage checkSuccsessfulDeleteSection(String sectionName) {
-        sectionCheckElement.forEach(element -> element.shouldNotHave(text(sectionName)));
-        return this;
-    }
-  */
 }

@@ -8,7 +8,7 @@ import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static enums.CheckField.*;
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через WEB")
@@ -36,71 +36,24 @@ public class TaskTests extends WebTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-        //String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
 
         taskPage
                 .openPage(url)
                 .login();
-
         taskPage
                 .clickOnAddTask(taskNumber)
                 .inputTaskContent(testTaskData.getContent())
                 .selectTaskPriority(String.valueOf(testTaskData.getPriority()))
                 .addTask();
 
-        sleep(3000);
+        sleep(500); // TODO : вероятно нужный слип
 
-
-        /*
-        sectionPage
-                .checkSuccsessfulCreatedSection(0, testSectionData.getName());*/
-
-        // TODO : добавить UI-проверку
-        
-        // TODO : добавить API-проверку
+        taskPage
+                .checkTask(testTaskData, CONTENT, PRIORITY);
+        tasksApi
+                .checkTask(testTaskData, CONTENT, PRIORITY);
     }
-
-    /*
-    @Test
-    @CleanupTestData
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Удаление задачи")
-    @DisplayName("Удалить задачу [Только для варианта отображения проекта - ДОСКА (BOARD)]")
-    void deleteTaskTest() {
-
-        int templateNumber = 0;
-        int sectionNumberInProject = 0;
-
-        TestDataModel testData = new DataCreator.Setup()
-                .setTemplate(TEMPLATES.get(templateNumber))
-                .createProjects(true)
-                .createSections(true)
-                .create();
-
-        String projectId = testData.getProjects().get(0).getId();
-        
-        String sectionId = testData.getSections().get(sectionNumberInProject).getId();
-        String sectionName = testData.getSections().get(sectionNumberInProject).getName();
-
-        taskPage
-                .openPage(projectId)
-                .login();
-
-        taskPage
-                .clickOtherActions(sectionId);
-                .clickDeleteSectionButton()
-                .clickConfirmDeleteSectionButtonElement();
-
-
-        taskPage
-                .checkSuccsessfulDeleteSection(sectionName);
-
-        // TODO : добавить UI-проверку
-        
-        // TODO : добавить API-проверку
-
-    }*/
 
     //TODO : сделать тест на драг энд дроп
     @Disabled

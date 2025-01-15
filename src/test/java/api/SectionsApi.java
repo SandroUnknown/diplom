@@ -8,6 +8,7 @@ import models.sections.SectionResponseModel;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
 
 public class SectionsApi extends BaseApi {
@@ -95,6 +96,25 @@ public class SectionsApi extends BaseApi {
 
         for (SectionResponseModel section : sections) {
             deleteSection(section.getId());
+        }
+    }
+
+    @Step("Проверить, что раздел был успешно создан в указанном месте [API]")
+    public void checkSection(int sectionIndex, String expectedSectionName) {
+
+        String actualSectionName = getAllSections().get(sectionIndex).getName();
+
+        assertThat(actualSectionName).isEqualTo(expectedSectionName);
+    }
+
+    @Step("Проверить, что раздел был успешно удалён [API]")
+    public void checkDeleteSection(String expectedSectionName) {
+
+        List<SectionResponseModel> actualSections = getAllSections();
+
+        for (SectionResponseModel actualSection : actualSections) {
+            String actualSectionName = actualSection.getName();
+            assertThat(actualSectionName).isNotEqualTo(expectedSectionName);
         }
     }
 }

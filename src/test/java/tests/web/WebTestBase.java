@@ -25,6 +25,8 @@ public class WebTestBase {
     static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
     ProjectsApi projectsApi = new ProjectsApi();
+    SectionsApi sectionsApi = new SectionsApi();
+    TasksApi tasksApi = new TasksApi();
 
     ProjectPage projectPage = new ProjectPage();
     SectionPage sectionPage = new SectionPage();
