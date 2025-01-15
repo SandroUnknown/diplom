@@ -223,8 +223,8 @@ public class ProjectPage {
 
     @Step("Проверить имя созданного проекта")
     public ProjectPage checkProjectName(String projectName) {
-        //projectListForCheckElement.shouldHave(text(projectName));
-        getProjectNameForCheckElement(projectName).shouldBe(exist);
+        projectListForCheckElement.shouldHave(text(projectName));
+        //getProjectNameForCheckElement(projectName).shouldBe(exist);
         return this;
     }
 
