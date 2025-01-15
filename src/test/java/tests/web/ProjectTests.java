@@ -98,8 +98,8 @@ public class ProjectTests extends WebTestBase {
     void deleteProjectTest() {
 
         int templateNumber = 0;
-
         new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();

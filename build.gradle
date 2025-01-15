@@ -119,8 +119,8 @@ task api(type: Test) {
 
 task web(type: Test) {
     useJUnitPlatform {
-        //includeTags("WEB")
-        includeTags("WEB_FOR_TEST")
+        includeTags("WEB")
+        //includeTags("WEB_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output
@@ -129,8 +129,8 @@ task web(type: Test) {
 
 task android(type: Test) {
     useJUnitPlatform {
-        includeTags("ANDROID")
-        //includeTags("MOBILE_FOR_TEST")
+        //includeTags("ANDROID")
+        includeTags("MOBILE_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output

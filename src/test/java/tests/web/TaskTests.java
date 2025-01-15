@@ -29,15 +29,14 @@ public class TaskTests extends WebTestBase {
     @DisplayName("Создать новую задачу в пустом разделе [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createTaskInEmptySectionTest() {
 
-        int templateNumber = 0;
         int taskNumber = 0;
-
+        int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         //String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
 

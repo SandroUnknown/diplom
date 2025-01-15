@@ -29,8 +29,8 @@ public class SectionTests extends WebTestBase {
     void createSectionInEmptyProjectTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -61,8 +61,8 @@ public class SectionTests extends WebTestBase {
     void createNotFirstSectionInProjectAtEndOfListTest() {
 
         int templateNumber = 0;
-
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -100,16 +100,16 @@ public class SectionTests extends WebTestBase {
     @DisplayName("Создать новый раздел между двумя ранее созданными разделами [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createSectionBetweenTwoPreviouslyCreatedSectionsTest() {
 
-        int templateNumber = 1;
-        int separatorIndex = 0;
-
+        //int templateNumber = 1; // TODO : удалить
+        int templateNumber = 2;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String url = testData.getProjects().get(0).getUrl();
+        int separatorIndex = 0;
         
         sectionPage
                 .openPage(url)
@@ -136,17 +136,15 @@ public class SectionTests extends WebTestBase {
     @DisplayName("Удалить раздел [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void deleteSectionTest() {
 
-        int templateNumber = 0;
         int sectionNumberToDelete = 0;
-
+        int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
+                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String url = testData.getProjects().get(0).getUrl();
-        
         String sectionName = testData.getSections().get(sectionNumberToDelete).getName();
 
         sectionPage
