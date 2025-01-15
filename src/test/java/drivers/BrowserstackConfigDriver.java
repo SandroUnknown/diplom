@@ -41,7 +41,7 @@ public class BrowserstackConfigDriver implements WebDriverProvider {
             return new RemoteWebDriver(
                     new URL(credentialsConfig.getBrowserstackHost()), caps);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("Неверные данные для Browserstak: " + e.getMessage(), e);
+            throw new RuntimeException("Неверные данные для Browserstack: " + e.getMessage(), e);
         }
     }
 }

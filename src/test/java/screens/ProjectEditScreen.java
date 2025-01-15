@@ -13,7 +13,6 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 import static enums.CheckField.*;
-import static enums.CheckField.VIEW_STYLE;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class ProjectEditScreen {

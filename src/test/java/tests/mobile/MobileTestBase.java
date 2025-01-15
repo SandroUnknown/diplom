@@ -23,16 +23,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();;
+    static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
-    AuthScreen authScreen = new AuthScreen();
-    BottomMenu bottomMenu = new BottomMenu();
-    BrowseScreen browseScreen = new BrowseScreen();
-    ProjectScreen projectScreen = new ProjectScreen();
-    ProjectEditScreen projectEditScreen = new ProjectEditScreen();
-    CreateSectionModalWindow createSectionModalWindow = new CreateSectionModalWindow();
-    CreateTaskModalWindow createTaskModalWindow = new CreateTaskModalWindow();
-    TaskEditScreen taskEditScreen = new TaskEditScreen();
+    final AuthScreen authScreen = new AuthScreen();
+    final BottomMenu bottomMenu = new BottomMenu();
+    final BrowseScreen browseScreen = new BrowseScreen();
+    final ProjectScreen projectScreen = new ProjectScreen();
+    final ProjectEditScreen projectEditScreen = new ProjectEditScreen();
+    final CreateSectionModalWindow createSectionModalWindow = new CreateSectionModalWindow();
+    final CreateTaskModalWindow createTaskModalWindow = new CreateTaskModalWindow();
+    final TaskEditScreen taskEditScreen = new TaskEditScreen();
 
     @BeforeAll
     static void beforeAll() {

@@ -1,11 +1,8 @@
 package api;
 
 import enums.CheckField;
-import enums.Color;
 import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
-import models.projects.ProjectRequestModel;
-import models.projects.ProjectResponseModel;
 import models.tasks.TaskRequestModel;
 import models.tasks.TaskResponseModel;
 
@@ -14,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static enums.CheckField.*;
-import static enums.CheckField.VIEW_STYLE;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;

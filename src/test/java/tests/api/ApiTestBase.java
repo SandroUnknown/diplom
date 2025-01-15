@@ -13,13 +13,13 @@ import java.util.List;
 
 public class ApiTestBase {
 
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
+    static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
-    ProjectsApi projectsApi = new ProjectsApi();
-    SectionsApi sectionsApi = new SectionsApi();
-    TasksApi tasksApi = new TasksApi();
-    CommentsApi commentsApi = new CommentsApi();
-    LabelsApi labelsApi = new LabelsApi();
+    final ProjectsApi projectsApi = new ProjectsApi();
+    final SectionsApi sectionsApi = new SectionsApi();
+    final TasksApi tasksApi = new TasksApi();
+    final CommentsApi commentsApi = new CommentsApi();
+    final LabelsApi labelsApi = new LabelsApi();
 
     @BeforeAll
     public static void setUp() {

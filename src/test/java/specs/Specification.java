@@ -12,7 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 
 public class Specification {
 
-    static String token = new CredentialsConfigDriver().getTodoistToken();
+    static final String token = new CredentialsConfigDriver().getTodoistToken();
 
     public static final RequestSpecification requestGetSpec = with()
             .filter(withCustomTemplates())

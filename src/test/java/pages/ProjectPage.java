@@ -27,13 +27,6 @@ public class ProjectPage {
         return $(String.format("#%s", viewStyle)).sibling(0);
     }
 
-    // TODO : ???
-    private SelenideElement getProjectNameForCheckElement(String projectName) {
-        //String projectNameSelector = String.format("a[aria-label] div span", projectName);
-        //String projectNameSelector = String.format("a[aria-label] div span", projectName);
-        return projectListForCheckElement.$("a[aria-label] div span");
-    }
-
     private SelenideElement getProjectColorForCheckElement(Color projectColor) {
         String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssUiTitle());
         return projectListForCheckElement.$(projectColorSelector);

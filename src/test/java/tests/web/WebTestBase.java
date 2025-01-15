@@ -22,15 +22,15 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class WebTestBase {
 
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
+    static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
-    ProjectsApi projectsApi = new ProjectsApi();
-    SectionsApi sectionsApi = new SectionsApi();
-    TasksApi tasksApi = new TasksApi();
+    final ProjectsApi projectsApi = new ProjectsApi();
+    final SectionsApi sectionsApi = new SectionsApi();
+    final TasksApi tasksApi = new TasksApi();
 
-    ProjectPage projectPage = new ProjectPage();
-    SectionPage sectionPage = new SectionPage();
-    TaskPage taskPage = new TaskPage();
+    final ProjectPage projectPage = new ProjectPage();
+    final SectionPage sectionPage = new SectionPage();
+    final TaskPage taskPage = new TaskPage();
 
     @BeforeAll
     public static void setUp() {

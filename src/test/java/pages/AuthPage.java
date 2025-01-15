@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class AuthPage {
 
-    static CredentialsConfigDriver credentials = new CredentialsConfigDriver();
+    static final CredentialsConfigDriver credentials = new CredentialsConfigDriver();
 
     private final SelenideElement
             emailElement = $("input[type='email']"),

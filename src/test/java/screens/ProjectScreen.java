@@ -21,9 +21,8 @@ public class ProjectScreen {
 
     private SelenideElement getAddTaskButtonElement(String sectionName) {
         SelenideElement parentElement = getTaskGroupElement(sectionName);
-        SelenideElement addTaskButtonElement = parentElement.$(By.xpath(
+        return parentElement.$(By.xpath(
                 ".//android.widget.TextView[@resource-id='com.todoist:id/text' and @text='Add task']"));
-        return addTaskButtonElement;
     }
 
     private SelenideElement getTaskElement(String sectionName, String taskName) {

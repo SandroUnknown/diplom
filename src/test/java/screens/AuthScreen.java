@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class AuthScreen {
 
-    static CredentialsConfigDriver credentials = new CredentialsConfigDriver();
+    static final CredentialsConfigDriver credentials = new CredentialsConfigDriver();
 
     private final SelenideElement continueWithEmailButtonElement = $(By.xpath("//android.widget.Button[@resource-id='com.todoist:id/btn_email']"));
     private final SelenideElement loginWithEmailButtonElement = $(By.xpath("//android.widget.TextView[@resource-id='com.todoist:id/email_login']"));
