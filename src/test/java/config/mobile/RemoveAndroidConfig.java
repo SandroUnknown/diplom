@@ -3,8 +3,8 @@ package config.mobile;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:properties/remove.properties"
-        //"classpath:properties/browserstack.properties"
+        //"classpath:properties/remove.properties"
+        "classpath:properties/browserstack.properties"
 })
 public interface RemoveAndroidConfig extends Config {
 
