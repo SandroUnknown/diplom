@@ -44,14 +44,12 @@ public class MobileTestBase {
 
         new ApiConfigDriver();
 
-        // TODO : переписать
-        /*String env = System.getProperty("env");
-        if (env == "remote") {
+        String env = System.getProperty("env", "local");
+        if (env.equals("remote")) {
             Configuration.browser = BrowserstackDriver.class.getName();
         } else {
             Configuration.browser = EmulationDriver.class.getName();
-        }*/
-        Configuration.browser = BrowserstackDriver.class.getName();
+        }
 
         Configuration.browserSize = null;
         Configuration.timeout = 30000;
