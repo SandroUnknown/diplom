@@ -30,13 +30,13 @@ public class BrowserstackDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
+
         MutableCapabilities caps = new MutableCapabilities();
 
-        //caps.setCapability("browserstack.user", deviceConfig.getBrowserstackUser());
-        //caps.setCapability("browserstack.key", deviceConfig.getBrowserstackKey());
         caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
         caps.setCapability("browserstack.key", credentialsConfig.getBrowserstackKey());
-        caps.setCapability("app", browserstack.checkUploadedAppsList("com.todoist-11342.apk"));
+        //caps.setCapability("app", browserstack.checkUploadedAppsList("com.todoist-11342.apk"));
+        caps.setCapability("app", browserstack.getAppUrl("com.todoist-11342.apk"));
         caps.setCapability("device", deviceConfig.getDevice());
         caps.setCapability("os_version", deviceConfig.getOsVersion());
 

@@ -31,6 +31,7 @@ public class Browserstack {
                 .extract().path("automation_session.video_url");
     }
 
+/*
     // Загружает приложение на БС
     public UploadAppResponseModel uploadAppToBrowserstack(String appName) {
 
@@ -80,6 +81,69 @@ public class Browserstack {
         }
 
         return uploadAppToBrowserstack(appName).getAppUrl();
+    }*/
+
+
+
+    // Загружает приложение на БС
+    private String uploadApp(String appName) {
+
+        //String path = "src/test/resources/apps/com.todoist-11342.apk";
+        String path = String.format("src/test/resources/apps/%s", appName);
+        File file = new File(path);
+
+        UploadAppResponseModel response = given()
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
+                .contentType(ContentType.MULTIPART)
+                .multiPart("file", file)
+                .when()
+                .post("https://api-cloud.browserstack.com/app-automate/upload")
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().as(UploadAppResponseModel.class);
+
+        return response.getAppUrl();
+    }
+
+    private String checkUploadedApp(String appName) {
+
+        String response = given()
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
+                .when()
+                .get("https://api-cloud.browserstack.com/app-automate/recent_apps")
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract()
+                .asString();
+
+        if (!response.contains("No results found")) {
+            List<UploadedAppsListResponseModel> appList =
+                    new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
+
+            for (UploadedAppsListResponseModel app : appList) {
+                //if (app.getAppName().equals("com.todoist-11342.apk")) {
+                if (app.getAppName().equals(appName)) {
+                    return app.getAppUrl();
+                }
+            }
+        }
+
+        return "";
+    }
+
+
+    // Получаем app
+    public String getAppUrl(String appName) {
+
+        var appUrl = checkUploadedApp(appName);
+
+        if (appUrl.isEmpty()) {
+            appUrl = uploadApp(appName);
+        }
+
+        return appUrl;
     }
 
     private void deleteApp(String appId) {
