@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static enums.CheckField.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через WEB")
@@ -42,18 +41,18 @@ public class ProjectTests extends WebTestBase {
                 .openPage()
                 .login();
 
-        // TODO : параметры надо откуда-то брать?
         projectPage
                 .clickPlusButton()
                 .clickAddProject()
                 .inputProjectName(testProjectData.getName())
                 .addProject();
 
-        sleep(1000); // TODO : нужный слип
+        sleep(500); // TODO : вероятно нужный слип
 
         projectPage
-                .checkProject(testProjectData, NAME)
-                .apiCheckProject(testProjectData, NAME);
+                .checkProject(testProjectData, NAME);
+        projectsApi
+                .checkProject(testProjectData, NAME);
     }
 
     @Test
@@ -67,7 +66,6 @@ public class ProjectTests extends WebTestBase {
                 .openPage()
                 .login();
 
-        // TODO : параметры надо откуда-то брать?
         projectPage
                 .clickPlusButton()
                 .clickAddProject()
@@ -77,18 +75,19 @@ public class ProjectTests extends WebTestBase {
                 .selectProjectViewStyle(testProjectData.getViewStyle())
                 .addProject();
 
-        sleep(1000); // TODO : нужный слип
+        sleep(500); // вероятно нужный слип
 
         projectPage
-                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE)
-                .apiCheckProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
+        projectsApi
+                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
     }
 
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.NORMAL)
     @Story("Удаление проекта")
-    @DisplayName("Удалить проект по ID")
+    @DisplayName("Удалить проект")
     void deleteProjectTest() {
 
         int templateNumber = 0;
@@ -107,14 +106,11 @@ public class ProjectTests extends WebTestBase {
                 .clickDeleteProjectButton()
                 .clickConfirmDeleteProjectButtonElement();
 
+        sleep(500); // вероятно нужный слип
 
         projectPage
                 .checkDeleteProject();
-
-        // TODO : слишком быстро проходит АПИ проверка, не успевают обновиться данные на сервере...
-        sleep(1000);
-
-        int projectCount = projectsApi.getAllProjects().size();
-        assertThat(projectCount).isEqualTo(1);
+        projectsApi
+                .checkDeleteProject();
     }
 }

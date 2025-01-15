@@ -1,12 +1,18 @@
 package api;
 
+import enums.CheckField;
+import enums.Color;
+import enums.ViewStyle;
 import io.qameta.allure.Step;
 import models.projects.ProjectRequestModel;
 import models.projects.ProjectResponseModel;
 
+import java.util.Arrays;
 import java.util.List;
 
+import static enums.CheckField.*;
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static specs.Specification.*;
 
 public class ProjectsApi extends BaseApi {
@@ -83,5 +89,56 @@ public class ProjectsApi extends BaseApi {
             String projectId = project.getId();
             deleteProject(projectId);
         }
+    }
+
+    @Step("Проверить, что проект был корректно создан [API]")
+    public void checkProject(ProjectRequestModel expectedProject, CheckField... checkFields) {
+
+        ProjectsApi projectsApi = new ProjectsApi();
+        ProjectResponseModel actualProject = projectsApi.getAllProjects().get(1);
+
+        List<CheckField> fieldsList = Arrays.asList(checkFields);
+
+        if (fieldsList.contains(NAME)) {
+            checkName(actualProject.getName(), expectedProject.getName());
+        }
+
+        if (fieldsList.contains(COLOR)) {
+            checkColor(actualProject.getColor(), expectedProject.getColor());
+        }
+
+        if (fieldsList.contains(FAVORITE)) {
+            checkFavorite(actualProject.isFavorite(), expectedProject.isFavorite());
+        }
+
+        if (fieldsList.contains(VIEW_STYLE)) {
+            checkViewStyle(actualProject.getViewStyle(), expectedProject.getViewStyle());
+        }
+    }
+
+    @Step("Проверить имя полученного проекта")
+    private void checkName(String actualName, String expectedName) {
+        assertThat(actualName).isEqualTo(expectedName);
+    }
+
+    @Step("Проверить цвет полученного проекта")
+    private void checkColor(Color actualColor, Color expectedColor) {
+        assertThat(actualColor).isEqualTo(expectedColor);
+    }
+
+    @Step("Проверить отметку 'избранное' полученного проекта")
+    private void checkFavorite(boolean actualFavorite, boolean expectedFavorite) {
+        assertThat(actualFavorite).isEqualTo(expectedFavorite);
+    }
+
+    @Step("Проверить вариант отображения полученного проекта")
+    private void checkViewStyle(ViewStyle actualViewStyle, ViewStyle ViewStyle) {
+        assertThat(actualViewStyle).isEqualTo(ViewStyle);
+    }
+
+    @Step("Проверить, что проект успешно удалён [API]")
+    public void checkDeleteProject() {
+        int projectCount = getAllProjects().size();
+        assertThat(projectCount).isEqualTo(1);
     }
 }
