@@ -54,11 +54,12 @@ dependencies {
             "io.appium:java-client:$appiumVersion"
     )
 
+    // Зависимость по умолчанию для всех тестов
+    testImplementation "com.codeborne:selenide:$selenideVersion"
+
     // Эта зависимость будет добавлена только если идет тест с тегом ANDROID.
     androidTestImplementation "com.codeborne:selenide:$lowerSelenideVersion"
 
-    // Зависимость по умолчанию для всех тестов
-    testImplementation "com.codeborne:selenide:$selenideVersion"
 }
 
 tasks.withType(JavaCompile) {
