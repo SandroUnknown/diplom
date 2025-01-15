@@ -203,7 +203,7 @@ public class ProjectPage {
 //================================================================
 
     @Step("Проверить имя созданного проекта")
-    public ProjectPage checkProjectName(String projectName) {
+    private ProjectPage checkProjectName(String projectName) {
         projectListForCheckElement.shouldHave(text(projectName));
         //getProjectNameForCheckElement(projectName).shouldBe(exist);
         //getProjectNameForCheckElement(projectName).shouldHave(text(projectName));
@@ -211,19 +211,19 @@ public class ProjectPage {
     }
 
     @Step("Проверить цвет созданного проекта")
-    public ProjectPage checkProjectColor(Color projectColor) {
+    private ProjectPage checkProjectColor(Color projectColor) {
         getProjectColorForCheckElement(projectColor).shouldBe(exist);
         return this;
     }
 
     @Step("Проверить, что созданный проект добавлен в 'Избранное'")
-    public ProjectPage checkProjectFavorite(String projectName) {
+    private ProjectPage checkProjectFavorite(String projectName) {
         projectFavoriteForCheckElement.shouldHave(text(projectName));
         return this;
     }
 
     @Step("Проверить вариант отображения (ViewStyle) созданного проекта")
-    public ProjectPage checkProjectViewStyle(ViewStyle viewStyle) {
+    private ProjectPage checkProjectViewStyle(ViewStyle viewStyle) {
         getProjectViewStyleForCheckElement(viewStyle).shouldBe(exist);
         return this;
     }
