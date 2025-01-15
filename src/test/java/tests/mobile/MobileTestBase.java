@@ -43,7 +43,10 @@ public class MobileTestBase {
         TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
         new ApiConfigDriver();
-        if (System.getProperty("env").equals("remote")) {
+
+        // TODO : переписать
+        String env = System.getProperty("env");
+        if (env == "remote") {
             Configuration.browser = BrowserstackDriver.class.getName();
         } else {
             Configuration.browser = EmulationDriver.class.getName();
