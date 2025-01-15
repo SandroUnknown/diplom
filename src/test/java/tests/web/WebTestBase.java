@@ -22,8 +22,7 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class WebTestBase {
 
-    static List<TestDataModel> TEMPLATES_2 = new DataStorage("data/Templates.json").getTemplates();
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates_TWO.json").getTemplates();
+    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
     ProjectsApi projectsApi = new ProjectsApi();
 

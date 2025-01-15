@@ -32,7 +32,6 @@ public class TaskTests extends WebTestBase {
         int taskNumber = 0;
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)

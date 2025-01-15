@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 
-    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates_TWO.json").getTemplates();;
+    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();;
 
     AuthScreen authScreen = new AuthScreen();
     BottomMenu bottomMenu = new BottomMenu();

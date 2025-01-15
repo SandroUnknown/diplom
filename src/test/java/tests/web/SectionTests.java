@@ -30,7 +30,6 @@ public class SectionTests extends WebTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -62,7 +61,6 @@ public class SectionTests extends WebTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -100,10 +98,8 @@ public class SectionTests extends WebTestBase {
     @DisplayName("Создать новый раздел между двумя ранее созданными разделами [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void createSectionBetweenTwoPreviouslyCreatedSectionsTest() {
 
-        //int templateNumber = 1; // TODO : удалить
         int templateNumber = 2;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -139,7 +135,6 @@ public class SectionTests extends WebTestBase {
         int sectionNumberToDelete = 0;
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)

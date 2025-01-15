@@ -4,7 +4,7 @@
       {
         "id": "",
         "name": "ВАЖНО",
-        "color": "GREY",
+        "color": "RED",
         "order": "",
         "favorite": true
       }
@@ -115,21 +115,300 @@
   {
     "labels": [
       {
-        "id": "0",
+        "id": "",
         "name": "ВАЖНО",
-        "color": "GREY",
+        "color": "RED",
         "order": "",
         "favorite": true
-      },
+      }
+    ],
+    "projects": [
       {
         "id": "0",
-        "name": "Акция",
+        "name": "Список покупок к Новому году",
+        "comment_count": "",
+        "color": "YELLOW",
+        "shared": false,
+        "order": "",
+        "favorite": false,
+        "inbox_project": false,
+        "team_inbox": false,
+        "view_style": "BOARD",
+        "url": "",
+        "parent_id": ""
+      }
+    ],
+    "comments_in_projects": [
+      {
+        "task_id": "",
+        "project_id": "0",
+        "id": "",
+        "content": "Обязательно купить всем новогодние подарки!!!",
+        "posted_at": "",
+        "attachment": {}
+      },
+      {
+        "task_id": "",
+        "project_id": "0",
+        "id": "",
+        "content": "Повесить гирлянды!",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ],
+    "tasks_in_projects": [
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "id": "0",
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "assigner_id": "",
+        "created_at": "",
+        "creator_id": "",
+        "comment_count": "",
+        "completed": false,
+        "url": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_projects": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Сделать оливье, но не заправлять пока что майонезом!!!",
+        "posted_at": "",
+        "attachment": {}
+      },
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Не использовать солёные огурцы)))",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ],
+    "sections": [
+      {
+        "id": "0",
+        "project_id": "0",
+        "order": 1,
+        "name": "Купить в `Ашане`"
+      }
+    ],
+    "tasks_in_sections": [
+      {
+        "content": "Мандарины",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "id": "0",
+        "project_id": "",
+        "section_id": "0",
+        "parent_id": "",
+        "assignee_id": "",
+        "assigner_id": "",
+        "created_at": "",
+        "creator_id": "",
+        "comment_count": "",
+        "completed": false,
+        "url": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_sections": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Мандарины только Марроканские!",
+        "posted_at": "",
+        "attachment": {}
+      },
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Нужно около 2-2.5 кг",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ]
+  },
+  {
+    "labels": [
+      {
+        "id": "",
+        "name": "ВАЖНО",
+        "color": "RED",
+        "order": "",
+        "favorite": true
+      }
+    ],
+    "projects": [
+      {
+        "id": "0",
+        "name": "Список покупок к Новому году",
+        "comment_count": "",
+        "color": "YELLOW",
+        "shared": false,
+        "order": "",
+        "favorite": false,
+        "inbox_project": false,
+        "team_inbox": false,
+        "view_style": "BOARD",
+        "url": "",
+        "parent_id": ""
+      }
+    ],
+    "comments_in_projects": [
+      {
+        "task_id": "",
+        "project_id": "0",
+        "id": "",
+        "content": "Обязательно купить всем новогодние подарки!!!",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ],
+    "tasks_in_projects": [
+      {
+        "content": "Сделать оливье",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "id": "0",
+        "project_id": "0",
+        "section_id": "",
+        "parent_id": "",
+        "assignee_id": "",
+        "assigner_id": "",
+        "created_at": "",
+        "creator_id": "",
+        "comment_count": "",
+        "completed": false,
+        "url": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_projects": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Сделать оливье, но не заправлять пока что майонезом!!!",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ],
+    "sections": [
+      {
+        "id": "0",
+        "project_id": "0",
+        "order": 1,
+        "name": "Купить в `Ашане`"
+      },
+      {
+        "id": "1",
+        "project_id": "0",
+        "order": 2,
+        "name": "Купить в `Пятёрочке`"
+      }
+    ],
+    "tasks_in_sections": [
+      {
+        "content": "Мандарины",
+        "description": "",
+        "order": 0,
+        "priority": 1,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "id": "0",
+        "project_id": "",
+        "section_id": "0",
+        "parent_id": "",
+        "assignee_id": "",
+        "assigner_id": "",
+        "created_at": "",
+        "creator_id": "",
+        "comment_count": "",
+        "completed": false,
+        "url": "",
+        "duration": {},
+        "due": {}
+      },
+      {
+        "content": "Картошка",
+        "description": "",
+        "order": 0,
+        "priority": 3,
+        "labels": [
+          "ВАЖНО"
+        ],
+        "id": "1",
+        "project_id": "",
+        "section_id": "1",
+        "parent_id": "",
+        "assignee_id": "",
+        "assigner_id": "",
+        "created_at": "",
+        "creator_id": "",
+        "comment_count": "",
+        "completed": false,
+        "url": "",
+        "duration": {},
+        "due": {}
+      }
+    ],
+    "comments_in_tasks_in_sections": [
+      {
+        "task_id": "0",
+        "project_id": "",
+        "id": "",
+        "content": "Мандарины только Марроканские!",
+        "posted_at": "",
+        "attachment": {}
+      },
+      {
+        "task_id": "1",
+        "project_id": "",
+        "id": "",
+        "content": "Нужно 2-2.5 кг кортошки, желательно чищеной",
+        "posted_at": "",
+        "attachment": {}
+      }
+    ]
+  },
+  {
+    "labels": [
+      {
+        "id": "",
+        "name": "ВАЖНО",
         "color": "RED",
         "order": "",
         "favorite": true
       },
       {
-        "id": "1",
+        "id": "",
         "name": "Кэшбек",
         "color": "BLUE",
         "order": "",
@@ -177,14 +456,6 @@
       },
       {
         "task_id": "",
-        "project_id": "0",
-        "id": "",
-        "content": "Повесить гирлянды!",
-        "posted_at": "",
-        "attachment": {}
-      },
-      {
-        "task_id": "",
         "project_id": "1",
         "id": "",
         "content": "Купить подарок имениннику!",
@@ -216,58 +487,14 @@
         "due": {}
       },
       {
-        "content": "Нарядить ёлку",
-        "description": "",
-        "order": 0,
-        "priority": 2,
-        "labels": [
-          "ВАЖНО"
-        ],
-        "id": "1",
-        "project_id": "0",
-        "section_id": "",
-        "parent_id": "",
-        "assignee_id": "",
-        "assigner_id": "",
-        "created_at": "",
-        "creator_id": "",
-        "comment_count": "",
-        "completed": false,
-        "url": "",
-        "duration": {},
-        "due": {}
-      },
-      {
         "content": "Купить свечки для торта",
         "description": "",
         "order": 0,
         "priority": 1,
         "labels": [
-          "ВАЖНО"
+          "Кэшбек"
         ],
-        "id": "2",
-        "project_id": "1",
-        "section_id": "",
-        "parent_id": "",
-        "assignee_id": "",
-        "assigner_id": "",
-        "created_at": "",
-        "creator_id": "",
-        "comment_count": "",
-        "completed": false,
-        "url": "",
-        "duration": {},
-        "due": {}
-      },
-      {
-        "content": "Придумать поздравление",
-        "description": "",
-        "order": 0,
-        "priority": 2,
-        "labels": [
-          "ВАЖНО"
-        ],
-        "id": "3",
+        "id": "1",
         "project_id": "1",
         "section_id": "",
         "parent_id": "",
@@ -286,7 +513,7 @@
       {
         "task_id": "0",
         "project_id": "",
-        "id": "0",
+        "id": "",
         "content": "Сделать оливье, но не заправлять пока что майонезом!!!",
         "posted_at": "",
         "attachment": {}
@@ -294,24 +521,8 @@
       {
         "task_id": "1",
         "project_id": "",
-        "id": "0",
-        "content": "Игрушки для ёлки лежат на верхней полке",
-        "posted_at": "",
-        "attachment": {}
-      },
-      {
-        "task_id": "2",
-        "project_id": "",
-        "id": "0",
+        "id": "",
         "content": "Купить счечку с цифрой 30",
-        "posted_at": "",
-        "attachment": {}
-      },
-      {
-        "task_id": "3",
-        "project_id": "",
-        "id": "0",
-        "content": "Придумать поздравление в стихах",
         "posted_at": "",
         "attachment": {}
       }
@@ -349,7 +560,7 @@
         "order": 0,
         "priority": 1,
         "labels": [
-          "Акция"
+          "ВАЖНО"
         ],
         "id": "0",
         "project_id": "",
@@ -371,7 +582,7 @@
         "order": 0,
         "priority": 2,
         "labels": [
-          "Акция",
+          "ВАЖНО",
           "Кэшбек"
         ],
         "id": "1",
@@ -457,7 +668,7 @@
         "priority": 4,
         "labels": [
           "Кэшбек",
-          "Акция"
+          "ВАЖНО"
         ],
         "id": "5",
         "project_id": "",
@@ -479,7 +690,7 @@
         "order": 0,
         "priority": 1,
         "labels": [
-          "Акция"
+          "ВАЖНО"
         ],
         "id": "6",
         "project_id": "",
@@ -564,14 +775,6 @@
         "project_id": "",
         "id": "",
         "content": "Два пакета по 2 л.",
-        "posted_at": "",
-        "attachment": {}
-      },
-      {
-        "task_id": "6",
-        "project_id": "",
-        "id": "",
-        "content": "Купить 200 грамм сыра",
         "posted_at": "",
         "attachment": {}
       },

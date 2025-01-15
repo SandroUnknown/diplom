@@ -119,8 +119,8 @@ task api(type: Test) {
 
 task web(type: Test) {
     useJUnitPlatform {
-        includeTags("WEB")
-        //includeTags("WEB_FOR_TEST")
+        //includeTags("WEB")
+        includeTags("WEB_FOR_TEST")
     }
 
     testClassesDirs = sourceSets.test.output
