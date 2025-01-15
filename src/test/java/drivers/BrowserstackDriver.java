@@ -20,13 +20,13 @@ public class BrowserstackDriver implements WebDriverProvider {
     private final RemoveAndroidConfig deviceConfig;
     private final CredentialsConfig credentialsConfig;
 
+    Browserstack browserstack = new Browserstack();
+
     // TODO : переписать
     public BrowserstackDriver() {
         this.deviceConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
-
-    Browserstack browserstack = new Browserstack();
 
     @Nonnull
     @Override
