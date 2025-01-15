@@ -48,7 +48,8 @@ configurations {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            //"com.codeborne:selenide:$lowerSelenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
