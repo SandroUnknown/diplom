@@ -40,7 +40,7 @@ allure {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$lowerSelenideVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
             //"com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
