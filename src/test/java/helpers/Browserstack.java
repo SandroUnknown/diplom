@@ -19,6 +19,7 @@ public class Browserstack {
             ConfigFactory.create(CredentialsConfig.class, System.getProperties());
 
     public static String videoUrl(String sessionId) {
+
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
 
         return given()
@@ -31,79 +32,16 @@ public class Browserstack {
                 .extract().path("automation_session.video_url");
     }
 
-/*
-    // Загружает приложение на БС
-    public UploadAppResponseModel uploadAppToBrowserstack(String appName) {
+    // Получаем app
+    public String getAppUrl(String appName) {
 
-        //String path = "src/test/resources/apps/com.todoist-11342.apk";
-        String path = String.format("src/test/resources/apps/%s", appName);
-        File file = new File(path);
+        var appUrl = checkUploadedApp(appName);
 
-        return given()
-                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
-                .contentType(ContentType.MULTIPART)
-                .multiPart("file", file)
-                .when()
-                .post("https://api-cloud.browserstack.com/app-automate/upload")
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract().as(UploadAppResponseModel.class);
-    }
-
-    // Проверяет загружено ли уже приложение
-    public String checkUploadedAppsList(String appName) {
-
-        //deleteApp("6c06179b3d81a3e0d5a9fb2488e2ef097fc5bac6");
-        //deleteApp("9e392d84bff7995744f16010e6bf9bb5cd8cd19d");
-        //deleteApp("da02849da3fd88922ff6cde24571671034592527");
-
-        String response = given()
-                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
-                .when()
-                .get("https://api-cloud.browserstack.com/app-automate/recent_apps")
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract()
-                .asString();
-
-        if (!response.contains("No results found")) {   // TODO : перепроверить
-            List<UploadedAppsListResponseModel> jResponse =
-                    new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
-
-            for (UploadedAppsListResponseModel app : jResponse) {
-                //if (app.getAppName().equals("com.todoist-11342.apk")) {
-                if (app.getAppName().equals(appName)) {
-                    return app.getAppUrl();
-                }
-            }
+        if (appUrl.isEmpty()) {
+            appUrl = uploadApp(appName);
         }
 
-        return uploadAppToBrowserstack(appName).getAppUrl();
-    }*/
-
-
-
-    // Загружает приложение на БС
-    private String uploadApp(String appName) {
-
-        //String path = "src/test/resources/apps/com.todoist-11342.apk";
-        String path = String.format("src/test/resources/apps/%s", appName);
-        File file = new File(path);
-
-        UploadAppResponseModel response = given()
-                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
-                .contentType(ContentType.MULTIPART)
-                .multiPart("file", file)
-                .when()
-                .post("https://api-cloud.browserstack.com/app-automate/upload")
-                .then()
-                .statusCode(200)
-                .log().all()
-                .extract().as(UploadAppResponseModel.class);
-
-        return response.getAppUrl();
+        return appUrl;
     }
 
     private String checkUploadedApp(String appName) {
@@ -123,7 +61,6 @@ public class Browserstack {
                     new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
 
             for (UploadedAppsListResponseModel app : appList) {
-                //if (app.getAppName().equals("com.todoist-11342.apk")) {
                 if (app.getAppName().equals(appName)) {
                     return app.getAppUrl();
                 }
@@ -133,19 +70,28 @@ public class Browserstack {
         return "";
     }
 
+    private String uploadApp(String appName) {
 
-    // Получаем app
-    public String getAppUrl(String appName) {
+        String path = String.format("src/test/resources/apps/%s", appName);
+        File file = new File(path);
 
-        var appUrl = checkUploadedApp(appName);
+        //UploadAppResponseModel response = given()
+        String appUrl = given()
+                .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
+                .contentType(ContentType.MULTIPART)
+                .multiPart("file", file)
+                .when()
+                .post("https://api-cloud.browserstack.com/app-automate/upload")
+                .then()
+                .statusCode(200)
+                .log().all()
+                .extract().as(UploadAppResponseModel.class).getAppUrl();
 
-        if (appUrl.isEmpty()) {
-            appUrl = uploadApp(appName);
-        }
-
+        //return response.getAppUrl();
         return appUrl;
     }
 
+    // TODO : удалить на релизе
     private void deleteApp(String appId) {
 
         given()
