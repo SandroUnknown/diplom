@@ -3,23 +3,30 @@ package config.mobile;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        //"classpath:properties/remove.properties"
-        "classpath:properties/browserstack.properties"
+        "classpath:properties/remove.properties"
+        //"classpath:properties/browserstack.properties"
 })
 public interface RemoveAndroidConfig extends Config {
 
-    @Key("app")
+    /*@Key("app")
     String getApp();
 
     @Key("device")
     String getDevice();
 
     @Key("os_version")
-    String getOsVersion();
+    String getOsVersion();*/
 
     //============
 
+    @Key("android_app")
+    String getApp();
 
+    @Key("android_device")
+    String getDevice();
+
+    @Key("android_os_version")
+    String getOsVersion();
 
 
     //============
