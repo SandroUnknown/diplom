@@ -36,13 +36,12 @@ public class BrowserstackDriver implements WebDriverProvider {
         //caps.setCapability("browserstack.key", deviceConfig.getBrowserstackKey());
         caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
         caps.setCapability("browserstack.key", credentialsConfig.getBrowserstackKey());
-        caps.setCapability("app", browserstack.checkUploadedAppsList());
+        caps.setCapability("app", browserstack.checkUploadedAppsList("com.todoist-11342.apk"));
         caps.setCapability("device", deviceConfig.getDevice());
         caps.setCapability("os_version", deviceConfig.getOsVersion());
 
         try {
             return new RemoteWebDriver(
-                    //new URL(deviceConfig.getRemoteUrl()), caps);
                     new URL(credentialsConfig.getBrowserstackHost()), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);

@@ -31,9 +31,11 @@ public class Browserstack {
                 .extract().path("automation_session.video_url");
     }
 
-    public UploadAppResponseModel uploadAppToBrowserstack() {
+    // Загружает приложение на БС
+    public UploadAppResponseModel uploadAppToBrowserstack(String appName) {
 
-        String path = "src/test/resources/apps/com.todoist-11342.apk";
+        //String path = "src/test/resources/apps/com.todoist-11342.apk";
+        String path = String.format("src/test/resources/apps/%s", appName);
         File file = new File(path);
 
         return given()
@@ -48,7 +50,8 @@ public class Browserstack {
                 .extract().as(UploadAppResponseModel.class);
     }
 
-    public String checkUploadedAppsList() {
+    // Проверяет загружено ли уже приложение
+    public String checkUploadedAppsList(String appName) {
 
         //deleteApp("6c06179b3d81a3e0d5a9fb2488e2ef097fc5bac6");
         //deleteApp("9e392d84bff7995744f16010e6bf9bb5cd8cd19d");
@@ -69,13 +72,14 @@ public class Browserstack {
                     new JsonPath(response).getList(".", UploadedAppsListResponseModel.class);
 
             for (UploadedAppsListResponseModel app : jResponse) {
-                if (app.getAppName().equals("com.todoist-11342.apk")) {
+                //if (app.getAppName().equals("com.todoist-11342.apk")) {
+                if (app.getAppName().equals(appName)) {
                     return app.getAppUrl();
                 }
             }
         }
 
-        return uploadAppToBrowserstack().getAppUrl();
+        return uploadAppToBrowserstack(appName).getAppUrl();
     }
 
     private void deleteApp(String appId) {
