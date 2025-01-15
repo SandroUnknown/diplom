@@ -16,6 +16,7 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
 
+    private final String appName = "com.todoist-11342.apk";
     private final RemoveAndroidConfig deviceConfig;
     private final CredentialsConfig credentialsConfig;
 
@@ -35,8 +36,7 @@ public class BrowserstackDriver implements WebDriverProvider {
 
         caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
         caps.setCapability("browserstack.key", credentialsConfig.getBrowserstackKey());
-        //caps.setCapability("app", browserstack.checkUploadedAppsList("com.todoist-11342.apk"));
-        caps.setCapability("app", browserstack.getAppUrl("com.todoist-11342.apk"));
+        caps.setCapability("app", browserstack.getAppUrl(appName));
         caps.setCapability("device", deviceConfig.getDevice());
         caps.setCapability("os_version", deviceConfig.getOsVersion());
 

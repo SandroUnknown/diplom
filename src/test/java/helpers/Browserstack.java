@@ -34,7 +34,7 @@ public class Browserstack {
 
     public String getAppUrl(String appName) {
 
-        //deleteApp("bs://9f36839290dfdc9f4f8110c1a2b748e80d786887");
+        deleteApp("bs://9f36839290dfdc9f4f8110c1a2b748e80d786887");
 
 
         String appUrl = checkUploadedApp(appName);
