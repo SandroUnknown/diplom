@@ -61,11 +61,29 @@ dependencies {
     )
 
     withoutAppiumTests(
-            "com.codeborne:selenide:$selenideVersion"
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "commons-io:commons-io:$commonsIoVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
     )
 
     withAppiumTests(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$lowerSelenideVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-schema-validator:$restAssuredVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "commons-io:commons-io:$commonsIoVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "org.aeonbits.owner:owner:$ownerVersion",
             "io.appium:java-client:$appiumVersion"
     )
 }
