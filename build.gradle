@@ -39,10 +39,10 @@ allure {
 
 configurations {
     withoutAppiumTests {
-        extendsFrom testImplementation
+        //extendsFrom testImplementation
     }
     withAppiumTests {
-        extendsFrom testImplementation
+        //extendsFrom testImplementation
     }
 }
 
@@ -50,7 +50,6 @@ dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$lowerSelenideVersion",
-            "com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",

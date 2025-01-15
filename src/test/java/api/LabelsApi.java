@@ -1,7 +1,7 @@
 package api;
 
-import enums.Color;
 import enums.CheckField;
+import enums.Color;
 import io.qameta.allure.Step;
 import models.labels.LabelRequestModel;
 import models.labels.LabelResponseModel;
