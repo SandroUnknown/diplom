@@ -3,8 +3,8 @@ package config.mobile;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:properties/remote.properties",
-        //"classpath:properties/local.properties"
+        "classpath:properties/${env}.properties",
+        "classpath:properties/local.properties"
         //"classpath:properties/browserstack.properties"
 })
 public interface RemoveAndroidConfig extends Config {
@@ -17,8 +17,8 @@ public interface RemoveAndroidConfig extends Config {
 
     //============
 
-    /*@Key("android_app_name")
-    String getAppName();*/
+    @Key("android_app_name")
+    String getAppName();
 
 
 }
