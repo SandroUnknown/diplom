@@ -2,7 +2,7 @@ package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.credentials.CredentialsConfig;
-import config.mobile.RemoveAndroidConfig;
+import config.mobile.MobileConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
@@ -19,12 +19,12 @@ import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 public class EmulationDriver implements WebDriverProvider {
 
-    private final RemoveAndroidConfig mobileConfig;
+    private final MobileConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
     public EmulationDriver() {
 
-        this.mobileConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
 

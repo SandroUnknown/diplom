@@ -5,15 +5,13 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "classpath:properties/${env}.properties",
         "classpath:properties/local.properties"
-        //"classpath:properties/remote.properties"
-        //"classpath:properties/browserstack.properties"
 })
-public interface RemoveAndroidConfig extends Config {
+public interface MobileConfig extends Config {
 
-    @Key("android_device")
+    @Key("mobile_device")
     String getDeviceName();
 
-    @Key("android_os_version")
+    @Key("mobile_os_version")
     String getOsVersion();
 
     //============

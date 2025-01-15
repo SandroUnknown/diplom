@@ -2,7 +2,7 @@ package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.credentials.CredentialsConfig;
-import config.mobile.RemoveAndroidConfig;
+import config.mobile.MobileConfig;
 import helpers.browserstack.Browserstack;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
@@ -16,14 +16,14 @@ import java.net.URL;
 
 public class BrowserstackDriver implements WebDriverProvider {
 
-    private final RemoveAndroidConfig mobileConfig;
+    private final MobileConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
     Browserstack browserstack = new Browserstack();
 
     // TODO : переписать
     public BrowserstackDriver() {
-        this.mobileConfig = ConfigFactory.create(RemoveAndroidConfig.class, System.getProperties());
+        this.mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
     }
 
