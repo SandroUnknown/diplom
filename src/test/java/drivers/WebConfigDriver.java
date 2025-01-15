@@ -32,9 +32,10 @@ public class WebConfigDriver {
 
         Configuration.baseUrl = webConfig.getBaseUrl();
 
-        String url = credentialConfig.getRemoteWebHost();
-        if (!url.isEmpty()) {
+        String env = System.getProperty("env", "local");
+        if (env.equals("remote")) {
 
+            String url = credentialConfig.getRemoteWebHost();
             String login = credentialConfig.getRemoteHostLogin();
             String password = credentialConfig.getRemoteHostPassword();
             if (login != null && password != null) {
