@@ -62,7 +62,7 @@ dependencies {
             "io.appium:java-client:$appiumVersion"
     )
 
-    withoutAppiumTests(  // раскоментил
+    withoutAppiumTests(
             "com.codeborne:selenide:$selenideVersion"
     )
 
@@ -89,11 +89,10 @@ tasks.withType(Test) {
 
 task api(type: Test) {
     useJUnitPlatform {
-        //includeTags("API")
-        includeTags("API_FOR_TEST")
+        includeTags("API")
+        //includeTags("API_FOR_TEST")
     }
 
-    // добавил
     testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
@@ -104,7 +103,6 @@ task web(type: Test) {
         //includeTags("WEB_FOR_TEST")
     }
 
-    // добавил
     testClassesDirs = sourceSets.test.output
     classpath = configurations.withoutAppiumTests + sourceSets.test.output
 }
