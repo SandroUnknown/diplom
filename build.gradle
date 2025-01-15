@@ -38,10 +38,10 @@ allure {
 
 configurations {
     withoutAppiumTests {
-        extendsFrom testImplementation
+        //extendsFrom testImplementation
     }
     withAppiumTests {
-        extendsFrom testImplementation
+        //extendsFrom testImplementation
     }
 }
 
@@ -65,6 +65,7 @@ dependencies {
     )
 
     withAppiumTests(
+            "com.codeborne:selenide:$lowerSelenideVersion",
             "io.appium:java-client:$appiumVersion"
     )
 }
