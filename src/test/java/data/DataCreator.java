@@ -113,6 +113,7 @@ public class DataCreator {
 
             if (createCommentsInProjects) {
                 if (!createProjects) {
+                    //throw new RuntimeException("Неверный URL для Appium сервера: " + e.getMessage(), e);
                     // TODO : выкинуть эксепшен, что "Вы пытаетесь создать Комментарий в Проекте, но Проект не создан."
                 }
                 mainClass.createCommentsInProjects(testData, templateData);

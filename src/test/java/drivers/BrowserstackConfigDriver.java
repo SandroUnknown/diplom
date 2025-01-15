@@ -19,8 +19,6 @@ public class BrowserstackConfigDriver implements WebDriverProvider {
     private final MobileConfig mobileConfig;
     private final CredentialsConfig credentialsConfig;
 
-    Browserstack browserstack = new Browserstack();
-
     public BrowserstackConfigDriver() {
         this.mobileConfig = ConfigFactory.create(MobileConfig.class, System.getProperties());
         this.credentialsConfig = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
@@ -30,6 +28,7 @@ public class BrowserstackConfigDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
 
+        Browserstack browserstack = new Browserstack();
         MutableCapabilities caps = new MutableCapabilities();
 
         caps.setCapability("browserstack.user", credentialsConfig.getBrowserstackUser());
