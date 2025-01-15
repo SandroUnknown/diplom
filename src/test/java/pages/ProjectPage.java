@@ -31,6 +31,11 @@ public class ProjectPage {
         return $(String.format("#%s", viewStyle)).sibling(0);
     }
 
+    private SelenideElement getProjectNameForCheckElement(String projectName) {
+        String projectNameSelector = String.format("a[aria-label='%s']", projectName);
+        return projectListForCheckElement.$(projectNameSelector);
+    }
+
     private SelenideElement getProjectColorForCheckElement(Color projectColor) {
         String projectColorSelector = String.format("[style='color: var(--named-color-%s);']", projectColor.getCssUiTitle());
         return projectListForCheckElement.$(projectColorSelector);
@@ -218,7 +223,8 @@ public class ProjectPage {
 
     @Step("Проверить имя созданного проекта")
     public ProjectPage checkProjectName(String projectName) {
-        projectListForCheckElement.shouldHave(text(projectName));
+        //projectListForCheckElement.shouldHave(text(projectName));
+        getProjectNameForCheckElement(projectName).shouldBe(exist);
         return this;
     }
 
