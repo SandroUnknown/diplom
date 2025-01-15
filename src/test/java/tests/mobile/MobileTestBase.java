@@ -5,7 +5,6 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
 import drivers.BrowserstackConfigDriver;
-import drivers.CredentialsConfigDriver;
 import drivers.EmulationConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
 import models.data.TestDataModel;
@@ -24,7 +23,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 
-    static List<TestDataModel> TEMPLATES;
+    static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates_TWO.json").getTemplates();;
 
     AuthScreen authScreen = new AuthScreen();
     BottomMenu bottomMenu = new BottomMenu();
@@ -35,12 +34,8 @@ public class MobileTestBase {
     CreateTaskModalWindow createTaskModalWindow = new CreateTaskModalWindow();
     TaskEditScreen taskEditScreen = new TaskEditScreen();
 
-
     @BeforeAll
     static void beforeAll() {
-
-        // TODO : хардкодить адрес с данными? === "data/Templates.json"
-        TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
         new ApiConfigDriver();
 
