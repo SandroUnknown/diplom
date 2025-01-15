@@ -32,16 +32,15 @@ public class Browserstack {
                 .extract().path("automation_session.video_url");
     }
 
-    // Получаем app
     public String getAppUrl(String appName) {
 
-        var appUrl = checkUploadedApp(appName);
+        String appUrl = checkUploadedApp(appName);
 
         if (appUrl.isEmpty()) {
-            appUrl = uploadApp(appName);
+            return uploadApp(appName);
+        } else {
+            return appUrl;
         }
-
-        return appUrl;
     }
 
     private String checkUploadedApp(String appName) {
@@ -75,8 +74,7 @@ public class Browserstack {
         String path = String.format("src/test/resources/apps/%s", appName);
         File file = new File(path);
 
-        //UploadAppResponseModel response = given()
-        String appUrl = given()
+        return given()
                 .auth().preemptive().basic(credentialsConfig.getBrowserstackUser(), credentialsConfig.getBrowserstackKey())
                 .contentType(ContentType.MULTIPART)
                 .multiPart("file", file)
@@ -85,10 +83,8 @@ public class Browserstack {
                 .then()
                 .statusCode(200)
                 .log().all()
-                .extract().as(UploadAppResponseModel.class).getAppUrl();
-
-        //return response.getAppUrl();
-        return appUrl;
+                .extract().as(UploadAppResponseModel.class)
+                .getAppUrl();
     }
 
     // TODO : удалить на релизе
