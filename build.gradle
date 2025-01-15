@@ -75,13 +75,15 @@ tasks.withType(Test) {
 
 task web(type: Test) {
     useJUnitPlatform {
-        includeTags("WEB")
+        //includeTags("WEB")
+        includeTags("WEB_FOR_TEST")
     }
 }
 
 task android(type: Test) {
     useJUnitPlatform {
-        includeTags("ANDROID")
+        //includeTags("ANDROID")
+        includeTags("MOBILE_FOR_TEST")
     }
 }
 
