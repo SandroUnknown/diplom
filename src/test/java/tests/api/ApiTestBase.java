@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ApiTestBase {
 
-    static List<TestDataModel> TEMPLATES_2 = new DataStorage("data/Templates.json").getTemplates();
     static List<TestDataModel> TEMPLATES = new DataStorage("data/Templates_TWO.json").getTemplates();
 
     ProjectsApi projectsApi = new ProjectsApi();

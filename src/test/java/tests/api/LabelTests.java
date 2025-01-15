@@ -71,7 +71,6 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber)) // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -91,7 +90,6 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -110,10 +108,8 @@ public class LabelTests extends ApiTestBase {
     @DisplayName("Получить все метки пользователя")
     void getAllLabelsTest() {
 
-        //int templateNumber = 1;  // TODO : удалить
         int templateNumber = 3;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();
@@ -140,7 +136,6 @@ public class LabelTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .create();

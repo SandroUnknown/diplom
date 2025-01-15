@@ -41,7 +41,6 @@ public class CommentTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
@@ -61,7 +60,6 @@ public class CommentTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -83,7 +81,6 @@ public class CommentTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -106,7 +103,6 @@ public class CommentTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -130,10 +126,8 @@ public class CommentTests extends ApiTestBase {
     @DisplayName("Получить все комментарии в проекте")
     void getAllCommentsInProjectTest() {
 
-        //int templateNumber = 0;  // TODO : удалить
         int templateNumber = 1;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createCommentsInProjects(true)
@@ -160,7 +154,6 @@ public class CommentTests extends ApiTestBase {
 
         int templateNumber = 1;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -193,10 +186,8 @@ public class CommentTests extends ApiTestBase {
     @DisplayName("Удалить комментарий по ID")
     void deleteCommentTest() {
 
-        //int templateNumber = 1;  // TODO : удалить
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)

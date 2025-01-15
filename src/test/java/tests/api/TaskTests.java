@@ -45,7 +45,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -71,7 +70,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -97,7 +95,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -122,10 +119,8 @@ public class TaskTests extends ApiTestBase {
     @DisplayName("Получить все активные задачи пользователя")
     void getAllTasksTest() {
 
-        //int templateNumber = 1;  // TODO : удалить
         int templateNumber = 3;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -152,10 +147,8 @@ public class TaskTests extends ApiTestBase {
     @DisplayName("Получить все активные задачи пользователя (с применением фильтра `label`)")
     void getTasksWithFilterTest() {
 
-        //int templateNumber = 1;  // TODO : удалить
         int templateNumber = 3;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createLabels(true)
                 .createProjects(true)
@@ -196,7 +189,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -222,7 +214,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
@@ -249,7 +240,6 @@ public class TaskTests extends ApiTestBase {
 
         int templateNumber = 0;
         TestDataModel testData = new DataCreator.Setup()
-                //.setTemplate(TEMPLATES_2.get(templateNumber))  // TODO : удалить
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .createSections(true)
