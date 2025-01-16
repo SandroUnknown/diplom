@@ -151,7 +151,7 @@ public class ProjectTests extends ApiTestBase {
 
         projectsApi.deleteProjects();
 
-        step("Проверить, все проекты пользователя действительно были удалены", () -> {
+        step("Проверить, что все проекты пользователя действительно были удалены", () -> {
                 int currentProjectCount = projectsApi.getAllProjects().size();
                 assertThat(currentProjectCount).isEqualTo(1);
         });
