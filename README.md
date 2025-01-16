@@ -68,11 +68,12 @@
 ### Технологии и инструменты
 
 > [!NOTE]
-> 
+>
+> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5%" height="5%" alt="Intellij IDEA"/></a><a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5%" height="5%" alt="Java"/></a>
+>
 > <details open>
 > <summary>Список технологи и инструментов, которые использовались в проекте</summary>
 > </br>
-> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5%" height="5%" alt="Intellij IDEA"/></a><a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5%" height="5%" alt="Java"/></a>
 > | Логотип                                                                                                                                    | Название               | Предназначение                                                                                                    |
 > | :---:                                                                                                                                      | :---:                  | :---                                                                                                              |
 > | <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="64" height="64" alt="Intellij IDEA"/></a>   | `Intellij`</br>`IDEA`  | Среда разработки программного обеспечения                                                                         |
