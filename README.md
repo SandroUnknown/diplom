@@ -72,6 +72,7 @@
 > <details open>
 > <summary>Список технологи и инструментов, которые использовались в проекте</summary>
 > </br>
+> 
 > | Логотип                                                                                                                                    | Название               | Предназначение                                                                                                    |
 > | :---:                                                                                                                                      | :---:                  | :---                                                                                                              |
 > | <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="64" height="64" alt="Intellij IDEA"/></a>   | `Intellij`</br>`IDEA`  | Среда разработки программного обеспечения                                                                         |
