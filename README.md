@@ -86,7 +86,7 @@
 <a href="https://github.com"><img src="readme/media/icons/Github.svg" width="5.7%" height="5.7%" alt="Github"/></a>
 <a href="https://telegram.org/"><img src="readme/media/icons/Telegram.svg" width="5.7%" height="5.7%" alt="Telegram"/></a>
 >
-> <details open>
+> <details>
 > <summary>Подробнее</summary>
 > </br>
 > 
