@@ -69,8 +69,6 @@
 
 > [!NOTE]
 >
-> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5%" height="5%" alt="Intellij IDEA"/></a><a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5%" height="5%" alt="Java"/></a>
->
 > <details open>
 > <summary>Список технологи и инструментов, которые использовались в проекте</summary>
 > </br>
