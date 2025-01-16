@@ -37,20 +37,21 @@ allure {
     }
 }
 
-configurations {
+// !!!!
+/*configurations {
     withoutAppiumTests {
         extendsFrom testImplementation
     }
     withAppiumTests {
         extendsFrom testImplementation
     }
-}
+}*/
 
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            //"com.codeborne:selenide:$lowerSelenideVersion",
-            "com.codeborne:selenide:$selenideVersion",
+            "com.codeborne:selenide:$lowerSelenideVersion",
+            //"com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -62,13 +63,14 @@ dependencies {
             "io.appium:java-client:$appiumVersion"
     )
 
-    withoutAppiumTests(
+    // !!!
+    /*withoutAppiumTests(
             "com.codeborne:selenide:$selenideVersion"
     )
 
     withAppiumTests(
             "io.appium:java-client:$appiumVersion"
-    )
+    )*/
 }
 
 tasks.withType(JavaCompile) {
@@ -93,8 +95,9 @@ task api(type: Test) {
         //includeTags("API_FOR_TEST")
     }
 
+    /* !!!
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output*/
 }
 
 task web(type: Test) {
@@ -103,16 +106,18 @@ task web(type: Test) {
         //includeTags("WEB_FOR_TEST")
     }
 
+    /* !!!
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output
+    classpath = configurations.withoutAppiumTests + sourceSets.test.output*/
 }
 
 task android(type: Test) {
     useJUnitPlatform {
-        //includeTags("ANDROID")
-        includeTags("MOBILE_FOR_TEST")
+        includeTags("ANDROID")
+        //includeTags("MOBILE_FOR_TEST")
     }
 
+    /* !!!
     testClassesDirs = sourceSets.test.output
-    classpath = configurations.withAppiumTests + sourceSets.test.output
+    classpath = configurations.withAppiumTests + sourceSets.test.output*/
 }
