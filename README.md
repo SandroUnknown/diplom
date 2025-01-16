@@ -87,7 +87,7 @@
 <a href="https://telegram.org/"><img src="readme/media/icons/Telegram.svg" width="5.7%" height="5.7%" alt="Telegram"/></a>
 >
 > <details open>
-> <summary>Список технологи и инструментов, которые использовались в проекте</summary>
+> <summary>Подробнее</summary>
 > </br>
 > 
 > | Логотип                                                                                                                                    | Название               | Предназначение                                                                                                    |
