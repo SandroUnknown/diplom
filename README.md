@@ -69,22 +69,22 @@
 
 > [!NOTE]
 >
-> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5%" height="5%" alt="Intellij IDEA"/></a>
-<a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5%" height="5%" alt="Java"/></a>
-<a href="https://junit.org/junit5"><img src="readme/media/icons/JUnit5.svg" width="5%" height="5%" alt="JUnit 5"/></a>
-<a href="https://gradle.org"><img src="readme/media/icons/Gradle.svg" width="5%" height="5%" alt="Gradle"/></a>
-<a href="https://selenide.org"><img src="readme/media/icons/Selenide.svg" width="5%" height="5%" alt="Selenide"/></a>
-<a href="https://rest-assured.io"><img src="readme/media/icons/Rest_Assured.svg" width="5%" height="5%" alt="REST Assured"/></a>
-<a href="https://appium.io"><img src="readme/media/icons/Appium.svg" width="5%" height="5%" alt="Appium"/></a>
-<a href="https://www.jenkins.io"><img src="readme/media/icons/Jenkins.svg" width="5%" height="5%" alt="Jenkins"/></a>
-<a href="https://aerokube.com/selenoid"><img src="readme/media/icons/Selenoid.svg" width="5%" height="5%" alt="Selenoid"/></a>
-<a href="https://www.browserstack.com"><img src="readme/media/icons/Browserstack.svg" width="5%" height="5%" alt="Browserstack"/></a>
-<a href="https://developer.android.com"><img src="readme/media/icons/Android_Studio.svg" width="5%" height="5%" alt="Android Studio"/></a>
-<a href="https://allurereport.org"><img src="readme/media/icons/Allure.svg" width="5%" height="5%" alt="Allure Report"/></a>
-<a href="https://qameta.io"><img src="readme/media/icons/AllureTestOps.svg" width="5%" height="5%" alt="Allure TestOps"/></a>
-<a href="https://www.atlassian.com/software/jira"><img src="readme/media/icons/Jira.svg" width="5%" height="5%" alt="Jira"/></a>
-<a href="https://github.com"><img src="readme/media/icons/Github.svg" width="5%" height="5%" alt="Github"/></a>
-<a href="https://telegram.org/"><img src="readme/media/icons/Telegram.svg" width="5%" height="5%" alt="Telegram"/></a>
+> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="6%" height="6%" alt="Intellij IDEA"/></a>
+<a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="6%" height="6%" alt="Java"/></a>
+<a href="https://junit.org/junit5"><img src="readme/media/icons/JUnit5.svg" width="6%" height="6%" alt="JUnit 5"/></a>
+<a href="https://gradle.org"><img src="readme/media/icons/Gradle.svg" width="6%" height="6%" alt="Gradle"/></a>
+<a href="https://selenide.org"><img src="readme/media/icons/Selenide.svg" width="6%" height="6%" alt="Selenide"/></a>
+<a href="https://rest-assured.io"><img src="readme/media/icons/Rest_Assured.svg" width="6%" height="6%" alt="REST Assured"/></a>
+<a href="https://appium.io"><img src="readme/media/icons/Appium.svg" width="6%" height="6%" alt="Appium"/></a>
+<a href="https://www.jenkins.io"><img src="readme/media/icons/Jenkins.svg" width="6%" height="6%" alt="Jenkins"/></a>
+<a href="https://aerokube.com/selenoid"><img src="readme/media/icons/Selenoid.svg" width="6%" height="6%" alt="Selenoid"/></a>
+<a href="https://www.browserstack.com"><img src="readme/media/icons/Browserstack.svg" width="6%" height="6%" alt="Browserstack"/></a>
+<a href="https://developer.android.com"><img src="readme/media/icons/Android_Studio.svg" width="6%" height="6%" alt="Android Studio"/></a>
+<a href="https://allurereport.org"><img src="readme/media/icons/Allure.svg" width="6%" height="6%" alt="Allure Report"/></a>
+<a href="https://qameta.io"><img src="readme/media/icons/AllureTestOps.svg" width="6%" height="6%" alt="Allure TestOps"/></a>
+<a href="https://www.atlassian.com/software/jira"><img src="readme/media/icons/Jira.svg" width="6%" height="6%" alt="Jira"/></a>
+<a href="https://github.com"><img src="readme/media/icons/Github.svg" width="6%" height="6%" alt="Github"/></a>
+<a href="https://telegram.org/"><img src="readme/media/icons/Telegram.svg" width="6%" height="6%" alt="Telegram"/></a>
 >
 > <details open>
 > <summary>Список технологи и инструментов, которые использовались в проекте</summary>
