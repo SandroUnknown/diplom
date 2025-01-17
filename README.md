@@ -1,5 +1,5 @@
 <a name="start"></a>
-# <p align="center">Дипломный проект</br>по автоматизации тестировани</br>приложения [`«Todoist»`](https://todoist.com/ru)</p>
+# <p align="center">Дипломный проект</br>по автоматизации тестирования</br>приложения [`«Todoist»`](https://todoist.com/ru)</p>
 <a href="https://todoist.com/ru"><img src="readme/media/1.png" width="100%" alt="Todoist"/></a>  
 
 > _<p align="justify"><sub><a href="https://todoist.com/ru"><img src="readme/media/logo1.png" width="128" alt="Todoist"/></a></sub></p>_
