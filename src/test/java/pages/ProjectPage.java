@@ -45,9 +45,7 @@ public class ProjectPage {
             addToFavoriteElement = $("input[name='is_favorite']").parent().parent(),
             createProjectButtonElement = $("button[type='submit']"),
             projectListForCheckElement = $("ul#projects_list"),
-            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel");
-
-    private final SelenideElement
+            projectFavoriteForCheckElement = $("div#left-menu-favorites-panel"),
             projectInListElement = $("#content ul[aria-label='Проекты'] li"),
             otherActionsButtonElement = $("button.reactist_menubutton"),
             deleteProjectButtonElement = $$("div.reactist_menulist div").last(),

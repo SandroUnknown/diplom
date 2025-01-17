@@ -8,7 +8,6 @@ group = 'gmail.sandrounknown1991'
 version = '1.0-SNAPSHOT'
 
 def junitVersion = "5.11.3",
-    selenideVersion = "7.7.0",
     lowerSelenideVersion = "6.13.0",
     restAssuredVersion = "5.5.0",
     allureVersion = "2.29.0",
@@ -37,21 +36,10 @@ allure {
     }
 }
 
-// !!!!
-/*configurations {
-    withoutAppiumTests {
-        extendsFrom testImplementation
-    }
-    withAppiumTests {
-        extendsFrom testImplementation
-    }
-}*/
-
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "com.codeborne:selenide:$lowerSelenideVersion",
-            //"com.codeborne:selenide:$selenideVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -62,15 +50,6 @@ dependencies {
             "org.aeonbits.owner:owner:$ownerVersion",
             "io.appium:java-client:$appiumVersion"
     )
-
-    // !!!
-    /*withoutAppiumTests(
-            "com.codeborne:selenide:$selenideVersion"
-    )
-
-    withAppiumTests(
-            "io.appium:java-client:$appiumVersion"
-    )*/
 }
 
 tasks.withType(JavaCompile) {
@@ -92,32 +71,17 @@ tasks.withType(Test) {
 task api(type: Test) {
     useJUnitPlatform {
         includeTags("API")
-        //includeTags("API_FOR_TEST")
     }
-
-    /* !!!
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output*/
 }
 
 task web(type: Test) {
     useJUnitPlatform {
         includeTags("WEB")
-        //includeTags("WEB_FOR_TEST")
     }
-
-    /* !!!
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withoutAppiumTests + sourceSets.test.output*/
 }
 
 task android(type: Test) {
     useJUnitPlatform {
         includeTags("ANDROID")
-        //includeTags("MOBILE_FOR_TEST")
     }
-
-    /* !!!
-    testClassesDirs = sourceSets.test.output
-    classpath = configurations.withAppiumTests + sourceSets.test.output*/
 }

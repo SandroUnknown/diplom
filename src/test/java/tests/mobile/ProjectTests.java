@@ -15,9 +15,9 @@ import static enums.CheckField.*;
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя на ANDROID")
 @Feature("Проверка проектов на ANDROID")
-@Tags({ @Tag("ANDROID"), @Tag("project") })
+@Tags({@Tag("ANDROID"), @Tag("project")})
 @DisplayName("Проверка проектов на ANDROID")
-public class MobileProjectTests extends MobileTestBase {
+public class ProjectTests extends MobileTestBase {
 
     private final ProjectRequestModel testProjectData = ProjectRequestModel.builder()
             .name("НОВЫЙ ПРОЕКТ")
@@ -26,8 +26,6 @@ public class MobileProjectTests extends MobileTestBase {
             .viewStyle(ViewStyle.BOARD)
             .build();
 
-    // TODO : убрать тег
-    @Tag("MOBILE_FOR_TEST")
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
@@ -53,7 +51,7 @@ public class MobileProjectTests extends MobileTestBase {
                 .clickEditProject();
         projectEditScreen
                 .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
-
-        // TODO : выполнить проверку API
+        projectsApi
+                .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
     }
 }

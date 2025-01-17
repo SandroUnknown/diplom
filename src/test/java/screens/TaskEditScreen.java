@@ -36,7 +36,6 @@ public class TaskEditScreen {
         }
     }
 
-    // TODO : параметр в степ
     @Step("Проверить, что созданная задача имеет верное название")
     private void checkTaskContent(String expectedContent) {
         String actualContent = taskContentElement.getAttribute("text")
@@ -44,7 +43,6 @@ public class TaskEditScreen {
         assertThat(actualContent).isEqualTo(expectedContent);
     }
 
-    // TODO : параметр в степ
     @Step("Проверить, что созданная задача имеет верный приоритет")
     private void checkTaskPriority(int expectedPriority) {
         String actualStringPriority = taskPriorityElement.getAttribute("text");

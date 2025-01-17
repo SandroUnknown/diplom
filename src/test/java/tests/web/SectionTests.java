@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через WEB")
 @Feature("Проверка разделов через WEB")
-@Tags({ @Tag("WEB"), @Tag("section") })
+@Tags({@Tag("WEB"), @Tag("section")})
 @DisplayName("Проверка разделов через WEB")
 public class SectionTests extends WebTestBase {
 
@@ -42,7 +42,7 @@ public class SectionTests extends WebTestBase {
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
-        sleep(500);  // TODO : нужный
+        sleep(500);
 
         sectionPage
                 .checkSection(0, testSectionData.getName());
@@ -66,12 +66,12 @@ public class SectionTests extends WebTestBase {
         String projectId = testData.getProjects().get(0).getId();
         String url = testData.getProjects().get(0).getUrl();
         int sectionCountInProject = 0;
-        for(SectionResponseModel section : testData.getSections()) {
+        for (SectionResponseModel section : testData.getSections()) {
             if (section.getProjectId().equals(projectId)) {
                 sectionCountInProject++;
             }
         }
-        
+
         sectionPage
                 .openPage(url)
                 .login();
@@ -80,7 +80,7 @@ public class SectionTests extends WebTestBase {
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
-        sleep(500);  // TODO : нужный
+        sleep(500);
 
         sectionPage
                 .checkSection(sectionCountInProject, testSectionData.getName());
@@ -103,7 +103,7 @@ public class SectionTests extends WebTestBase {
                 .create();
         String url = testData.getProjects().get(0).getUrl();
         int separatorIndex = 0;
-        
+
         sectionPage
                 .openPage(url)
                 .login();
@@ -112,7 +112,7 @@ public class SectionTests extends WebTestBase {
                 .inputSectionName(testSectionData.getName())
                 .addSection();
 
-        sleep(500);  // TODO : нужный
+        sleep(500);
 
         sectionPage
                 .checkSection(separatorIndex + 1, testSectionData.getName());
@@ -145,13 +145,12 @@ public class SectionTests extends WebTestBase {
                 .clickDeleteSectionButton()
                 .clickConfirmDeleteSectionButtonElement();
 
-        sleep(500);  // TODO : нужный
+        sleep(500);
 
         sectionPage
                 .checkDeleteSection(sectionName);
         sectionsApi
                 .checkDeleteSection(sectionName);
-
     }
 
     @Disabled

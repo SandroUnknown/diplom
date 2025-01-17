@@ -41,16 +41,16 @@ public class ProjectEditScreen {
     private final SelenideElement favoriteSelectElement = $(By.xpath(
             "//android.widget.Switch[@resource-id='com.todoist:id/favorite']"));
 
-    @Step("Ввести имя проекта")
-    public ProjectEditScreen inputProjectName(String name) {
-        nameInputElement.sendKeys(name);
+    @Step("Ввести имя проекта : <{projectName}>")
+    public ProjectEditScreen inputProjectName(String projectName) {
+        nameInputElement.sendKeys(projectName);
         return this;
     }
 
-    @Step("Выбрать цвет проекта")
+    @Step("Выбрать цвет проекта : <{color}>")
     public ProjectEditScreen selectProjectColor(Color color) {
         colorSelectElement.click();
-        getSelectProjectColorElement(color).click();          // TODO : будет ли работать с VIOLET?
+        getSelectProjectColorElement(color).click();
         return this;
     }
 
@@ -62,7 +62,7 @@ public class ProjectEditScreen {
         return this;
     }
 
-    @Step("Выбрать стиль отображения проекта")
+    @Step("Выбрать стиль отображения проекта : <{viewStyle}>")
     public ProjectEditScreen selectProjectViewStyle(ViewStyle viewStyle) {
         int numberViewStyle = viewStyle.getNumber();
         getViewStyleElement(numberViewStyle).click();

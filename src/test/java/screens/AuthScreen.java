@@ -11,13 +11,22 @@ public class AuthScreen {
 
     static final CredentialsConfigDriver credentials = new CredentialsConfigDriver();
 
-    private final SelenideElement continueWithEmailButtonElement = $(By.xpath("//android.widget.Button[@resource-id='com.todoist:id/btn_email']"));
-    private final SelenideElement loginWithEmailButtonElement = $(By.xpath("//android.widget.TextView[@resource-id='com.todoist:id/email_login']"));
-    private final SelenideElement emailInputElement = $(By.xpath("//android.widget.EditText[@resource-id='email']"));
-    private final SelenideElement passwordInputElement = $(By.xpath("//android.widget.EditText[@resource-id='password']"));
-    private final SelenideElement submitLoginButtonElement = $(By.xpath("//android.view.View[@resource-id='auth_button_tag']"));
+    private final SelenideElement continueWithEmailButtonElement = $(By.xpath(
+            "//android.widget.Button[@resource-id='com.todoist:id/btn_email']"));
 
-    @Step("Ввести логин и пароль.")
+    private final SelenideElement loginWithEmailButtonElement = $(By.xpath(
+            "//android.widget.TextView[@resource-id='com.todoist:id/email_login']"));
+
+    private final SelenideElement emailInputElement = $(By.xpath(
+            "//android.widget.EditText[@resource-id='email']"));
+
+    private final SelenideElement passwordInputElement = $(By.xpath(
+            "//android.widget.EditText[@resource-id='password']"));
+
+    private final SelenideElement submitLoginButtonElement = $(By.xpath(
+            "//android.view.View[@resource-id='auth_button_tag']"));
+
+    @Step("Ввести логин и пароль")
     public AuthScreen login() {
 
         continueWithEmailButtonElement.click();

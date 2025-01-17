@@ -5,6 +5,7 @@ import helpers.annotations.CleanupTestData;
 import io.qameta.allure.*;
 import models.data.TestDataModel;
 import models.tasks.TaskRequestModel;
+import models.tasks.TaskResponseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -12,13 +13,15 @@ import org.junit.jupiter.api.Test;
 
 import static enums.CheckField.CONTENT;
 import static enums.CheckField.PRIORITY;
+import static io.qameta.allure.Allure.step;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя на ANDROID")
 @Feature("Проверка задач на ANDROID")
-@Tags({ @Tag("ANDROID"), @Tag("task") })
+@Tags({@Tag("ANDROID"), @Tag("task")})
 @DisplayName("Проверка задач на ANDROID")
-public class MobileTaskTests extends MobileTestBase {
+public class TaskTests extends MobileTestBase {
 
     private final TaskRequestModel testTaskData = TaskRequestModel.builder()
             .content("НОВАЯ ЗАДАЧА")
@@ -59,6 +62,10 @@ public class MobileTaskTests extends MobileTestBase {
         taskEditScreen
                 .checkTask(testTaskData, CONTENT, PRIORITY);
 
-        // TODO : выполнить проверку API
+        step("Проверить, что задача была корректно создана", () -> {
+            TaskResponseModel myCreatedTask = tasksApi.getAllTasks().get(0);
+            assertThat(myCreatedTask.getContent()).isEqualTo(testTaskData.getContent());
+            assertThat(myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
+        });
     }
 }

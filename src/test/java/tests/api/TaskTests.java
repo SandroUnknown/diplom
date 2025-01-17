@@ -18,12 +18,10 @@ import java.util.List;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : может быть тест переменные передавать как параметры?
-
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка задач через API")
-@Tags({ @Tag("API"), @Tag("task") })
+@Tags({@Tag("API"), @Tag("task")})
 @DisplayName("Проверка задач через API")
 public class TaskTests extends ApiTestBase {
 
@@ -49,7 +47,6 @@ public class TaskTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String sectionId = testData.getSections().get(0).getId();
         testTaskData.setSectionId(sectionId);
 
@@ -75,7 +72,6 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         String taskId = testData.getTasksInSections().get(0).getId();
 
         TaskResponseModel myUpdatedTask = tasksApi.updateTask(taskId, updatedTestTaskData);
@@ -100,7 +96,6 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         TaskResponseModel myCreatedTask = testData.getTasksInSections().get(0);
         String taskId = myCreatedTask.getId();
 
@@ -126,14 +121,13 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         List<TaskResponseModel> myCreatedTasks = testData.getTasksInSections();
 
         List<TaskResponseModel> myReceivedTasks = tasksApi.getAllTasks();
 
         step("Проверить, что задачи были корректно получены", () -> {
             assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
-            for(int i = 0; i < myCreatedTasks.size(); i++) {
+            for (int i = 0; i < myCreatedTasks.size(); i++) {
                 assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
                 assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
             }
@@ -156,11 +150,10 @@ public class TaskTests extends ApiTestBase {
                 .createTasksInSections(true)
                 .addLabelsForTasksInSections(true)
                 .create();
-
-        String labelName = testData.getLabels().get(1).getName(); // TODO : заменить на 0?
+        String labelName = testData.getLabels().get(1).getName();
 
         List<TaskResponseModel> myCreatedTasks = new ArrayList<>();
-        for(TaskResponseModel myCreatedTask : testData.getTasksInSections()) {
+        for (TaskResponseModel myCreatedTask : testData.getTasksInSections()) {
             if (myCreatedTask.getLabels().contains(labelName)) {
                 myCreatedTasks.add(myCreatedTask);
             }
@@ -173,7 +166,7 @@ public class TaskTests extends ApiTestBase {
 
         step("Проверить, что задачи были корректно получены", () -> {
             assertThat(myReceivedTasks.size()).isEqualTo(myCreatedTasks.size());
-            for(int i = 0; i < myCreatedTasks.size(); i++) {
+            for (int i = 0; i < myCreatedTasks.size(); i++) {
                 assertThat(myReceivedTasks.get(i).getContent()).isEqualTo(myCreatedTasks.get(i).getContent());
                 assertThat(myReceivedTasks.get(i).getPriority()).isEqualTo(myCreatedTasks.get(i).getPriority());
             }
@@ -194,7 +187,6 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         String taskId = testData.getTasksInSections().get(0).getId();
 
         tasksApi.closeTask(taskId);
@@ -219,9 +211,8 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         String taskId = testData.getTasksInSections().get(0).getId();
-        tasksApi.closeTask(taskId); // TODO : может создать уже готовый проект с закрытой задачей?
+        tasksApi.closeTask(taskId);
 
         tasksApi.reopenTask(taskId);
 
@@ -245,7 +236,6 @@ public class TaskTests extends ApiTestBase {
                 .createSections(true)
                 .createTasksInSections(true)
                 .create();
-
         int createdTaskCount = testData.getTasksInSections().size();
         String taskId = testData.getTasksInSections().get(0).getId();
 

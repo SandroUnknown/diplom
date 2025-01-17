@@ -17,7 +17,7 @@ import static enums.CheckField.*;
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через WEB")
 @Feature("Проверка проектов через WEB")
-@Tags({ @Tag("WEB"), @Tag("project") })
+@Tags({@Tag("WEB"), @Tag("project")})
 @DisplayName("Проверка проектов через WEB")
 public class ProjectTests extends WebTestBase {
 
@@ -28,8 +28,6 @@ public class ProjectTests extends WebTestBase {
             .viewStyle(ViewStyle.BOARD)
             .build();
 
-    // TODO : убрать тег
-    @Tag("WEB_FOR_TEST")
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.CRITICAL)
@@ -40,14 +38,13 @@ public class ProjectTests extends WebTestBase {
         projectPage
                 .openPage()
                 .login();
-
         projectPage
                 .clickPlusButton()
                 .clickAddProject()
                 .inputProjectName(testProjectData.getName())
                 .addProject();
 
-        sleep(500); // TODO : вероятно нужный слип
+        sleep(500);
 
         projectPage
                 .checkProject(testProjectData, NAME);
@@ -65,7 +62,6 @@ public class ProjectTests extends WebTestBase {
         projectPage
                 .openPage()
                 .login();
-
         projectPage
                 .clickPlusButton()
                 .clickAddProject()
@@ -75,7 +71,7 @@ public class ProjectTests extends WebTestBase {
                 .selectProjectViewStyle(testProjectData.getViewStyle())
                 .addProject();
 
-        sleep(500); // вероятно нужный слип
+        sleep(500);
 
         projectPage
                 .checkProject(testProjectData, NAME, COLOR, FAVORITE, VIEW_STYLE);
@@ -99,14 +95,13 @@ public class ProjectTests extends WebTestBase {
         projectPage
                 .openPage()
                 .login();
-
         projectPage
                 .mouseHoverOnCreatedProject()
                 .clickOtherActions()
                 .clickDeleteProjectButton()
                 .clickConfirmDeleteProjectButtonElement();
 
-        sleep(500); // вероятно нужный слип
+        sleep(500);
 
         projectPage
                 .checkDeleteProject();

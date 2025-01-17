@@ -22,8 +22,7 @@ public class BrowseScreen {
         return this;
     }
 
-    // TODO : подставить в степ название проекта из параметра
-    @Step("Открыть проект")
+    @Step("Открыть проект : <{projectName}>")
     public BrowseScreen openProject(String projectName) {
         getProjectElement(projectName).click();
         return this;

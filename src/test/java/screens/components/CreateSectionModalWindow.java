@@ -14,10 +14,9 @@ public class CreateSectionModalWindow {
     private final SelenideElement submitButtonElement = $(By.xpath(
             "//android.widget.ImageButton[@content-desc='Submit']"));
 
-    @Step("Ввести имя раздела")
+    @Step("Ввести имя раздела : <{sectionName}>")
     public CreateSectionModalWindow inputSectionName(String sectionName) {
         sectionNameInputElement.sendKeys(sectionName);
-        //sectionNameInputElement.pressEnter();
         submitButtonElement.click();
         return this;
     }

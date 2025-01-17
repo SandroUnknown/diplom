@@ -17,12 +17,10 @@ import java.util.List;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// TODO : может быть тест переменные передавать как параметры?
-
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка разделов через API")
-@Tags({ @Tag("API"), @Tag("section") })
+@Tags({@Tag("API"), @Tag("section")})
 @DisplayName("Проверка разделов через API")
 public class SectionTests extends ApiTestBase {
 
@@ -43,7 +41,6 @@ public class SectionTests extends ApiTestBase {
                 .setTemplate(TEMPLATES.get(templateNumber))
                 .createProjects(true)
                 .create();
-
         String projectId = testData.getProjects().get(0).getId();
         testSectionData.setProjectId(projectId);
 
@@ -67,7 +64,6 @@ public class SectionTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String sectionId = testData.getSections().get(0).getId();
 
         SectionResponseModel myUpdatedSection = sectionsApi.updateSection(sectionId, updatedSectionName);
@@ -90,11 +86,10 @@ public class SectionTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String projectId = testData.getProjects().get(0).getId();
 
         List<SectionResponseModel> myCreatedSections = new ArrayList<>();
-        for(SectionResponseModel myCreatedSection : testData.getSections()) {
+        for (SectionResponseModel myCreatedSection : testData.getSections()) {
             if (myCreatedSection.getProjectId().equals(projectId)) {
                 myCreatedSections.add(myCreatedSection);
             }
@@ -104,7 +99,7 @@ public class SectionTests extends ApiTestBase {
 
         step("Проверить, что разделы были корректно получены", () -> {
             assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
-            for(int i = 0; i < myCreatedSections.size(); i++) {
+            for (int i = 0; i < myCreatedSections.size(); i++) {
                 assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
             }
         });
@@ -123,14 +118,13 @@ public class SectionTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         List<SectionResponseModel> myCreatedSections = testData.getSections();
 
         List<SectionResponseModel> myReceivedSections = sectionsApi.getAllSections();
 
         step("Проверить, что разделы были корректно получены", () -> {
             assertThat(myReceivedSections.size()).isEqualTo(myCreatedSections.size());
-            for(int i = 0; i < myCreatedSections.size(); i++) {
+            for (int i = 0; i < myCreatedSections.size(); i++) {
                 assertThat(myReceivedSections.get(i).getName()).isEqualTo(myCreatedSections.get(i).getName());
             }
         });
@@ -149,7 +143,6 @@ public class SectionTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         int createdSectionCount = testData.getSections().size();
         String sectionId = testData.getSections().get(0).getId();
 
@@ -174,7 +167,6 @@ public class SectionTests extends ApiTestBase {
                 .createProjects(true)
                 .createSections(true)
                 .create();
-
         String projectId = testData.getProjects().get(0).getId();
 
         sectionsApi.deleteAllSectionInProject(projectId);

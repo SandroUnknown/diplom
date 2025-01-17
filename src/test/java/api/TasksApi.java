@@ -133,9 +133,6 @@ public class TasksApi extends BaseApi {
                 .spec(responseSpec204);
     }
 
-
-
-
     @Step("Проверить, что задача была корректно создана [API]")
     public void checkTask(TaskRequestModel expectedTask, CheckField... checkFields) {
 
@@ -150,7 +147,6 @@ public class TasksApi extends BaseApi {
         if (fieldsList.contains(PRIORITY)) {
             checkTaskPriority(actualTask.getPriority(), expectedTask.getPriority());
         }
-
     }
 
     @Step("Проверить содержимое созданной задачи")

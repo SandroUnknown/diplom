@@ -1,5 +1,6 @@
 package tests.mobile;
 
+import api.*;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -28,6 +29,12 @@ public class MobileTestBase {
     private static final String env = System.getProperty("env", "local");
 
     static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
+
+    final LabelsApi labelsApi = new LabelsApi();
+    final ProjectsApi projectsApi = new ProjectsApi();
+    final SectionsApi sectionsApi = new SectionsApi();
+    final TasksApi tasksApi = new TasksApi();
+    final CommentsApi commentsApi = new CommentsApi();
 
     final AuthScreen authScreen = new AuthScreen();
     final BottomMenu bottomMenu = new BottomMenu();

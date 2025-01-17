@@ -16,7 +16,6 @@ public class SectionPage {
             deleteSectionButtonElement = $$("div.reactist_menulist div").last(),
             confirmDeleteSectionButtonElement = $$("div[data-testid='modal-overlay'] footer button").last();
 
-
     private final ElementsCollection
             separatorBetweenSectionsElement = $$("button.board_add_section_trigger"),
             sectionCheckElement = $$("[data-testid='board-section']"),

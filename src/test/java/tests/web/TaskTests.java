@@ -8,12 +8,13 @@ import models.tasks.TaskRequestModel;
 import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Selenide.sleep;
-import static enums.CheckField.*;
+import static enums.CheckField.CONTENT;
+import static enums.CheckField.PRIORITY;
 
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через WEB")
 @Feature("Проверка задач через WEB")
-@Tags({ @Tag("WEB"), @Tag("task") })
+@Tags({@Tag("WEB"), @Tag("task")})
 @DisplayName("Проверка задач через WEB")
 public class TaskTests extends WebTestBase {
 
@@ -47,7 +48,7 @@ public class TaskTests extends WebTestBase {
                 .selectTaskPriority(String.valueOf(testTaskData.getPriority()))
                 .addTask();
 
-        sleep(500); // TODO : вероятно нужный слип
+        sleep(500);
 
         taskPage
                 .checkTask(testTaskData, CONTENT, PRIORITY);

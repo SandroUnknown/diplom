@@ -15,11 +15,11 @@ public class ApiTestBase {
 
     static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
+    final LabelsApi labelsApi = new LabelsApi();
     final ProjectsApi projectsApi = new ProjectsApi();
     final SectionsApi sectionsApi = new SectionsApi();
     final TasksApi tasksApi = new TasksApi();
     final CommentsApi commentsApi = new CommentsApi();
-    final LabelsApi labelsApi = new LabelsApi();
 
     @BeforeAll
     public static void setUp() {

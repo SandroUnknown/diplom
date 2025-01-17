@@ -21,8 +21,7 @@ public class CreateTaskModalWindow {
         return this;
     }
 
-    // TODO : дописать параметр в Степ
-    @Step("Установить приоритет задачи")
+    @Step("Установить приоритет задачи : <Приоритет {taskPriority}>")
     public CreateTaskModalWindow setTaskPriority(int taskPriority) {
         String text = taskNameInputElement.getAttribute("text") + " !!" + taskPriority;
         taskNameInputElement.sendKeys(text);

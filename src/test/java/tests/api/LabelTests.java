@@ -21,7 +21,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Owner("Petyukov Alexander")
 @Epic("Проверка рабочего пространства пользователя через API")
 @Feature("Проверка меток через API")
-@Tags({ @Tag("API"), @Tag("label") })
+@Tags({@Tag("API"), @Tag("label")})
 @DisplayName("Проверка меток через API")
 public class LabelTests extends ApiTestBase {
 
@@ -120,8 +120,8 @@ public class LabelTests extends ApiTestBase {
         step("Проверить метки", () -> {
             assertThat(myReceivedLabels.size()).isEqualTo(myCreatedLabels.size());
             for (int i = 0; i < myCreatedLabels.size(); i++) {
-                labelsApi
-                        .checkEqualsLabel(myReceivedLabels.get(i), myCreatedLabels.get(i),
+                labelsApi.checkEqualsLabel(
+                        myReceivedLabels.get(i), myCreatedLabels.get(i),
                         NAME, COLOR, ORDER, FAVORITE);
             }
         });
