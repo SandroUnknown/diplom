@@ -353,7 +353,7 @@
 ### Интеграция с Jira
 
 > [!TIP]
-> Выполнена интеграция `Allure TestOps` с [`Jira`](https://jira.autotests.cloud/browse/HOMEWORK-1364) (требуется авторизация).
+> Выполнена интеграция `Allure TestOps` с [`Jira`](https://jira.autotests.cloud/browse/HOMEWORK-1385) (требуется авторизация).
 > </br>
 > </br>
 >
