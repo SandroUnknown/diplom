@@ -324,7 +324,7 @@
 ### Allure TestOps
 
 > [!TIP]
-> Выполнена интеграция сборки `Jenkins` с [`Allure TestOps`](https://allure.autotests.cloud/project/4485/dashboards) (требуется авторизация).
+> Выполнена интеграция сборки `Jenkins` с [`Allure TestOps`](https://allure.autotests.cloud/project/4569/dashboards) (требуется авторизация).
 > </br>
 > </br>
 >
