@@ -423,21 +423,15 @@
 > </br>
 > </br>
 >
-> **Проверка меню на главной странице**</br>
+> **Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)** ` WEB `
 > 
-> | ![menu test](/readme/media/gif/menu_test.gif) |
+> | ![web video](/readme/media/gif/web_video.gif) |
 > |-|
 > </br>
 >
-> **Проверка партнеров из города Москва**
+> **Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)** ` ANDROID `
 > 
-> | ![check partner test](/readme/media/gif/check_partner_test.gif) |
-> |-|
-> </br>
->
-> **Поиск партнера ЭМИТЭЛ**
-> 
-> | ![search test](/readme/media/gif/search_test.gif) |
+> | ![android video](/readme/media/gif/android_video.gif) |
 > |-|
 
 </br>
