@@ -328,10 +328,16 @@
 > </br>
 > </br>
 >
-> **Один из запусков** `(Launches)`</br>
+> **Дашборд** `(Dashboard)`</br>
+> 
+> | ![allure_testops_dashboard](/readme/media/screenshots/allure_testops_dashboard.png) |
+> |-|
+> </br>
+>
+> **Один из запусков** `(Launch)`</br>
 > _(с шагами пройденного теста)_
 > 
-> | ![allure testops launches](/readme/media/screenshots/allure_testops_launches.png) |
+> | ![allure testops launch](/readme/media/screenshots/allure_testops_launch.png) |
 > |-|
 > </br>
 >
