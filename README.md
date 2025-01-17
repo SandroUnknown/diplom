@@ -330,7 +330,7 @@
 >
 > **Дашборд** `(Dashboard)`</br>
 > 
-> | ![allure_testops_dashboard](/readme/media/screenshots/allure_testops_dashboard.png) |
+> | ![allure testops dashboard](/readme/media/screenshots/allure_testops_dashboard.png) |
 > |-|
 > </br>
 >
@@ -349,7 +349,7 @@
 >
 > **Список ручных тестов**
 > 
-> | ![allure testops manual test](/readme/media/screenshots/allure_testops_manual_test.png) |
+> | ![allure testops manual tests](/readme/media/screenshots/allure_testops_manual_tests.png) |
 > |-|
 
 </br>
