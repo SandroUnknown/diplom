@@ -382,7 +382,7 @@
 > **После выполнения теста (при запуске на Jenkins) `Telegram-бот` пришлет оповещение в специальный Telegram-канал**</br>
 > _(с краткой статистикой пройденных тестов)_
 > 
-> | ![telegram](/readme/media/screenshots/telegram_1.png) | ![telegram](/readme/media/screenshots/telegram_2.png) |
+> | ![telegram](/readme/media/screenshots/telegram_1.jpg) | ![telegram](/readme/media/screenshots/telegram_2.jpg) |
 > |-|-|
 
 </br>
