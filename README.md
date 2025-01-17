@@ -69,11 +69,11 @@
 
 > [!NOTE]
 >
-> <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5.7%" height="5.7%" alt="Intellij IDEA"/></a>
-<a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5.7%" height="5.7%" alt="Java"/></a>
+> <a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="5.7%" height="5.7%" alt="Java"/></a>
 <a href="https://junit.org/junit5"><img src="readme/media/icons/JUnit5.svg" width="5.7%" height="5.7%" alt="JUnit 5"/></a>
 <a href="https://gradle.org"><img src="readme/media/icons/Gradle.svg" width="5.7%" height="5.7%" alt="Gradle"/></a>
 <a href="https://selenide.org"><img src="readme/media/icons/Selenide.svg" width="5.7%" height="5.7%" alt="Selenide"/></a>
+<a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="5.7%" height="5.7%" alt="Intellij IDEA"/></a>
 <a href="https://rest-assured.io"><img src="readme/media/icons/Rest_Assured.svg" width="5.7%" height="5.7%" alt="REST Assured"/></a>
 <a href="https://appium.io"><img src="readme/media/icons/Appium.svg" width="5.7%" height="5.7%" alt="Appium"/></a>
 <a href="https://www.jenkins.io"><img src="readme/media/icons/Jenkins.svg" width="5.7%" height="5.7%" alt="Jenkins"/></a>
@@ -92,11 +92,11 @@
 > 
 > | Логотип                                                                                                                                    | Название               | Предназначение                                                                                                    |
 > | :---:                                                                                                                                      | :---:                  | :---                                                                                                              |
-> | <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="64" height="64" alt="Intellij IDEA"/></a>   | `Intellij`</br>`IDEA`  | Среда разработки программного обеспечения                                                                         |
 > | <a href="https://www.java.com"><img src="readme/media/icons/Java.svg" width="64" height="64" alt="Java"/></a>                              | `Java`                 | Язык программирования, на котором написаны тесты                                                                  |
 > | <a href="https://junit.org/junit5"><img src="readme/media/icons/JUnit5.svg" width="64" height="64" alt="JUnit 5"/></a>                     | `JUnit 5`              | Фреймворк для модульного тестирования                                                                             |
 > | <a href="https://gradle.org"><img src="readme/media/icons/Gradle.svg" width="64" height="64" alt="Gradle"/></a>                            | `Gradle`               | Система автоматической сборки                                                                                     |
 > | <a href="https://selenide.org"><img src="readme/media/icons/Selenide.svg" width="64" height="64" alt="Selenide"/></a>                      | `Selenide`             | Фреймворк для автоматизированного тестирования веб-приложений                                                     |
+> | <a href="https://www.jetbrains.com/idea"><img src="readme/media/icons/Intelij_IDEA.svg" width="64" height="64" alt="Intellij IDEA"/></a>   | `Intellij`</br>`IDEA`  | Среда разработки программного обеспечения                                                                         | 
 > | <a href="https://rest-assured.io"><img src="readme/media/icons/Rest_Assured.svg" width="64" height="64" alt="REST Assured"/></a>           | `REST Assured`         | Библиотека Java, упрощающая тестирование и валидацию REST API                                                     |
 > | <a href="https://appium.io"><img src="readme/media/icons/Appium.svg" width="64" height="64" alt="Appium"/></a>                             | `Appium`               | Кроссплатформенный инструмент автоматизации мобильных приложений                                                  |
 > | <a href="https://www.jenkins.io"><img src="readme/media/icons/Jenkins.svg" width="64" height="64" alt="Jenkins"/></a>                      | `Jenkins`              | Программная система для обеспечения процесса непрерывной интеграции программного обеспечения                      |
@@ -423,13 +423,13 @@
 > </br>
 > </br>
 >
-> ` WEB ` **Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)**
+> ` WEB ` **Создание нового проекта** (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)
 > 
 > | ![web video](/readme/media/gif/web_video.gif) |
 > |-|
 > </br>
 >
-> ` ANDROID ` **Создание нового проекта (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)**
+> ` ANDROID ` **Создание нового проекта** (с заполнением имени, цвета, отметкой 'избранное' и варианта отображения)
 > 
 > | ![android video](/readme/media/gif/android_video.gif) |
 > |-|
