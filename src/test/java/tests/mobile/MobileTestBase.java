@@ -7,6 +7,7 @@ import drivers.ApiConfigDriver;
 import drivers.BrowserstackConfigDriver;
 import drivers.EmulationConfigDriver;
 import io.qameta.allure.selenide.AllureSelenide;
+import helpers.attachments.Attach;
 import models.data.TestDataModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -58,15 +59,16 @@ public class MobileTestBase {
 
     @AfterEach
     void addAttachments() {
-        //Attach attach = new Attach();
-       /* if (System.getProperty("deviceHost").equals("browserstack")) {
+        Attach attach = new Attach();
+        String env = System.getProperty("env", "local");
+        if (env.equals("remote")) {
             String sessionId = Selenide.sessionId().toString();
             attach.addVideo(sessionId);
         }
-        if (System.getProperty("deviceHost").equals("emulation")) {
+        if (env.equals("local")) {
             attach.screenshotAs("Last screenshot");
-        }*/
-        //Attach.pageSource();
+        }
+        Attach.pageSource();
         closeWebDriver();
     }
 }
