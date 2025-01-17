@@ -30,11 +30,9 @@ public class MobileTestBase {
 
     static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
-    final LabelsApi labelsApi = new LabelsApi();
     final ProjectsApi projectsApi = new ProjectsApi();
     final SectionsApi sectionsApi = new SectionsApi();
     final TasksApi tasksApi = new TasksApi();
-    final CommentsApi commentsApi = new CommentsApi();
 
     final AuthScreen authScreen = new AuthScreen();
     final BottomMenu bottomMenu = new BottomMenu();

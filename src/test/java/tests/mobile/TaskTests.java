@@ -65,7 +65,7 @@ public class TaskTests extends MobileTestBase {
         step("Проверить, что задача была корректно создана", () -> {
             TaskResponseModel myCreatedTask = tasksApi.getAllTasks().get(0);
             assertThat(myCreatedTask.getContent()).isEqualTo(testTaskData.getContent());
-            assertThat(myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
+            assertThat(5 - myCreatedTask.getPriority()).isEqualTo(testTaskData.getPriority());
         });
     }
 }
