@@ -280,7 +280,7 @@
 > 2. Выбрать необходимые [параметры](#console_params)
 > 3. Нажать кнопку `▷ Build`
 >
-> | ![jenkins status](/readme/media/screenshots/jenkins_status.png) | ![jenkins build](/media/screenshots/jenkins_build.png) |
+> | ![jenkins status](/readme/media/screenshots/jenkins_status.png) | ![jenkins build](/readme/media/screenshots/jenkins_build.png) |
 > |-|-|
 >
 > После выполнения сборки в разделе `🔆 Build History` можно будет детально изучить прошедние тесты:
