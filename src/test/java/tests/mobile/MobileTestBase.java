@@ -25,6 +25,8 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class MobileTestBase {
 
+    private static final String env = System.getProperty("env", "local");
+
     static final List<TestDataModel> TEMPLATES = new DataStorage("data/Templates.json").getTemplates();
 
     final AuthScreen authScreen = new AuthScreen();
@@ -41,7 +43,6 @@ public class MobileTestBase {
 
         new ApiConfigDriver();
 
-        String env = System.getProperty("env", "local");
         if (env.equals("remote")) {
             Configuration.browser = BrowserstackConfigDriver.class.getName();
         } else {
@@ -62,7 +63,6 @@ public class MobileTestBase {
     void addAttachments() {
         
         Attach attach = new Attach();
-        String env = System.getProperty("env", "local");
         String sessionId = Selenide.sessionId().toString();
         
         if (env.equals("local")) {
