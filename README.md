@@ -273,7 +273,7 @@
 ### Сборка в Jenkins
 
 > [!TIP]
-> Реализован запуск тестов с помощью [`Jenkins`](https://jenkins.autotests.cloud/job/C30-SandroUnknown-demo_project_for_Flat/) (требуется авторизация).</br>
+> Реализован запуск тестов с помощью [`Jenkins`](https://jenkins.autotests.cloud/job/C30-SandroUnknown-graduate-work-todoist/) (требуется авторизация).</br>
 > </br>
 > Для запуска сборки необходимо: 
 > 1. Перейти в раздел `▷ Build with Parameters`
@@ -295,7 +295,7 @@
 ### Allure Report
 
 > [!TIP]
-> После выполнения тестов формируется [`Allure Report`](https://jenkins.autotests.cloud/job/C30-SandroUnknown-demo_project_for_Flat/allure/#) (требуется авторизация).
+> После выполнения тестов формируется [`Allure Report`](https://jenkins.autotests.cloud/job/C30-SandroUnknown-graduate-work-todoist/allure/#) (требуется авторизация).
 > </br>
 > </br>
 >
