@@ -1,6 +1,7 @@
 package tests.mobile;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataStorage;
 import drivers.ApiConfigDriver;
