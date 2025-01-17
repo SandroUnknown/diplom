@@ -55,13 +55,12 @@ public class TaskTests extends WebTestBase {
                 .checkTask(testTaskData, CONTENT, PRIORITY);
     }
 
-    //TODO : сделать тест на драг энд дроп
     @Disabled
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.MINOR)
-    @Story("Перемещение задачи")
-    @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
-    void dragAndDropSectionTest() {
+    @Story("Перемещение задачи на новое место (Drag & Drop)")
+    @DisplayName("Переместить задачу на новое место (Drag & Drop) [Только для варианта отображения проекта - ДОСКА (BOARD)]")
+    void dragAndDropTaskTest() {
     }
 }
