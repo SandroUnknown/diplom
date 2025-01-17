@@ -154,13 +154,12 @@ public class SectionTests extends WebTestBase {
 
     }
 
-    //TODO : сделать тест на драг энд дроп
     @Disabled
     @Test
     @CleanupTestData
     @Severity(SeverityLevel.MINOR)
-    @Story("Перемещение раздела")
-    @DisplayName("ДРАГ энд ДРОП [Только для варианта отображения проекта - ДОСКА (BOARD)].")
+    @Story("Перемещение раздела на новое место (Drag & Drop)")
+    @DisplayName("Переместить раздел на новое место (Drag & Drop) [Только для варианта отображения проекта - ДОСКА (BOARD)]")
     void dragAndDropSectionTest() {
     }
 }
