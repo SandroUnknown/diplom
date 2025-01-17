@@ -59,16 +59,20 @@ public class MobileTestBase {
 
     @AfterEach
     void addAttachments() {
+        
         Attach attach = new Attach();
         String env = System.getProperty("env", "local");
-        if (env.equals("remote")) {
-            String sessionId = Selenide.sessionId().toString();
-            attach.addVideo(sessionId);
-        }
+        String sessionId = Selenide.sessionId().toString();
+        
         if (env.equals("local")) {
             attach.screenshotAs("Last screenshot");
         }
+        
         Attach.pageSource();
         closeWebDriver();
+        
+        if (env.equals("remote")) {
+            attach.addVideo(sessionId);
+        }   
     }
 }
