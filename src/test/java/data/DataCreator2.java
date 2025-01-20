@@ -18,13 +18,22 @@ public class DataCreator2 {
     public static class Setup {
 
         private TestDataModel template;
-        private boolean createLabels;
-        private boolean createProjects;
+
+        // TODO : do...
+        private int createLabels;
+        
+        private int projectCount;
+
+        private List<Integer> sectionCount = new ArrayList<>();
+
+        
+
+        
         private boolean createCommentsInProjects;
         private boolean createTasksInProjects;
         private boolean addLabelsForTasksInProjects;
         private boolean createCommentsInTasksInProjects;
-        private boolean createSections;
+        
         private boolean createTasksInSections;
         private boolean addLabelsForTasksInSections;
         private boolean createCommentsInTasksInSections;
@@ -34,15 +43,25 @@ public class DataCreator2 {
             return this;
         }
 
-        public Setup createLabels(boolean createLabels) {
+        public Setup createLabels(int createLabels) {
             this.createLabels = createLabels;
             return this;
         }
 
-        public Setup createProjects(boolean createProjects) {
-            this.createProjects = createProjects;
+        public Setup createProjects(int projectCount) {
+            this.projectCount = projectCount;
             return this;
         }
+
+        public Setup createSections(int... sectionCount) {
+            for (int count : sectionCount) {
+                this.sectionCount.add(count);
+            }
+            return this;
+        }
+
+        
+        
 
         public Setup createCommentsInProjects(boolean createCommentsInProjects) {
             this.createCommentsInProjects = createCommentsInProjects;
@@ -64,10 +83,7 @@ public class DataCreator2 {
             return this;
         }
 
-        public Setup createSections(boolean createSections) {
-            this.createSections = createSections;
-            return this;
-        }
+
 
         public Setup createTasksInSections(boolean createTasksInSections) {
             this.createTasksInSections = createTasksInSections;
@@ -84,9 +100,83 @@ public class DataCreator2 {
             return this;
         }
 
+
+        private int checkProjectCount(int projectCount) {
+
+            if (projectCount < 0) {
+                // TODO : Эксепшен, что нельзя создать отрицательное число проектов
+            }
+
+            if (projectCount > 5) {
+                // TODO : Эксепшен, что нельзя создать больше 5 проектов (заменить 5 на переменную?)
+            }
+            
+            return projectCount;
+        }
+        
+
+        private List<Integer> checkSectionCount(int projectCount, List<Integer> sectionCount) {
+
+            if (sectionCount.size() > projectCount) {
+                // TODO : Эксепшен, что нельзя создать столько разделов (не создаётся достаточное количество проектов)
+            }
+
+            int missingCount = projectCount - sectionCount.size();
+            for(int i = 0; i < missingCount; i++) {
+                sectionCount.add(0);
+            }
+
+            return sectionCount;
+        }
+
+        private List<Integer> checkTaskCount(List<Integer> sectionCount, List<Integer> taskCount) {
+
+            int totalSectionCount = getTotalCount(sectionCount);
+            
+            if (taskCount.size() > totalSectionCount) {
+                // TODO : Эксепшен, что нельзя создать столько задач (не создаётся достаточное количество разделов)
+            }
+
+            int missingCount = totalSectionCount - taskCount.size();
+            for(int i = 0; i < missingCount; i++) {
+                taskCount.add(0);
+            }
+
+            return taskCount;
+        }
+
         @Step("Подготовить данные для теста")
         public TestDataModel create() {
 
+            // Проверка, что с полученным количеством всё ок
+            //==========================================================
+
+            int projectCount = 
+                checkProjectCount(this.projectCount);
+            
+            List<Integer> sectionCount = 
+                checkSectionCount(this.projectCount, this.sectionCount);
+
+            List<Integer> taskCount = 
+                checkTaskCount(this.sectionCount, this.taskCount);
+
+            // Создание сущностей
+            //==========================================================
+
+            List<String> projectIds =
+                createProject(projectCount);
+
+            List<String> sectionsIds =
+                createProject(projectCount);
+            
+
+            
+
+
+
+
+            //==========================================================
+            
             DataCreator mainClass = new DataCreator();
 
             TestDataModel templateData = this.template;
