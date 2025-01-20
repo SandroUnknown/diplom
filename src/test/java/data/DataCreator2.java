@@ -100,6 +100,7 @@ public class DataCreator2 {
             return this;
         }
 
+        // =====================================================================
 
         private int checkProjectCount(int projectCount) {
 
@@ -145,6 +146,27 @@ public class DataCreator2 {
             return taskCount;
         }
 
+        // =====================================================================
+
+        private void createProjects(TestDataModel testData, int projectCount) {
+
+            /*ProjectsApi api = new ProjectsApi();
+            for (int i = 0; i < projectCount; i++) {
+                ProjectResponseModel project = templateData.getProjects().get(i);
+                ProjectRequestModel request = ProjectRequestModel.builder()
+                        .name(project.getName())
+                        .color(project.getColor())
+                        .viewStyle(project.getViewStyle())
+                        .build();
+    
+                project = api.createNewProject(request);
+                testData.getProjects().add(project);
+            }*/
+        }
+
+        
+        // =====================================================================
+
         @Step("Подготовить данные для теста")
         public TestDataModel create() {
 
@@ -163,11 +185,11 @@ public class DataCreator2 {
             // Создание сущностей
             //==========================================================
 
-            List<String> projectIds =
-                createProject(projectCount);
-
-            List<String> sectionsIds =
-                createProject(projectCount);
+            TestDataModel testData = new TestDataModel();
+            
+            createProjects(testData, projectCount);
+            createSections(testData, sectionCount);
+            createTasks(testData, taskCount);
             
 
             
